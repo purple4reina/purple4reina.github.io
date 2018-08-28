@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+
+
+
+<script type="text/javascript">
+    
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36096439-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+    
+    </script>
+
+
+
+<html value='this html is a mess dont you think?'>
+    <head>
+        <title>Reina Abolofia</title>
+        
+        
+        <style type="text/css">
+            
+            body {
+                background-color: #B6DBF2;
+                font: "Helvetica";
+                font-size: 30px;
+                color:#516B7A;
+                text-shadow: 1px 1px 0px rgba(180, 180, 180, 0.5), -1px -1px 0px rgba(5, 5, 5, 0.5);
+                text-align:center;
+            }
+            
+            
+            a:link	{
+                text-decoration:none;
+                color:#721E9C;
+            }
+            
+            a:visited	{
+                text-decoration:none;
+                color:#9565AD;
+            }
+            
+            a:hover	{
+                text-decoration:underline;
+                color:#9565AD;
+            }
+            
+            a:active	{
+                text-decoration:underline;
+            }
+            
+            
+
+            div {
+                margin:50px;
+                width:auto;
+                color: rgba(81, 107, 122, 0.5);
+                background-color: #B6DBF2;
+                height:auto;
+                padding: 40px;
+                padding-top:27px;
+                padding-bottom:27px;
+                border-radius: 20px;
+                box-shadow:0px 0px 50px 0px #516B7A inset, 10px 10px 30px grey;
+                -webkit-box-shadow:0px 0px 50px 0px #516B7A inset, 10px 10px 30px grey;
+                position:relative;
+                line-height:60%;
+                text-shadow: 1px 1px 0px rgba(180, 180, 180, 0.5), -1px -1px 0px rgba(5, 5, 5, 0.5);
+                text-align:left;
+            }
+            
+            .regular {
+                text-shadow: 0px 0px;
+                color: rgba(132, 132, 132, 1);
+                font-size:20px;
+            }
+            
+            div.image {
+                border-width:3px;
+                background-image:url('http://abolofia.net/fractal.png');
+                height:300px;
+                width:565px;
+                margin:10px;
+                box-shadow:0px 0px 25px 0px #516B7A inset, 5px 5px 15px grey;
+            }
+            
+            pre.code {
+                font-size:15px;
+                text-shadow: 0px 0px;
+                color: rgba(132, 132, 132, 1);
+            }
+            
+            font.date {
+                font-size:14px;
+            }
+            
+            table {
+                text-align:right;
+            }
+            
+            
+            
+            </style>
+    </head>
+    <body value='eh well the page looks good at least'>
+
+        
+<br />more of Reina's fun...<br /><br />
+
+
+<div>
+	GeekTools Quote Geeklet <font class="date">9 Mar 2013</font><br />
+
+	<p class="regular">
+	I have been slowly pimping out my desktop using <a href="https://itunes.apple.com/us/app/geektool/id456877552">Geektools</a>. My favorite is the ability to put a quote down in the bottom left corner of my screen. I use it as a repository for all the funny things my grandfather has to say. It uses a python script and the shelve module to move through the quotes list one by one instead of just randomly as it would be without the data persistence. GeekTools then runs this script every 10 minutes to change to the next quote.<br /><br />
+I have posted my Geeklet online at <a href="http://www.macosxtips.co.uk/geeklets/messaging/your-quotes/">http://www.macosxtips.co.uk/geeklets/messaging/your-quotes/</a>. I hope that others can find this as enjoyable as I do.<br /><br />
+<img src="quotes_image.png" alt="geeklet image reina"> 
+
+
+</p>
+</div>        
+
+<div>
+    Automating Price Checks <font class="date">4 Mar 2013</font><br />
+    <p class="regular">
+    For the last couple of years I've been in the market for a new clarinet. Mine is about 15 years old now and is beginning to go out of tune. Prices however have been on the rise for years. When I bought my first Bb clarinet (with silver plated keys) they were going for about $1600. Now this same instrument costs over twice that.<br /><br />
+    I had a hunch that with the strengthening dollar, prices might begin to go back down, or at least stop rising. Being that Buffet Clarinets are made in Paris, they are strongly tied to the price of the Euro. I've been keeping track of the current price of clarinets and exchange rates for about a year now to help prove (or disprove) this theory.<br /><br />
+    I got tired of keeping a note for myself to once a month go to each of the websites and write down all the information I needed. Today I made a python script that I'm running once a week on a crontab that will do this all for me. The code is below.<br /><br />
+    
+    <pre class="code">
+        import urllib
+        import ast
+        import time
+        
+        """ This script finds the current price of an R13 Bb clarinet silver plated on
+        weinermusic.com and writes this, along with the current Euro exchange rate, to
+        file clarinetprices.txt
+        
+        """
+        
+        # Find the price of the clarinet
+        weiner_object = urllib.urlopen('http://shop.weinermusic.com/BUFFET-R13-
+            CLARINET-Bb-SILVER-PLATED-BC1131-2-0/productinfo/IBC113120/')
+        weiner_str = weiner_object.read()
+        weiner_index = weiner_str.find('Unit Price:')
+        weiner_price =  weiner_str[weiner_index+12:weiner_index+21]
+        
+        # Find the current exchange rate
+        exchange_object = urllib.urlopen('http://rate-exchange.appspot.com/
+                                         currency?from=USD&to=EUR')
+        exchange_str = exchange_object.read()
+        exchange_dict = ast.literal_eval(exchange_str)
+        exchange_rate =  str(exchange_dict['rate'])[:7]
+        
+        # Create date
+        date_tuple = time.localtime()
+        date_year = str(date_tuple[0])
+        date_month = str(date_tuple[1])
+        date_day = str(date_tuple[2])
+        date_full = date_month + '/' + date_day + '/' + date_year
+        
+        # Write to file as date, price, exchange
+        with open('/path/to/text/file', 'a') as clarinet_file:
+            clarinet_file.write(date_full + ', ' + weiner_price + 
+                                ', ' + exchange_rate + '\n')
+    </pre>
+    </p>
+    </div>
+        
+        
+
+<div>
+    Removing Duplicates from List in Python <font class="date">15 Feb 2013</font><br />
+    <p class="regular">
+    I recently came across the question of how to remove the duplicates of a list in python most efficiently. There are clearly going to be several ways of going about this. The first question to ask is if order needs to be preserved because if not, all that is needed is to convert the list to a set then back again.
+    <br /><br />
+    To test the speed of the different ways of solving this problem, I wrote code to test each and time how long it would take for it to complete 1, 10, 100, and 1000 times.
+    <br /><br />
+    The eight methods I came up with are:<br /><br />
+
+        1) Convert the list to a set then back to a list (does not preserve order)<br />
+        2) Add each item to a new list only if it is not already in it<br />
+        3) Test if an item is in a new set, if it is not, add it to the set then append it to the end of a new list<br />
+        4) Use a dictionary to store whether an item has been seen or not, when it is first seen a dictionary key is added<br />
+        5) Use a dictionary to store whether an item has been seen or not, start with a complete dictionary of keys, as each item is seen change the value of its key from 0 to 1<br />
+        6) Same as the previous, however only create the blank dictionary one time instead of with each iteration<br />
+        7) Use a prime number list to test if a number has been seen before by assigning a different prime number to each different element of the list. When an item is seen its corresponding prime number is multiplied into a running count, thus if this count is evenly divisble by a given prime its corresponding item has already been seen.<br />
+        8) Same as previous, however only create the primes list one time instead of with each iteration<br /><br />
+    
+    I can think still of a few more ways of solving this problem, but I think the combination of the above methods can cover just about all of them.<br /><br />
+    Results: Below is a table giving the time in seconds it took to run each of these methods 1, 10, 100, and 1000 times. The test list contained 10,000 random numbers between 0 and 9,999.<br /><br />
+
+    <table class="regular" border="1">
+        <tr>
+            <td>Method Number</td>
+            <td>1 iteration</td>
+            <td>10 iterations</td>
+            <td>100 iterations</td>
+            <td>1000 iterations</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0.00167</td>
+            <td>0.01162</td>
+            <td>0.12849</td>
+            <td>1.43305</td>
+        <tr/>
+        <tr>
+            <td>2</td>
+            <td>0.98720</td>
+            <td>9.91833</td>
+            <td>112.97926</td>
+            <td>1155.32918</td>
+        <tr/>
+        <tr>
+            <td>3</td>
+            <td>0.00656</td>
+            <td>0.06393</td>
+            <td>0.79312</td>
+            <td>6.78953</td>
+        <tr/>
+        <tr>
+            <td>4</td>
+            <td>0.01763</td>
+            <td>0.16482</td>
+            <td>1.99453</td>
+            <td>20.02654</td>
+        <tr/>
+        <tr>
+            <td>5</td>
+            <td>0.11699</td>
+            <td>0.96288</td>
+            <td>11.65250</td>
+            <td>91.47175</td>
+        <tr/>
+        <tr>
+            <td>6</td>
+            <td>0.09631</td>
+            <td>0.12191</td>
+            <td>0.43058</td>
+            <td>3.12156</td>
+        <tr/>
+        <tr>
+            <td>7</td>
+            <td>0.75656</td>
+            <td>7.59497</td>
+            <td>86.16487</td>
+            <td>761.63860</td>
+        <tr/>
+        <tr>
+            <td>8</td>
+            <td>0.45354</td>
+            <td>4.51525</td>
+            <td>52.09928</td>
+            <td>458.12212</td>
+        <tr/>
+    </table>
+        <br />
+    <p class="regular">
+    Some conclusions: Clearly method number 2 is out. No matter how many times it needs to be run, it's just going to be slow slow slow. More interesting is the trend between methods 3 and 6. With just one iteration, method 3 is the clear winner. However, as the iterations increase, method 6 begins to win out. I attribute this to the fact that it takes a good amount of time to create that empty dictionary. Thus, with fewer iterations, this time is becomes a greater percentage of the total time. But as the iterations increase, the speed of searching through dictionary versus a set wins out.<br /><br />
+    
+    I am curious how smaller versus larger lists of numbers influences time. For instance if the test list had a length of 1 million. Or if it was very short, like with just 10 items. I suppose though that would be a problem for another day.
+    
+        </p></p>
+    
+    
+    
+    </div>
+        
+        
+        
+
+<div value='I love my twitter bots'>
+    
+Simple Twitter Bot <font class="date">22 Jan 2013</font><br />
+    <p class="regular">
+        Using the twitter api and a cron job running off my shared server, I made a fun <a href="https://twitter.com/11111011101">little bot</a>. It posts the time in binary every half hour.
+        
+        <br /><br />
+        
+        <blockquote class="twitter-tweet"><p>The current date and time is11:0010/1111/11111011101</p>&mdash; Binary Time (@11111011101) <a href="https://twitter.com/11111011101/status/302250886833516544">February 15, 2013</a></blockquote>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        
+        <br /><br />
+        <p class="regular">And here's the code:
+        <pre class="code">
+
+    import sys
+    import time
+    import twitter
+
+
+    def convbin(n):
+        binstr = str(bin(n))[2:]
+        while len(binstr) < 2:
+            binstr = '0' + binstr
+        return binstr
+        
+    TWEET = 'The current date and time is  ' + convbin(time.gmtime()[3]) + ':' +
+            convbin(time.gmtime()[4]) + '  ' + convbin(time.gmtime()[1]) + '/' +
+            convbin(time.gmtime()[2]) + '/' + convbin(time.gmtime()[0])
+
+    BinTime = twitter.Twitter(auth=OAuth(token, token_key, con_secret,
+            con_secret_key), domain='api.twitter.com', api_version='1.1')
+
+    BinTime.statuses.update(status=TWEET, trim_user='true')
+            </pre>
+        
+        </p></p>
+        
+</div>
+
+        
+<div>
+Fractals <font class="date">31 Oct 2012</font><br />
+    <p class="regular">
+        The Thue-Morse Sequence can be used in the drawing of fractals. The sequence (<a href="http://oeis.org/A010060">A010060 in OEIS</a>) is built exclusively of 0's and 1's. One formula for its derivation is a(2n)=a(n), a(2n+1)=1-a(n), a(0)=0. It can be thought of as a starting 0 followed by the boolean complement of the sequence thus far.<sup><a href="http://en.wikipedia.org/wiki/Thue-Morse_sequence">[1]</a></sup>
+            
+            <br /><br />
+            
+            The use of Turtle Graphics that follows the Thue-Morse Sequence can produce fractals:<br />
+            when a(n) = 0: move ahead one unit<br />
+            when a(n) = 1: rotate 60 degrees counter-clockwise
+            
+            <br /><br />
+            
+            A little creativity mixed with my love for rainbows:<br />
+            <br />
+            <div class="image"></div>
+
+    </p>
+</div>
+       
+        <br />        <br />        <br />
