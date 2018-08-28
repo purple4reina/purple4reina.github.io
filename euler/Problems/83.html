@@ -1,0 +1,63 @@
+<html><head><title>Euler - Problem 1</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=83" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem was just like <a href="http://euler.clarinetcat.com/Problems/82">number 82</a>. I just added one more thing to it so that it could go 
+left and made sure that it went from top left to bottom right. Script ran 
+in under 1 second!
+
+
+CODE:
+
+small = 10**8
+empty = nothing()
+visite = [[0,0]]
+empty[0][0] = matrix[0][0]
+while len(visite) > 0:
+	v = visite[0]
+	if v[0] != 79:
+		visite.append([v[0]+1, v[1]])
+		if empty[v[0]][v[1]] + matrix[v[0]+1][v[1]] < empty[v[0]+1][v[1]]:
+			empty[v[0]+1][v[1]] = empty[v[0]][v[1]] + matrix[v[0]+1][v[1]]
+		else:
+			visite.pop()
+	if v[0] != 0:
+		visite.append([v[0]-1, v[1]])
+		if empty[v[0]][v[1]] + matrix[v[0]-1][v[1]] < empty[v[0]-1][v[1]]:
+			empty[v[0]-1][v[1]] = empty[v[0]][v[1]] + matrix[v[0]-1][v[1]]
+		else:
+			visite.pop()
+	if v[1] != 79:
+		visite.append([v[0], v[1]+1])
+		if empty[v[0]][v[1]] + matrix[v[0]][v[1]+1] < empty[v[0]][v[1]+1]:
+			empty[v[0]][v[1]+1] = empty[v[0]][v[1]] + matrix[v[0]][v[1]+1]
+		else:
+			visite.pop()
+	if v[1] != 0:
+		visite.append([v[0], v[1]-1])
+		if empty[v[0]][v[1]] + matrix[v[0]][v[1]-1] < empty[v[0]][v[1]-1]:
+			empty[v[0]][v[1]-1] = empty[v[0]][v[1]] + matrix[v[0]][v[1]-1]
+		else:
+			visite.pop()	
+	del visite[0]
+	if empty[-1][-1] < small:
+		small = empty[-1][-1]
+print small
+
+
+</pre></body></html>

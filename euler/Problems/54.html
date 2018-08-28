@@ -1,0 +1,515 @@
+<html><head><title>Euler - Problem 54</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=54" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+Oh how I hated this problem. It was sooooo tedious! I'm sure my script is way 
+way more sloppy and long than it really needed to be. But, as usual, I just 
+dove right in and started coding, and along the way, instead of going back and 
+making the big changes that would have kept it clean, I just kept on with the 
+mess.
+
+
+RESULTS:
+
+It took about 4 hours to write and only half a second to run.
+
+
+CODE:
+
+poker = open('poker.txt', 'r')
+
+def highest(hand):
+	numbers = []
+	for c in hand:
+		if c == 13:
+			numbers.append(13)
+		elif c == 12:
+			numbers.append(12)
+		elif c == 11:
+			numbers.append(11)
+		elif c == 10:
+			numbers.append(10)
+		elif c == 9:
+			numbers.append(9)
+		elif c == 8:
+			numbers.append(8)
+		elif c == 7:
+			numbers.append(7)
+		elif c == 6:
+			numbers.append(6)
+		elif c == 5:
+			numbers.append(5)
+		elif c == 4:
+			numbers.append(4)
+		elif c == 3:
+			numbers.append(3)
+		elif c == 2:
+			numbers.append(2)
+		elif c == 1:
+			numbers.append(1)
+		return max(numbers)
+
+def lowest(hand):
+	numbers = []
+	for c in hand:
+		if c == 13:
+			numbers.append(13)
+		elif c == 12:
+			numbers.append(12)
+		elif c == 11:
+			numbers.append(11)
+		elif c == 10:
+			numbers.append(10)
+		elif c == 9:
+			numbers.append(9)
+		elif c == 8:
+			numbers.append(8)
+		elif c == 7:
+			numbers.append(7)
+		elif c == 6:
+			numbers.append(6)
+		elif c == 5:
+			numbers.append(5)
+		elif c == 4:
+			numbers.append(4)
+		elif c == 3:
+			numbers.append(3)
+		elif c == 2:
+			numbers.append(2)
+		elif c == 1:
+			numbers.append(1)
+		return min(numbers)
+
+def highcard(hand):
+	ans = []
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (13 in numbers):
+		ans.append(13)
+	if (12 in numbers):
+		ans.append(12)
+	if (11 in numbers):
+		ans.append(11)
+	if (10 in numbers):
+		ans.append(10)
+	if (9 in numbers):
+		ans.append(9)
+	if (8 in numbers):
+		ans.append(8)
+	if (7 in numbers):
+		ans.append(7)
+	if (6 in numbers):
+		ans.append(6)
+	if (5 in numbers):
+		ans.append(5)
+	if (4 in numbers):
+		ans.append(4)
+	if (3 in numbers):
+		ans.append(3)
+	if (2 in numbers):
+		ans.append(2)
+	if (1 in numbers):
+		ans.append(1)
+	return ans
+
+def royalflush(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (hand[0][-1] == hand[1][-1] == hand[2][-1] == hand[3][-1] == hand[4][-1]) and (9 in numbers) and (10 in numbers) and (11 in numbers) and (12 in numbers) and (13 in numbers):
+		return True
+	else:
+		return False	
+
+def straightflush(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (hand[0][1] == hand[1][1] == hand[2][1] == hand[3][1] == hand[4][1]):
+		if (13 in numbers) and (1 in numbers) and (2 in numbers) and (3 in numbers) and (4 in numbers):
+			return (True, 5)
+		elif (1 in numbers) and (2 in numbers) and (3 in numbers) and (4 in numbers) and (5 in numbers):
+			return (True, 6)
+		elif (2 in numbers) and (3 in numbers) and (4 in numbers) and (5 in numbers) and (6 in numbers):
+			return (True, 7)
+		elif (3 in numbers) and (4 in numbers) and (5 in numbers) and (6 in numbers) and (7 in numbers):
+			return (True, 8)
+		elif (4 in numbers) and (5 in numbers) and (6 in numbers) and (7 in numbers) and (8 in numbers):
+			return (True, 9)
+		elif (5 in numbers) and (6 in numbers) and (7 in numbers) and (8 in numbers) and (9 in numbers):
+			return (True, 10)
+		elif (6 in numbers) and (7 in numbers) and (8 in numbers) and (9 in numbers) and (10 in numbers):
+			return (True, 11)
+		elif (7 in numbers) and (8 in numbers) and (9 in numbers) and (10 in numbers) and (11 in numbers):
+			return (True, 12)
+		elif (8 in numbers) and (9 in numbers) and (10 in numbers) and (11 in numbers) and (12 in numbers):
+			return (True, 13)
+		else:
+			return [False]
+	else:
+		return [False]
+
+def fourofakind(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if numbers[0] == numbers[1] == numbers[2] == numbers[3]:
+		return (True, numbers[0], numbers[4])
+	elif numbers[0] == numbers[1] == numbers[2] == numbers[4]:
+		return (True, numbers[0], numbers[3])
+	elif numbers[0] == numbers[1] == numbers[3] == numbers[4]:
+		return (True, numbers[0], numbers[2])
+	elif numbers[0] == numbers[2] == numbers[3] == numbers[4]:
+		return (True, numbers[0], numbers[1])
+	elif numbers[1] == numbers[2] == numbers[3] == numbers[4]:
+		return (True, numbers[1], numbers[0])
+	else:
+		return [False]
+
+def fullhouse(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (numbers[0] == numbers[1]) and (numbers[2] == numbers[3] == numbers[4]):
+		return (True, numbers[2], numbers[0])
+	elif (numbers[0] == numbers[2]) and (numbers[1] == numbers[3] == numbers[4]):
+		return (True, numbers[1], numbers[0])
+	elif (numbers[0] == numbers[3]) and (numbers[2] == numbers[1] == numbers[4]):
+		return (True, numbers[2], numbers[0])
+	elif (numbers[0] == numbers[4]) and (numbers[2] == numbers[3] == numbers[1]):
+		return (True, numbers[2], numbers[0])
+	elif (numbers[1] == numbers[2]) and (numbers[0] == numbers[3] == numbers[4]):
+		return (True, numbers[0], numbers[1])
+	elif (numbers[1] == numbers[3]) and (numbers[2] == numbers[0] == numbers[4]):
+		return (True, numbers[2], numbers[3])
+	elif (numbers[1] == numbers[4]) and (numbers[2] == numbers[3] == numbers[0]):
+		return (True, numbers[2], numbers[4])
+	elif (numbers[2] == numbers[3]) and (numbers[0] == numbers[1] == numbers[4]):
+		return (True, numbers[0], numbers[3])
+	elif (numbers[2] == numbers[4]) and (numbers[0] == numbers[3] == numbers[1]):
+		return (True, numbers[0], numbers[4])
+	elif (numbers[3] == numbers[4]) and (numbers[2] == numbers[0] == numbers[1]):
+		return (True, numbers[2], numbers[4])
+	else:
+		return [False]
+
+def flush(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (hand[0][-1] == hand[1][-1] == hand[2][-1] == hand[3][-1] == hand[4][-1]):
+		return (True, highest(numbers))
+	else:
+		return [False]
+
+def straight(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (13 in numbers) and (1 in numbers) and (2 in numbers) and (3 in numbers) and (4 in numbers):
+		return (True, 5)
+	elif (1 in numbers) and (2 in numbers) and (3 in numbers) and (4 in numbers) and (5 in numbers):
+		return (True, 6)
+	elif (2 in numbers) and (3 in numbers) and (4 in numbers) and (5 in numbers) and (6 in numbers):
+		return (True, 7)
+	elif (3 in numbers) and (4 in numbers) and (5 in numbers) and (6 in numbers) and (7 in numbers):
+		return (True, 8)
+	elif (4 in numbers) and (5 in numbers) and (6 in numbers) and (7 in numbers) and (8 in numbers):
+		return (True, 9)
+	elif (5 in numbers) and (6 in numbers) and (7 in numbers) and (8 in numbers) and (9 in numbers):
+		return (True, 10)
+	elif (6 in numbers) and (7 in numbers) and (8 in numbers) and (9 in numbers) and (10 in numbers):
+		return (True, 11)
+	elif (7 in numbers) and (8 in numbers) and (9 in numbers) and (10 in numbers) and (11 in numbers):
+		return (True, 12)
+	elif (8 in numbers) and (9 in numbers) and (10 in numbers) and (11 in numbers) and (12 in numbers):
+		return (True, 13)
+	else:
+		return [False]
+
+def threeofakind(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (numbers[2] == numbers[3] == numbers[4]):
+		return (True, numbers[2], highest((numbers[1], numbers[0])), lowest((numbers[1], numbers[0])))
+	elif (numbers[1] == numbers[3] == numbers[4]):
+		return (True, numbers[1], highest((numbers[2], numbers[0])), lowest((numbers[2], numbers[0])))
+	elif (numbers[2] == numbers[1] == numbers[4]):
+		return (True, numbers[2], highest((numbers[2], numbers[0])), lowest((numbers[2], numbers[0])))
+	elif (numbers[2] == numbers[3] == numbers[1]):
+		return (True, numbers[2], highest((numbers[4], numbers[0])), lowest((numbers[4], numbers[0])))
+	elif (numbers[0] == numbers[3] == numbers[4]):
+		return (True, numbers[0], highest((numbers[1], numbers[2])), lowest((numbers[1], numbers[2])))
+	elif (numbers[2] == numbers[0] == numbers[4]):
+		return (True, numbers[2], highest((numbers[1], numbers[3])), lowest((numbers[1], numbers[3])))
+	elif (numbers[2] == numbers[3] == numbers[0]):
+		return (True, numbers[2], highest((numbers[1], numbers[4])), lowest((numbers[1], numbers[4])))
+	elif (numbers[0] == numbers[1] == numbers[4]):
+		return (True, numbers[0], highest((numbers[2], numbers[3])), lowest((numbers[2], numbers[3])))
+	elif (numbers[0] == numbers[3] == numbers[1]):
+		return (True, numbers[0], highest((numbers[4], numbers[2])), lowest((numbers[4], numbers[2])))
+	elif (numbers[2] == numbers[0] == numbers[1]):
+		return (True, numbers[2], highest((numbers[3], numbers[4])), lowest((numbers[3], numbers[4])))
+	else:
+		return [False]
+
+def twopairs(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (numbers[0] == numbers[1]) and (numbers[2] == numbers[3]):
+		return (True, highest((numbers[0], numbers[2])), lowest((numbers[0], numbers[2])))
+	elif (numbers[0] == numbers[1]) and (numbers[2] == numbers[4]):
+		return (True, highest((numbers[0], numbers[2])), lowest((numbers[0], numbers[2])))
+	elif (numbers[0] == numbers[1]) and (numbers[3] == numbers[4]):
+		return (True, highest((numbers[0], numbers[3])), lowest((numbers[0], numbers[3])))
+	
+	elif (numbers[0] == numbers[2]) and (numbers[1] == numbers[3]):
+		return (True, highest((numbers[0], numbers[1])), lowest((numbers[0], numbers[1])))
+	elif (numbers[0] == numbers[2]) and (numbers[1] == numbers[4]):
+		return (True, highest((numbers[0], numbers[1])), lowest((numbers[0], numbers[1])))
+	elif (numbers[0] == numbers[2]) and (numbers[3] == numbers[4]):
+		return (True, highest((numbers[0], numbers[3])), lowest((numbers[0], numbers[3])))
+	
+	elif (numbers[0] == numbers[3]) and (numbers[2] == numbers[1]):
+		return (True, highest((numbers[0], numbers[2])), lowest((numbers[0], numbers[2])))
+	elif (numbers[0] == numbers[3]) and (numbers[2] == numbers[4]):
+		return (True, highest((numbers[0], numbers[2])), lowest((numbers[0], numbers[2])))
+	elif (numbers[0] == numbers[3]) and (numbers[1] == numbers[4]):
+		return (True, highest((numbers[0], numbers[1])), lowest((numbers[0], numbers[1])))
+	
+	elif (numbers[0] == numbers[4]) and (numbers[2] == numbers[3]):
+		return (True, highest((numbers[0], numbers[2])), lowest((numbers[0], numbers[2])))
+	elif (numbers[0] == numbers[4]) and (numbers[2] == numbers[1]):
+		return (True, highest((numbers[0], numbers[2])), lowest((numbers[0], numbers[2])))
+	elif (numbers[0] == numbers[4]) and (numbers[3] == numbers[1]):
+		return (True, highest((numbers[0], numbers[3])), lowest((numbers[0], numbers[3])))
+	
+	elif (numbers[1] == numbers[2]) and (numbers[0] == numbers[3]):
+		return (True, highest((numbers[1], numbers[0])), lowest((numbers[1], numbers[0])))
+	elif (numbers[1] == numbers[2]) and (numbers[0] == numbers[4]):
+		return (True, highest((numbers[1], numbers[0])), lowest((numbers[1], numbers[0])))
+	elif (numbers[1] == numbers[2]) and (numbers[3] == numbers[4]):
+		return (True, highest((numbers[1], numbers[3])), lowest((numbers[1], numbers[3])))
+	
+	elif (numbers[1] == numbers[3]) and (numbers[2] == numbers[0]):
+		return (True, highest((numbers[1], numbers[2])), lowest((numbers[1], numbers[2])))
+	elif (numbers[1] == numbers[3]) and (numbers[2] == numbers[4]):
+		return (True, highest((numbers[1], numbers[2])), lowest((numbers[1], numbers[2])))
+	elif (numbers[1] == numbers[3]) and (numbers[0] == numbers[4]):
+		return (True, highest((numbers[1], numbers[0])), lowest((numbers[1], numbers[0])))
+	
+	elif (numbers[1] == numbers[4]) and (numbers[2] == numbers[3]):
+		return (True, highest((numbers[1], numbers[2])), lowest((numbers[1], numbers[2])))
+	elif (numbers[1] == numbers[4]) and (numbers[2] == numbers[0]):
+		return (True, highest((numbers[1], numbers[2])), lowest((numbers[1], numbers[2])))
+	elif (numbers[1] == numbers[4]) and (numbers[3] == numbers[0]):
+		return (True, highest((numbers[1], numbers[3])), lowest((numbers[1], numbers[3])))
+	
+	elif (numbers[2] == numbers[3]) and (numbers[0] == numbers[1]):
+		return (True, highest((numbers[2], numbers[0])), lowest((numbers[2], numbers[0])))
+	elif (numbers[2] == numbers[3]) and (numbers[0] == numbers[4]):
+		return (True, highest((numbers[2], numbers[0])), lowest((numbers[2], numbers[0])))
+	elif (numbers[2] == numbers[3]) and (numbers[1] == numbers[4]):
+		return (True, highest((numbers[2], numbers[1])), lowest((numbers[2], numbers[1])))
+	
+	elif (numbers[2] == numbers[4]) and (numbers[0] == numbers[3]):
+		return (True, highest((numbers[2], numbers[0])), lowest((numbers[2], numbers[0])))
+	elif (numbers[2] == numbers[4]) and (numbers[0] == numbers[1]):
+		return (True, highest((numbers[2], numbers[0])), lowest((numbers[2], numbers[0])))
+	elif (numbers[2] == numbers[4]) and (numbers[3] == numbers[1]):
+		return (True, highest((numbers[2], numbers[3])), lowest((numbers[2], numbers[3])))
+	
+	elif (numbers[3] == numbers[4]) and (numbers[2] == numbers[0]):
+		return (True, highest((numbers[3], numbers[2])), lowest((numbers[3], numbers[2])))
+	elif (numbers[3] == numbers[4]) and (numbers[2] == numbers[1]):
+		return (True, highest((numbers[3], numbers[2])), lowest((numbers[3], numbers[2])))
+	elif (numbers[3] == numbers[4]) and (numbers[0] == numbers[1]):
+		return (True, highest((numbers[3], numbers[0])), lowest((numbers[3], numbers[0])))
+	
+	else:
+		return [False]
+
+def onepair(hand):
+	numbers = [hand[0][:-1], hand[1][:-1], hand[2][:-1], hand[3][:-1], hand[4][:-1]]
+	numbers = map(int, numbers)
+	if (numbers[0] == numbers[1]):
+		return (True, numbers[0], highest((numbers[2], numbers[3], numbers[4])))
+	elif (numbers[0] == numbers[2]):
+		return (True, numbers[0], highest((numbers[1], numbers[3], numbers[4])))
+	elif (numbers[0] == numbers[3]):
+		return (True, numbers[0], highest((numbers[1], numbers[2], numbers[4])))
+	elif (numbers[0] == numbers[4]):
+		return (True, numbers[0], highest((numbers[1], numbers[2], numbers[3])))
+	elif (numbers[1] == numbers[2]):
+		return (True, numbers[1], highest((numbers[0], numbers[3], numbers[4])))
+	elif (numbers[1] == numbers[3]):
+		return (True, numbers[1], highest((numbers[0], numbers[2], numbers[4])))
+	elif (numbers[1] == numbers[4]):
+		return (True, numbers[1], highest((numbers[0], numbers[2], numbers[3])))
+	elif (numbers[2] == numbers[3]):
+		return (True, numbers[2], highest((numbers[0], numbers[1], numbers[4])))
+	elif (numbers[2] == numbers[4]):
+		return (True, numbers[2], highest((numbers[0], numbers[1], numbers[3])))
+	elif (numbers[3] == numbers[4]):
+		return (True, numbers[3], highest((numbers[0], numbers[1], numbers[2])))
+	else:
+		return [False]
+
+def winner(hand):
+	oldcards = [hand[0:2], hand[3:5], hand[6:8], hand[9:11], hand[12:14], hand[15:17], hand[18:20], hand[21:23], hand[24:26], hand[27:29]]
+	cards = []
+	for c in oldcards:
+		this = []
+		for d in c:
+			this.append(d)
+		c = this
+		if c[0] == 'A':
+			c[0] = 13
+		elif c[0] == 'K':
+			c[0] = 12
+		elif c[0] == 'Q':
+			c[0] = 11
+		elif c[0] == 'J':
+			c[0] = 10
+		elif c[0] == 'T':
+			c[0] = 9
+		elif c[0] == '9':
+			c[0] = 8
+		elif c[0] == '8':
+			c[0] = 7
+		elif c[0] == '7':
+			c[0] = 6
+		elif c[0] == '6':
+			c[0] = 5
+		elif c[0] == '5':
+			c[0] = 4
+		elif c[0] == '4':
+			c[0] = 3
+		elif c[0] == '3':
+			c[0] = 2
+		elif c[0] == '2':
+			c[0] = 1
+		c = ''.join(map(str, c))
+		cards.append(c)
+	
+	p1hand = cards[0:5]
+	p2hand = cards[5:10]
+#	print p1hand, p2hand
+	p1value = 0
+	p2value = 0
+	
+	if royalflush(p1hand) == True:
+		p1value = 10
+		p1tuple = royalflush(p1hand)
+	elif straightflush(p1hand)[0] == True:
+		p1value = 9
+		p1tuple = straightflush(p1hand)
+	elif fourofakind(p1hand)[0] == True:
+		p1value = 8
+		p1tuple = fourofakind(p1hand)
+	elif fullhouse(p1hand)[0] == True:
+		p1value = 7
+		p1tuple = fullhouse(p1hand)
+	elif flush(p1hand)[0] == True:
+		p1value = 6
+		p1tuple = flush(p1hand)
+	elif straight(p1hand)[0] == True:
+		p1value = 5
+		p1tuple = straight(p1hand)
+	elif threeofakind(p1hand)[0] == True:
+		p1value = 4
+		p1tuple = threeofakind(p1hand)
+	elif twopairs(p1hand)[0] == True:
+		p1value = 3
+		p1tuple = twopairs(p1hand)
+	elif onepair(p1hand)[0] == True:
+		p1value = 2
+		p1tuple = onepair(p1hand)
+	else:
+		p1value = 1
+		p1tuple = [None] + highcard(p1hand)
+		
+	if royalflush(p2hand) == True:
+		p2value = 10
+		p2tuple = royalflush(p2hand)
+	elif straightflush(p2hand)[0] == True:
+		p2value = 9
+		p2tuple = straightflush(p2hand)
+	elif fourofakind(p2hand)[0] == True:
+		p2value = 8
+		p2tuple = fourofakind(p2hand)
+	elif fullhouse(p2hand)[0] == True:
+		p2value = 7
+		p2tuple = fullhouse(p2hand)
+	elif flush(p2hand)[0] == True:
+		p2value = 6
+		p2tuple = flush(p2hand)
+	elif straight(p2hand)[0] == True:
+		p2value = 5
+		p2tuple = straight(p2hand)
+	elif threeofakind(p2hand)[0] == True:
+		p2value = 4
+		p2tuple = threeofakind(p2hand)
+	elif twopairs(p2hand)[0] == True:
+		p2value = 3
+		p2tuple = twopairs(p2hand)
+	elif onepair(p2hand)[0] == True:
+		p2value = 2
+		p2tuple = onepair(p2hand)
+	else:
+		p2value = 1
+		p2tuple = [None] + highcard(p2hand)
+	
+#	print p1tuple, p2tuple
+		
+	if p1value > p2value:
+		return True
+	elif p1value < p2value:
+		return False
+	elif p1value == p2value:
+		if p1tuple[1] > p2tuple[1]:
+			return True
+		elif p1tuple[1] < p2tuple[1]:
+			return False
+		elif p1tuple[1] == p2tuple[1]:
+			if p1tuple[2] > p2tuple[2]:
+				return True
+			elif p1tuple[2] < p2tuple[2]:
+				return False
+			elif p1tuple[2] == p2tuple[2]:
+				if p1tuple[3] > p2tuple[3]:
+					return True
+				elif p1tuple[3] < p2tuple[3]:
+					return False
+				elif p1tuple[3] == p2tuple[3]:
+					if p1tuple[4] > p2tuple[4]:
+						return True
+					elif p1tuple[4] < p2tuple[4]:
+						return False
+					elif p1tuple[4] == p2tuple[4]:
+						return None
+	else:
+		return None
+					
+
+
+count = 0
+for line in poker:
+	hand = line[:29]
+	win = winner(hand)
+	if win == True:
+		count += 1
+
+print 'p1 wins', count
+
+
+</pre></body></html>

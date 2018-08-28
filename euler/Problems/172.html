@@ -1,0 +1,64 @@
+<html><head><title>Euler - Problem 172</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=172" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+Got this one on the first try. That rocks. I used dictionaries to track the progress as 
+new digits were added. If a digit had reach its limit, then that digit was not added on. 
+It took almost 4 minutes to run, but that's alright by me!
+
+
+CODE:
+
+from itertools import *
+
+numDict = dict(zip(product(range(4), repeat=10), [0]*4**10))
+saved = numDict.copy()
+
+
+numDict[(0,0,0,0,0,0,0,0,0,1)] = 1
+numDict[(0,0,0,0,0,0,0,0,1,0)] = 1
+numDict[(0,0,0,0,0,0,0,1,0,0)] = 1
+numDict[(0,0,0,0,0,0,1,0,0,0)] = 1
+numDict[(0,0,0,0,0,1,0,0,0,0)] = 1
+numDict[(0,0,0,0,1,0,0,0,0,0)] = 1
+numDict[(0,0,0,1,0,0,0,0,0,0)] = 1
+numDict[(0,0,1,0,0,0,0,0,0,0)] = 1
+numDict[(0,1,0,0,0,0,0,0,0,0)] = 1
+
+i = 1
+while i < 18:
+	print i
+	i += 1
+	newDict = saved.copy()
+	for key in numDict.iterkeys():
+		for j in range(len(key)):
+			if key[j] < 3 and numDict[key] > 0:
+				newkey = list(key)
+				newkey[j] += 1
+				newkey = tuple(newkey)
+				newDict[newkey] += numDict[key]
+	numDict = newDict.copy()
+
+total = 0
+for value in numDict.itervalues():
+	total += value
+
+print total
+
+
+</pre></body></html>

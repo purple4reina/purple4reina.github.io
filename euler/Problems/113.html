@@ -1,0 +1,62 @@
+<html><head><title>Euler - Problem 113</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=113" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This one took forever! It's been several days since I've completed a problem 
+so I'm feeling pretty good about finishing one again. I've had to do this one 
+several times.
+
+I had to do several things to make this one come out. I used dictionaries to 
+keep track only of the last digit of the numbers.
+
+Because those numbers that are the same number in each digit would be counted 
+twice: first in the up numbers and second in the down numbers. Those were 
+eliminated at the end.
+
+With the completion of this problem, I've now made it to Level 5!! Woopee!
+
+
+CODE:
+
+Udict = dict(zip(range(1,10),[1]*9))
+Ddict = dict(zip(range(1,10),[1]*9))
+Ddict[0] = 0
+count = 18
+
+for i in xrange(99):
+	newdict = dict(zip(range(10),[0]*10))
+	for key in Udict.iterkeys():
+		for x in range(key, 10):
+			newdict[x] += Udict[key]
+	Udict = newdict.copy()
+	for value in Udict.itervalues():
+		count += value
+
+for i in xrange(99):
+	newdict = dict(zip(range(10),[0]*10))
+	for key in Ddict.iterkeys():
+		for x in range(key+1):
+			newdict[x] += Ddict[key]
+	Ddict = newdict.copy()
+	for value in Ddict.itervalues():
+		count += value
+			
+print count - (100*9)
+
+
+</pre></body></html>

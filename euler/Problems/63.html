@@ -1,0 +1,50 @@
+<html><head><title>Euler - Problem 63</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=63" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+For some reason, this one, again, took me longer than it should have to 
+finish. I think I just didn't realize I had the correct answer when I had 
+it. Also, important thing that I realized is that the base of the number 
+must be less than 10, because 10 raised to a power will have one more 
+digit in it than the power it is raised to.
+
+
+CODE:
+
+from math import log10
+def n_digit(n):
+	if n == 0: return 0
+	return int(log10(n) + 1)
+
+"""for n in range(1001):
+	print n, n_digit(n)"""
+
+
+count = 0
+
+for power in range(1, 10**6):
+	if power%100 == 0: print power
+	for bass in range(1, 10):
+		if n_digit(bass**power) == power: 
+			count +=1
+			print bass, '^', power, '=', bass**power, 'count =', count
+
+print count
+
+
+</pre></body></html>

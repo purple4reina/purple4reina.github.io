@@ -1,0 +1,73 @@
+<html><head><title>Euler - Problem 142</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=142" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I tried to build in as many of the properties as possible as I was digging 
+through numbers. My for loops create squares of x-y and y-z. I then realized 
+that I could check x+y before entering the z loop. That sped things up quite a 
+bit.
+
+
+CODE:
+
+bound = 10**6
+
+def issquare(n):
+	if n**.5%1 == 0:
+		return True
+	else:
+		return False
+
+def squaretest(x,y,z):
+	if issquare(x+y) == False:
+		return False
+	elif issquare(x+z) == False:
+		return False
+	elif issquare(y+z) == False:
+		return False
+	elif issquare(x-z) == False:
+		return False
+	elif issquare(x-y) == False:
+		return False
+	elif issquare(y-z) == False:
+		return False
+	else:
+		return True
+
+squares = []
+for n in range(1, bound+1):
+	if issquare(n) == True:
+		squares.append(n)
+
+for x in xrange(3, bound):
+	if x%1000 == 0: print x
+	for yi in squares:
+		y = x - yi
+		if y < 0:
+			break
+		elif issquare(x+y) == False:
+			continue
+		for zi in squares:
+			z = y - zi
+			if z < 0:
+				break
+			elif squaretest(x,y,z) == True:
+				print x, y, z, x+y+z
+				
+
+</pre></body></html>

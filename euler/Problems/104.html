@@ -1,0 +1,63 @@
+<html><head><title>Euler - Problem 104</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=104" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I had to try this problem like 10 times. The biggest problem was the fact that 
+I was working with really really large numbers, but only needing the first and 
+last 9 digits of it.
+
+The way I solved that was to keep track of the length of the number, then only 
+keep the first 15 digits and the last 10. It was some work to deal with lining 
+up the first 15 digits correctly when adding them.
+
+
+CODE:
+
+def panlast(n):
+	last = str(n)[-9:]
+	for d in range(1,10):
+		if str(d) not in last:
+			return False
+	return True
+
+def panfirst(n):
+	first = str(n)[:9]
+	for d in range(1,10):
+		if str(d) not in first:
+			return False
+	return True
+
+F = [0,1,1]
+for i in range(100):
+	F.append(F[-1]+F[-2])
+
+i = 80
+F = [[int(str(F[79])[:15]),len(str(F[79])),F[79]],[int(str(F[80])[:15]),len(str(F[80])),F[80]]]
+while True:
+	i += 1
+	nextF = [F[0][0]+F[1][0]*10**(F[1][1]-F[0][1]), 0, int(str(F[0][2])[-10:]) + int(str(F[1][2])[-10:])]
+	nextF[1] = F[1][1] + (len(str(nextF[0])) - len(str(F[1][0])) - (F[1][1]-F[0][1]))
+	nextF[0] = int(str(nextF[0])[:15])
+	F.append(nextF)
+	del F[0]
+	if panfirst(F[1][0]) == True and panlast(F[1][2]) == True:
+		print i
+		break
+
+
+</pre></body></html>

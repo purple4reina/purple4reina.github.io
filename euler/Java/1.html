@@ -1,0 +1,47 @@
+<html><head><title>Euler - Problem 1</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<pre>
+
+COMMENTS:
+
+This is my first venture into Java! I'm so proud :)
+
+
+CODE:
+
+public class One {
+	
+	public static void main(String[] args) {
+		int count;
+		count = 0;
+		
+		for (int threeMult = 0; 3*threeMult < 1000; threeMult++)
+			count += 3*threeMult;
+		
+		for (int fiveMult = 0; 5*fiveMult < 1000; fiveMult++)
+			count += 5*fiveMult;
+		
+		for (int bothMult = 0; 15*bothMult < 1000; bothMult++)
+			count -= 15*bothMult;
+		
+			
+		System.out.println(count);	
+			
+			
+	}
+}
+
+
+</pre></body></html>

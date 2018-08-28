@@ -1,0 +1,48 @@
+<html><head><title>Euler - Problem 47</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=47" target="_blank">View Problem</a></p>
+<pre>
+
+CODE:
+
+def isprime(n):
+	if n == 0 or n == 1: return 'false'
+	for i in range(2, int(n**.5) + 1):
+		if n%i == 0: return 'false'
+	return 'true'
+
+primeslist = []
+
+def factorcount(n):
+	times = 0
+	for p in primeslist:
+		if n%p == 0: times += 1
+	return times
+
+count = 0
+n = 1
+while count < 4:
+	n += 1
+	if isprime(n) == 'true': primeslist.append(n)
+	print n, count
+	if factorcount(n) == 4:
+		count += 1
+	else:
+		count = 0
+
+print n, 'is the fourth number'
+
+
+</pre></body></html>

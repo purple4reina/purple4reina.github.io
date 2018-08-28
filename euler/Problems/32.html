@@ -1,0 +1,64 @@
+<html><head><title>Euler - Problem 32</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=32" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This one was also pretty simple. The one catch was compensating for different forms of the numbers. The digits 
+aren't always 2+3+4, so I had to also write into the script to check for ones that are 1+4+4 and 2+2+5. That 
+captured all of them.
+
+
+CODE:
+
+def str2num(n):
+	return int(''.join(map(str, n)))
+
+from itertools import permutations
+
+prodlist = []
+sum = 0
+for r in permutations(range(1, 10)):
+	multiplicand = str2num(r[0:2])
+	multiplier = str2num(r[2:5])
+	product = str2num(r[5:9])
+	if (multiplicand * multiplier == product) and (product not in prodlist):
+		prodlist.append(product)
+		sum += product
+		print product
+
+for r in permutations(range(1, 10)):
+	multiplicand = str2num(r[0:1])
+	multiplier = str2num(r[1:5])
+	product = str2num(r[5:9])
+	if (multiplicand * multiplier == product) and (product not in prodlist):
+		prodlist.append(product)
+		sum += product
+		print product
+		
+for r in permutations(range(1, 10)):
+	multiplicand = str2num(r[0:2])
+	multiplier = str2num(r[2:4])
+	product = str2num(r[4:9])
+	if (multiplicand * multiplier == product) and (product not in prodlist):
+		prodlist.append(product)
+		sum += product
+		print product
+
+print sum, 'here'
+
+
+</pre></body></html>

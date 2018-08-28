@@ -1,0 +1,64 @@
+<html><head><title>Euler - Problem 95</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=95" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I used the same strategy as I used for <a href="http://euler.clarinetcat.com/Problems/179">Problem 179</a> in finding the number 
+of factors of a number. I used a set to eliminate the numbers that I'd 
+already dug through. This sped things up a bit. I also threw out any 
+string of amicables where the next number was less than the first one.
+
+
+CODE:
+
+ans = [0,0]
+nset = set(range(10**6+1))
+
+def nextam(n):
+	fact = [1]
+	for i in range(2, int(n**.5)+1):
+		if n%i == 0:
+			fact.append(i)
+			if n/i != i:
+				fact.append(n/i)
+	return sum(fact)
+
+while len(nset) > 0:
+	number = nset.pop()
+	n = number
+	if n%10**4 == 0: print n, len(nset), ans[0]
+	amlist = [n]
+	done = False
+	count = 0
+	while done == False:
+		next = nextam(n)
+		count += 1
+		if next > 10**6 or count > 10**3 or next < number:
+			break
+		elif next == number:
+			done = True
+		else:
+			amlist.append(next)
+		n = next	
+	if done == True:
+		nset -= set(amlist)
+		if count > ans[0]:
+			ans = [count, number]
+
+print ans
+
+</pre></body></html>

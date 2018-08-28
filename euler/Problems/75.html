@@ -1,0 +1,69 @@
+<html><head><title>Euler - Problem 75</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=75" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I don't think I did a very good job on this one. I did get the correct 
+answer, but it took the program over an hour to come to the answer. Not 
+very efficient. What did get it at least partially there is knowing that 
+to make a primitive triple, m and n must be coprime. This made things much 
+faster and more efficient.
+
+
+CODE:
+
+from time import time
+from fractions import gcd
+start = time(); end = time()
+
+all_triples = set()
+for n in range(1, 1225):
+	end, start = time() - start, time()
+	print n, end
+	if 2*(n+1)*(2*n+1) > 1500000:
+		break
+	for m in range(n+1, 1225, 2):
+		if (gcd(m, n) != 1):
+			continue
+		if 2*m*(m+n) > 1500000:
+			break
+		for k in range(1, 1500000):
+			a = k*(m**2 - n**2)
+			b = k*(2*m*n)
+			c = k*(m**2 + n**2)
+			triple = tuple(sorted([a, b, c]))
+			if a+b+c <= 1500000:
+				all_triples |= {triple}
+			elif a+b+c > 1500000:
+				break
+
+duplicates = set()
+unique = set()
+for t in all_triples:
+	tsum = sum(t)
+	if tsum in duplicates:
+		continue
+	elif tsum in unique:
+		duplicates.add(tsum)
+		unique.remove(tsum)
+	elif tsum not in unique:
+		unique.add(tsum)
+
+print len(unique)
+
+
+</pre></body></html>

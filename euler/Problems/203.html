@@ -1,0 +1,77 @@
+<html><head><title>Euler - Problem 203</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=203" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This one was pretty easy. I took some definition snippets from a previous script. I 
+wrote the nCk function, though I bet Python already has it.
+
+
+CODE:
+
+from math import factorial
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n < 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+def nextprime(p):
+	if p == 2:
+		return 3
+	else:
+		while True:
+			p += 2
+			if isprime(p) == True:
+				return p
+
+def squarefree(n):
+	p = 2
+	while n > 1:
+		i = 1
+	 	while n%(p**i) == 0:
+			i += 1
+		if i == 2:
+			n /= p**(i-1)
+		elif i > 2:
+			return False
+		p = nextprime(p)
+	return True
+
+def C(n, k):
+	return (factorial(n)/(factorial(k)*factorial(n-k)))
+
+
+total = 0
+tested = set()
+for n in xrange(51):
+	for k in xrange(n+1):
+		this = C(n, k)
+		if this not in tested:
+			tested.add(this)
+			if squarefree(this) == True:
+				total += this
+
+print total
+
+
+</pre></body></html>

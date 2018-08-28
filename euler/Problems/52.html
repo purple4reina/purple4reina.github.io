@@ -1,0 +1,53 @@
+<html><head><title>Euler - Problem 52</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=52" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I work and I work, and all this time, it was the little trick I was trying to use to save some time that was 
+getting in the way. I knew the number had to start with a 1, so I attempted to create only numbers beginning with 
+1 to test for the property needed. But, somehow, doing this created some bug in the line. Not sure exactly what it 
+was. But taking that out, I got the answer in just a few seconds.
+
+
+CODE:
+
+#(1234) --> [1, 2, 3, 4]
+import re
+def num2str(n):
+	return map(int, re.split('_', re.sub('\B', '_', str(n))))
+
+#take a string of form (1, 2, a, b) and make it into one word or number of form 12ab
+def str2num(n):
+	return ''.join(map(str, n))	
+
+
+from itertools import count
+for n in count(0):
+	x = 2
+	checkstring = num2str(n)
+	check = n
+	#checkstring = [1] + num2str(n)
+	#check = str2num(checkstring)
+	while x < 7:
+		against = num2str(x*check)
+		for i in range(10):
+			if against.count(i) != checkstring.count(i): x = 7
+		if x == 6: print check
+		x += 1
+
+
+</pre></body></html>

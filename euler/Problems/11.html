@@ -1,0 +1,242 @@
+<html>
+
+<head>
+<title>Euler - Problem 11</title>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=11" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I think for this one I am going to head over to Python. I'm wanting something that is scriptable. Though I'm 
+sure Mathematica can handle what I'm looking for, I'd rather have something that will run as a script that I can 
+tweak with each application.
+
+The script I wrote is really inefficient. But I figure since it's my first Python script, I'll let that slide.
+
+
+CODE:
+
+a=[8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8]
+b=[49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0]
+c=[81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65]
+d=[52, 70, 95, 23, 4, 60, 11, 42, 69, 24, 68, 56, 1, 32, 56, 71, 37, 2, 36, 91]
+e=[22, 31, 16, 71, 51, 67, 63, 89, 41, 92, 36, 54, 22, 40, 40, 28, 66, 33, 13, 80]
+f=[24, 47, 32, 60, 99, 3, 45, 2, 44, 75, 33, 53, 78, 36, 84, 20, 35, 17, 12, 50]
+g=[32, 98, 81, 28, 64, 23, 67, 10, 26, 38, 40, 67, 59, 54, 70, 66, 18, 38, 64, 70]
+h=[67, 26, 20, 68, 2, 62, 12, 20, 95, 63, 94, 39, 63, 8, 40, 91, 66, 49, 94, 21]
+i=[24, 55, 58, 5, 66, 73, 99, 26, 97, 17, 78, 78, 96, 83, 14, 88, 34, 89, 63, 72]
+j=[21, 36, 23, 9, 75, 0, 76, 44, 20, 45, 35, 14, 0, 61, 33, 97, 34, 31, 33, 95]
+k=[78, 17, 53, 28, 22, 75, 31, 67, 15, 94, 3, 80, 4, 62, 16, 14, 9, 53, 56, 92]
+l=[16, 39, 5, 42, 96, 35, 31, 47, 55, 58, 88, 24, 0, 17, 54, 24, 36, 29, 85, 57]
+m=[86, 56, 0, 48, 35, 71, 89, 7, 5, 44, 44, 37, 44, 60, 21, 58, 51, 54, 17, 58]
+n=[19, 80, 81, 68, 5, 94, 47, 69, 28, 73, 92, 13, 86, 52, 17, 77, 4, 89, 55, 40]
+o=[4, 52, 8, 83, 97, 35, 99, 16, 7, 97, 57, 32, 16, 26, 26, 79, 33, 27, 98, 66]
+p=[88, 36, 68, 87, 57, 62, 20, 72, 3, 46, 33, 67, 46, 55, 12, 32, 63, 93, 53, 69]
+q=[4, 42, 16, 73, 38, 25, 39, 11, 24, 94, 72, 18, 8, 46, 29, 32, 40, 62, 76, 36]
+r=[20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74, 4, 36, 16]
+s=[20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54]
+t=[1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
+products=[]
+
+#rows
+for each_number in range(17):
+		the_product= a[each_number]*a[each_number+1]*a[each_number+2]*a[each_number+3]
+		products.append(the_product)
+for each_number in range(17):
+		the_product= b[each_number]*b[each_number+1]*b[each_number+2]*b[each_number+3]
+		products.append(the_product)
+for each_number in range(17):
+		the_product= c[each_number]*c[each_number+1]*c[each_number+2]*c[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= d[each_number]*d[each_number+1]*d[each_number+2]*d[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= e[each_number]*e[each_number+1]*e[each_number+2]*e[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= f[each_number]*f[each_number+1]*f[each_number+2]*f[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= g[each_number]*g[each_number+1]*g[each_number+2]*g[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= h[each_number]*h[each_number+1]*h[each_number+2]*h[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= i[each_number]*i[each_number+1]*i[each_number+2]*i[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= j[each_number]*j[each_number+1]*j[each_number+2]*j[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= k[each_number]*k[each_number+1]*k[each_number+2]*k[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= l[each_number]*l[each_number+1]*l[each_number+2]*l[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= m[each_number]*m[each_number+1]*m[each_number+2]*m[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= n[each_number]*n[each_number+1]*n[each_number+2]*n[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= o[each_number]*o[each_number+1]*o[each_number+2]*o[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= p[each_number]*p[each_number+1]*p[each_number+2]*p[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= q[each_number]*q[each_number+1]*q[each_number+2]*q[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= r[each_number]*r[each_number+1]*r[each_number+2]*r[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= s[each_number]*s[each_number+1]*s[each_number+2]*s[each_number+3]
+		products.append(the_product)
+for each_number in range(17):	
+		the_product= t[each_number]*t[each_number+1]*t[each_number+2]*t[each_number+3]
+		products.append(the_product)
+
+#columns
+for each_number in range(20):
+	the_product= a[each_number]*b[each_number]*c[each_number]*d[each_number]
+	products.append(the_product)
+	the_product= b[each_number]*c[each_number]*d[each_number]*e[each_number]
+	products.append(the_product)
+	the_product= c[each_number]*d[each_number]*e[each_number]*f[each_number]
+	products.append(the_product)
+	the_product= d[each_number]*e[each_number]*f[each_number]*g[each_number]
+	products.append(the_product)
+	the_product= e[each_number]*f[each_number]*g[each_number]*h[each_number]
+	products.append(the_product)
+	the_product= f[each_number]*g[each_number]*h[each_number]*i[each_number]
+	products.append(the_product)
+	the_product= g[each_number]*h[each_number]*i[each_number]*j[each_number]
+	products.append(the_product)
+	the_product= h[each_number]*i[each_number]*j[each_number]*k[each_number]
+	products.append(the_product)
+	the_product= i[each_number]*j[each_number]*k[each_number]*l[each_number]
+	products.append(the_product)
+	the_product= j[each_number]*k[each_number]*l[each_number]*m[each_number]
+	products.append(the_product)
+	the_product= k[each_number]*l[each_number]*m[each_number]*n[each_number]
+	products.append(the_product)
+	the_product= l[each_number]*m[each_number]*n[each_number]*o[each_number]
+	products.append(the_product)
+	the_product= m[each_number]*n[each_number]*o[each_number]*p[each_number]
+	products.append(the_product)
+	the_product= n[each_number]*o[each_number]*p[each_number]*q[each_number]
+	products.append(the_product)
+	the_product= o[each_number]*p[each_number]*q[each_number]*r[each_number]
+	products.append(the_product)
+	the_product= p[each_number]*q[each_number]*r[each_number]*s[each_number]
+	products.append(the_product)
+	the_product= q[each_number]*r[each_number]*s[each_number]*t[each_number]
+	products.append(the_product)
+
+#negative sloping diagonals
+for each_number in range(17):
+	the_product= a[each_number]*b[each_number+1]*c[each_number+2]*d[each_number+3]
+	products.append(the_product)
+	the_product= b[each_number]*c[each_number+1]*d[each_number+2]*e[each_number+3]
+	products.append(the_product)
+	the_product= c[each_number]*d[each_number+1]*e[each_number+2]*f[each_number+3]
+	products.append(the_product)
+	the_product= d[each_number]*e[each_number+1]*f[each_number+2]*g[each_number+3]
+	products.append(the_product)
+	the_product= e[each_number]*f[each_number+1]*g[each_number+2]*h[each_number+3]
+	products.append(the_product)
+	the_product= f[each_number]*g[each_number+1]*h[each_number+2]*i[each_number+3]
+	products.append(the_product)
+	the_product= g[each_number]*h[each_number+1]*i[each_number+2]*j[each_number+3]
+	products.append(the_product)
+	the_product= h[each_number]*i[each_number+1]*j[each_number+2]*k[each_number+3]
+	products.append(the_product)
+	the_product= i[each_number]*j[each_number+1]*k[each_number+2]*l[each_number+3]
+	products.append(the_product)
+	the_product= j[each_number]*k[each_number+1]*l[each_number+2]*m[each_number+3]
+	products.append(the_product)
+	the_product= k[each_number]*l[each_number+1]*m[each_number+2]*n[each_number+3]
+	products.append(the_product)
+	the_product= l[each_number]*m[each_number+1]*n[each_number+2]*o[each_number+3]
+	products.append(the_product)
+	the_product= m[each_number]*n[each_number+1]*o[each_number+2]*p[each_number+3]
+	products.append(the_product)
+	the_product= n[each_number]*o[each_number+1]*p[each_number+2]*q[each_number+3]
+	products.append(the_product)
+	the_product= o[each_number]*p[each_number+1]*q[each_number+2]*r[each_number+3]
+	products.append(the_product)
+	the_product= p[each_number]*q[each_number+1]*r[each_number+2]*s[each_number+3]
+	products.append(the_product)
+	the_product= q[each_number]*r[each_number+1]*s[each_number+2]*t[each_number+3]
+	products.append(the_product)
+
+#positive sloping diagonals
+for each_number in range(17):
+	the_product= d[each_number]*c[each_number+1]*b[each_number+2]*a[each_number+3]
+	products.append(the_product)
+	the_product= e[each_number]*d[each_number+1]*c[each_number+2]*b[each_number+3]
+	products.append(the_product)
+	the_product= f[each_number]*e[each_number+1]*d[each_number+2]*c[each_number+3]
+	products.append(the_product)
+	the_product= g[each_number]*f[each_number+1]*e[each_number+2]*d[each_number+3]
+	products.append(the_product)
+	the_product= h[each_number]*g[each_number+1]*f[each_number+2]*e[each_number+3]
+	products.append(the_product)
+	the_product= i[each_number]*h[each_number+1]*g[each_number+2]*f[each_number+3]
+	products.append(the_product)
+	the_product= j[each_number]*i[each_number+1]*h[each_number+2]*g[each_number+3]
+	products.append(the_product)
+	the_product= k[each_number]*j[each_number+1]*i[each_number+2]*h[each_number+3]
+	products.append(the_product)
+	the_product= l[each_number]*k[each_number+1]*j[each_number+2]*i[each_number+3]
+	products.append(the_product)
+	the_product= m[each_number]*l[each_number+1]*k[each_number+2]*j[each_number+3]
+	products.append(the_product)
+	the_product= n[each_number]*m[each_number+1]*l[each_number+2]*k[each_number+3]
+	products.append(the_product)
+	the_product= o[each_number]*n[each_number+1]*m[each_number+2]*l[each_number+3]
+	products.append(the_product)
+	the_product= p[each_number]*o[each_number+1]*n[each_number+2]*m[each_number+3]
+	products.append(the_product)
+	the_product= q[each_number]*p[each_number+1]*o[each_number+2]*n[each_number+3]
+	products.append(the_product)
+	the_product= r[each_number]*q[each_number+1]*p[each_number+2]*o[each_number+3]
+	products.append(the_product)
+	the_product= s[each_number]*r[each_number+1]*q[each_number+2]*p[each_number+3]
+	products.append(the_product)
+	the_product= t[each_number]*s[each_number+1]*r[each_number+2]*q[each_number+3]
+	products.append(the_product)
+
+print products
+maximal= max(products)
+print maximal
+
+
+
+</pre>
+</body>
+</html>

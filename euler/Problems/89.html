@@ -1,0 +1,149 @@
+<html><head><title>Euler - Problem 89</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=89" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This one was tedious problem. But, the answer came with the first run.
+
+It also got me a new award! I now have the "As Easy As Pi" award.
+
+
+CODE:
+
+def value(R):
+	total = 0
+	for i in range(len(R)):
+		d = R[i]
+		if d == 'I':
+			if 'V' in R[i:] or 'X' in R[i:]:
+				total -= 1
+			else:
+				total += 1
+		elif d == 'V':
+			total += 5
+		elif d == 'X':
+			if 'L' in R[i:] or 'C' in R[i:]:
+				total -= 10
+			else:
+				total += 10
+		elif d == 'L':
+			total += 50
+		elif d == 'C':
+			if 'D' in R[i:] or 'M' in R[i:]:
+				total -= 100
+			else:
+				total += 100
+		elif d == 'D':
+			total += 500
+		elif d == 'M':
+			total += 1000
+	return total
+
+def Roman(n):
+	thousand = n%10000 - n%1000
+	hundred = n%1000 - n%100
+	ten = n%100 - n%10
+	one = n%10
+	return Rthousand(thousand) + Rhundred(hundred) + Rten(ten) + Rone(one)
+
+def Rthousand(n):
+	if n == 4000:
+		return 'MMMM'
+	if n == 3000:
+		return 'MMM'
+	if n == 2000:
+		return 'MM'
+	if n == 1000:
+		return 'M'
+	if n == 0:
+		return ''
+
+def Rhundred(n):
+	if n == 900:
+		return 'CM'
+	if n == 800:
+		return 'DCCC'
+	if n == 700:
+		return 'DCC'
+	if n == 600:
+		return 'DC'
+	if n == 500:
+		return 'D'
+	if n == 400:
+		return 'CD'
+	if n == 300:
+		return 'CCC'
+	if n == 200:
+		return 'CC'
+	if n == 100:
+		return 'C'
+	if n == 0:
+		return ''
+
+def Rten(n):
+	if n == 90:
+		return 'XC'
+	if n == 80:
+		return 'LXXX'
+	if n == 70:
+		return 'LXX'
+	if n == 60:
+		return 'LX'
+	if n == 50:
+		return 'L'
+	if n == 40:
+		return 'XL'
+	if n == 30:
+		return 'XXX'
+	if n == 20:
+		return 'XX'
+	if n == 10:
+		return 'X'
+	if n == 0:
+		return ''
+
+def Rone(n):
+	if n == 9:
+		return 'IX'
+	if n == 8:
+		return 'VIII'
+	if n == 7:
+		return 'VII'
+	if n == 6:
+		return 'VI'
+	if n == 5:
+		return 'V'
+	if n == 4:
+		return 'IV'
+	if n == 3:
+		return 'III'
+	if n == 2:
+		return 'II'
+	if n == 1:
+		return 'I'
+	if n == 0:
+		return ''
+
+
+count = 0
+for R in LIST:
+	count += len(R) - len(Roman(value(R)))
+
+print count
+
+
+</pre></body></html>

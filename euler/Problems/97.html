@@ -1,0 +1,38 @@
+<html><head><title>Euler - Problem 97</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=97" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+There was no way my computer would be able to calculate the actual number. Instead, I had it just calculate the 
+last 14 digits of the number. I did this by defining a function timestwo to just return the last 14 digits of a 
+number times 2. This way, the numbers I was working with always remained very manageable.
+
+
+CODE:
+
+def timestwo(x):
+	return str(2 * int(x))[-14:]
+
+a = 1
+for i in range(7830457):
+	print i
+	a = timestwo(a)
+	
+print 28433 * int(a) + 1
+
+
+</pre></body></html>

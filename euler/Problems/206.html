@@ -1,0 +1,39 @@
+<html><head><title>Euler - Problem 206</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=206" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+The only difficulty with this one was making sure I was testing the 
+correct digits. At first my code wasn't working because I was having it 
+look at the even numbered digits instead of the odd numbered digits. Once 
+I caught the mistake, the script worked nicely.
+
+
+CODE:
+
+num = 1000000000
+squ = str(pow(num, 2))
+
+while len(squ) == 19:
+	if [squ[0], squ[2], squ[4], squ[6], squ[8], squ[10], squ[12], squ[14], squ[16], squ[18]] == map(str, (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)):
+		print [[[[num]]]]
+		break
+	num += 10
+	squ = str(num**2)
+
+
+</pre></body></html>

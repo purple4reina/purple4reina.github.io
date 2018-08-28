@@ -1,0 +1,85 @@
+<html><head><title>Euler - Problem 72</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=72" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem was great. There have been several problems so far that 
+involve fractions. I used the phi function again, but this time found a 
+way to maximize it. I learned that sets are much faster to access than 
+lists. So, I kept both a list and a set of primes. This made it really 
+quick to check and see if a number was prime or not, because checking to 
+see if that number is in the set of primes was very fast. 
+
+I also kept a dictionary of the prime factorizations of numbers. This 
+allowed me to find the prime factors of large numbers very quickly.
+
+
+CODE:
+
+from fractions import *
+count = 1
+bound = 10**6
+
+def isprime(n):
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+primes = []
+for n in range(bound):
+	if isprime(n) == True:
+		primes.append(n)
+
+primeset = set(primes)
+pfact = {}
+
+def prime_fact(n):
+	num = n
+	fact = set()
+	i = 0
+	p = primes[i]
+	while p <= n:
+		if n in primeset:
+			fact.add(n)
+			break
+		p = primes[i]
+		if n%p == 0:
+			fact.add(p)
+			n /= p
+			if n in pfact:
+				fact |= set(pfact[n])
+				break
+		i += 1
+	pfact[num] = tuple(fact)
+	return fact
+
+def phi(n):
+	ph = n
+	for p in prime_fact(n):
+		ph *= (1 - (1/float(p)))
+	return ph
+
+
+total = 0
+for d in range(2, bound+1):
+	total += phi(d)
+	
+print int(total)
+
+
+</pre></body></html>

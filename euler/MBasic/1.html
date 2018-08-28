@@ -1,0 +1,49 @@
+<html><head><title>Euler Basic - Problem 1</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<pre>
+
+COMMENTS:
+
+This program uses WHILE...WEND loops.
+
+
+RESULTS:
+
+0.26 seconds on Macbook Pro
+3.6 seconds on KayPro 10
+
+
+CODE:
+
+x=0
+y=0
+z=0
+c=0
+while x<1000
+	c=c+x
+	x=x+3
+wend
+while y<1000
+	c=c+y
+	y=y+5
+wend
+while z<1000
+	c=c-z
+	z=z+15
+wend
+print c
+
+
+</pre></body></html>

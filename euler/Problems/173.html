@@ -1,0 +1,42 @@
+<html><head><title>Euler - Problem 173</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=173" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I wish this one ran faster. Not sure how I could have made that happen though. 
+Probably using a little more math brains would have helped. Oh well. I figured, by 
+the time I found that faster method, the slower one would have finished.
+
+
+CODE:
+
+count = 0
+bound = 10**6
+
+for outer in range(3, bound/4 + 2):
+	if outer%1000 == 0: print outer
+	for inner in range(outer-2, 0, -2):
+		this = outer**2 - inner**2
+		if this <= bound:
+			count += 1
+		if this > bound:
+			break
+
+print count
+
+
+</pre></body></html>

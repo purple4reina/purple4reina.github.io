@@ -1,0 +1,63 @@
+<html><head><title>Euler - Problem 55</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=55" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+The hardest part of this one was defining functions that find the 
+palindrome of a number and then add it to the original. It took a little 
+work with string methods, but all in all, it wasn't too bad. To get the 
+reversed order of a number, I used a for loop that then took the numbers 
+in reverse order from the original and fed them into a new number.
+
+
+CODE:
+
+def ispalindrome(n):
+	number = str(n)
+	backward = [[]] * len(number)
+	for i in range(len(number)):
+		backward[len(number) - i - 1] = number[i]
+	backward = ''.join(map(str, backward))
+	if backward == number: return True
+	else: return False
+
+
+def reverse_and_add(n):
+	number = str(n)
+	backward = [[]] * len(number)
+	for i in range(len(number)):
+		backward[len(number) - i - 1] = number[i]
+	backward = ''.join(map(str, backward))
+	number = int(number)
+	backward = int(backward)
+	return number + backward
+
+Lychrel = 0
+
+for n in range(10000):
+	for x in range(50):
+		n = reverse_and_add(n)
+		if ispalindrome(n) == True:
+			break
+			break
+	else:
+		Lychrel += 1
+		
+print Lychrel
+
+
+</pre></body></html>

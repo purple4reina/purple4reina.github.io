@@ -1,0 +1,499 @@
+<html><head><title>Euler - Problem 96</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=96" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem took me months to complete. I tried several different approaches. Ultimately, 
+the one that worked was using python objects and creating a sudoku class. Within this, I 
+was able to create a ton of methods that could be called.
+
+I combined two strategies in my final code. I've been an avid Sudoku player (by hand) for 
+years. I thus have the logical strategies down already. I approached the initial 
+programming as I do any sudoku puzzle. I created the box_reduce() method to capture the 
+first logical step that I use when solving. Unfortunately, I was unable to implement any 
+further versions of my logical by hand methods. 
+
+However, this first step was enough to make a brute force attack possible. I then 
+implemented a walk() method that went through each square and testing the possibilities for 
+it. Upon an error, it erases it's work and continues on.
+
+I've printed two versions of my code below. The first is the cleaned up version that I 
+perfected after the completion of the problem. The second is the initial code I ran. This 
+latter version has many methods that were not needed in the end.
+
+
+FINAL CODE:
+
+#	s = string of the numbers from l to r, x's mean not filled yet
+#	n = number index for a row, column, box
+#	d = digit 1-9
+
+class sudoku:
+	
+	def __init__(self, s):
+		self.part = str()
+		whole_list = []
+		for d in s:
+			whole_list.append(d)
+		for i in xrange(len(whole_list)):
+			if whole_list[i] == '0':
+				whole_list[i] = 'x'
+		self.whole = ''.join(map(str, whole_list))
+	
+	def row(self, n):
+		self.part = str()
+		for i in xrange(9):
+			self.part += self.whole[n*9 + i]
+		return self.part
+	
+	def column(self, n):
+		self.part = str()
+		for i in xrange(9):
+			self.part += self.whole[n + i*9]
+		return self.part
+	
+	def box(self, n):
+		self.part = str()
+		for i in xrange(3):
+			for j in xrange(3):
+				self.part += self.whole[(n/3)*18 + n*3 + i*9 + j] # double check
+		return self.part
+	
+	def isSolved(self):
+		self.error()
+		if 'x' in self.whole:
+			return False
+		for n in xrange(9):
+			this_row = self.row(n)
+			this_column = self.column(n)
+			this_box = self.box(n)
+			for d in xrange(1, 10):
+				if (str(d) not in this_row) or (str(d) not in this_column) or (str(d) not in this_box):
+					return False
+		return True
+	
+	def box_index(self, n):		# (row, column)
+		self.part = dict()
+		for i in xrange(3):
+			for j in xrange(3):
+				self.part[((n/3)*3 + i, (n%3)*3 + j)] = self.whole[(n/3)*18 + n*3 + i*9 + j] # double check
+		return self.part
+	
+	def all_index(self):		# (row, column)
+		self.part = dict()
+		for n in xrange(9):
+			for i in xrange(9):
+				self.part[(n, i)] = self.whole[n*9 + i]
+		return self.part
+	
+	def error(self):
+		if '0' in self.whole:
+			raise Exception('SudokuError: Zero')
+		if len(self.whole) != 81:
+			raise Exception('SudokuError: Length')
+		for n in xrange(9):
+			this_row = self.row(n)
+			this_column = self.column(n)
+			this_box = self.box(n)
+			for d in xrange(1, 10):
+				if this_row.count(str(d)) > 1 or this_column.count(str(d)) > 1 or this_box.count(str(d)) > 1:
+					raise Exception('SudokuError: Double')					
+	
+	def dict_to_whole(self, s_index):	# does not return, updates self.whole within the method
+		new_whole = []
+		for i in xrange(9):
+			for j in xrange(9):
+				new_whole.append(s_index[(i, j)])
+		self.whole = ''.join(map(str, new_whole))	
+	
+	def list_to_whole(self, s_list):	# does not return, updates self.whole within the method
+		self.whole = ''.join(map(str, s_list))
+	
+	def box_reduce(self):				# does not return, updates self.whole within the method
+		all_boxes = self.all_index()		
+		prev_whole = ''
+		
+		while self.whole != prev_whole:
+			prev_whole = self.whole
+			for d in xrange(1, 10):
+				for n in xrange(9):
+					this_box_index = self.box_index(n)
+					if str(d) in self.box(n):
+						continue
+					for key_value in all_boxes.iteritems():
+						if key_value[1] == str(d):
+							for i in xrange(9):
+								if (key_value[0][0], i) in this_box_index:
+									del this_box_index[(key_value[0][0], i)]
+								if (i, key_value[0][1]) in this_box_index:
+									del this_box_index[(i, key_value[0][1])]
+					solo_count = 0
+					for i in this_box_index.iterkeys():
+						if this_box_index[i] == 'x':
+							solo_count += 1
+					if solo_count == 1:
+						for i in this_box_index.iterkeys():
+							if this_box_index[i] == 'x':
+								all_boxes[i] = str(d)
+					self.dict_to_whole(all_boxes)
+			
+		self.error()
+
+	def walk(self):
+
+		def x_index_list(s):
+			x_list = []
+			for i in range(len(list(s))):
+				if list(s)[i] == 'x':
+					x_list.append(i)
+			return x_list
+		
+		saved_whole = self.whole
+		whole_list = list(self.whole)
+		x_index = x_index_list(saved_whole)
+		
+		i = 0
+		while True:
+			try:
+				whole_list[x_index[i]] = str(int(whole_list[x_index[i]]) + 1)
+			except:
+				whole_list[x_index[i]] = '1'
+			if whole_list[x_index[i]] == '10':
+				whole_list[x_index[i]] = 'x'
+				i -= 1
+			else:
+				try:
+					self.list_to_whole(whole_list)
+					if self.isSolved() == True:
+						return
+					else:
+						i += 1
+				except:
+					pass
+		
+
+def nextgrid():
+	s = open('sudoku.txt', 'r')
+	i = 0
+	sud = []
+	for row in s:
+		i = (i+1)%10
+		if i != 1:
+			sud.append(str(row)[:9])
+		if i == 0:
+			sud = ''.join(sud)
+			new = []
+			for j in sud:
+				if j != '0':
+					new.append(int(j))
+				else:
+					new.append('x')
+			yield ''.join(map(str, new))
+			sud = []
+	return		
+
+def main():	
+	total = 0
+	for s in nextgrid():
+		this_sudoku = sudoku(s)
+		this_sudoku.box_reduce()
+		if this_sudoku.isSolved() == False:
+			this_sudoku.walk()
+		print this_sudoku.whole, this_sudoku.isSolved(), int(this_sudoku.whole[:3])
+		total += int(this_sudoku.whole[:3])
+		
+	print total
+
+main()
+
+
+
+INITIAL CODE:
+
+from itertools import *
+
+#	s = string of the numbers from l to r, x's mean not filled yet
+#	n = number index for a row, column, box
+#	d = digit 1-9
+
+class sudoku:
+	
+	def __init__(self, s):
+		self.part = str()
+		whole_list = []
+		for d in s:
+			whole_list.append(d)
+		for i in xrange(len(whole_list)):
+			if whole_list[i] == '0':
+				whole_list[i] = 'x'
+		self.whole = ''.join(map(str, whole_list))
+	
+	def row(self, n):
+		self.part = str()
+		for i in xrange(9):
+			self.part += self.whole[n*9 + i]
+		return self.part
+	
+	def column(self, n):
+		self.part = str()
+		for i in xrange(9):
+			self.part += self.whole[n + i*9]
+		return self.part
+	
+	def box(self, n):
+		self.part = str()
+		for i in xrange(3):
+			for j in xrange(3):
+				self.part += self.whole[(n/3)*18 + n*3 + i*9 + j] # double check
+		return self.part
+	
+	def isSolved(self):
+		self.error()
+		if 'x' in self.whole:
+			return False
+		for n in xrange(9):
+			this_row = self.row(n)
+			this_column = self.column(n)
+			this_box = self.box(n)
+			for d in xrange(1, 10):
+				if (str(d) not in this_row) or (str(d) not in this_column) or (str(d) not in this_box):
+					return False
+		return True
+	
+	def available(self):		# returns list, numbers available for each space
+		slist = []
+		for n in self.whole:
+			if n == 'x':
+				slist.append(range(1,10))
+			else:
+				slist.append([int(n)])
+		return slist
+	
+	def row_index(self, n):		# (row, column)
+		self.part = dict()
+		for i in xrange(9):
+			self.part[(n, i)] = self.whole[n*9 + i]
+		return self.part
+	
+	def column_index(self, n):	# (row, column)
+		self.part = dict()
+		for i in xrange(9):
+			self.part[(i, n)] = self.whole[n + i*9]
+		return self.part
+	
+	def box_index(self, n):		# (row, column)
+		self.part = dict()
+		for i in xrange(3):
+			for j in xrange(3):
+				self.part[((n/3)*3 + i, (n%3)*3 + j)] = self.whole[(n/3)*18 + n*3 + i*9 + j] # double check
+		return self.part
+	
+	def all_index(self):		# (row, column)
+		self.part = dict()
+		for n in xrange(9):
+			for i in xrange(9):
+				self.part[(n, i)] = self.whole[n*9 + i]
+		return self.part
+	
+	def error(self):
+		if '0' in self.whole:
+			raise Exception('SudokuError: Zero')
+		if len(self.whole) != 81:
+			raise Exception('SudokuError: Length')
+		for n in xrange(9):
+			this_row = self.row(n)
+			this_column = self.column(n)
+			this_box = self.box(n)
+			for d in xrange(1, 10):
+				if this_row.count(str(d)) > 1 or this_column.count(str(d)) > 1 or this_box.count(str(d)) > 1:
+					raise Exception('SudokuError: Double')					
+	
+	def dict_to_whole(self, s_index):	# does not return, updates self.whole within the method
+		new_whole = []
+		for i in xrange(9):
+			for j in xrange(9):
+				new_whole.append(s_index[(i, j)])
+		self.whole = ''.join(map(str, new_whole))	
+	
+	def list_to_whole(self, s_list):	# does not return, updates self.whole within the method
+		self.whole = ''.join(map(str, s_list))
+	
+	def box_reduce(self):				# does not return, updates self.whole within the method
+		all_boxes = self.all_index()		
+		prev_whole = ''
+		
+		while self.whole != prev_whole:
+			prev_whole = self.whole
+			for d in xrange(1, 10):
+				for n in xrange(9):
+					this_box_index = self.box_index(n)
+					if str(d) in self.box(n):
+						continue
+					for key_value in all_boxes.iteritems():
+						if key_value[1] == str(d):
+							for i in xrange(9):
+								if (key_value[0][0], i) in this_box_index:
+									del this_box_index[(key_value[0][0], i)]
+								if (i, key_value[0][1]) in this_box_index:
+									del this_box_index[(i, key_value[0][1])]
+					solo_count = 0
+					for i in this_box_index.iterkeys():
+						if this_box_index[i] == 'x':
+							solo_count += 1
+					if solo_count == 1:
+						for i in this_box_index.iterkeys():
+							if this_box_index[i] == 'x':
+								all_boxes[i] = str(d)
+					self.dict_to_whole(all_boxes)
+			
+		self.error()
+	
+	def box_spread(self):				# does not return, updates self.whole within the method
+		all_boxes = self.all_index()		
+		prev_whole = ''
+		
+		while self.whole != prev_whole:
+			prev_whole = self.whole
+			for i in xrange(3):
+				
+				for d in xrange(1, 10):
+					for n in xrange(9):
+						this_box_index = self.box_index(n)
+						if str(d) in self.box(n):
+							continue
+						for key_value in all_boxes.items():
+							if key_value[1] == str(d):
+								for i in xrange(9):
+									if (key_value[0][0], i) in this_box_index:
+										del this_box_index[(key_value[0][0], i)]
+									if (i, key_value[0][1]) in this_box_index:
+										del this_box_index[(i, key_value[0][1])]
+					
+						remaining_keys = []
+						for k in this_box_index.iterkeys():
+							if all_boxes[k] == 'x':
+								remaining_keys.append(k)
+						remaining_keys_row = [k[0] for k in remaining_keys]
+						remaining_keys_column = [k[1] for k in remaining_keys]
+				
+						if len(remaining_keys) == 0:
+							continue
+						
+						if max(remaining_keys_row) == min(remaining_keys_row):
+							all_boxes[(min(remaining_keys_row), str(n*10))] = str(d)
+#							print d
+			
+						if max(remaining_keys_column) == min(remaining_keys_column):
+							all_boxes[(str(n*10), min(remaining_keys_column))] = str(d)
+#							print d
+					
+			self.dict_to_whole(all_boxes)
+			
+			
+		self.error()
+		
+	
+	def zip_x(self, x_fill):
+		whole_list = list(self.whole)
+		x_fill = list(x_fill)
+		for i in xrange(len(whole_list)):
+			if whole_list[i] == 'x':
+				whole_list[i] = x_fill.pop(0)
+		return ''.join(map(str, whole_list))
+	
+	def digits_left(self):
+		left = []
+		for d in xrange(1, 10):
+			for i in xrange(9 - self.whole.count(str(d))):
+				left.append(str(d))
+		return ''.join(left)
+	
+
+	def walk(self):
+		def x_index_list(s):
+			x_list = []
+			for i in range(len(list(s))):
+				if list(s)[i] == 'x':
+					x_list.append(i)
+			return x_list
+		
+		saved_whole = self.whole
+		whole_list = list(self.whole)
+		x_index = x_index_list(saved_whole)
+		
+		i = 0
+		while True:
+			try:
+				whole_list[x_index[i]] = str(int(whole_list[x_index[i]]) + 1)
+			except:
+				whole_list[x_index[i]] = '1'
+			if whole_list[x_index[i]] == '10':
+				whole_list[x_index[i]] = 'x'
+				i -= 1
+			else:
+				try:
+					self.list_to_whole(whole_list)
+					if self.isSolved() == True:
+						return
+					else:
+						i += 1
+				except:
+					pass
+
+
+def nextgrid():
+	s = open('sudoku.txt', 'r')
+	i = 0
+	sud = []
+	for row in s:
+		i = (i+1)%10
+		if i != 1:
+			sud.append(str(row)[:9])
+		if i == 0:
+			sud = ''.join(sud)
+			new = []
+			for j in sud:
+				if j != '0':
+					new.append(int(j))
+				else:
+					new.append('x')
+			yield ''.join(map(str, new))
+			sud = []
+	return		
+
+def main():
+	
+	total = 0
+	for s in nextgrid():
+		this_sudoku = sudoku(s)
+		
+		this_sudoku.box_reduce()
+		
+		if this_sudoku.isSolved() == False:
+			this_sudoku.walk()
+	
+		print this_sudoku.whole, this_sudoku.isSolved(), int(this_sudoku.whole[:3])
+		
+		total += int(this_sudoku.whole[:3])
+		
+	print total
+
+
+main()
+
+
+</pre></body></html>

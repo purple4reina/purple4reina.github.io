@@ -1,0 +1,80 @@
+<html><head><title>Euler - Problem 70</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=70" target="_blank">View Problem</a></p>
+<pre>
+
+RESOURCES:
+
+The page on wikipedia about euler's totient was really helpful.
+
+
+COMMENTS:
+
+This problem was great! I realized, from reading the wikipedia article on 
+euler's totient, that the smallest ratio of n/&phi;(n) will be one when n is 
+prime. For prime numbers, &phi;(n) = n-1, so there was no need for me to use 
+the &phi; function at all. 
+
+There is no way that &phi;(n) could be a palendrome of n because &phi;(n) = n-1. 
+This told me that the next best way for n/&phi;(n) to be minimized was if n 
+was the product of just two primes.
+
+So, I generated a list of all the primes listed in ordered pairs with 
+their &phi;(n). I then used the combinations iterator to generate all pairs of 
+those primes until I found the smallest value.
+
+
+CODE:
+
+def isperm(n, m):
+	n = sorted(map(int, str(n)))
+	m = sorted(map(int, str(m)))
+	if n == m:
+		return True
+	else:
+		return False
+
+def isprime(n):
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+
+n = 1
+primes = []
+ratio = [10**7, 10**7]
+
+while n <= 10**7/2:
+	n += 1	
+	if isprime(n) == True: 
+		primes.append([n, n-1])
+
+from itertools import combinations
+
+for pairs in combinations(primes, 2):
+	n = pairs[0][0]*pairs[1][0]
+	if n >= 10**7:
+		continue
+	ph = pairs[0][1]*pairs[1][1]
+	nph = n/float(ph)
+	if isperm(n, ph) == True and nph < ratio[1]:
+		ratio = [n, nph]
+		print ratio
+		
+print ratio
+
+
+</pre></body></html>

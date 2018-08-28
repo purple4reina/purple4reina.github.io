@@ -1,0 +1,53 @@
+<html><head><title>Euler - Problem 68</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=68" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I found this one to be much easier than I expected it to be. It was 
+intimidating because of the geometric shapes involved. However, by simply 
+numbering each node, the problem because easily workable.
+
+I took all permutations of the numbers 1 through 10 and subjected them to 
+three tests. First, whether each line in the ring summed to the same number. 
+Second, whether what I considered the top most node was in fact that with the 
+lowest integer assignment. Finally, whether the concatenation was 16-digits in 
+length.
+
+
+RESULTS:
+
+With this, the script ran in 3 seconds.
+
+
+CODE:
+
+from itertools import *
+
+works = set()
+prev = 'I love Peter and Charlie'
+
+for t in permutations(range(1,11)):
+	if t[0]+t[1]+t[2] == t[3]+t[2]+t[4] == t[5]+t[4]+t[6] == t[7]+t[6]+t[8] == t[9]+t[8]+t[1]:
+		if t[0] < t[3] and t[0] < t[5] and t[0] < t[7] and t[0] < t[9]:
+			new = ''.join(map(str, [t[0],t[1],t[2],t[3],t[2],t[4],t[5],t[4],t[6],t[7],t[6],t[8],t[9],t[8],t[1]]))
+			if len(new) == 16:
+				works.add(new)
+
+print max(works)
+
+
+</pre></body></html>

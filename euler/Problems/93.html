@@ -1,0 +1,197 @@
+<html><head><title>Euler - Problem 93</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=93" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This code is so sloppy, but it works. It's really a combinatorics problem. 
+But I don't yet know how to do combinatoric things with the algebraic 
+functions +,-,*,/ as I can with integers.
+
+
+CODE:
+
+from itertools import *
+
+def target(l):
+	ans = []
+	for s in permutations(list(l)):
+		a = float(s[0]); b = float(s[1]); c = float(s[2]); d = float(s[3])
+		ans.append(((a+b)-c)*d)
+		ans.append(((a+b)-c)/d)
+		ans.append(((a+b)*c)-d)
+		ans.append(((a+b)*c)/d)
+		ans.append(((a+b)/c)-d)
+		ans.append(((a+b)/c)*d)
+		ans.append(((a-b)+c)*d)
+		ans.append(((a-b)+c)/d)
+		ans.append(((a-b)*c)+d)
+		ans.append(((a-b)*c)/d)
+		ans.append(((a-b)/c)+d)
+		ans.append(((a-b)/c)*d)
+		ans.append(((a*b)+c)-d)
+		ans.append(((a*b)+c)/d)			
+		ans.append(((a*b)-c)+d)
+		ans.append(((a*b)-c)/d)
+		ans.append(((a*b)/c)+d)
+		ans.append(((a*b)/c)-d)
+		ans.append(((a/b)+c)-d)
+		ans.append(((a/b)+c)*d)
+		ans.append(((a/b)-c)+d)
+		ans.append(((a/b)-c)*d)
+		ans.append(((a/b)*c)+d)
+		ans.append(((a/b)*c)-d)
+			
+		ans.append(((a+b)+c)-d)
+		ans.append(((a+b)-c)+d)
+		ans.append(((a-b)+c)+d)
+		ans.append(((a+b)+c)*d)
+		ans.append(((a+b)*c)+d)
+		ans.append(((a*b)+c)+d)
+		ans.append(((a+b)+c)/d)
+		ans.append(((a+b)/c)+d)
+		ans.append(((a/b)+c)+d)
+		ans.append(((a-b)-c)*d)
+		ans.append(((a-b)*c)-d)
+		ans.append(((a*b)-c)-d)
+		ans.append(((a-b)-c)/d)
+		ans.append(((a-b)/c)-d)
+		ans.append(((a/b)-c)-d)
+		ans.append(((a*b)*c)/d)
+		ans.append(((a*b)/c)*d)
+		ans.append(((a/b)*c)*d)
+		ans.append(((a-b)-c)+d)
+		ans.append(((a-b)+c)-d)
+		ans.append(((a+b)-c)-d)
+		ans.append(((a*b)*c)+d)
+		ans.append(((a*b)+c)*d)
+		ans.append(((a+b)*c)*d)
+		ans.append(((a/b)/c)+d)
+		ans.append(((a/b)+c)/d)
+		ans.append(((a+b)/c)/d)
+		ans.append(((a*b)*c)-d)
+		ans.append(((a*b)-c)*d)
+		ans.append(((a-b)*c)*d)
+		ans.append(((a/b)/c)-d)
+		ans.append(((a/b)-c)/d)
+		ans.append(((a-b)/c)/d)
+		ans.append(((a/b)/c)*d)
+		ans.append(((a/b)*c)/d)
+		ans.append(((a*b)/c)/d)	
+		
+		ans.append(((a+b)+c)+d)
+		ans.append(((a-b)-c)-d)
+		ans.append(((a*b)*c)*d)
+		ans.append(((a/b)/c)/d)
+		
+		
+		ans.append((a+b)-(c*d))
+		ans.append((a+b)-(c/d))
+		ans.append((a+b)*(c-d))
+		ans.append((a+b)*(c/d))
+		ans.append((a+b)/(c-d))
+		ans.append((a+b)/(c*d))
+		ans.append((a-b)+(c*d))
+		ans.append((a-b)+(c/d))
+		ans.append((a-b)*(c+d))
+		ans.append((a-b)*(c/d))
+		ans.append((a-b)/(c+d))
+		ans.append((a-b)/(c*d))
+		ans.append((a*b)+(c-d))
+		ans.append((a*b)+(c/d))			
+		ans.append((a*b)-(c+d))
+		ans.append((a*b)-(c/d))
+		ans.append((a*b)/(c+d))
+		ans.append((a*b)/(c-d))
+		ans.append((a/b)+(c-d))
+		ans.append((a/b)+(c*d))
+		ans.append((a/b)-(c+d))
+		ans.append((a/b)-(c*d))
+		ans.append((a/b)*(c+d))
+		ans.append((a/b)*(c-d))
+			
+		ans.append((a+b)+(c-d))
+		ans.append((a+b)-(c+d))
+		ans.append((a-b)+(c+d))
+		ans.append((a+b)+(c*d))
+		ans.append((a+b)*(c+d))
+		ans.append((a*b)+(c+d))
+		ans.append((a+b)+(c/d))
+		ans.append((a+b)/(c+d))
+		ans.append((a/b)+(c+d))
+		ans.append((a-b)-(c*d))
+		ans.append((a-b)*(c-d))
+		ans.append((a*b)-(c-d))
+		ans.append((a-b)-(c/d))
+		ans.append((a-b)/(c-d))
+		ans.append((a/b)-(c-d))
+		ans.append((a*b)*(c/d))
+		ans.append((a*b)/(c*d))
+		ans.append((a/b)*(c*d))
+		ans.append((a-b)-(c+d))
+		ans.append((a-b)+(c-d))
+		ans.append((a+b)-(c-d))
+		ans.append((a*b)*(c+d))
+		ans.append((a*b)+(c*d))
+		ans.append((a+b)*(c*d))
+		ans.append((a/b)/(c+d))
+		ans.append((a/b)+(c/d))
+		ans.append((a+b)/(c/d))
+		ans.append((a*b)*(c-d))
+		ans.append((a*b)-(c*d))
+		ans.append((a-b)*(c*d))
+		ans.append((a/b)/(c-d))
+		ans.append((a/b)-(c/d))
+		ans.append((a-b)/(c/d))
+		ans.append((a/b)/(c*d))
+		ans.append((a/b)*(c/d))
+		ans.append((a*b)/(c/d))	
+		
+		ans.append((a+b)+(c+d))
+		ans.append((a-b)-(c-d))
+		ans.append((a*b)*(c*d))
+		ans.append((a/b)/(c/d))
+		
+	return sorted(clean(ans))
+
+
+def clean(l):
+	ans = set()
+	for n in l:
+		if n%1 == 0 and n > 0:
+			ans.add(int(n))
+	return list(ans)
+
+
+def longest(l):
+	i = 0
+	for n in l:
+		i += 1
+		if n != i:
+			return i-1
+
+
+big = [0,0]
+for l in combinations(range(1, 10), 4):
+	this = longest(target(l))
+	if this > big[0]:
+		big = [this, l]
+		print l, big
+	
+print big
+
+
+</pre></body></html>

@@ -1,0 +1,53 @@
+<html><head><title>Euler - Problem 91</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=91" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This one felt really similar to the "find all the rectangles in this box" problem. 
+I simply made an algorithm to make all possible triangles, used the Pythagorean 
+Theorem to find which were right triangles, and weeded out duplicates and dumb ones 
+like (0,0) and stuff like that. Took the script just 14 seconds to run!
+
+
+CODE:
+
+bound = 50
+
+def isright((x1, y1), (x2, y2)):
+	a = (x1**2 + y1**2)
+	b = (x2**2 + y2**2)
+	c = ((x1-x2)**2 + (y1-y2)**2)
+	if (a + b == c) or (b + c == a) or (c + a == b):
+		return True
+	else:
+		return False
+
+
+count = 0
+tested = set()
+for x1 in range(bound+1):
+	for y1 in range(bound+1):
+		for x2 in range(bound+1):
+			for y2 in range(bound+1):
+				if (isright((x1, y1), (x2, y2)) == True) and (((x2, y2), (x1, y1)) not in tested) and ((x1, y1) != (0,0)) and ((x2, y2) != (0,0)) and ((x1, y1) != (x2, y2)):
+					count += 1
+					tested.add(((x1, y1), (x2, y2)))
+
+print count
+
+
+</pre></body></html>

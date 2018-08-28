@@ -1,0 +1,55 @@
+<html><head><title>Euler - Problem 31</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=31" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I'm sure there's an easier way to do this. But I didn't much feel like figuring that out. I used way too many for 
+loops. I am thinking there must be some way to break out of each for loop when the sum to that point is too big. 
+The script took a little under 2 minutes to run as is, so I'm not complaining too much.
+
+
+CODE:
+
+p1 = 1		#a
+p2 = 2		#b
+p5 = 5		#c
+p10 = 10	#d
+p20 = 20	#e
+p50 = 50	#f
+p100 = 100	#g
+p200 = 200	#h
+
+thecount = 0
+for h in range(2):
+	for g in range(3):
+		for f in range(5):
+			for e in range(11):
+				for d in range(21):
+					for c in range(41):
+						for	b in range(101):
+							for a in range(201):
+								this = (a*p1 + b*p2 + c*p5 + d*p10 + e*p20 + f*p50 + g*p100 + h*p200)
+								if this > 200: break
+								elif this == 200:
+									thecount += 1
+									print a
+							
+
+print thecount
+
+
+</pre></body></html>

@@ -1,0 +1,126 @@
+<html><head><title>Euler - Problem 71</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=71" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem frustrated me soooooo much! I worked for sooo long on it, 
+then after hours and hours of toil, I realized the problem was in my 
+division algorithm. After all that time, I had just forgotten to add a 
+zero.
+
+When I was done, I looked at the forums for this problem. It made me 
+really sad that everyone said how easy it was. Most everyone just did it 
+in their heads. It really bummed me out to see that, but I think I'm going 
+to keep checking the forums to get hints and new ideas for future 
+problems.
+
+You can see in my final code, which I've included here, that I worked 
+through many many different functions and definitions to try to get to the 
+answer. Ends up, I used hardly any of them. Because, it was just an error 
+in my division function that all along was causing me grief.
+
+
+CODE:
+
+bound = 10**6
+from math import *
+from time import time
+
+short = 7
+longs = 100
+
+n = 3; d = 7; m = 1; mult = []
+while d*m <= 10**6:
+	mult.append([n*m, d*m])
+	m += 1
+	
+def reduce2(x, y):
+	if [x, y] in mult: return True
+	else: return False
+
+def reduce(x, y):
+	for i in range(2, x+1):
+		while x%i == y%i == 0:
+			x = x / i
+			y = y / i
+	return x, y
+
+def isprime(n):
+	if n == 1 or n == 0: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def primeslist(bounds):
+	primes = []
+	for n in range(bounds+1):
+		if isprime(n) == True: primes.append(n)
+	return primes
+
+def divide(x, y):
+	x = int(x)
+	y = int(y)
+	z = []
+	while len(z) < short:
+		if (x / y) >= 1:
+			z.append(x / y)
+			x = x%y * 10
+		else:
+			x = x*10
+			z.append(0)
+	return str(''.join(map(str, z[1:])))
+
+def dividelong(x, y):
+	x = int(x)
+	y = int(y)
+	z = []
+	while len(z) < longs:
+		if (x / y) >= 1:
+			z.append(x / y)
+			x = x%y * 10
+		else:
+			x = x*10
+			z.append(0)
+	return str(''.join(map(str, z[1:])))
+
+def addmult(n, d, mult):
+	m = 1
+	while d*m <= 10**6:
+		mult.append([n*m, d*m])
+		m += 1
+	return mult
+
+
+answers = [[dividelong(3, 7), 3, 7]]
+test = divide(3, 7)
+start = time(); print 0, len(answers), 0
+for d in range(7, bound + 1):
+	if d%10000 == 0:
+		end = time()
+		print d, len(answers), end-start
+		start = end
+	
+	n = int(floor(float(d)*float(3)/float(7)))
+	this = divide(n, d)
+	if (this == test):
+		answers.append([dividelong(n, d), n, d])
+		
+
+print sorted(answers)
+
+
+</pre></body></html>

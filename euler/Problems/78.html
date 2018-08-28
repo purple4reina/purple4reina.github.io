@@ -1,0 +1,85 @@
+<html><head><title>Euler - Problem 78</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=78" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+The first time through this problem I was using a recursive algorithm that 
+required both n and k. Filling these into a dictionary used up way too much 
+memory as well as giving a recursive depth error.
+
+I then found a second algorithm that, though still using k, used it as part of 
+a sigma summation. This meant that it could be part of a for loop.
+
+With this change, the script gave the correct answer. However, it took just 
+under an hour to do so. Upon reading other people's answers in the forum, I 
+realized I could break out of the for loop when one of the values dips below 
+zero. That got me the answer in less than a minute.
+
+The code below is my origion one that took an hour to complete.
+
+
+CODE:
+
+from time import time
+start = time()
+
+Pdict = dict()
+Pdict[0] = 1
+Pdict[-1] = 0
+
+def testP():
+	assert P(1) == 1
+	assert P(2) == 2
+	assert P(3) == 3
+	assert P(4) == 5
+	assert P(5) == 7
+	assert P(6) == 11
+	assert P(7) == 15
+	assert P(8) == 22
+#	assert P(100) == 190569292
+	
+
+def P(n):
+	n = int(n)
+	if n < 0:
+		return 0
+	elif n in Pdict:
+		return Pdict[n]
+	sum = 0
+	for k in range(1, n+1):
+		key1 = max(n-.5*k*(3*k-1), -1)
+		key2 = max(n-.5*k*(3*k+1), -1)
+		sum += (-1)**(k+1)*(Pdict[key1]+Pdict[key2])
+	Pdict[n] = int(sum)
+	return Pdict[n]
+
+testP()
+
+n = 1
+while True:
+	n += 1
+	Part = P(n)
+	if Part%10**6 == 0:
+		print n
+		break
+	elif n%1000 == 0:
+		end = time()
+		print '		', n, end-start
+		start = end
+
+
+</pre></body></html>

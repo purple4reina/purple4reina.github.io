@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<title>Euler - Problem 15</title>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=15" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This one required just a little logic to start out with. It's a simple combinations/permutations problem. There's 
+40 permutations of moves needed, but 20 right moves and 20 down moves are the same, and thus must be removed.
+
+I've also started adding in some simple header and footer work to the scripts. These include some breakpoint lines 
+and start and stop times. These are helping me visually see what is going on and also help manage the efficiency of 
+my scripts.
+
+
+CODE:
+
+from time import time
+start_time= time()
+print """Process started
+----------"""
+
+
+from math import factorial
+
+total= factorial(40)/(factorial(20)*factorial(20))
+
+print total
+
+
+end_time= time()
+elapse_time= end_time - start_time
+print '----------'
+print elapse_time, 'seconds have passed'
+
+
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<html><head><title>Euler - Problem 62</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="http://euler.clarinetcat.com/">Back</a></p>
+<p><a href="http://projecteuler.net/problem=62" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem took three tries, three different codes, before I got it. 
+I've included them all below, in order from the last to the first.
+
+I'm really very proud of the work I did on this problem. By brute force, 
+this problem would have taken forever to complete. What I did instead was 
+define two variables, num and cube, representing a number and its cube 
+respectively. I had the program dig through and group all the cubes of the 
+same length together, then analyse them. I felt this would be better than 
+going through each number, then working to find the permutations of its 
+cube, etc.
+
+What made this script really run quite fast was that I sorted the cube's 
+digits in increasing order. This way, with all the same lengthed cubes 
+together, it would be very easy to find how many cubes are built from the 
+same digits.
+
+
+TRY THREE:
+
+CODE:
+
+from itertools import *
+from time import time
+leg = 3
+num = int((10**(leg-1))**(float(1)/float(3))) + 1
+start = time(); end = time()
+
+def permutation_groups(group):
+	five_group = []
+	while len(group) >= 6:
+		if group[0][0] == group[1][0] == group[2][0] == group[3][0] == group[4][0] and group[0][0] != group[5][0]:
+			five_group.append(group[0][1]**3)
+		del group[0]
+	return five_group
+
+
+for length in range(leg, 20):
+	cube_group = []
+	cube = [''.join(sorted(map(str, str(num**3)))), num]
+	while len(cube[0]) == length:
+		cube_group.append(cube)
+		num += 1
+		cube = [''.join(sorted(map(str, str(num**3)))), num]
+	end, start = time() - start, time(); print (length, len(cube_group), end)
+	#print sorted(cube_group)
+	this_permutation_group = permutation_groups(sorted(cube_group))
+	if this_permutation_group != []:
+		print this_permutation_group[0]
+		break
+
+
+TRY TWO:
+
+CODE:
+
+from itertools import *
+from time import time
+leg = 12
+num = int((10**(leg-1))**(float(1)/float(3))) + 1
+start = time(); end = time()
+
+def permutation_groups(num_group, cube_group, length):
+	new_group = []
+	for number in combinations_with_replacement(range(10), length):
+		n = ''.join(map(str, number))
+		if cube_group.count(n) == 5:
+			new_group.append(num_group[cube_group.index(n)])
+		while cube_group.count(n) > 0:
+			del num_group[cube_group.index(n)]
+			cube_group.remove(n)
+		if len(cube_group) == 0:
+			return new_group
+
+
+for length in range(leg, 100):
+	num_group = []
+	cube_group = []
+	cube = ''.join(sorted(map(str, str(num ** 3))))
+	while len(cube) == length:
+		cube_group.append(cube)
+		num_group.append(num)
+		num += 1
+		cube = ''.join(sorted(map(str, str(num ** 3))))
+	end, start = time() - start, time(); print (length, len(cube_group), end)
+	this_permutation_group = permutation_groups(num_group, cube_group, length)
+	if this_permutation_group != []:
+		print this_permutation_group
+
+
+TRY ONE:
+
+CODE:
+
+from itertools import *
+from time import time
+num = 300
+cube = str(num ** 3)
+start = time(); end = time()
+
+def permutation_groups(group):
+	new_group = []
+	while len(group) > 0:
+		c = group[0]
+		c_group = [[c]]
+		group.remove(c)
+		for p in permutations(c):
+			perm = ''.join(p)
+			if perm in group:
+				c_group.append(group.pop(group.index(perm)))
+		print len(c_group), len(group)
+		if len(c_group) >= 5:
+			new_group.append(c_group)
+	return new_group
+
+
+for length in range(8, 100):
+	end, start = time() - start, time(); print (length, end)
+	cube_group = []
+	cube = str(num ** 3)
+	while len(cube) == length:
+		cube = str(num ** 3)
+		cube_group.append(cube)
+		num += 1
+	this_permutation_group = permutation_groups(cube_group)
+	if this_permutation_group != []:
+		print this_permutation_group
+		break
+
+</pre></body></html>
