@@ -9,11 +9,28 @@
 <pre>
 COMMENTS:
 
-This problem just shows me how important it is to test. I started working on this problem yesterday and found myself getting a bit stuck on it. I was scratching my head because I thought I had a good algorithm but couldn't figure out why things were working. Well, that's because there were at least 2 or 3 or more bugs in the code. I started working on this today by writing tests for each method on my Matrix class. Once I did, I was able to pinpoint problems and fix them easily.
+This problem just shows me how important it is to test. I started working on
+this problem yesterday and found myself getting a bit stuck on it. I was
+scratching my head because I thought I had a good algorithm but couldn't figure
+out why things were working. Well, that's because there were at least 2 or 3 or
+more bugs in the code. I started working on this today by writing tests for
+each method on my Matrix class. Once I did, I was able to pinpoint problems and
+fix them easily.
 
-This code works, but it's not something that I'd use more than once. First of all, it's not all that quick. The problem takes about 32 seconds to complete. While not bad, it's also not good if you're wanting to work with a matrix any bit larger than what we're given for this problem.
+This code works, but it's not something that I'd use more than once. First of
+all, it's not all that quick. The problem takes about 32 seconds to complete.
+While not bad, it's also not good if you're wanting to work with a matrix any
+bit larger than what we're given for this problem.
 
-Additionally, I've been thinking a lot at work lately about good APIs. I'd say that what I have here is not an idea API. Some methods that I have on the Matrix class really shouldn't be methods on that class and instead should probably just be top level functions. Examples of this being the `_next_vertex` and `_next_vertex_via_rollback` methods. There's nothing in them that is requiring access to the Matrix class itself, so why have it as a method on that class? I didn't find it all that important to fix this while working on the problem since this is just one off work, but just some thoughts for if I were to actually need this code long term.
+Additionally, I've been thinking a lot at work lately about good APIs. I'd say
+that what I have here is not an idea API. Some methods that I have on the
+Matrix class really shouldn't be methods on that class and instead should
+probably just be top level functions. Examples of this being the `_next_vertex`
+and `_next_vertex_via_rollback` methods. There's nothing in them that is
+requiring access to the Matrix class itself, so why have it as a method on that
+class? I didn't find it all that important to fix this while working on the
+problem since this is just one off work, but just some thoughts for if I were
+to actually need this code long term.
 
 
 CODE:
