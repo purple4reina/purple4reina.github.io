@@ -53,12 +53,12 @@ class Problem
       return 1 if num == 1
       return 3 if num == 2
 
-    div, remain = (num - 2).divmod(9)
-    multiplier = 10.pow(div, mod)
-    base = multiplier - 6 - num
-    prefix = PREFEXES[remain] * multiplier
+      div, remain = (num - 2).divmod(9)
+      multiplier = 10.pow(div, mod)
+      base = multiplier - 6 - num
+      prefix = PREFEXES[remain] * multiplier
 
-    return prefix + base
+      return prefix + base
     end
 
     def fibs max
