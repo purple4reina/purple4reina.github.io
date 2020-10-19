@@ -1,0 +1,95 @@
+<html><head><title>Euler - Problem 694</title>
+<p><a href="http://projecteuler.net/problem=694" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I grabbed this problem to work on because I feel like I've been doing a bunch
+of problems using divisors.  So I felt like I was well prepared for it.  I was
+able to solve it pretty quickly because of that.
+
+Seems like with a lot of these problems where you're counting the occurance of
+something, I will start by running through all the numbers and checking for all
+the things.  Then I'll realize how slow that'll be and change to trying to
+produce the things instead.  That was my exact process in this case.  10 ** 18
+is a very large number to be running all the way through!  I do think starting
+by running all the numbers is a good idea because then I can write some good
+working tests.  Once I do that I have confidence to make sweeping changes to
+the code.
+
+
+CODE:
+
+from sympy import sieve
+
+def S(n):
+    total = n
+    cube_fulls = set([1])
+    for p in sieve.primerange(1, int(n ** (1 / 3)) + 1):
+        new_cube_fulls = set(cube_fulls)
+        cube = p ** 3
+        max_add = n // cube
+        for full in cube_fulls:
+            mult = full * cube
+            while mult <= n:
+                total += n // mult
+                if mult < max_add:
+                    new_cube_fulls.add(mult)
+                mult *= p
+        cube_fulls = new_cube_fulls
+
+    return total
+
+if __name__ == '__main__':
+    import sys
+    n = int(sys.argv[1])
+    print(S(n))
+
+
+TESTS:
+
+import pytest
+from problem import S
+
+_test_S = (
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+        (6, 6),
+        (7, 7),
+        (8, 9),
+        (9, 10),
+        (10, 11),
+        (11, 12),
+        (13, 14),
+        (14, 15),
+        (15, 16),
+        (16, 19),
+        (17, 20),
+        (18, 21),
+        (19, 22),
+        (20, 23),
+        (21, 24),
+        (22, 25),
+        (23, 26),
+        (24, 28),
+        (25, 29),
+        (26, 30),
+        (27, 32),
+        (28, 33),
+        (29, 34),
+        (30, 35),
+        (31, 36),
+        (32, 40),
+        (100, 126),
+        (10000, 13344),
+)
+
+@pytest.mark.parametrize('n,expect', _test_S)
+def test_S(n, expect):
+    assert expect == S(n)
+
+
+</pre></body></html>
