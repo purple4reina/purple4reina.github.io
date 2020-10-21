@@ -1,0 +1,26 @@
+<html><head><title>Euler - Problem 381</title>
+<p><a href="http://projecteuler.net/problem=381" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem just required a little bit of algebra and modular division.  I had
+to look up and learn a bit about modular division first though.  It doesn't
+work for every divisor and modulus, but if the modulus is prime, then it will
+always work.  Funny that!  In which case `a/b % p` becomes `a * pow(b, p-2, p)`.
+
+
+CODE:
+
+from sympy import sieve
+
+def solve(n):
+    total = 0
+    for p in sieve.primerange(5, n):
+        total += ((p//2) * pow(p-4, p-2, p) + p//2) % p
+    return total
+
+if __name__ == '__main__':
+    print(solve(10**8))
+
+</pre></body></html>
