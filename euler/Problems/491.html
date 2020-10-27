@@ -1,0 +1,37 @@
+<html><head><title>Euler - Problem NUMBER</title>
+<p><a href="http://projecteuler.net/problem=NUMBER" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I looked up the easy ways to see if a number is divisible by 11.
+
+    Form the alternating sum of the digits. The result must be divisible by 11.
+    For example:  918,082: 9 − 1 + 8 − 0 + 8 − 2 = 22 = 2 × 11.
+
+Using combinatorics, I just needed to find the number of ways that 20 choose 10
+could result in 2 groups of numbers that could be divisible by 11.  There were
+only 16,000 and some of them, so that felt really doable.  From there, it's
+just a matter of finding the number of permutations of these groups that could
+result in a 20 digit number.  Basically, it just couldn't start with a 0 and we
+must account for the fact that there's 2 of each number by dividing the result
+by 2**10.
+
+
+CODE:
+
+from itertools import combinations
+
+def solve():
+    all_digits = tuple(range(10)) + tuple(range(10))
+    elevens = 0
+    for combo in combinations(all_digits, 10):
+        if (2 * sum(combo) - 90) % 11 == 0:
+            elevens += sum(1 for i in combo if i != 0)
+    nine_fact = 9*8*7*6*5*4*3*2
+    return elevens * 10 * nine_fact ** 2 // (1 << 10)
+
+if __name__ == '__main__':
+    print(solve())
+
+</pre></body></html>
