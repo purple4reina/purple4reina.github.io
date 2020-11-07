@@ -1,0 +1,79 @@
+<html><head><title>Euler - Problem 668</title>
+<p><a href="http://projecteuler.net/problem=668" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem was pretty easy for me.  I feel like I've gotten pretty good at
+this type of algorithm.  I used a similar approach to how I tackled problem 88
+just a couple weeks ago.
+
+The math behind this was pretty simple.  First thing I did was implement a
+brute force approach.  Then I printed all the solutions below 100 and wrote out
+their prime factorizations.  That confirmed my suspicions.  In order to find
+all the solutions, all I needed to do was find products of at least three
+primes where the last prime added is less than the product of the preceding
+ones.  I used recursion and the sieve of Eratosthenes to create the primes.
+Code runs in about 51 seconds.
+
+
+CODE:
+
+def solve(n):
+
+    top = int(n ** 0.5)
+    sieve = [True] * (top + 1)
+    primes = []
+    for p, is_prime in enumerate(sieve):
+        if not is_prime or p < 2:
+            continue
+        primes.append(p)
+        num = p + p
+        while num <= top:
+            sieve[num] = False
+            num += p
+
+    def get_smooth(product, length, i):
+        length += 1
+        smooths = 0
+        for p in primes[i:]:
+            prod = product * p
+            if prod > n:
+                break
+            elif length > 2 and p < product:
+                smooths += 1
+            if n // prod >= p:
+                smooths += get_smooth(prod, length, i)
+            i += 1
+        return smooths
+
+    return get_smooth(1, 0, 0) + 1
+
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (10**1, 2),
+        (10**2, 29),
+        (10**3, 274),
+        (10**4, 2656),
+        (10**5, 26613),
+        (10**6, 268172),
+        (10**7, 2719288),
+        #(10**8, 27531694),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>
