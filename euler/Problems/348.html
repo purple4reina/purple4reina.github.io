@@ -1,0 +1,56 @@
+<html><head><title>Euler - Problem 348</title>
+<p><a href="http://projecteuler.net/problem=348" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+The hardest part about this one for me was trying to figure out the string
+slicing so I could create the palendromic numbers.  For the life of me I
+couldn't figure out how to reverse a string, but omit the last character before
+reversing.
+
+After that the solution was pretty easy to get to.  At first I had this code
+create the squares then look for the cubes.  But that was problematic because
+floating point numbers don't work well when dividing by three.  So I switched
+it to be create the cubes and look for the squares.  Answer in a little over 2
+seconds using Pypy3.
+
+
+CODE:
+
+def palendromes():
+    pow0, pow1 = 1, 10
+    while True:
+        for n in range(pow0, pow1):
+            strn = str(n)
+            yield int(strn + strn[-2::-1])
+        for n in range(pow0, pow1):
+            strn = str(n)
+            yield int(strn + strn[::-1])
+        pow0, pow1 = pow1, pow1 * 10
+
+def is_square(n):
+    return int(n ** 0.5) ** 2 == n
+
+def solve(n):
+    squ_cubes = []
+    for p in palendromes():
+        found = 0
+        for cube in range(1, int(p ** (1/3)) + 1):
+            remain = p - cube ** 3
+            if is_square(remain):
+                found += 1
+                if found > 4:
+                    break
+        if found == 4:
+            squ_cubes.append(p)
+            if len(squ_cubes) == n:
+                break
+    return sum(squ_cubes)
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+</pre></body></html>
