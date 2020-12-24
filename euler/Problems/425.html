@@ -12,6 +12,11 @@ by first finding all the "relatives" then returning only those that are prime.
 Since I already have my sieve, it would be very easy to check if a number is
 prime.  I think I'll try that out and come back here to report my findings!
 
+Update: It is in fact faster!  And this makes sense because even for the
+largest primes you are checking against <50 other numbers.  Whereas in my
+previous version you were checking against good lord knows how many other
+primes (and mostly coming up empty too!).
+
 
 CODE:
 
@@ -88,6 +93,24 @@ if __name__ == '__main__':
     sys.setrecursionlimit(60000)
     n = eval(sys.argv[1])
     print(solve(n))
+
+
+AMENDED CODE:
+
+def relatives_below(p):
+    below = []
+    digits = int(math.log(p, 10)) + 1
+    num = p % (10**(digits-1))
+    if num and int(math.log(num, 10)) + 1 == digits - 1:
+        below.append(p % (10**(digits-1)))
+    for digit in range(digits):
+        num = (p // (10**(digit+1)) * (10**(digit+1))) + (p % (10**digit))
+        if digit == digits - 1 and digits > 1:
+            num += 10**digit
+        while num < p:
+            below.append(num)
+            num += 10**digit
+    return below
 
 
 TESTS:
