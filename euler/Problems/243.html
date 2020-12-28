@@ -1,0 +1,98 @@
+<html><head><title>Euler - Problem NUMBER</title>
+<p><a href="http://projecteuler.net/problem=NUMBER" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I've been working on this problem off and on for a really long time.  It was
+the last problem I needed in order to get the "Trinary Triumph" award.  I
+remember the last time I worked on it having a tough time.  But when I pulled
+it out today, I was able to finish it in under an hour.  I guess I am learning
+things from doing all these problems....
+
+It was pretty easy to see right away that we were looking for the ratio between
+Euler's totient and one minus the number.  I grabbed my already made totient
+function and was able to get a working program pretty quickly.  Only problem
+was, you guessed it, it was too slow.  Printing out the values of d that
+produced a newly small ratio, I was able to see that the difference between
+numbers was very consistent.  This lead me to an answer.  Program runs in about
+0.1 seconds.
+
+
+CODE:
+
+def memoize(fn):
+    _cache = {}
+    def wrap(*args):
+        if args in _cache:
+            return _cache[args]
+        ret = fn(*args)
+        _cache[args] = ret
+        return ret
+    return wrap
+
+def is_prime(p):
+    for n in range(3, int(p**0.5) + 2, 2):
+        if p % n == 0:
+            return False
+    return True
+
+_primes = [2, 3]
+def primes():
+    for p in _primes:
+        yield p
+    while True:
+        p += 2
+        if is_prime(p):
+            _primes.append(p)
+            yield p
+
+@memoize
+def totient(n):
+    if n == 1:
+        return 1
+    top = n ** 0.5
+    for p in primes():
+        if p > top:
+            break
+        if n % p == 0:
+            n //= p
+            e = 1
+            while n % p == 0:
+                n //= p
+                e += 1
+            return p ** e * (1 - 1/p) * totient(n)
+    return n - 1
+
+def solve(n):
+    d, prevd, ratio, minn, diff = 1, 0, 1, 1, 1
+    while ratio >= n:
+        d += diff
+        ratio = totient(d) / (d - 1)
+        if ratio < minn:
+            diff = d - prevd
+            minn = ratio
+            prevd = d
+    return d
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (4/10, 12),
+        (0.17102402829451352, 38798760),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>
