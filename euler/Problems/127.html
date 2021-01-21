@@ -1,0 +1,75 @@
+<html><head><title>Euler - Problem 127</title>
+<p><a href="http://projecteuler.net/problem=127" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+It's kinda cool looking and seeing that some of the problems in this range
+(like 125) I completed exactly 9 years ago today!  It's kinda fun looking back
+and seeing what I was up to back then.  I'm super glad that I started this
+little website back when I did.  I've been really really loving doing these
+problems over the years.
+
+The key to getting this problem is realizing that since a, b, and c are
+coprime, then rad(a*b*c) = rad(a)*rad(b)*rad(c).  The slowest piece of this
+problem is getting the greatest common denominator.  It was just by chance that
+I figured out that if gcd(a, b) = 1, then gcd(a, a + b) = 1 and gcd(b, a + b) =
+1.  After I did it, I took a second to think about why this is true and it
+makes sense.  After getting those two key pieces of knowledge, all I had to do
+was use a sieve to collect all the rads.
+
+Runs in about 8 seconds on Pypy3.
+
+
+CODE:
+
+def gcd(a, b):
+    while a:
+        b, a = a, b % a
+    return b
+
+def solve(n):
+    sieve = [1] * (n + 1)
+    for p, val in enumerate(sieve):
+        if val > 1 or p < 2:
+            continue
+        num = p
+        while num <= n:
+            sieve[num] *= p
+            num += p
+
+    total = 0
+    for b in range(2, n):
+        for a in range(1, b):
+            c = a + b
+            if c >= n:
+                break
+            if sieve[b] * sieve[a] * sieve[c] < c:
+                if gcd(a, b) == 1:
+                    total += c
+    return total
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (1000, 12523),
+        (2500, 57799),
+        (3000, 62972),
+        (3500, 85147),
+        (4000, 108127),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>
