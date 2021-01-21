@@ -10,6 +10,20 @@ binary search instead.  Requires the decimal modulo because the numbers are too
 precise for floating point arithmetic.  Runs in about 9 seconds on Pypy3.
 
 
+UPDATE:
+
+After reading through the forum posts once I finished the problem, I realized
+that I can vastly improve the performance of this code.  The slowest part is
+taking the large powers of `r**(k-1)`.  This can be avoided by storing the
+r-power in a variable, and just multiplying this by `r` for each loop.  Takes
+the time down to about 700 ms.
+
+    r_k = 1
+    for k in range(1, n + 1):
+        total += (900 - 3*k) * r_k
+        r_k *= r
+
+
 CODE:
 
 import decimal
