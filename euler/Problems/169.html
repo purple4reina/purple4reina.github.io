@@ -1,0 +1,73 @@
+<html><head><title>Euler - Problem 169</title>
+<p><a href="http://projecteuler.net/problem=169" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem almost felt too easy.  I started by implementing this as a
+recursive function which successively adds powers of 2, essentially a brute
+force method.  From there, I wrote tests.  I then threw the values of the
+method into oeis.org and found https://oeis.org/A002487 the Stern's diatomic
+series.  I then used the definition of this series for my solution.
+
+
+CODE:
+
+def memoize(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+def solve(n):
+
+    @memoize
+    def _solve(n):
+        if n < 2:
+            return n
+        if n % 2 == 0:
+            return _solve(n//2)
+        return _solve((n - 1)//2) + _solve((n + 1)//2)
+
+    return _solve(n+1)
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (0, 1),
+        (1, 1),
+        (2, 2),
+        (3, 1),
+        (4, 3),
+        (5, 2),
+        (6, 3),
+        (7, 1),
+        (8, 4),
+        (9, 3),
+        (10**1, 5),
+        (10**2, 19),
+        (10**3, 39),
+        (10**4, 205),
+        (10**5, 713),
+        (10**6, 1287),
+        (10**7, 9469),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>
