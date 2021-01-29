@@ -1,0 +1,120 @@
+<html><head><title>Euler - Problem 211</title>
+<p><a href="http://projecteuler.net/problem=211" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem felt pretty easy.  I already knew how to decently efficiently get
+all the divisors of a number.  After that it was just a matter of squaring
+those, adding them together, then determining if the result was a square.  This
+solution isn't all that quick, runs in about a minute and a half.
+
+
+CODE:
+
+def memoize(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+def divisors_factory(n):
+    sieve = [True, True] + [False] * (n - 1)
+    for p, iscomposite in enumerate(sieve):
+        if iscomposite:
+            continue
+        sieve[p] = p
+        num = p + p
+        while num <= n:
+            sieve[num] = p
+            num += p
+
+    @memoize
+    def _divisors(n):
+        if n == 1:
+            return [1]
+        p = sieve[n]
+        n //= p
+        e = 1
+        while n % p == 0:
+            n //= p
+            e += 1
+        divs = _divisors(n)
+        return [d*p**exp for exp in range(0, 2*e+1, 2) for d in divs]
+
+    return _divisors
+
+def is_square(n):
+    return int(n**0.5)**2 == n
+
+def solve(n):
+    divisors = divisors_factory(n)
+    total = 0
+    for k in range(1, n):
+        if is_square(sum(divisors(k))):
+            total += k
+    return total
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (2, 1),
+        (3, 1),
+        (4, 1),
+        (5, 1),
+        (6, 1),
+        (7, 1),
+        (8, 1),
+        (9, 1),
+        (10, 1),
+        (11, 1),
+        (12, 1),
+        (13, 1),
+        (14, 1),
+        (15, 1),
+        (16, 1),
+        (17, 1),
+        (18, 1),
+        (19, 1),
+        (20, 1),
+        (21, 1),
+        (22, 1),
+        (23, 1),
+        (24, 1),
+        (25, 1),
+        (26, 1),
+        (27, 1),
+        (28, 1),
+        (29, 1),
+        (30, 1),
+        (31, 1),
+        (32, 1),
+        (33, 1),
+        (34, 1),
+        (35, 1),
+        (36, 1),
+        (37, 1),
+        (38, 1),
+        (39, 1),
+        (40, 1),
+        (100, 43),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>
