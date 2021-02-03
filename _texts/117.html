@@ -1,0 +1,46 @@
+<html><head><title>Euler - Problem 117</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=117" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This was a harder version of <a href="116.html">problem 116</a>. I basically used the same code, but updated it by adding the 
+"end" variable which gave all options for block lengths as well. Took just .13 
+seconds to run.
+
+
+CODE:
+
+bound = 50
+count = 0
+
+colorDict = dict()
+
+for k in xrange(bound+1):
+	colorDict[k] = 0
+
+for length in range(2, bound+1):
+	for start in range(1, length):
+		for end in range(2, 5):
+			if start + end - 1 > length: continue
+			colorDict[length] += 1
+			colorDict[length] += colorDict[length-(start+end)+1]
+
+count = colorDict[bound] + 1
+print count
+
+
+</pre></body></html>

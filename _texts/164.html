@@ -1,0 +1,68 @@
+<html><head><title>Euler - Problem 164</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=164" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I made a function that spat back all the possible next digits when you feed it two 
+digits. I used a dictionary to keep track of the number of integers with each last 
+two digit string. It's really only those last two digits that you care about, after 
+that, it's just keeping track of how many numbers there are with those last two 
+digits.
+
+
+RESULTS:
+
+Script runs in under 1 second!
+
+
+CODE:
+
+from itertools import *
+
+def next_digit(a, b):
+	largest = 9 - a - b
+	return range(largest+1)
+
+
+trys = dict()
+
+for start in product(range(1,10), range(10)):
+	if sum(list(start)) > 9:
+		continue
+	else:
+		trys[start] = 1
+
+
+for i in range(18):
+	new_trys = dict()
+	for t in trys.iterkeys():
+		for n in next_digit(t[0], t[1]):
+			try:
+				new_trys[(t[1], n)] += trys[(t[0], t[1])]
+			except:
+				new_trys[(t[1], n)] = trys[(t[0], t[1])]
+	trys = new_trys
+
+
+total = 0
+for s in trys.itervalues():
+	total += s
+
+print total
+
+
+</pre></body></html>

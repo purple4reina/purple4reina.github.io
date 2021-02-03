@@ -1,0 +1,58 @@
+<html><head><title>Euler - Problem 45</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=45" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+The tough part about this problem was the runtime. Going through each integer consecutively would have taken 
+forever. So I then started going through all the triangular numbers consecutively. Then I realized that the 
+hexagonal numbers are spaced the furthest apart. When I started with them, the script ran in less than a minute! 
+Hurray!
+
+
+CODE:
+
+bound = 10**5
+
+T = []
+for t in range(286, bound):
+	T.append(int((0.5)*(t)*(t+1)))
+
+tmax = max(T)
+
+P = []
+for p in range(bound):
+	pi = int((p)*(3*p-1)*(0.5))
+	P.append(pi)
+	if pi > tmax: break
+
+H = []
+for h in range(bound):
+	hi = int((h)*(2*h-1))
+	H.append(hi)
+	if hi > tmax: break
+
+print len(T), max(T), max(P), max(H)
+
+for n in H:
+	if n in P:
+		print '**', n
+		if n in T:
+			print n
+			break; break; break
+
+
+</pre></body></html>

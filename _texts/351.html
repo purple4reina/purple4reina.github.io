@@ -1,0 +1,103 @@
+<html><head><title>Euler - Problem 351</title>
+<p><a href="http://projecteuler.net/problem=351" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+It was really fun how this problem reduced down to just being a problem based
+on Euler's Totient.  Once that was figured out, I was able to put together a
+solution pretty quickly.
+
+
+CODE:
+
+def cache(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+def solve(n):
+
+    top = int(n ** 0.5)
+    sieve = [True] * (top + 1)
+    primes = []
+    for p, is_prime in enumerate(sieve):
+        if not is_prime or p < 2:
+            continue
+        primes.append(p)
+        num = p + p
+        while num <= top:
+            sieve[num] = False
+            num += p
+
+    @cache
+    def totient(k):
+        if k == 1:
+            return 1
+        top = k ** 0.5
+        for p in primes:
+            if p > top:
+                break
+            if k % p == 0:
+                k //= p
+                e = 1
+                while k % p == 0:
+                    k //= p
+                    e += 1
+                return p ** e * (1 - 1/p) * totient(k)
+        return k - 1
+
+    visible = 0
+    for r in range(1, n + 1):
+        visible += totient(r)
+
+    orchard = n * (n + 1) // 2
+    return 6 * int(orchard - visible)
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (0, 0),
+        (1, 0),
+        (2, 6),
+        (3, 12),
+        (4, 24),
+        (5, 30),
+        (6, 54),
+        (7, 60),
+        (8, 84),
+        (9, 102),
+        (10, 138),
+        (11, 144),
+        (12, 192),
+        (13, 198),
+        (14, 246),
+        (15, 288),
+        (16, 336),
+        (17, 342),
+        (18, 414),
+        (19, 420),
+        (20, 492),
+        (100, 12036),
+        (1000, 1177848),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

@@ -1,0 +1,74 @@
+<html><head><title>Euler - Problem 662</title>
+<p><a href="http://projecteuler.net/problem=662" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I never got to a satisfactory solution with this one.  This program runs in
+about 48 minutes with Pypy3.  Looking at the forum posts after I completed the
+problem, it seems I used the same approach as many other people.  They even
+cited the complexity of their solutions and it matched mine: O(width * height).
+It must just be that I did something inefficiently but I'm not sure what or
+where.  I'd like to keep myself to the solutions under 1 min of runtime rule,
+so I'm a bit disappointed.  Or, maybe it's just been yet another really hard
+week.
+
+
+CODE:
+
+modulo = 1000000007
+
+def fibonacci(top):
+    a, b = 1, 1
+    while b <= top:
+        yield b
+        a, b = b, b + a
+
+def solve(warg, harg):
+    fibs = tuple(fibonacci(harg * 2))
+    grid = {(w, h): 0 for h in range(harg + 1) for w in range(warg + 1)}
+    grid[(0, 0)] = 1
+
+    reaches = []
+    for h in range(harg + 1):
+        for w in range(warg + 1):
+            if (w**2 + h**2) ** 0.5 in fibs:
+                reaches.append((w, h))
+
+    for (width, height), mult in grid.items():
+        mult %= modulo
+        for w, h in reaches:
+            if height + h > harg:
+                break
+            if width + w > warg:
+                continue
+            reached = (width + w, height + h)
+            grid[reached] += mult
+
+    return grid[reached] % modulo
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    m = eval(sys.argv[1])
+    print(solve(n,m))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (3, 4, 278),
+        (10, 10, 215846462),
+        (100, 100, 804752316),
+        (500, 500, 708290453),
+        (1000, 1000, 790802713),
+)
+
+@pytest.mark.parametrize('w,h,expect', _test_solve)
+def test_solve(w, h, expect):
+    assert expect == solve(w, h)
+
+</pre></body></html>

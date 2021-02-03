@@ -1,0 +1,121 @@
+<html>
+
+<head>
+<title>Euler - Problem 16</title>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=16" target="_blank">View Problem</a></p>
+<pre>
+
+TRY ONE:
+
+COMMENTS:
+
+The problem I'm having here is that the number 2^1000 is so large that the computer can't handle it. The 
+scripting program I'm using turns it into scientific notation and thus I can't count the digits.
+
+I am going to look to one of two options. First, looking for patterns in the sums and looking for more 
+information on counting digit patterns. I know a pattern exists for 3, 6, and 9. So, feasibly there is also one 
+for 2. Second, I will look at other scripting languages. I'm thinking one of them may be able to handle the 
+larger output.
+
+
+RESOURCES:
+
+I pulled up Mathematica. It gave 2^1000 nicely.
+
+
+RESULTS:
+
+Well, looks like I'll need a different scripting language. Gotta love Apple though for these finer touches.
+
+<img src="../img/Way%20too%20long,%20dude.png" alt="Way too long, dude." border="5"/>
+
+
+
+TRY TWO:
+
+RESOURCES:
+
+Okay. Goodbye Applescript. Hello Mathematica!
+
+
+COMMENTS:
+
+Well, that was easy.
+
+
+CODE:
+
+In[1]:= 2^1000
+
+
+Out[1]= 10715086071862673209484250490600018105614048117055336074437503\
+8837035105112493612249319837881569585812759467291755314682518714528569\
+2314043598457757469857480393456777482423098542107460506237114187795418\
+2153046474983581941267398767559165543946077062914571196477686542167660\
+429831652624386837205668069376
+
+In[2]:= characters[\
+1071508607186267320948425049060001810561404811705533607443750388370351\
+0511249361224931983788156958581275946729175531468251871452856923140435\
+9845775746985748039345677748242309854210746050623711418779541821530464\
+7498358194126739876755916554394607706291457119647768654216766042983165\
+2624386837205668069376]
+
+
+In[3]:= characters[\
+"107150860718626732094842504906000181056140481170553360744375038837035\
+1051124936122493198378815695858127594672917553146825187145285692314043\
+5984577574698574803934567774824230985421074605062371141877954182153046\
+4749835819412673987675591655439460770629145711964776865421676604298316\
+52624386837205668069376"]
+
+Out[3]= characters[\
+"107150860718626732094842504906000181056140481170553360744375038837035\
+1051124936122493198378815695858127594672917553146825187145285692314043\
+5984577574698574803934567774824230985421074605062371141877954182153046\
+4749835819412673987675591655439460770629145711964776865421676604298316\
+52624386837205668069376"]
+
+In[4]:= list = {1, 0, 7, 1, 5, 0, 8, 6, 0, 7, 1, 8, 6, 2, 6, 7, 3, 2, 
+   0, 9, 4, 8, 4, 2, 5, 0, 4, 9, 0, 6, 0, 0, 0, 1, 8, 1, 0, 5, 6, 1, 
+   4, 0, 4, 8, 1, 1, 7, 0, 5, 5, 3, 3, 6, 0, 7, 4, 4, 3, 7, 5, 0, 3, 
+   8, 8, 3, 7, 0, 3, 5, 1, 0, 5, 1, 1, 2, 4, 9, 3, 6, 1, 2, 2, 4, 9, 
+   3, 1, 9, 8, 3, 7, 8, 8, 1, 5, 6, 9, 5, 8, 5, 8, 1, 2, 7, 5, 9, 4, 
+   6, 7, 2, 9, 1, 7, 5, 5, 3, 1, 4, 6, 8, 2, 5, 1, 8, 7, 1, 4, 5, 2, 
+   8, 5, 6, 9, 2, 3, 1, 4, 0, 4, 3, 5, 9, 8, 4, 5, 7, 7, 5, 7, 4, 6, 
+   9, 8, 5, 7, 4, 8, 0, 3, 9, 3, 4, 5, 6, 7, 7, 7, 4, 8, 2, 4, 2, 3, 
+   0, 9, 8, 5, 4, 2, 1, 0, 7, 4, 6, 0, 5, 0, 6, 2, 3, 7, 1, 1, 4, 1, 
+   8, 7, 7, 9, 5, 4, 1, 8, 2, 1, 5, 3, 0, 4, 6, 4, 7, 4, 9, 8, 3, 5, 
+   8, 1, 9, 4, 1, 2, 6, 7, 3, 9, 8, 7, 6, 7, 5, 5, 9, 1, 6, 5, 5, 4, 
+   3, 9, 4, 6, 0, 7, 7, 0, 6, 2, 9, 1, 4, 5, 7, 1, 1, 9, 6, 4, 7, 7, 
+   6, 8, 6, 5, 4, 2, 1, 6, 7, 6, 6, 0, 4, 2, 9, 8, 3, 1, 6, 5, 2, 6, 
+   2, 4, 3, 8, 6, 8, 3, 7, 2, 0, 5, 6, 6, 8, 0, 6, 9, 3, 7, 6};
+Total[list]
+
+
+Out[5]= 
+
+
+</pre>
+</body>
+</html>

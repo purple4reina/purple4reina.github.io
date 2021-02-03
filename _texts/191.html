@@ -1,0 +1,49 @@
+<html><head><title>Euler - Problem 191</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=191" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I used the same method on this one as I did the problem that involved only 
+increasing or decreasing numbers. I used a dictionary that held only the 
+required information in it. Then with every new class day, I moved each 
+grouping to its possible new locations.
+
+
+CODE:
+
+attendDict = {'O': 1, 'one L': 1, 'one A': 1, 'two A': 0, 'one L one A': 0, 'one L two A': 0}
+
+i = 1
+while i < 30:
+	i += 1
+	newDict = {'O': 0, 'one L': 0, 'one A': 0, 'two A': 0, 'one L one A': 0, 'one L two A': 0}
+	newDict['O'] = attendDict['O'] + attendDict['one A'] + attendDict['two A']
+	newDict['one L'] = attendDict['O'] + attendDict['one A'] + attendDict['two A'] + attendDict['one L one A'] + attendDict['one L two A'] + attendDict['one L']
+	newDict['one A'] = attendDict['O']
+	newDict['two A'] = attendDict['one A']
+	newDict['one L one A'] = attendDict['one L']
+	newDict['one L two A'] = attendDict['one L one A']
+	attendDict = newDict.copy()
+	
+total = 0
+for t in attendDict.itervalues():
+	total += t
+
+print total
+
+
+</pre></body></html>

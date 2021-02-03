@@ -1,0 +1,79 @@
+<html><head><title>Euler - Problem 500</title>
+<p><a href="http://projecteuler.net/problem=500" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I completed three in one day!  That feels pretty good.  This one I actually was
+able to get running pretty quickly.  I was able to get the answer in about 7
+seconds.  Most of the time is being taken up by creating the first 500500 prime
+numbers.
+
+I enjoyed working on this one because it reminded me a lot of problem 650.
+That problem also involved calculating the number of divisors of a given
+number.  Having completed that one recently, I was able to build on the
+knowledge I gained.
+
+The key to this problem is noticing that the requested number of divisors is a
+power of 2.  This meant that the exponent on each prime factor must also be a
+power of 2.  That made the search much easier.
+
+
+CODE:
+
+from sympy import sieve
+
+modulo = 500500507
+
+def solve(n):
+    count = 0
+    factorization = []
+    last_number = 1
+    while count < n:
+        count += 1
+
+        smallest = float('inf')
+        for exponent, i in enumerate(factorization + [0]):
+            num = sieve[i+1] ** (1 << exponent)
+            if num < smallest:
+                smallest = num
+                prime_i = exponent
+
+        last_number *= smallest
+        last_number %= modulo
+        if prime_i == len(factorization):
+            factorization.append(1)
+        else:
+            factorization[prime_i] += 1
+
+    return last_number
+
+if __name__ == '__main__':
+    import sys
+    n = int(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+    (1, 2),
+    (2, 6),
+    (3, 24),
+    (4, 120),
+    (5, 840),
+    (6, 7560),
+    (7, 83160),
+    (8, 1081080),
+    (9, 17297280),
+    (10, 294053760),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

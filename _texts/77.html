@@ -1,0 +1,74 @@
+<html><head><title>Euler - Problem 77</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=77" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This was the most inefficient way of tackling this problem I'm sure. Please don't 
+judge me. I wish I could figure out problem 76, because that would have helped 
+immensely in solving this one.
+
+
+CODE:
+
+from itertools import *
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n < 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+
+def primesbelow(h):
+	answer = [2]
+	for n in range(3, h, 2):
+		if isprime(n) == True:
+			answer.append(n)
+	return answer
+
+
+
+upper = 1000
+
+while True:
+	countDict = dict(zip(range(upper+1), [0]*(upper+1)))
+	humbug = False
+	for length in range(2, upper/2 + 1):
+		print length
+		for test in combinations_with_replacement(primesbelow(upper - 2*(length-1)), length):
+			sumT = sum(list(test))
+			if sumT <= upper:
+				countDict[sumT] += 1
+				if countDict[sumT] > 5000 and sumT < upper:
+					print sumT, countDict[sumT]
+					upper = sumT
+					humbug = True
+					break
+		if humbug == True:
+			break
+	if humbug == False:
+		break
+					
+
+print countDict	
+
+
+</pre></body></html>

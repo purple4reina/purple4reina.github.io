@@ -1,0 +1,60 @@
+<html><head><title>Euler - Problem 105</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=105" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I can't believe it was that easy. I basically just copied and pasted the 
+code from <a href="103.html">problem 103</a>. Ran in 15 seconds too.
+
+
+CODE:
+
+from itertools import *
+
+def rule1(a):
+	for i in range(1, len(a)/2+1):
+		for A in combinations(a, i):
+			for j in range(1, len(a)-len(A)+1):
+				for B in combinations((set(a)-set(A)), j):
+					if sum(list(A)) == sum(list(B)):
+						return False
+	return True
+
+def rule2(a):
+	for i in range(1, len(a)/2+1):
+		for A in combinations(a, i):
+			for j in range(1, len(a)-len(A)+1):
+				for B in combinations((set(a)-set(A)), j):
+					if len(A) > len(B) and sum(list(A)) < sum(list(B)):
+						return False
+					elif len(B) > len(A) and sum(list(B)) < sum(list(A)):
+						return False
+	return True
+
+def S(a):
+	return sum(list(a))
+
+
+total = 0
+for A in sets:
+	if rule1(A) == True and rule2(A) == True:
+		total += S(A)
+
+print total
+
+
+</pre></body></html>

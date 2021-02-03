@@ -1,0 +1,111 @@
+<html><head><title>Euler - Problem 76</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=76" target="_blank">View Problem</a></p>
+<pre>
+
+TRY ONE:
+
+COMMENTS:
+
+I'm enjoying working on this problem. There is definitely a pattern to it 
+that I really want to find. I started with the brute force method, but 
+that would take way too long to find the answer. Plus, I really want to 
+challenge myself to find the optimal solution.
+
+
+CODE:
+
+from itertools import *
+count = 0
+
+for length in range(2, 101):
+	print length
+	for nums in combinations_with_replacement(range(1, 101), length):
+		s = sum(nums)
+		if s == 100:
+			count += 1
+
+print count
+
+
+TRY TWO:
+
+COMMENTS:
+
+After putting this problem away for a long time, I came back to it with 
+determination and a new strategy.
+
+This problem was very difficult for me for some reason. It's one of those that 
+is very intuitive, and could be done easily enough by hand; but teaching a 
+computer to go through this complicated thought process is quite tough.
+
+I made (for the first time!) a generator function that gives the next list, 
+with the given sum, of that same length. I used a lot of loops and whiles and 
+breaks to get it to work. But it finally did.
+
+This little bit of code will be super helpful for future problems!
+
+
+CODE:
+
+total = 100
+
+def plus_one(l):
+	global total
+	n = 2
+	while True:
+		if l[0] < l[1] + 2:
+			save = l
+			rep = True
+			while rep == True:
+				try:
+					while True:
+						if l[n] + 1 <= l[n-1]:
+							break
+						else:
+							n += 1
+				except:
+					return
+				l[n] += 1
+				l[1:n] = [l[n]]*len(l[1:n])
+				l[0] = total - sum(l[1:])
+				if l[0] < l[1]:
+					l = save
+					continue
+				else:
+					rep = False
+					yield l
+		else:
+			l[1] += 1
+			l[0] -= 1
+			n = 2
+			yield l
+
+
+count = 0
+for length in range(2, total+1):
+	build = [0]*length
+	build[1:] = [1]*(length-1)
+	build[0] = total - sum(build)
+	print build
+	count += 1
+	for l in plus_one(build):
+		count += 1
+
+	
+print count
+
+
+</pre></body></html>

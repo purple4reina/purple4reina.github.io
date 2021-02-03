@@ -1,0 +1,66 @@
+<html><head><title>Euler - Problem 357</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=357" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I'd like to work out a faster way to do this problem. As it is, this is spending more than 
+half its time determining which numbers are prime. I am assuming that it is double checking 
+some of them.
+
+Therefore, as it is, this script takes way too long to run. But, it works at least.
+
+
+CODE:
+
+def generating(n):
+	if (isprime(n + 1) == False) or (n ** 0.5 == 0):
+		return False
+	else:
+		for d in xrange(2, int(n ** 0.5) + 1):
+			if (n % d == 0) and (isprime(d + (n / d)) == False):
+				return False
+		else:
+			return True
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n < 2 or n%2 == 0:
+		return False
+	else:
+		for i in xrange(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+def Test():
+	assert generating(30) == True
+	print 'tests pass'
+
+
+def Main():
+	Test()
+	bound = 10**8
+	total = 0
+	for n in xrange(bound):
+		if n%10**4 == 0: print n
+		if generating(n) == True:
+			total += n
+	print total
+
+Main()
+
+</pre></body></html>

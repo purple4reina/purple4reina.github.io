@@ -1,0 +1,37 @@
+<html><head><title>Euler - Problem 24</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=24" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+It took me a surprisingly long time to realize that the millionth item in a list using Python is referenced 
+with the number 999999, not 1000000 or 1000001. Other than that, Python is great because it already has a 
+permutations function built in! Shortest script ever!
+
+
+CODE:
+
+def onenumber(n):
+	return ''.join(map(str, n))
+
+
+from itertools import permutations
+all = map(onenumber, permutations(range(10)))
+
+print all[999999]
+
+
+</pre></body></html>

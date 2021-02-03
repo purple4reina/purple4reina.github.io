@@ -1,0 +1,119 @@
+<html><head><title>Euler - Problem 516</title>
+<p><a href="http://projecteuler.net/problem=516" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem took me several days to finish.  I keep spinning my wheels coming
+up with convoluted algorithms.  What I really needed to do was sit down with
+paper and pen and look at the actual math.  This isn't an agorithms problem,
+it's a math problem!
+
+What I found is that the totient of a number is hamming if two things about the
+number are true:
+
+    1. For every prime factor p of n, (p - 1) must be a hamming number
+    2. The only prime factors p of n that can have an exponent >1 are p = 2, 3, 5
+
+These follow from the generating function for the totient:
+
+    Where n = p1^k1 * p2^k2 * ... pr^kr, and p1, p2, ... pr are distinct primes
+    φ(n) = p1^(k1 - 1)*(p1 - 1) * p2^(k2 - 1)*(p2 - 1) * ... pr^(kr - 1)*(pr - 1)
+
+After figuring this out, I stopped trying to search for the correct answers and
+instead went about creating them.
+
+
+CODE:
+
+modulo = 1 << 32
+
+_primes = []
+def is_prime(n):
+    n_root = int(n ** 0.5)
+    for p in _primes:
+        if p > n_root:
+            return True
+        if n % p == 0:
+            return False
+    return True
+
+def solve(n):
+
+    hammings = [1]
+    for p in (2, 3, 5):
+        next_hammings = []
+        for h in hammings:
+            if h == 1 and (p == 3 or p == 5):
+                continue
+            for e in range(1, n):
+                num = h * p ** e
+                if num >= n:
+                    break
+                next_hammings.append(num)
+        hammings.extend(next_hammings)
+
+    top = int(n ** 0.5)
+    sieve = [True] * (top + 1)
+    for p, prime in enumerate(sieve):
+        if not prime or p < 2:
+            continue
+        _primes.append(p)
+        num = p + p
+        while num <= top:
+            sieve[num] = False
+            num += p
+
+    hamming_primes = []
+    for h in hammings:
+        if is_prime(h + 1):
+            hamming_primes.append(h + 1)
+
+    hamming_totients = [1]
+    for p in hamming_primes:
+        next_hammings = []
+        for h in hamming_totients:
+            if p > 5:
+                num = h * p
+                if num > n:
+                    break
+                next_hammings.append(num)
+            else:
+                for e in range(1, n):
+                    num = h * p ** e
+                    if num > n:
+                        break
+                    next_hammings.append(num)
+        hamming_totients.extend(next_hammings)
+        hamming_totients.sort()
+
+    return sum(hamming_totients) % modulo
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (10 ** 1, 55),
+        (10 ** 2, 3728),
+        (10 ** 3, 203813),
+        (10 ** 4, 9586559),
+        (10 ** 5, 397079942),
+        (10 ** 6, 2236471777),
+        (10 ** 7, 3567819736),
+        (10 ** 8, 3620613805),
+        (10 ** 9, 964002218),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

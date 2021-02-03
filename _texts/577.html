@@ -1,0 +1,66 @@
+<html><head><title>Euler - Problem 577</title>
+<p><a href="http://projecteuler.net/problem=577" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I ended up getting off on a long tangent on this one.  I used paper and pen to
+come up with the first few values if H(n), then stuck these values into
+oeis.org.  Unfortunately, these numbers very closely matched another sequence
+(https://oeis.org/A011779).  In order to create a generating function for that
+sequence, I had to learn about Taylor Series and figure out how to take the
+first derivative in Python.  Fortunately (?) taking the derivative in Python is
+very slow, so I knew I'd have to come up with a new method for calculating the
+solution.  I implemented what I believed was correct, only to find that my new
+solution diverged from the oeis series at the 25th item.  At this point though,
+I figured, what the heck, I'll get the solution with this implementation and
+put it into the solution box, and if it's correct yay and if not, I'll figure
+it out from there.  Ends up, my solution was correct!  Runs in about 0.2
+seconds on Pypy3.
+
+
+CODE:
+
+def triange(n):
+    return int((n + 1) * (n / 2))
+
+def series(n):
+    total = 0
+    for i, k in enumerate(range(2, n, 3)):
+        total += triange(n - k) * (i + 1)
+    return total
+
+def solve(n):
+    total = 0
+    for k in range(3, n + 1):
+        total += series(k)
+    return total
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (3, 1),
+        (4, 4),
+        (5, 10),
+        (6, 22),
+        (7, 43),
+        (8, 76),
+        (9, 127),
+        (10, 202),
+        (20, 4592),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

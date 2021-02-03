@@ -1,0 +1,64 @@
+<html><head><title>Euler - Problem 162</title>
+<p><a href="http://projecteuler.net/problem=162" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+For this one I took a dynamic programming approach.  It's actually quite
+similar to the FAREEFAREA problem number 679.  If all three of the things have
+been placed, add 1 and recurse.  Pretty simple, I don't have much more to say.
+Runs in 46 ms.
+
+
+CODE:
+
+def memoize(fn):
+    _cache = {}
+    def wrap(*args):
+        if args in _cache:
+            return _cache[args]
+        ret = fn(*args)
+        _cache[args] = ret
+        return ret
+    return wrap
+
+def solve(n):
+
+    @memoize
+    def hexas(zer, one, aye, left):
+        if left == 0:
+            return 0
+
+        total = 13 * (all((zer, one, aye)) + hexas(zer, one, aye, left - 1))
+        total += all((zer, 1, aye)) + hexas(zer, 1, aye, left - 1)
+        total += all((zer, one, 1)) + hexas(zer, one, 1, left - 1)
+
+        if left < n:
+            total += all((1, one, aye)) + hexas(1, one, aye, left - 1)
+
+        return total
+
+    answer = hexas(0, 0, 0, n)
+    return answer, hex(answer)[2:].upper()
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (3, (4, '4')),
+        (4, (262, '106')),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

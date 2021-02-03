@@ -1,0 +1,53 @@
+<html><head><title>Euler - Problem 43</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=43" target="_blank">View Problem</a></p>
+<pre>
+
+CODE:
+
+def str2num(n):
+	return int(''.join(map(str, n)))
+
+from itertools import permutations
+thelist = []
+
+for first in permutations(range(10), 4):
+	firstpiece = first
+	firstnumber = str2num(first)
+	if firstnumber%2 == 0:
+		thelist.append(firstpiece)
+
+primes = [3, 5, 7, 11, 13, 17]
+for p in primes:
+	newlist = thelist
+	thelist = []
+	for new in newlist:
+	#	second = str(second)
+		#print new
+		for i in range(10):
+			#i = str(i)
+			if i not in new:
+				newpiece = list(new); newpiece.append(i)
+				#print newpiece
+				newnumber = str2num(newpiece[-3:])
+				if newnumber%p == 0:
+					thelist.append((newpiece))
+
+final = map(str2num, thelist)
+print final
+print sum(final)
+
+
+</pre></body></html>

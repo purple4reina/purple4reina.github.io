@@ -1,0 +1,128 @@
+<html><head><title>Euler - Problem 84</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=84" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I looked up Monopoly on Wikipedia which lead me to a couple of outside 
+webpages and the concept of the Markov chain.
+
+I did not make a Markov chain for this problem. Instead I used the "Monte 
+Carlo" method. I had the script roll the dice a million times (literally) and 
+keep track of where it lands each time based on the rules given. The squares 
+that at the end of the million rolls had the most visits also had the highest 
+probability.
+
+This method took longer than if I used a Markov chain, but it was effective 
+nonetheless.
+
+
+CODE:
+
+from random import randint
+
+def rules(next):
+	# go to jail:
+	if next == 30:
+		return 10
+	
+	# comunity chest:
+	elif next == 2 or next == 17 or next == 33:
+		CC = randint(1,16)
+		if CC == 1:
+			return 0
+		elif CC == 2:
+			return 10
+		else:
+			return next
+	
+	# chance:
+	elif next == 7 or next == 22 or next == 36:
+		CH = randint(1,16)
+		if CH == 1:
+			return 0
+		elif CH == 2:
+			return 10
+		elif CH == 3:
+			return 11
+		elif CH == 4:
+			return 24
+		elif CH == 5:
+			return 39
+		elif CH == 6:
+			return 5
+		elif CH == 7 or CH == 8:
+			if next == 7:
+				return 15
+			elif next == 22:
+				return 25
+			elif next == 36:
+				return 5
+		elif CH == 9:
+			if next == 7 or next == 36:
+				return 12
+			elif next == 22:
+				return 28
+		elif CH == 10:
+			return rules(next-3)
+		else:
+			return next
+	
+	else:
+		return next
+
+def three_doubles(l):
+	r1 = l[0]
+	r2 = l[1]
+	r3 = l[2]
+	
+	if r1[0] == r1[1] and r2[0] == r2[1] and r3[0] == r3[1]:
+		return True
+	else:
+		return False
+
+
+squareDict = dict(zip(range(40),[0]*40))
+
+current_square = 0
+last_square = 0
+total_rolls = 0
+roll_hist = [(0,1),(0,1),(0,1)]
+
+while total_rolls < 10**6:
+	roll_hist.append((randint(1,4),randint(1,4)))
+	del roll_hist[0]
+	total_rolls += 1
+	
+	if three_doubles(roll_hist) == True:
+		squareDict[10] += 1
+		last_square = 10
+		roll_hist = [(0,1),(0,1),(0,1)]
+	else:
+		current_square = rules((last_square + sum(roll_hist[-1]))%40)
+		squareDict[current_square] += 1
+		last_square = current_square
+		
+largest = [(0,0),(0,0),(0,0)]
+for this in squareDict.iteritems():
+	if this[1] > min(largest)[0]:
+		largest.remove(min(largest))
+		largest.append((this[1],this[0]))
+
+print largest
+
+
+</pre></body></html>

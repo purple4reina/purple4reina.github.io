@@ -1,0 +1,59 @@
+<html><head><title>Euler - Problem 94</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=94" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I first tried this problem by going through every value possible for the sides of 
+the triangle. But for some reason, it just never gave me the correct answer.
+
+In this version, I generate the set of (mostly) primitive Pythagorean triples, then 
+test to see which fulfill the requirements. This strategy worked great.
+
+
+CODE:
+
+from fractions import *
+
+bound = 10**9
+tested = set()
+total = 0
+
+for n in xrange(1, bound):
+	if n%100 == 0: print n, total
+	for m in xrange(n+1, bound):
+		a = (m**2 - n**2)
+		b = (2*m*n)
+		c = (m**2 + n**2)
+		if c > 350*10**6: break
+		if (2*a == c+1) and ((c+1, c+1, 2*a) not in tested) and ((2*(c+1) + 2*a) <= bound):
+			tested.add((c+1, c+1, 2*a))
+			total += (2*(c+1) + 2*a)
+		if (2*a == c-1) and ((c-1, c-1, 2*a) not in tested) and ((2*(c-1) + 2*a) <= bound):
+			tested.add((c-1, c-1, 2*a))
+			total += (2*(c-1) + 2*a)
+		if (2*b == c+1) and ((c+1, c+1, 2*b) not in tested) and ((2*(c+1) + 2*b) <= bound):
+			tested.add((c+1, c+1, 2*b))
+			total += (2*(c+1) + 2*b)
+		if (2*b == c-1) and ((c-1, c-1, 2*b) not in tested) and ((2*(c-1) + 2*b) <= bound):
+			tested.add((c-1, c-1, 2*b))
+			total += (2*(c-1) + 2*b)
+								
+			
+print total
+
+
+</pre></body></html>

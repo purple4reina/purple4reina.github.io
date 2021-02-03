@@ -1,0 +1,107 @@
+<html><head><title>Euler - Problem 609</title>
+<p><a href="http://projecteuler.net/problem=609" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+My solution wasn't all that efficient.  It took about 5 minutes to run.  But I
+figured in the time it would take me to make it faster, I could probably just
+get the answer, so that's what I did :-)
+
+For this problem I created a little `@cache` wrapper because I was tired of
+writing the same thing over and over again.  The wrapper memoizes the function.
+Hmm, maybe I should have named it `@memoize` instead then...
+
+
+CODE:
+
+modulo = 1000000007
+
+def cache(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+@cache
+def is_prime(p):
+    if p < 2:
+        return False
+    if p == 2:
+        return True
+    if p % 2 == 0:
+        return False
+    for n in range(3, int(p**0.5) + 1, 2):
+        if p % n == 0:
+            return False
+    return True
+
+@cache
+def pi(n):
+    if n == 1:
+        return 0
+    return is_prime(n) + pi(n - 1)
+
+def c(u):
+    totals = {}
+    t = 0 if is_prime(u) else 1
+    while u != 1:
+        u = pi(u)
+        t += 0 if is_prime(u) else 1
+        totals[t] = totals.get(t, 0) + 1
+    return totals
+
+def solve(n):
+    prod = 1
+    totals = {k: 0 for k in range(n + 1)}
+    prev_c = {}
+    for u in range(1, n + 1):
+        if is_prime(u):
+            prev_c.clear()
+            for t, v in c(u).items():
+                totals[t] += v
+                prev_c[t+1] = v
+        else:
+            for t, v in prev_c.items():
+                totals[t] += v
+    for val in totals.values():
+        if val > 1:
+            prod *= val
+    return prod % modulo
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve, pi
+
+_test_solve = (
+        (10**1, 648),
+        (10**2, 31038676032 % 1000000007),
+        (10**3, 649720175),
+        (10**4, 929483685),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+_test_pi = (
+        (6, 3),
+        (100, 25),
+)
+
+@pytest.mark.parametrize('n,expect', _test_pi)
+def test_pi(n, expect):
+    assert expect == pi(n)
+
+</pre></body></html>

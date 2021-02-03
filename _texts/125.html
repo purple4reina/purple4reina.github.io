@@ -1,0 +1,61 @@
+<html><head><title>Euler - Problem 125</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=125" target="_blank">View Problem</a></p>
+<pre>
+
+RESOURCES:
+
+I used wikipedia to find the formula for a pyramidal number. This is the 
+same thing as finding the sum of squares of integers from 1 to n.
+
+
+COMMENTS:
+
+Finding that formula on wikipedia is what made this problem so easy and 
+run so fast. Instead of having to test every single number below 10^8, I 
+was able to quickly produce all the values. Then I tested that they were 
+palindromic.
+
+
+CODE:
+
+def pal(n):
+	n = str(n)
+	for i in range(int(len(n)/2)):
+		if n[i] != n[-1-i]:
+			return False
+	return True
+
+def pyr(n):
+	return (2*n**3 + 3*n**2 + n)/6
+
+used = set()
+bound = 10**8
+bigger = 1
+total = 0
+
+while bigger <= bound**.5:
+	bigger += 1
+	if bigger%100 == 0: print bigger
+	for smaller in range(bigger-1):
+		this = pyr(bigger)-pyr(smaller)
+		if this < bound and pal(pyr(bigger)-pyr(smaller)) == True and this not in used:
+			total += this
+			used.add(this)
+
+print total
+
+
+</pre></body></html>

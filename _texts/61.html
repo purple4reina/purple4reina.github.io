@@ -1,0 +1,87 @@
+<html><head><title>Euler - Problem 61</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=61" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This one frustrated me. I had problems dealing with how to arrange all the 
+data that I needed to keep track of throughout the process. I tried 
+ordered pairs, then a dictionary, then back to ordered pairs. It was tough 
+trying to make sure that I got all the indexes correct for all the lists.
+
+
+CODE:
+
+def P(k, n):
+	if k == 3:
+		return n*(n+1)/2
+	if k == 4:
+		return n**2
+	if k == 5:
+		return n*(3*n-1)/2
+	if k == 6:
+		return n*(2*n-1)
+	if k == 7:
+		return n*(5*n-3)/2
+	if k == 8:
+		return n*(3*n-2)
+
+def end(n):
+	n = str(n)
+	return n[2] + n[3]
+
+def begin(n):
+	n = str(n)
+	return n[0] + n[1]
+
+k = 3; n = 1; num = []
+while k <= 8:
+	while len(str(P(k, n))) <=4:
+		if len(str(P(k, n))) == 4:
+			num.append([P(k, n), k])
+		n += 1
+	k += 1; n = 1
+
+circles = []
+for a in num:
+	for b in num:
+		if end(a[0]) == begin(b[0]):
+			for c in num:
+				if end(b[0]) == begin(c[0]):
+					for d in num:
+						if end(c[0]) == begin(d[0]):
+							for e in num:
+								if end(d[0]) == begin(e[0]):
+									for f in num:
+										if end(e[0]) == begin(f[0]) and end(f[0]) == begin(a[0]):
+											circles.append([a, b, c, d, e, f])
+
+
+for q in circles:
+	poly_list = []
+	for poly in q:
+		poly = poly[1]
+		if poly not in poly_list:
+			poly_list.append(poly)
+	if len(poly_list) == 6:
+		total = 0
+		for number in q:
+			total += number[0]
+		print total
+				
+
+
+</pre></body></html>

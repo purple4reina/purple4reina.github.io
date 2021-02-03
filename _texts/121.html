@@ -1,0 +1,99 @@
+<html><head><title>Euler - Problem 121</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=121" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I first tried to not use any brains and just play the game a million times and 
+see if the bank lost. That didn't work out because it was really really slow, 
+and didn't always come up with the correct value.
+
+Instead, I did the math. There were two steps to it. The first and toughest 
+part was getting the probability of winning. This depended on there being a 
+greater number of blues pulled than reds. So, I needed to find the product of 
+1's and some numbers, where those numbers were based on the exact turn from 
+which the blue was pulled. That took a little work to get it to come out 
+right.
+
+The easier part was figuring out if the bank won. I wrote out the simple 
+algorithm for this. I had the payout variable increase until the bank lost.
+
+Below I've included both of the tries I made, the latter being the one that 
+worked.
+
+
+TRY ONE:
+
+CODE:
+
+from random import choice
+
+turns = 15
+bound = 10**6
+
+payout = 2000
+while True:
+	payout += 1
+	wins = 0
+	money = 0
+	for i in range(bound):
+		bag = ['r', 'b']
+		money += 1
+		blues = 0
+		for j in range(turns):
+			take = choice(bag)
+			bag.append('r')
+			if take == 'b':
+				blues += 1
+		if blues > turns/2.0:
+			money -= payout
+			wins += 1
+	print payout, money, wins
+
+
+TRY TWO:
+
+CODE:
+
+from operator import mul
+from math import factorial
+from itertools import product
+
+turns = 15
+
+work = range(1,turns+1)
+prob = 0
+
+for mult in product([0,1], repeat=turns):
+	if sum(mult) >= turns/2.0:
+		continue
+	next = 1
+	for i in map(mul, mult, work):
+		if i == 0:
+			continue
+		else:
+			next *= i
+	prob += next
+
+payout = 0
+while True:
+	payout += 1
+	if (factorial(turns+1)-prob) - prob*(payout-1) < 0:
+		print payout - 1
+		break
+
+
+</pre></body></html>

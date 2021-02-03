@@ -1,0 +1,72 @@
+<html><head><title>Euler - Problem 82</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=82" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+My first try, I wrote an algorithm that would just find random ways 
+through the matrix and then give me the solution that comes out. I think 
+there was something wrong in that initial one because it gave me numbers 
+that ended up being way too small.
+
+The final code, I kept a variable that represented the places in the 
+matrix that should be tested the next go around. For each of those spots, 
+it checks to see if the path through it was less than the other paths 
+already compiled. Then it would add to the variable the points above, 
+below, and to the right of it; those points that should be tested on the 
+next go around.
+
+If the tested point did not yield a smaller value, it's point above, 
+below, or to the right was not added to the list. This meant that when the 
+list was empty, the final value was found.
+
+
+CODE:
+
+small = 10**8
+empty = nothing()
+visite = []
+for start in range(80):	
+	visite.append([start, 0])
+	empty[start][0] = matrix[start][0]
+while len(visite) != 0:
+	v = visite[0]
+	if v[0] != 79:
+		visite.append([v[0]+1, v[1]])
+		if empty[v[0]][v[1]] + matrix[v[0]+1][v[1]] < empty[v[0]+1][v[1]]:
+			empty[v[0]+1][v[1]] = empty[v[0]][v[1]] + matrix[v[0]+1][v[1]]
+		else:
+			visite.pop()
+	if v[0] != 0:
+		visite.append([v[0]-1, v[1]])
+		if empty[v[0]][v[1]] + matrix[v[0]-1][v[1]] < empty[v[0]-1][v[1]]:
+			empty[v[0]-1][v[1]] = empty[v[0]][v[1]] + matrix[v[0]-1][v[1]]
+		else:
+			visite.pop()
+	if v[1] != 79:
+		visite.append([v[0], v[1]+1])
+		if empty[v[0]][v[1]] + matrix[v[0]][v[1]+1] < empty[v[0]][v[1]+1]:
+			empty[v[0]][v[1]+1] = empty[v[0]][v[1]] + matrix[v[0]][v[1]+1]
+		else:
+			visite.pop()
+	del visite[0]
+	for e in empty:
+		if e[-1] < small:
+			small = e[-1]
+print small
+
+
+</pre></body></html>

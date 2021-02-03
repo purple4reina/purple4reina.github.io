@@ -1,0 +1,108 @@
+<html><head><title>Euler - Problem 185</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=185" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+Genetic Algorithm. Took 76 seconds to run, but I think that was just a lucky chance.
+
+
+CODE:
+
+from random import *
+
+def crossover(a, b):
+	a = str(a)
+	b = str(b)
+	cut = randrange(digitLen)
+	return int(a[:cut] + b[cut:])
+
+def mutation(a):
+	a = str(a)
+	while len(a) < digitLen:
+		a = '0' + a
+	aList = []
+	for d in a:
+		aList.append(d)
+	randindex = randrange(digitLen)
+	aList[randindex] = str(randrange(10))
+	return int(''.join(aList))
+
+def exchange(a):
+	a = str(a)
+	while len(a) < digitLen:
+		a = '0' + a
+	aList = []
+	for d in a:
+		aList.append(d)
+	randindex1 = randrange(digitLen)
+	randindex2 = randrange(digitLen)
+	aList[randindex1], aList[randindex2] = aList[randindex2], aList[randindex1]
+	return int(''.join(aList))
+
+def fitness(n):
+	n = str(n)
+	while len(n) < digitLen:
+		n = '0' + n
+	fitLevel = 0
+	for rule in guessList:
+		correct = 0
+		test = str(rule[0])
+		for i in range(digitLen):
+			if test[i] == n[i]:
+				correct += 1
+		if correct == rule[1]:
+			fitLevel += 1
+	return ruleLen - fitLevel
+
+
+guessesTest = [(90342, 2), (70794, 0), (39458, 2), (34109, 1), (51545, 2), (12531, 1)]
+guesses = [(5616185650518293, 2), (3847439647293047, 1), (5855462940810587, 3), (9742855507068353, 3), (4296849643607543, 3), (3174248439465858, 1), (4513559094146117, 2), (7890971548908067, 3), (8157356344118483, 1), (2615250744386899, 2), (8690095851526254, 3), (6375711915077050, 1), (6913859173121360, 1), (6442889055042768, 2), (2321386104303845, 0), (2326509471271448, 2), (5251583379644322, 2), (1748270476758276, 3), (4895722652190306, 1), (3041631117224635, 3), (1841236454324589, 3), (2659862637316867, 2)]
+
+guessList = guesses
+digitLen = len(str(guessList[0][0]))
+ruleLen = len(guessList)
+
+parent = [(ruleLen, randrange(10**digitLen)) for i in range(100)]
+
+z = 0
+while True:
+	z += 1
+	print z, parent[0], parent[-1]
+	child = {parent[0]}
+	for k in range(300):
+		
+		child1 = crossover(choice(parent)[1], choice(parent)[1])
+		fitness1 = fitness(child1)
+		child.add((fitness1, child1))
+		
+		child2 = mutation(choice(parent)[1])
+		fitness2 = fitness(child2)
+		child.add((fitness2, child2))
+		
+		child3 = exchange(choice(parent)[1])
+		fitness3 = fitness(child3)
+		child.add((fitness3, child3))		
+	
+	child = sorted(list(child))
+	if child[0][0] == 0:
+		print child[0][1]
+		break
+	else:
+		parent = child[:100]
+
+
+</pre></body></html>

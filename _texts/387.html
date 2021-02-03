@@ -1,0 +1,361 @@
+<html>
+    <head>
+        <title>Euler - Problem 387</title>
+    </head>
+    <body>
+        <p><a href="../index.html">Back</a></p>
+        <p><a href="http://projecteuler.net/problem=387" target="_blank">View Problem</a></p>
+
+<pre>
+COMMENTS:
+
+For some reason I felt reinspired to start doing some of these problems again.
+I think it's because we've been doing some hiring at work and I've been
+reviewing code challenges. It makes me want to do some challenges for myself.
+And well, what better place???
+
+It took me two tries to get this problem solved. In the end the solution took
+about 7 min and 13 to get. That's a bit long for my liking, but I left some
+comments in my code for where I think some improvements could be made.
+
+I started with a brute force strategy. Running through all prime numbers less
+than 10**14 and then checking to see if they fit the requirements. In the end,
+this was unreasonable because creating that many prime numbers was just too
+much to have to do.
+
+For the second try I built a list of right truncatable Harshad numbers, then
+checked which were strong. From those, I then tacked on odd digits to the right
+and then checked to see which of those numbers were prime. This algorithm
+worked fine in the end. Again, I think I could have done it a bit faster by
+caching some values and what not, but in the end, 7+ minutes isn't so bad. I
+just brushed my teeth and got ready for bed while it was running :)
+
+CODE:
+
+
+def is_harshad(num):
+    sum = 0
+    for digit in str(num):
+        sum += int(digit)
+    if num % sum == 0:
+        return True
+    return False
+
+
+def is_right_truncatable_harshad(num):
+    str_num = str(num)
+    running_sum = 0
+    for i in xrange(1, len(str_num)+1):
+        t_num = str_num[:i]
+        running_sum += int(t_num[-1])
+        if int(t_num) % running_sum != 0:
+            return False
+    return True
+
+
+def is_strong_harshad_number(num):
+    sum = 0
+    for digit in str(num):
+        sum += int(digit)
+    if not num % sum:
+        return is_prime(num/sum)
+    return False
+
+
+def is_strong_right_truncatable_harshad_prime(num, check_prime=True):
+    str_num = str(num)
+    if len(str_num) < 2:
+        return False
+    if check_prime:
+        if not is_prime(num):
+            return False
+    truncated = int(str(num)[:-1])
+    return is_strong_harshad_number(truncated) and \
+            is_right_truncatable_harshad(truncated)
+
+
+def sum_strong_right_truncatable_harshad_primes_less_than(num):
+    sum = 0
+    # FIXME: Since running through so many primes is going to be impossible, we
+    # will have to build the numbers from scratch instead.
+    for i in prime_generator(num):
+        if is_strong_right_truncatable_harshad_prime(i, check_prime=False):
+            sum += i
+    return sum
+
+
+# ---------- building them from scratch
+
+
+def get_right_truncatable_harshad_numbers_below(max):
+    harshads_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    new_harshads = list(harshads_list)
+    while True:
+        new_harshads = _build_next_truncatables(new_harshads)
+        for new_harshad in new_harshads:
+            if new_harshad >= max:
+                return harshads_list
+            harshads_list.append(new_harshad)
+
+
+_single_digits = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+_single_odds = ('1', '3', '5', '7', '9')
+
+
+def _build_next_truncatables(harshads_list):
+    next_harshads = []
+    for harshad in harshads_list:
+        harshad_str = str(harshad)
+        for digit in _single_digits:
+            new_harshad = int(harshad_str + digit)
+            if is_harshad(new_harshad):  # TODO: this can be cached
+                next_harshads.append(new_harshad)
+    return next_harshads
+
+
+def get_strong_right_truncatable_harshads_below(num):
+    harshads = []
+    for harshad in get_right_truncatable_harshad_numbers_below(num):
+        if is_strong_harshad_number(harshad):
+            harshads.append(harshad)
+    return harshads
+
+
+def get_strong_right_truncatable_harshad_primes_below(num):
+    harshads = []
+    for harshad in get_strong_right_truncatable_harshads_below(num):
+        new_harshads = _build_harshad_primes_from(harshad)
+        for new_harshad in new_harshads:
+            if new_harshad >= num:
+                break
+            harshads.append(new_harshad)
+    return harshads
+
+
+def _build_harshad_primes_from(num):
+    harshads = []
+    num_str = str(num)
+    for digit in _single_odds:
+        new_harshad = int(num_str + digit)
+        if is_prime(new_harshad):
+            harshads.append(new_harshad)
+    return harshads
+
+
+def sum_strong_right_truncatable_harshad_primes_below(num):
+    sum = 0
+    for harshad in get_strong_right_truncatable_harshad_primes_below(num):
+        sum += harshad
+    return sum
+
+
+# ---------- primes functions
+
+_primes = [2, 3, 5, 7]
+
+
+def is_prime(num):
+    if num < 2:
+        return False
+    elif num == 2:
+        return True
+    elif not (num % 2):
+        return False
+    else:
+        for i in prime_generator(max=(num ** 0.5 + 1)):
+            if not (num % i):
+                return False
+        return True
+
+
+def prime_generator(max=None):
+    max = max or float('inf')
+
+    for prime in _primes:
+        if prime <= max:
+            yield prime
+        else:
+            return
+
+    num = prime + 2
+    while num <= max:
+        if is_prime(num):
+            yield num
+            _primes.append(num)
+        num += 2
+
+
+if __name__ == '__main__':
+    print sum_strong_right_truncatable_harshad_primes_below(10**14)
+
+
+TESTS AND BENCHMARKS:
+
+
+import pytest
+import time
+
+from problem import (is_harshad, is_right_truncatable_harshad,
+        is_strong_harshad_number, is_strong_right_truncatable_harshad_prime,
+        sum_strong_right_truncatable_harshad_primes_less_than as sum_less_than,
+        get_right_truncatable_harshad_numbers_below,
+        get_strong_right_truncatable_harshads_below,
+        get_strong_right_truncatable_harshad_primes_below,
+        sum_strong_right_truncatable_harshad_primes_below as sum_below,
+)
+
+
+@pytest.mark.parametrize('number,expected', (
+    (1, True),
+    (10, True),
+    (11, False),
+    (12, True),
+    (13, False),
+    (14, False),
+    (15, False),
+    (16, False),
+    (17, False),
+    (18, True),
+    (19, False),
+    (20, True),
+    (201, True),
+    (202, False),
+))
+def test_is_harshad(number, expected):
+    actual = is_harshad(number)
+    assert actual == expected
+
+
+@pytest.mark.parametrize('number,expected', (
+    (1, True),
+    (10, True),
+    (11, False),
+    (12, True),
+    (201, True),
+    (2001, True),
+))
+def test_is_right_truncatable_harshad(number, expected):
+    actual = is_right_truncatable_harshad(number)
+    assert actual == expected
+
+
+@pytest.mark.parametrize('number,expected', (
+    (2, False),
+    (3, False),
+    (10, False),
+    (11, False),
+    (12, False),
+    (18, True),
+))
+def test_is_strong_harshad_number(number, expected):
+    actual = is_strong_harshad_number(number)
+    assert actual == expected
+
+
+@pytest.mark.parametrize('number,expected', (
+    (1, False),
+    (10, False),
+    (11, False),
+    (12, False),
+    (13, False),
+    (14, False),
+    (15, False),
+    (16, False),
+    (17, False),
+    (18, False),
+    (19, False),
+    (20, False),
+    (201, False),
+    (202, False),
+    (2011, True),
+))
+def test_is_strong_right_truncatable_harshad_prime_true(number, expected):
+    actual = is_strong_right_truncatable_harshad_prime(number, check_prime=True)
+    assert actual == expected
+
+
+@pytest.mark.parametrize('number,expected', (
+    (1, False),
+    (10, False),
+    (11, False),
+    (12, False),
+    (13, False),
+    (14, False),
+    (15, False),
+    (16, False),
+    (17, False),
+    (18, False),
+    (19, False),
+    (20, False),
+    (201, False),
+    (202, False),
+    (2011, True),
+))
+def test_is_strong_right_truncatable_harshad_prime_false(number, expected):
+    actual = is_strong_right_truncatable_harshad_prime(number,
+            check_prime=False)
+    assert actual == expected
+
+
+@pytest.mark.parametrize('number,expected', (
+    (10000, 90619),
+))
+def test_sum_strong_right_truncatable_harshad_primes_less_than(number,
+        expected):
+    actual = sum_less_than(number)
+    assert actual == expected
+
+
+def test_get_right_truncatable_harshad_numbers_below():
+    max_value = 100
+    expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 18, 20, 21, 24, 27, 30, 36,
+            40, 42, 45, 48, 50, 54, 60, 63, 70, 72, 80, 81, 84, 90]
+    actual = get_right_truncatable_harshad_numbers_below(max_value)
+    assert actual == expected
+
+    actual = get_right_truncatable_harshad_numbers_below(10000)
+    assert len(actual) == 180
+
+
+def test_get_strong_right_truncatable_harshads_below():
+    max_value = 100
+    expected = [18, 21, 27, 42, 45, 63, 84]
+    actual = get_strong_right_truncatable_harshads_below(max_value)
+    assert actual == expected
+
+    actual = get_strong_right_truncatable_harshads_below(10000)
+    assert len(actual) == 26
+
+
+def test_get_strong_right_truncatable_harshad_primes_below():
+    max_value = 10000
+    expected = [181, 211, 271, 277, 421, 457, 631, 2011, 2017, 2099, 2473,
+            2477, 4021, 4027, 4073, 4079, 4231, 4813, 4817, 6037, 8011, 8017,
+            8039, 8461, 8467]
+    actual = get_strong_right_truncatable_harshad_primes_below(max_value)
+    assert actual == expected
+
+
+def test_sum_strong_right_truncatable_harshad_primes_below():
+    max_value = 10000
+    expected = 90619
+    actual = sum_below(max_value)
+    assert actual == expected
+
+
+def benchmark_sum_strong_right_truncatable_harshad_primes_less_than(iters):
+    import problem
+    start = time.time()
+    for i in xrange(iters):
+        problem._primes = [2, 3, 5, 7]
+        assert sum_less_than(10000) == 90619
+    end = time.time()
+    print "time for %d iterations: %f sec" % (iters, end - start)
+    print "time per iteration: %f sec" % ((end - start) / iters)
+
+
+if __name__ == '__main__':
+    benchmark_sum_strong_right_truncatable_harshad_primes_less_than(100)
+
+
+</pre></body></html>

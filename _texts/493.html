@@ -1,0 +1,259 @@
+<html>
+    <head>
+        <title>Euler - Problem 493</title>
+    </head>
+    <body>
+        <p><a href="../index.html">Back</a></p>
+        <p><a href="http://projecteuler.net/problem=493" target="_blank">View Problem</a></p>
+
+<pre>
+COMMENTS:
+
+
+I think I'm on a roll now with these things. I mean, doing two in a row is a
+roll right???
+
+This problem I decided to do in Go since that's the language I'm now working
+with at work. Plus, it's a lot faster than Python. Not that the added speed is
+required to solve the problems, but it's nice.
+
+Again, this problem took me two tries. First, I started by creating a
+"simulation" and running it about 100 million times, then finding the average
+of all those simulation tries. Ends up this isn't nearly good enough. Since the
+problem was looking for accuracy to the 9th decimal place, this means I would
+need to run at the very least 10^9 simulations. I optimized my simulation as
+much as I could and still realized that this would be impossible to run.
+
+Next I decided to do the hard work that it would take to actually do the math
+correctly. I took discrete math in college, I can do this right? This method
+proved to be the right one and the program ran in about 0.13 seconds! Pretty
+good! I looked up some code to do Combinations in Go. This lead me to a repo
+that was no longer maintained but still had a good example of how to generate
+all combinations of a set of numbers. I started with this and slowly edited it
+to include repeated values up to 10 times.
+
+I ran the program at this point and found that the answer was incorrect. This
+is because for each possible combination, there are multiple ways to pull this
+grouping of balls out of the urn. This means each combination needed to be
+weighted. I then added calculations for the weight and ran it again. Still
+wrong. Sigh. Coming back to it after a short break, I wrote a quick test for
+what I'd expect the weight to be on the second pick. The test failed! This
+pointed me to two different bugs in my weight calculation. Once fixing these, I
+was able to solve the problem.
+
+Also, git was super helpful to me in this problem and the last. I did not push
+my code anywhere but still got a ton of value out of it. It was really nice to
+be able to go back to my very first commit and show how the subtle bugs in my
+weight algorithm were incorrect. Very helpful!
+
+
+CODE:
+
+
+package main
+
+import (
+	"fmt"
+)
+
+var (
+	factorialCache = make(map[int]int, repeatsAllowed)
+	chooseCache    = make(map[int]int, k)
+)
+
+func Factorial(num int) int {
+	if fac, ok := factorialCache[num]; ok {
+		return fac
+	}
+	fac := 1
+	for i := num; i > 1; i-- {
+		fac = fac * i
+	}
+	factorialCache[num] = fac
+	return fac
+}
+
+func Choose(n, k int) int {
+	if choose, ok := chooseCache[k]; ok {
+		return choose
+	}
+	choose := Factorial(n) / (Factorial(n-k) * Factorial(k))
+	chooseCache[k] = choose
+	return choose
+}
+
+func NextPick(lastpick Pick) Pick {
+	distMap := make(map[int]int, n)
+	for j := k - 1; j >= 0; j-- {
+		if lastpick.Hand[j] >= n-1 {
+			if j == 0 {
+				lastpick.OK = false
+				return lastpick
+			}
+			continue
+		}
+		lastpick.Hand[j]++
+		distMap[lastpick.Hand[j]] += 1
+		setVal := lastpick.Hand[j]
+		setCount := 1
+		for l := j + 1; l < k; l++ {
+			setCount++
+			if setCount > repeatsAllowed {
+				if setVal+1 > n-1 {
+					return NextPick(lastpick)
+				}
+				lastpick.Hand[l] = setVal + 1
+			} else {
+				lastpick.Hand[l] = setVal
+			}
+			distMap[lastpick.Hand[l]] += 1
+		}
+		for l := 0; l < j; l++ {
+			distMap[lastpick.Hand[l]] += 1
+		}
+		break
+	}
+	dist := 0
+	weight := 1
+	for _, val := range distMap {
+		if val > 0 {
+			dist++
+		}
+		weight *= Choose(repeatsAllowed, val)
+	}
+	lastpick.Distincts = dist
+	lastpick.Weight = weight
+	return lastpick
+}
+
+type Pick struct {
+	Hand      [k]int
+	Distincts int
+	Weight    int
+	OK        bool
+}
+
+func FirstPick() Pick {
+	hand := [k]int{}
+	num := 0
+	count := 0
+	for i := 0; i < k; i++ {
+		if count >= repeatsAllowed {
+			count = 0
+			num++
+		}
+		count++
+		hand[i] = num
+	}
+
+	return Pick{
+		Hand:      hand,
+		Distincts: 2,
+		Weight:    1,
+		OK:        true,
+	}
+}
+
+const (
+	n              int = 7
+	k              int = 20
+	repeatsAllowed int = 10
+)
+
+func Simulate() (int, int) {
+	var total int
+	var tries int
+
+	for pick := FirstPick(); pick.OK; pick = NextPick(pick) {
+		total += pick.Distincts * pick.Weight
+		tries += pick.Weight
+	}
+
+	return total, tries
+}
+
+func main() {
+	total, tries := Simulate()
+
+	fmt.Printf("total: %#v\n", total)
+	fmt.Printf("tries: %#v\n", tries)
+	fmt.Printf("total/tries: %#v\n", float64(total)/float64(tries))
+}
+
+
+TESTS AND BENCHMARKS:
+
+
+package main
+
+import "testing"
+
+func TestFactorial(t *testing.T) {
+	testcases := []struct {
+		input    int
+		expected int
+	}{
+		{0, 1},
+		{1, 1},
+		{2, 2},
+		{3, 6},
+		{4, 24},
+	}
+	for _, test := range testcases {
+		if actual := Factorial(test.input); test.expected != actual {
+			t.Errorf("wrong answer for %d: %d", test.input, actual)
+		}
+	}
+}
+
+func TestChoice(t *testing.T) {
+	testcases := []struct {
+		inputN   int
+		inputK   int
+		expected int
+	}{
+		{1, 1, 1},
+		{2, 2, 1},
+		{4, 2, 6},
+		{5, 3, 10},
+	}
+	for _, test := range testcases {
+		chooseCache = make(map[int]int) // clear the cache
+		if actual := Choose(test.inputN, test.inputK); test.expected != actual {
+			t.Errorf("wrong answer for Choose(%d, %d): %d", test.inputN, test.inputK, actual)
+		}
+	}
+}
+
+func TestSimulate(t *testing.T) {
+	expectedTotal := 39661069975935
+	expectedTries := 5785324890608
+
+	actualTotal, actualTries := Simulate()
+
+	if expectedTotal != actualTotal {
+		t.Errorf("incorrect total: actual=%d, expected=%d", actualTotal, expectedTotal)
+	}
+	if expectedTries != actualTries {
+		t.Errorf("incorrect tries: actual=%d, expected=%d", actualTries, expectedTries)
+	}
+}
+
+func BenchmarkFactorial(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		factorialCache = make(map[int]int, repeatsAllowed)
+		Factorial(50)
+		Factorial(100)
+	}
+}
+
+func TestWeight(t *testing.T) {
+	pick := FirstPick()
+	pick = NextPick(pick)
+	if 100 != pick.Weight {
+		t.Error("incorrect pick weight", pick.Weight)
+	}
+}
+
+
+</pre></body></html>

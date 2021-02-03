@@ -1,0 +1,231 @@
+<html><head><title>Euler - Problem 684</title>
+<p><a href="http://projecteuler.net/problem=684" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+For some reason this problem was harder than it initially seamed.  I pretty
+quickly figured out that there was a pattern to the values of `S(n)`.  You
+don't need to run `s(n)` at all or do any digit counting.  Using just the
+number passed to `S` it is possible to determine its value.
+
+The problem was that this value very very quickly overflowed.  I tried it with
+both Ruby and Python and while Python could handle larger numbers and was a bit
+faster, both of them eventually started returning "Infinity".  This was
+happening during the calculation of the large powers of 10.
+
+To overcome this I tried creating the number using strings then converting to
+an integer, but that was too much for the processor to handle still.  I tried
+creative ways of calculating the power, but they were all slower than the
+built-in `pow` methods of both languages.
+
+The solution was to use modulo math.  The crux of it is the identity
+`(A + B) mod C == ((A mod C) + (B mod C)) mod C`.  This meant that I could
+calculate the modulo of this large power of 10 up front and have it not affect
+the overall outcome.  This is where I learned that both Ruby and Python allow
+an extra argument to their `pow` methods for the modules.  They're both
+lightning fast and got me the final answer in what seemed like a few
+milliseconds.
+
+This is also the first problem that I completed in Ruby!  I've been working
+with it and using it at my new job.
+
+
+CODE:
+
+class Problem
+  MOD = 1_000_000_007
+  PREFEXES = {
+    0 => 10,
+    1 => 14,
+    2 => 19,
+    3 => 25,
+    4 => 32,
+    5 => 40,
+    6 => 49,
+    7 => 59,
+    8 => 79,
+  }
+
+  class << self
+    def S(num, mod: nil)
+      return 0 if num == 0
+      return 1 if num == 1
+      return 3 if num == 2
+
+      div, remain = (num - 2).divmod(9)
+      multiplier = 10.pow(div, mod)
+      base = multiplier - 6 - num
+      prefix = PREFEXES[remain] * multiplier
+
+      return prefix + base
+    end
+
+    def fibs max
+      fibs = []
+      f1, f2 = 0, 1
+      (2..max).each do |num|
+        f3 = f1 + f2
+        fibs << f3
+        f1, f2 = f2, f3
+      end
+      fibs
+    end
+
+    def answer max: 90
+      total = 0
+      fibs(max).each do |fib|
+        total += S(fib, mod: MOD)
+      end
+      total % MOD
+    end
+  end
+end
+
+if __FILE__ == $0
+  puts Problem.answer
+end
+
+
+TESTS:
+
+require "test/unit"
+require_relative "./problem"
+
+class Test684 < Test::Unit::TestCase
+  def test_S
+    assert_equal            0, Problem.S(0)
+    assert_equal            1, Problem.S(1)
+    assert_equal            3, Problem.S(2)
+    assert_equal            6, Problem.S(3)
+    assert_equal           10, Problem.S(4)
+    assert_equal           15, Problem.S(5)
+    assert_equal           21, Problem.S(6)
+    assert_equal           28, Problem.S(7)
+    assert_equal           36, Problem.S(8)
+    assert_equal           45, Problem.S(9)
+    assert_equal           64, Problem.S(10)
+    assert_equal           93, Problem.S(11)
+    assert_equal          132, Problem.S(12)
+    assert_equal          181, Problem.S(13)
+    assert_equal          240, Problem.S(14)
+    assert_equal          309, Problem.S(15)
+    assert_equal          388, Problem.S(16)
+    assert_equal          477, Problem.S(17)
+    assert_equal          576, Problem.S(18)
+    assert_equal          775, Problem.S(19)
+    assert_equal         1074, Problem.S(20)
+    assert_equal         1473, Problem.S(21)
+    assert_equal         1972, Problem.S(22)
+    assert_equal         2571, Problem.S(23)
+    assert_equal         3270, Problem.S(24)
+    assert_equal         4069, Problem.S(25)
+    assert_equal         4968, Problem.S(26)
+    assert_equal         5967, Problem.S(27)
+    assert_equal         7966, Problem.S(28)
+    assert_equal        10965, Problem.S(29)
+    assert_equal        14964, Problem.S(30)
+    assert_equal        19963, Problem.S(31)
+    assert_equal        25962, Problem.S(32)
+    assert_equal        32961, Problem.S(33)
+    assert_equal        40960, Problem.S(34)
+    assert_equal        49959, Problem.S(35)
+    assert_equal        59958, Problem.S(36)
+    assert_equal        79957, Problem.S(37)
+    assert_equal       109956, Problem.S(38)
+    assert_equal       149955, Problem.S(39)
+    assert_equal       199954, Problem.S(40)
+    assert_equal       259953, Problem.S(41)
+    assert_equal       329952, Problem.S(42)
+    assert_equal       409951, Problem.S(43)
+    assert_equal       499950, Problem.S(44)
+    assert_equal       599949, Problem.S(45)
+    assert_equal       799948, Problem.S(46)
+    assert_equal      1099947, Problem.S(47)
+    assert_equal      1499946, Problem.S(48)
+    assert_equal      1999945, Problem.S(49)
+    assert_equal      2599944, Problem.S(50)
+    assert_equal      3299943, Problem.S(51)
+    assert_equal      4099942, Problem.S(52)
+    assert_equal      4999941, Problem.S(53)
+    assert_equal      5999940, Problem.S(54)
+    assert_equal      7999939, Problem.S(55)
+    assert_equal     10999938, Problem.S(56)
+    assert_equal     14999937, Problem.S(57)
+    assert_equal     19999936, Problem.S(58)
+    assert_equal     25999935, Problem.S(59)
+    assert_equal     32999934, Problem.S(60)
+    assert_equal     40999933, Problem.S(61)
+    assert_equal     49999932, Problem.S(62)
+    assert_equal     59999931, Problem.S(63)
+    assert_equal     79999930, Problem.S(64)
+    assert_equal    109999929, Problem.S(65)
+    assert_equal    149999928, Problem.S(66)
+    assert_equal    199999927, Problem.S(67)
+    assert_equal    259999926, Problem.S(68)
+    assert_equal    329999925, Problem.S(69)
+    assert_equal    409999924, Problem.S(70)
+    assert_equal    499999923, Problem.S(71)
+    assert_equal    599999922, Problem.S(72)
+    assert_equal    799999921, Problem.S(73)
+    assert_equal   1099999920, Problem.S(74)
+    assert_equal   1499999919, Problem.S(75)
+    assert_equal   1999999918, Problem.S(76)
+    assert_equal   2599999917, Problem.S(77)
+    assert_equal   3299999916, Problem.S(78)
+    assert_equal   4099999915, Problem.S(79)
+    assert_equal   4999999914, Problem.S(80)
+    assert_equal   5999999913, Problem.S(81)
+    assert_equal   7999999912, Problem.S(82)
+    assert_equal  10999999911, Problem.S(83)
+    assert_equal  14999999910, Problem.S(84)
+    assert_equal  19999999909, Problem.S(85)
+    assert_equal  25999999908, Problem.S(86)
+    assert_equal  32999999907, Problem.S(87)
+    assert_equal  40999999906, Problem.S(88)
+    assert_equal  49999999905, Problem.S(89)
+    assert_equal  59999999904, Problem.S(90)
+    assert_equal  79999999903, Problem.S(91)
+    assert_equal 109999999902, Problem.S(92)
+    assert_equal 149999999901, Problem.S(93)
+    assert_equal 199999999900, Problem.S(94)
+    assert_equal 259999999899, Problem.S(95)
+    assert_equal 329999999898, Problem.S(96)
+    assert_equal 409999999897, Problem.S(97)
+    assert_equal 499999999896, Problem.S(98)
+    assert_equal 599999999895, Problem.S(99)
+  end
+
+  def test_fibs
+    exp = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597,
+           2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418,
+           317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 9227465,
+           14930352, 24157817, 39088169, 63245986, 102334155, 165580141,
+           267914296, 433494437, 701408733, 1134903170, 1836311903, 2971215073,
+           4807526976, 7778742049, 12586269025, 20365011074, 32951280099,
+           53316291173, 86267571272, 139583862445, 225851433717, 365435296162,
+           591286729879, 956722026041, 1548008755920, 2504730781961,
+           4052739537881, 6557470319842, 10610209857723, 17167680177565,
+           27777890035288, 44945570212853, 72723460248141, 117669030460994,
+           190392490709135, 308061521170129, 498454011879264, 806515533049393,
+           1304969544928657, 2111485077978050, 3416454622906707,
+           5527939700884757, 8944394323791464, 14472334024676221,
+           23416728348467685, 37889062373143906, 61305790721611591,
+           99194853094755497, 160500643816367088, 259695496911122585,
+           420196140727489673, 679891637638612258, 1100087778366101931,
+           1779979416004714189, 2880067194370816120]
+    assert_equal exp, Problem.fibs(90)
+  end
+
+  def test_answer
+    assert_equal 8042614, Problem.answer(max: 10)
+    assert_equal 692437619, Problem.answer(max: 25)
+    assert_equal 159166760, Problem.answer(max: 30)
+    assert_equal 645435163, Problem.answer(max: 35)
+    assert_equal 570500927, Problem.answer(max: 40)
+    assert_equal 922058210, Problem.answer(max: 90)
+  end
+end
+
+
+</pre></body></html>

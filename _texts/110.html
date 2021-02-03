@@ -1,0 +1,91 @@
+<html><head><title>Euler - Problem 110</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=110" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This was a more difficult version of <a href="108.html">problem 108</a>. But instead of just 
+running through numbers one by one, I knew I had to be more strategic. I 
+knew the number had to be the product of a lot of smaller primes. So I set 
+up an algorithm to dig through all powers on all primes less than 50. That 
+worked great.
+
+
+CODE:
+
+from itertools import *
+from time import time
+start = time()
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n < 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+def nextprime(p):
+	if p == 2:
+		return 3
+	else:
+		while True:
+			p += 2
+			if isprime(p) == True:
+				return p
+
+def powerlist(n):
+	ans = []
+	p = 2
+	while n > 1:
+		i = 1
+	 	while n%(p**i) == 0:
+			i += 1
+		if i > 1:
+			n /= p**(i-1)
+			ans.append(i-1)
+		p = nextprime(p)
+	return ans
+
+
+primes = []
+for n in range(50):
+	if isprime(n) == True:
+		primes.append(n)
+
+tlast = 0
+nlast = 63892555340714100
+for t in product(range(4), repeat=15):
+	if t[6] != tlast:
+		tlast = t[6]
+		print t
+	n = 1
+	for i in range(15):
+		n *= primes[-1-i]**t[i]
+	alist = powerlist(n)
+	ans = 1
+	for a in alist:
+		ans *= (1 + 2*a)
+	ans = (ans + 1)/2
+
+	if ans > 4*10**6 and n < nlast:
+		nlast = n
+		print n
+
+
+</pre></body></html>

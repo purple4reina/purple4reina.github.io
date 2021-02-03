@@ -1,0 +1,49 @@
+<html><head><title>Euler - Problem 57</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=57" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This one was really fun. At first I set up a function that would handle 
+the iterations as rational numbers. Then I had to rewrite it to handle in 
+and outputs as fractions. The switch was pretty simple, and once it 
+happened, the correct answer came quickly.
+
+
+CODE:
+
+def iterant(x):
+	return ((2*x[1] + x[0]), (x[1] + x[0]))
+
+def digits(n):
+	n = str(n)
+	length = 0
+	for i in n:
+		length += 1
+	return length
+
+x = [1, 1]
+count = 0
+for n in range(1000):
+	x = iterant(x)
+	if digits(x[0]) > digits(x[1]):
+		print x
+		count += 1
+		
+print count
+
+
+</pre></body></html>

@@ -1,0 +1,42 @@
+<html><head><title>Euler - Problem 30</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=30" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+The bug I had to fix in this one was that I had the if statement in the wrong place. It needed to be evaluated 
+at the end of running through all digits in the number, rather than after evaluating each digit. Noticing the 
+difference it makes to indent the if statement one level.
+
+
+CODE:
+
+import re
+def num2str(n):
+	return re.split('_', re.sub('\B', '_', str(n)))
+
+sum = 0
+for n in range(2, 10**6):
+	power = 0
+	for i in num2str(n):
+		power = int(i)**5 + power
+	if n == power: 
+		sum = sum + n
+		print n, sum
+		
+print '=', sum
+
+</pre></body></html>

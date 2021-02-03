@@ -1,0 +1,64 @@
+<html><head><title>Euler - Problem 37</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=37" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I just think it is so awesome when I think I'm still testing out a script and all of a sudden I find the correct 
+answer has just popped out! That's totally what happened with this script. Very awesome. I also feel like I'm 
+really starting to get the hang of these string methods. I'm pretty quick now at figuring out how to change 
+numbers into digits and a string of digits back to numbers. That has been a very useful skill in these last few 
+problems.
+
+
+CODE:
+
+#evaluate if a number is prime or not
+def isprime(n):
+	if n == 1: return 'FALSE'
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return 'FALSE'
+	return 'TRUE'
+	
+#define right truncation
+def rtrunk(n):
+	return int(str(n)[:-1])
+
+#define left truncation
+def ltrunk(n):
+	return int('0' + str(n)[1:])
+	
+
+from math import log10
+nlist = []
+n = 10
+while len(nlist) < 11:
+	test = 'TRUE'
+	if isprime(n) == 'TRUE':
+		rn = ln = n
+		for r in range(int(log10(n))):
+			rn = rtrunk(rn)
+			if isprime(rn) == 'FALSE': test = 'FALSE'
+		for l in range(int(log10(n))):
+			ln = ltrunk(ln)
+			if isprime(ln) == 'FALSE': test = 'FALSE'
+		if test == 'TRUE': nlist.append(n)
+	n += 1
+
+print sum(nlist)
+
+
+</pre></body></html>

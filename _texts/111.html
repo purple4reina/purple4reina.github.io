@@ -1,0 +1,77 @@
+<html><head><title>Euler - Problem 111</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=111" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I started out with this one thinking that I'd have to run through every single 10 
+digit number until I found all the primes. Then, run through all of those primes 
+untill I found the longest strings of digits, and yada yada. That would, clearly, 
+have taken years to complete.
+
+Instead, I realized that about 9 ones and some other digit would probably be prime. 
+And low and behold it was. That's where I started from: 9 of one digit, and 1 of 
+another. If that didn't work, I did 8 of one digit and 2 others. And so on, until I 
+got the answer.
+
+
+CODE:
+
+from itertools import *
+def isprime(n):
+	if n == 2:
+		return True
+	elif n < 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+primes = []
+tested = set()
+
+repitit = 10
+intint = range(10)
+works = []
+
+while len(intint) > 0:
+	repitit -= 1
+	for w in works:
+		try:
+			intint.remove(w)
+		except:
+			pass
+	for t in intint:
+		print t
+		for d in combinations_with_replacement(range(10), 10-repitit):
+			for n in permutations([t]*repitit + list(d), 10):
+				if n in tested: 
+					continue
+				number = int(''.join(map(str, n)))
+				tested.add(n)
+				if len(str(number)) < 10:
+					continue
+				if isprime(number) == True:
+					primes.append(number)
+					works.append(t)
+
+print primes
+print len(primes)
+print sum(primes)
+
+
+</pre></body></html>

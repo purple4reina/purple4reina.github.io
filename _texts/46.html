@@ -1,0 +1,43 @@
+<html><head><title>Euler - Problem 46</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=46" target="_blank">View Problem</a></p>
+<pre>
+
+CODE:
+
+primeslist = [2]
+def iscomposite(n):
+	for i in range(2, int(n**.5)+1):
+		if n%i == 0: return 'true'
+	primeslist.append(n)
+	return 'false'
+
+def conjecture(n):
+	for i in range(int((n/2)**.5)+1):
+		for p in primeslist:
+			if n == p + 2*(i**2): return 'true'
+	return 'false'
+
+c = 'true'
+n = 3
+while c != 'false':
+	n += 2; print n
+	if iscomposite(n) == 'true':
+		c = conjecture(n)
+
+print n, 'makes the conjecture false'
+
+
+</pre></body></html>

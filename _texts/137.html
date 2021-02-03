@@ -1,0 +1,81 @@
+<html><head><title>Euler - Problem 137</title>
+<p><a href="http://projecteuler.net/problem=137" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This was a really interesting problem!  I don't think I've ever solved an
+infinitely polynomial series like this before so I definitely learned something
+new.  Which is super awesome.
+
+I did some research about how to solve these infinite polynomial series.  I
+found that Σx^n for n {0..∞} is 1/(1 - x).  That didn't apply here, but what
+was interesting was how this solution was derived.  I then used a similar
+method to figure out the answer to this A(x).
+
+            A(x) = Σ F(n)*x^n, for n {0..∞}, where F(n) is the Fibonacci sequence
+                 = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
+
+Multiply each side by x
+
+          x*A(x) =     x^2 +  x^3 + 2x^4 + 3x^5 + 5x^6 + ...
+
+Add A(x) and x*A(x) together
+
+      A(x)*(x+1) = x +2x^2 + 3x^3 + 5x^4 + 8x^5 +13x^6 + ...
+
+Multiply each side by x again
+
+    x*A(x)*(x+1) =     x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
+                 = A(x) - x
+
+Rearranging
+
+               0 = A(x)*x^2 + (A(x)+1)*x - A(x)
+
+And since we know A(x) and are solving for x, we can use the quadradic formula
+to solve for x.  This means that for x to be rational, then the determinant
+must be a perfect square.  This allows us to find all the values of A(x) for
+which x is rational.
+
+Since I knew the value of A(x) would probably be pretty large, I looked for a
+pattern in the values of the determinant for which x was rational.  These
+numbers followed the pattern in https://oeis.org/A033889.  It was from here
+that I was able to get the answer.
+
+
+CODE:
+
+def fib(n):
+    if n < 3:
+        return 1
+    f1 = f2 = 1
+    for _ in range(n - 2):
+        f1, f2 = f2, f1 + f2
+    return f2
+
+def solve(n):
+    d = fib(4*n + 1)
+    return int((5*d**2 - 4)**0.5 - 1) // 5
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (1, 2),
+        (10, 74049690),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

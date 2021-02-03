@@ -1,0 +1,96 @@
+<html><head><title>Euler - Problem 512</title>
+<p><a href="http://projecteuler.net/problem=512" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem oh so nicely simplified down to an addition of all the totients of
+odd numbers.  Just a bit of algebra and factoring was all it needed.  My
+program doesn't run very quickly, takes just over 11m to get the answer.  I
+considered using the sieve method of calculating all the totients, but figured
+it would probably be slower.  Might have been worth a try though.
+
+
+CODE:
+
+def memoize(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+def totient(maxx):
+    top = int(maxx ** 0.5)
+    sieve = {}
+    primes = []
+    for p in range(2, top + 1):
+        if sieve.get(p):
+            continue
+        primes.append(p)
+        num = p + p
+        while num <= top:
+            sieve[num] = p
+            num += p
+
+    @memoize
+    def _totient(n):
+        if n == 1:
+            return 1
+        if n > top:
+            stop = n ** 0.5
+            for p in primes:
+                if p > stop:
+                    return n - 1
+                if n % p == 0:
+                    break
+            else:
+                return n - 1
+        else:
+            p = sieve.get(n)
+            if not p:
+                return n - 1
+        n //= p
+        e = 0
+        while n % p == 0:
+            n //= p
+            e += 1
+        return pow(p, e) * (p - 1) * _totient(n)
+
+    return _totient
+
+def solve(num):
+    totfn = totient(num)
+
+    total = 0
+    for n in range(1, num + 1, 2):
+        total += totfn(n)
+
+    return total
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (10**1, 19),
+        (10**2, 2007),
+        (10**3, 202661),
+        (10**4, 20263333),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

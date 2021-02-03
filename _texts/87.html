@@ -1,0 +1,62 @@
+<html><head><title>Euler - Problem 87</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=87" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+There were a couple of problems with this one that I needed to overcome. I 
+wrote a good code that ran really fast, yet over and over came up with the 
+same wrong answer. I think realized that it was because I was counting 
+some numbers multiple times. Once I finally figured out the issue, I then 
+came across the need to optimize the process. I was using a list before, 
+but through digging around on the Python site I thought of using sets 
+instead because they have good union, intersection, etc functions. Making 
+that switch worked really well. This script ran in under 4 seconds.
+
+
+CODE:
+
+def isprime(n):
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+primes = []
+n = 1
+while n**2 < 5*10**7:
+	n += 1
+	if isprime(n) == True:
+		primes.append(n)
+
+belowset = set()
+for square in primes:
+	if square**2 > 5*10**7:
+		break
+	for cube in primes:
+		if cube**3 > 5*10**7:
+			break
+		for tesseract in primes:
+			if tesseract**4 > 5*10**7:
+				break
+			below = square**2 + cube**3 + tesseract**4
+			if below < 5*10**7:
+				belowset |= {below}
+				
+print len(belowset)
+
+
+</pre></body></html>

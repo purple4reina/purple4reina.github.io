@@ -1,0 +1,109 @@
+<html><head><title>Euler - Problem 66</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=66" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I'm a little upset about this one. I couldn't actually get this script to 
+work for some reason. And I know why it is. To solve the Diophontine 
+equation, I need the continued fraction of D. But for D=661, the continued 
+fraction is soooo long, I couldn't get the program to recognize when it 
+had repeated itself.
+
+I was able to solve the problem by doing a little research using the 
+website Wolfram MathWorld. This explained to me exactly how the Pell 
+equation worked and linked me to the Sloane series that actually gave me 
+the answer. 
+
+So, what actually upsets me is that I didn't use any programming to get me 
+to the correct answer. I was able to find the solution however using a 
+little internet research and a true understanding of the mathematics 
+behind the problem. It was a +1 for math learning but a -1 for programming 
+learning.
+
+
+CODE:
+
+from math import *
+bound = 1000
+longest = [0,0]
+from decimal import *
+
+def cont_frac(c):
+	global r
+	a = []
+	a.append(floor(Decimal(c)))
+	a.append(floor(1/Decimal(c-Decimal(a[0]))))
+	pre = (1/Decimal(c-Decimal(a[0])))
+	i = 1
+	period = False
+	while period == False:
+		i += 1
+		a.append(floor(1/Decimal(pre-Decimal(a[i-1]))))
+		pre = 1/Decimal(pre - Decimal(a[i-1]))
+		try:
+			if a[-3] == a[0]*2 and map(int, a[-2:]) == map(int, a[1:3]):
+				period = True
+		except:
+			pass
+	leng = len(a)*3
+	r = len(a) - 5
+	while len(a) < leng:
+		i += 1
+		a.append(floor(1/Decimal(pre-Decimal(a[i-1]))))
+		pre = 1/Decimal(pre - Decimal(a[i-1]))
+	return map(int, a)
+
+def p_relation(a):
+	global r
+	if r%2 == 1:
+		ri = r
+	elif r%2 == 0:
+		ri = 2*r + 1
+	p = []
+	p.append(a[0])
+	p.append(a[0]*a[1] + 1)
+	i = 1
+	if i == ri:
+		return a[i]*p[1] + p[0]
+	while True:
+		i += 1
+		if i == ri:
+			return a[i]*p[1] + p[0]
+		else:
+			p.append(a[i]*p[1] + p[0])
+			del p[0]
+
+def square(n):
+	if n**.5%1 == 0:
+		return True
+	else:
+		return False
+
+
+for D in range(bound+1):
+	print D
+	if square(D) == True: continue
+	a = cont_frac(Decimal(D)**Decimal(.5))
+	p = p_relation(a)
+	del a[0:]
+	if p > longest[0]:
+		longest = [p, D]
+
+print longest[1]
+
+
+</pre></body></html>

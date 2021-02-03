@@ -1,0 +1,67 @@
+<html><head><title>Euler - Problem 731</title>
+<p><a href="http://projecteuler.net/problem=731" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+Before I started working on this problem, I wrote the following in my notes:
+
+    I'm excited to work on this problem because I know I will learn something
+    new about continued fractions and whatever these "stoneham numbers" are...
+
+I definitely learned something about continued fractions.  At first I thought I
+would have to find the exact period of each decimal expansion.  This lead me to
+learning about Multiplicative Order.  I still don't totally grok what it is and
+why it can be useful.  I hope that further problems use it more.
+
+My final solution didn't end up using Multiplicative Order at all though.  It
+was mostly by chance that I figured out that `n % t` gives the same value as `n
+% (multiplicative order of t)`.
+
+Update: and now after exploring a bit more, I realize that I don't even need
+the mod in `n % t - 1`.  Simply `n - 1` will suffice.
+
+
+CODE:
+
+def solve(n):
+    t, total = 3, 0
+    while t <= n:
+        m, a = 1, 0
+        mod = n % t - 1
+        if mod > 0:
+            m = pow(10, mod, t)
+        for _ in range(15):
+            d, m = divmod(m * 10, t)
+            a = (a * 10 + d)
+        total += a
+        t *= 3
+    return (total // 10**5) % 10**10
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (10**1, 4444444444),
+        (10**2, 4938271604),
+        (10**3, 8326474622),
+        (10**4, 5863435451),
+        (10**5, 2187843993),
+        (10**6, 9851385196),
+        (10**7, 5158680727),
+        (10**8, 2584642393),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

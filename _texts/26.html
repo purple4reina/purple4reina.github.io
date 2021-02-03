@@ -1,0 +1,135 @@
+<html><head><title>Euler - Problem 26</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=26" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+Ugh. This one is annoying because python can't handle numbers large enough for what I need. All of these numbers 
+are rational, so if you get to enough decimal places, it will repeat. But I haven't been able to get to the number 
+of decimal places that I need yet. I'm trying to do some visual inspections of what pops out to see if that can 
+help too.
+
+I finally got it. But it took a very long time. I took this with the brute force method, which was incredibly 
+inificient. I got to the correct answer eventually, but it took running the script multiple times. I'm going to 
+take a look at the forums to see how other people approached this and see if I can learn something from it.
+
+
+CODE ONE:
+
+import math
+#take a string of form (1, 2, a, b) and make it into one word or number of form 12ab
+def str2num(n):
+	return ''.join(map(str, n))		
+	
+#opposite of the above, take a number and split it into individual digits
+import re
+def num2str(n):
+	return re.split('_', re.sub('\B', '_', str(n)))
+	
+def circle(n): #takes first number, puts it at the end
+	return int(str2num((list(num2str(n)))[1:] + [(list(num2str(n)))[0]]))
+	
+#finding a pattern from a string of integers
+
+def patternlength(m, pull):
+	n = num2str(m)
+	for l in range(len(n), 1, -1):
+		small = []
+		for i in range(len(n)-l+1):
+			small.append(int(str2num(n[i:i+l])))
+		if len(small) == 0: continue
+		small.reverse()
+		for j in small:
+			thisj = j
+			for k in range(l):
+				if thisj == circle(thisj): break
+				thisj = circle(thisj)
+				if thisj not in small: break
+				if k == l-1: print (l, j, pull, m)
+	return ('none', 'none', pull, m)
+
+from decimal import *
+getcontext().prec = 53
+invlist = []
+for x in range(3, 1000):
+	invx = str(Decimal(1) / Decimal(x)).lstrip('0.')
+	invlist.append(patternlength(invx, x))
+
+for y in sorted(invlist):
+	print y
+
+
+CODE FINAL:
+
+import math
+#take a string of form (1, 2, a, b) and make it into one word or number of form 12ab
+def str2num(n):
+	return ''.join(map(str, n))		
+	
+#opposite of the above, take a number and split it into individual digits
+import re
+def num2str(n):
+	return re.split('_', re.sub('\B', '_', str(n)))
+	
+def circle(n): #takes first number, puts it at the end
+	return str2num((list(num2str(n)))[1:] + [(list(num2str(n)))[0]])
+
+#gives x / y with no decimal points
+import math
+def longdivision(x, y):
+	x = float(x)
+	y = float(y)
+	z = []
+	while len(z) < 2000:
+		if (x / y) >= 1:
+			z.append(int(math.floor(x / y)))
+			x = float(x%y)
+		else:
+			x = float(''.join(str(int(x)) + '0'))
+	return str2num(z)
+
+#finding a pattern from a string of integers
+def patternlength(m, pull):
+	n = num2str(m)
+	for l in range(400, len(n)):
+		small = []
+		for i in range(len(n)-l+1):
+			small.append(str2num(n[i:i+l]))
+		if len(small) == 0: continue
+		small.reverse()
+		for j in small[0:5]: #place to cut runtime
+			thisj = j
+			for k in range(l):
+				if thisj == circle(thisj): return ('none', j, pull, m)
+				thisj = circle(thisj)
+				if thisj not in small: break
+				if k == l-1: return (l, j, pull, m)
+	return ('none', 'none', pull, m)
+
+#find the answer
+invlist = []
+testlist = [571, 577, 593, 619, 659, 701, 709, 727, 743, 821, 841, 857, 863, 887, 937, 941, 953, 971, 977, 983]
+for x in testlist:
+	print x
+	invx = longdivision(1, x)
+	thisx = patternlength(invx, x)
+	print thisx
+	invlist.append(thisx)
+	
+print max(invlist)
+
+
+</pre></body></html>

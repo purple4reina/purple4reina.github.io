@@ -1,0 +1,82 @@
+<html><head><title>Euler - Problem 265</title>
+<p><a href="http://projecteuler.net/problem=265" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I got a bit confused about how many times I needed to raise 2 to a power.
+Shifting left this many, then right this many, it got a bit out of control.
+
+As always, I started with a naïve approach that checks each possibility and
+each sub-sequence.  Then I realized that the number of sub-sequences is n, the
+values for each sub-sequence item is between 0 and n-1 inclusive, and therefore
+each value must be present exactly one time.  This allowed me to create a
+recursive approach (I really do love recursion) that ensures that the only
+duplicates created are just twists in the ring.
+
+Program runs in under 200 milliseconds.
+
+
+CODE:
+
+def concat(seq):
+    num = 0
+    for s in seq:
+        num <<= 1
+        num += s & 1
+    return num
+
+def solve(n):
+
+    def minimal_orien(num):
+        num = bin(num)[2:].rjust(1 << n, '0')
+        minim = num
+        for i in range(len(num)):
+            seg = num[i:] + num[:i]
+            minim = min(seg, minim)
+        return int(minim, base=2)
+
+    seq = [0] * (1 << n)
+
+    def rings(i):
+        i -= 1
+        if i == 0:
+            yield concat(seq)
+            return
+        last = seq[i]
+        for k in range(2):
+            num = (last >> 1) + (k << (n - 1))
+            if num in seq[i:] or num == last:
+                continue
+            seq[i-1] = num
+            yield from rings(i)
+
+    total, founds = 0, {}
+    for ring in rings(1 << n):
+        minim = minimal_orien(ring)
+        if minim not in founds:
+            total += minim
+        founds[minim] = True
+    return total
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (3, 52),
+        (4, 51504),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

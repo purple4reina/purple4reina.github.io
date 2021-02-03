@@ -1,0 +1,76 @@
+<html><head><title>Euler - Problem 131</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=131" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+Came across a problem with floating point numbers in this one. The usual 
+way of raising a number to the 1/3rd power returned false for 64 (which is 
+4^3). I had to write a new function that actually tested it correctly.
+
+The second thing that was a super big help was noticing that all the 
+values of n that worked in the primes under 100 were cubes themselves. So, 
+instead of running through every value of n, I just ran through cubic 
+numbers.
+
+Then, I saw that the values of n were always increasing for each larger 
+prime. And what's more, is that each was within between 1 and 20 bigger 
+than the previous (These were for n when I was testing n^3). Pretty cool.
+
+
+CODE:
+
+bound = 10**6
+
+def isprime(n):
+	if n < 2 or n%2 == 0: return False
+	if n == 2: return True
+	for i in range(3, int(n**0.5 + 1), 2):
+		if n%i == 0: return False
+	return True
+
+def iscube(c):
+	n = int(c**(1/3.0)) - 1
+	while 1:
+		if n**3 == c:
+			return True
+		elif n**3 > c:
+			return False
+		else:
+			n += 1
+
+
+primes = []
+for n in range(bound):
+	if isprime(n) == True:
+		primes.append(n)
+
+count = 0
+last = 1
+
+for p in primes:
+	for n in range(last, last+20):
+		c = n**3
+		this = c**3 + p*c**2
+		if iscube(this) == True:
+			count += 1
+			last = n+1
+			break
+
+print count
+
+
+</pre></body></html>

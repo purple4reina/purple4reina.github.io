@@ -1,0 +1,103 @@
+<html><head><title>Euler - Problem 134</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=134" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+The trick I used in this problem to get the runtime to 90sec is the use of a dictionary to 
+store all possible values of any odd number times another odd number, both less than 1000. 
+This told me what possible multipliers I would need for p2. Thus, with each loop, I 
+increased each multiplier by 1000 from the previous round. This cut runtime down 
+incredibly.
+
+
+CODE:
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n < 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+def nextprime(p):
+	if p == 2:
+		return 3
+	else:
+		while True:
+			p += 2
+			if isprime(p) == True:
+				return p
+
+def multfind(p1, p2):
+	if p2 < 1000:
+		return strconcfind(p1, p2)
+	p1_last = int(str(p1)[-3:])
+	p2_last = int(str(p2)[-3:])
+	n_list = []
+	for pair in multDict[p1_last]:
+		if pair[0] == p2_last:
+			n_list.append(pair[1])
+	while True:
+		for n in n_list:
+			test = n * p2
+			if str(test)[-1 * len(p1):] == p1:
+				return test
+			else:
+				n_list = [(n+1000) for n in n_list]
+
+def strconcfind(p1, p2):
+	n = 1
+	while True:
+		test = int(str(n) + p1)
+		if test%p2 == 0:
+			return test
+		else:
+			n += 1
+
+def Build():
+	
+	global primes
+	global multDict
+		
+	multDict = dict(zip(range(1000), [[] for i in range(1000)]))
+	for a in xrange(1, 1000, 2):
+		for b in xrange(1, 1000, 2):
+			multDict[int(str(a*b)[-3:])].append((a,b))
+			
+	primes = []
+	for n in xrange(7, 10**6):
+		if isprime(n) == True:
+			primes.append(n)
+	primes.append(nextprime(primes[-1]))
+	
+
+
+Build()
+p1 = '5'
+total = 0
+for p2 in primes:
+	print p2
+	S = multfind(p1, p2)
+	total += S
+	p1 = str(p2)
+
+print total
+
+</pre></body></html>

@@ -1,0 +1,450 @@
+<html><head><title>Euler - Problem 60</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=60" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+This problem took me all day to complete! I tried 6 different methods, 
+then ended up coming back to an earlier one. I've included all the scripts 
+in order below.
+
+I couldn't figure out which method would be fastest to get all 5 numbers 
+that could be combined with each other to still be primes. I tried doing 
+it in groups of two. Then I did a group of two and a group of three. I 
+also tried making groups of two, then combining those groups of twos into 
+groups of fours, then adding a single to the end. None of those were as 
+fast as just adding one prime at a time to the list until five were found.
+
+
+TRY ONE:
+
+CODE:
+
+from itertools import *
+bound = 1000
+
+def glue(n):
+	return ''.join(map(str, n))
+
+def isprime(n):
+	n = int(n)
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def isdifferent(list):
+	for n in permutations(list, 2):
+		if n[0] == n[1]: return False
+	return True
+
+primes = []
+for n in range(3, bound):
+	if isprime(n) == True: primes.append(n)
+
+def theanswer():
+	i = 0
+	for numberlist in combinations(primes, 5):
+		if i%100000 == 0: print numberlist
+		i += 1
+		answer = True
+		for x in permutations(numberlist, 2):
+			if isprime(int(glue(x))) == False:
+				answer = False
+				break
+		if answer == True:
+			return numberlist, sum(numberlist)
+
+print theanswer()
+
+
+TRY TWO:
+
+CODE:
+
+from itertools import *
+bound = 1000
+
+def glue(n):
+	return ''.join(map(str, n))
+
+def isprime(n):
+	n = int(n)
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def isdifferent(list):
+	for n in permutations(list, 2):
+		if n[0] == n[1]: return False
+	return True
+
+primes = []
+for n in range(3, bound):
+	if isprime(n) == True: primes.append(n)
+
+def theanswer():
+	twos = []
+	threes = []
+	answers = []
+	for a in primes:
+		for b in primes:
+			if isprime(int(glue([a, b]))) == True and isprime(int(glue([b, a]))) == True:
+				twos.append([a, b])
+	for a in primes:
+		for b in primes:
+			for c in primes:
+				answer = True
+				for test in permutations([a, b, c], 2):
+					if isprime(int(glue(test))) == False: 
+						answer = False
+						break
+				if answer == True: 
+					threes.append([a, b, c])
+	for two in twos:
+		for three in threes:
+			five = two + three
+			answer = True
+			for test in permutations(five, 2):
+				if isprime(int(glue(test))) == False:
+					answer = False
+					break
+			if answer == True:
+				answers.append(five); print five
+	return answers	
+
+print theanswer()
+
+
+TRY THREE:
+
+CODE:
+
+from itertools import *
+bound = 10000
+
+def glue(n):
+	return ''.join(map(str, n))
+
+def isprime(n):
+	n = int(n)
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def makeprimes(bound):
+	p = []
+	for n in range(3, bound):
+		if isprime(n) == True: p.append(n)
+	return p
+
+def flipprime(n):
+	for test in permutations(n, 2):
+		if isprime(int(glue(test))) == False: return False
+	return True
+
+
+def theanswer():
+	answers = []
+	primes = makeprimes(bound)
+	
+	for a in primes:
+		print [a]
+		for b in primes:
+			if b <= a: continue
+			if flipprime([a, b]) == True:
+				for c in primes:
+					if c <= b: continue
+					if flipprime([a, b, c]) == True:
+						for d in primes:
+							if d <= c: continue
+							if flipprime([a, b, c, d]) == True:
+								for e in primes:
+									if e <= d: continue
+									if flipprime([a, b, c, d, e]) == True:
+										answers.append([a, b, c, d, e])
+										print [a, b, c, d, e]
+	return answers
+
+print theanswer()
+
+
+TRY FOUR:
+
+CODE:
+
+from itertools import *
+lower = 5000
+bound = 10000
+
+def glue(n):
+	return ''.join(map(str, n))
+
+def isprime(n):
+	n = int(n)
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def isdifferent(list):
+	for n in permutations(list, 2):
+		if n[0] == n[1]: return False
+	return True
+
+def primelist(start, finish):
+	primes = []
+	for n in range(start, finish):
+		if isprime(n) == True: primes.append(n)
+	return primes
+
+def flipprimelist(n, primes):
+	for test in permutations(n, 2):
+		if int(glue(test)) not in primes: return False
+	return True
+
+def flipprimeloop(n):
+	for test in permutations(n, 2):
+		if isprime(int(glue(test))) == False: return False
+	return True
+
+def mixup(element, listt):
+	for mix in permutations(element, len(element)):
+		if mix in listt: return True
+	return False
+
+
+def theanswer():
+	answers = []
+	twos = []
+	fours = []
+	primes = primelist(lower, bound)
+	
+	print 'primes compiled', len(primes)
+	
+	for two in combinations(primes, 2):
+		if flipprimeloop(two) == True:
+			twos.append(two)
+			print two
+	
+	print 'twos compiled', len(twos)
+	
+	for four in combinations(twos, 2):
+		four = four[0] + four[1]
+		if flipprimeloop(four) == True and mixup(four, fours) == False:
+			fours.append(four)
+			print four
+			for one in primes:
+				five = list(four) + [one]
+				if flipprimeloop(five) == True:
+					answers.append([five, sum(five)])
+					print five, sum(five)
+	
+	return answers
+
+print theanswer()
+
+
+TRY FIVE:
+
+CODE:
+
+from itertools import *
+lower = 3
+bound = 2000
+
+def glue(n):
+	return ''.join(map(str, n))
+
+def isprime(n):
+	n = int(n)
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def isdifferent(list):
+	for n in permutations(list, 2):
+		if n[0] == n[1]: return False
+	return True
+
+def primelist(start, finish):
+	primes = []
+	for n in range(start, finish):
+		if isprime(n) == True: primes.append(n)
+	return primes
+
+def flipprimelist(n, primes):
+	for test in permutations(n, 2):
+		if int(glue(test)) not in primes: return False
+	return True
+
+def flipprimeloop(n):
+	for test in permutations(n, 2):
+		if isprime(int(glue(test))) == False: return False
+	return True
+
+def mixup(element, listt):
+	for mix in permutations(element, len(element)):
+		if mix in listt: return True
+	return False
+
+
+def theanswer():
+	answers = []
+	twos = []
+	threes = []
+	fours = []
+	primes = primelist(lower, bound)
+	
+	print 'primes compiled', len(primes)
+	
+	for two in combinations(primes, 2):
+		if flipprimeloop(two) == True:
+			twos.append(list(two))
+	
+	print 'twos compiled', len(twos)
+	
+	for two in twos:
+		for one in primes:
+			if one in two: continue
+			three = two + [one]
+			if flipprimeloop(three) == True:
+				threes.append(three)
+	
+	print 'threes compiled', len(threes)
+	
+	for two in twos:
+		for three in threes:
+			five = two + three
+			#print five
+			if flipprimeloop(five) == True:
+				answers.append([five, sum(five)])
+				print five, sum(five), '<-------------------------------'
+	
+	return answers
+
+print theanswer()
+
+
+TRY SIX:
+
+CODE:
+
+from itertools import *
+lower = 3
+bound = 1000
+
+def glue(n):
+	return ''.join(map(str, n))
+
+def isprime(n):
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def primelist(start, finish):
+	p = []
+	for n in range(start, finish):
+		if isprime(n) == True: p.append(n)
+	return p
+
+def flipprime(n):
+	for test in permutations(n, 2):
+		if isprime(int(glue(test))) == False: return False
+	return True
+
+def mixup(element, listt):
+	for mix in permutations(element, len(element)):
+		if mix in listt: return True
+	return False
+
+
+def theanswer():
+	answers = []
+	primes = primelist(lower, bound)
+	
+	print 'primes compiled', len(primes)
+	
+	for five in combinations(primes, 5):
+		print five
+		if flipprime(five) == True:
+			answers.append(list(five))
+			print five, sum(five)
+	
+	return answers
+
+print theanswer()
+
+
+TRY SEVEN:
+
+CODE:
+
+from itertools import *
+bound = 10000
+
+def glue(n):
+	return ''.join(map(str, n))
+
+def isprime(n):
+	n = int(n)
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def makeprimes(bound):
+	p = []
+	for n in range(3, bound):
+		if isprime(n) == True: p.append(n)
+	return p
+
+def flipprime(n):
+	for test in permutations(n, 2):
+		if isprime(int(glue(test))) == False: return False
+	return True
+
+
+def theanswer():
+	answers = []
+	primes = makeprimes(bound)
+	
+	for a in primes:
+		print [a]
+		for b in primes:
+			if b <= a: continue
+			if flipprime([a, b]) == True:
+				for c in primes:
+					if c <= b: continue
+					if flipprime([a, b, c]) == True:
+						for d in primes:
+							if d <= c: continue
+							if flipprime([a, b, c, d]) == True:
+								for e in primes:
+									if e <= d: continue
+									if flipprime([a, b, c, d, e]) == True:
+										answers.append([a, b, c, d, e])
+										print [a, b, c, d, e]
+	return answers
+
+print theanswer()
+
+
+</pre></body></html>

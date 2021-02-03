@@ -1,0 +1,56 @@
+<html>
+
+<head>
+<title>Euler - Problem 2</title>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=2" target="_blank">View Problem</a></p>
+<pre>
+
+
+
+
+set bound to 4000000
+set the_list to {{1, 1}, {2, 2}} -- {item, value}
+set the_sum to 0
+
+
+repeat with i from 3 to 4000000
+	
+	if ((item 2 of item (i - 2) of the_list) + (item 2 of item (i - 1) of the_list)) <= 4000000 then
+		set the_list to the_list & {{i, (item 2 of item (i - 2) of the_list) + (item 2 of item (i - 1) of the_list)}}
+	else
+		exit repeat
+	end if
+	
+end repeat
+
+repeat with j from 1 to (count the_list)
+	
+	if ((j * 3) - 1) > (count the_list) then exit repeat
+	set the_sum to the_sum + (item 2 of item ((j * 3) - 1) of the_list)
+	
+end repeat
+
+return the_sum
+</pre>
+</body>
+</html>

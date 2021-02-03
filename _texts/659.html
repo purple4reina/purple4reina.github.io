@@ -1,0 +1,114 @@
+<html><head><title>Euler - Problem 659</title>
+<p><a href="http://projecteuler.net/problem=659" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I wasn't able to get this problem to run in under a couple hours.  I think the
+problem is neeeding to search through so many primes in order to get the
+largest prime factor of the form `p = 4*k + 1`.  I was hoping that Python
+slices would do the trick so I didn't have to start at the very beginning of
+the primes list with every call to factor.  But, ends up that Python will make
+a copy of the list when creating the slice.  That's really annoying because I
+know that Go will just point the slice to the same underlying array as the
+original.  I didn't feel like rewriting the whole thing in Go though.  I tried
+many things to try to get the time down, but nothing seemed to work.  This form
+with the recursion was the fastest I could devise.
+
+The problem itself was pretty interesting and I found myself getting crosseyed
+trying to make sense of all the crazy patterns and interconnections I was
+discovering.  First off, I quickly figured that for the equation `q*p = n**2 +
+k**2` where q, n, and k are integers and p a prime, `p = 2*n + 1` and n must be
+even.  This lead me to the sequence of Pythagorean primes
+https://oeis.org/A002144.
+
+I next printed out the values of q, p, n, and k for the values of P(k) for k
+less than 100.  Here is where I found an interesting pattern!  For some reason
+that I was unable to prove, p always evenly divided `4 * k**2 + 1`.  I think
+used this fact to just run through all primes of the form `4*x + 1` and pick
+the largest that divides `4 * k**2 + 1`.
+
+
+CODE:
+
+_factor = {1: 0}
+def factor(n):
+    if n in _factor:
+        return _factor[n]
+    n_root = int(n ** 0.5) + 1
+    for p in primes:
+        if n % p == 0:
+            fact = max(p, factor(n // p))
+            break
+        if p > n_root:
+            fact = n
+            break
+    else:
+        raise AssertionError('cannot factor %d' % n)
+    _factor[n] = fact
+    return fact
+
+modulo = 10 ** 18
+maxi = 10 ** 8
+sieve = [False, False] + [True] * (maxi - 1)
+primes = []
+for p, is_prime in enumerate(sieve):
+    if not is_prime:
+        continue
+    if (p - 1) % 4 == 0:
+        primes.append(p)
+    _factor[p] = p
+    num = p + p
+    while num <= maxi:
+        sieve[num] = False
+        num += p
+
+def solve(top):
+    total = 0
+    for k in range(1, top + 1):
+        total += factor(4 * k ** 2 + 1)
+    return total % modulo
+
+if __name__ == '__main__':
+    import sys, time
+    n = eval(sys.argv[1])
+    st = time.time()
+    s = solve(n)
+    en = time.time()
+    print(s, en - st)
+
+
+TESTS:
+
+import pytest
+from problem import solve
+
+_test_solve = (
+        (1, 5),
+        (2, 22),
+        (3, 59),
+        (4, 72),
+        (5, 173),
+        (6, 202),
+        (7, 399),
+        (8, 656),
+        (9, 669),
+        (10, 1070),
+        (11, 1167),
+        (12, 1744),
+        (13, 2421),
+        (14, 2578),
+        (15, 2631),
+        (16, 2672),
+        (17, 2761),
+        (18, 4058),
+        (19, 4075),
+        (20, 5676),
+        (100000, 178688812032788),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_P(n, expect):
+    assert expect == solve(n)
+
+</pre></body></html>

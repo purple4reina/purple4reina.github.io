@@ -1,0 +1,60 @@
+<html><head><title>Euler - Problem 187</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></head><body><p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=187" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+Once the list of primes was compiled, this script took under a second to 
+run. I'd like to create a new function that pops out a list of primes for 
+me so I don't have to spend 30 minutes compiling primes lists again.
+
+
+CODE:
+
+def isprime(n):
+	if n < 2 or n%2 == 0: return False
+	if n == 2: return True
+	for i in range(3, int(n**0.5 + 1), 2):
+		if n%i == 0: return False
+	return True
+
+primes = [2]
+n = 1
+while True:
+	n += 2
+	if (n-1)%10**6 == 0: print (n-1)/10**6
+	if isprime(n) == True:
+		primes.append(n)
+	if n >= 10**8/2 + 10**4:
+		break
+
+count = 0	
+while len(primes) > 0:
+	this_a = primes[0]
+	if this_a**2 > 10**8: break
+	print this_a
+	for b in range(len(primes)):
+		this = this_a*primes[b]
+		if this < 10**8:
+			count += 1
+		elif this > 10**8:
+			del primes[0]
+			del primes[b+1:]
+			break
+
+print count
+
+</pre></body></html>

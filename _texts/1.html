@@ -1,0 +1,60 @@
+---
+layout: poem
+completed: 11.28.2011
+---
+
+<html>
+
+<head>
+<title>Euler - Problem 1</title>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=1" target="_blank">View Problem</a></p>
+<pre>
+
+
+set a to 3
+set b to 5
+set bound to 1000
+set the_list to {}
+set the_sum to 0
+
+
+repeat with i from 1 to 1000
+	
+	set this_a to a * i
+	set this_b to b * i
+	
+	if this_a < bound then set the_sum to (the_sum + this_a)
+	if this_b < bound then set the_sum to (the_sum + this_b)
+	
+	set this_ab to a * b * i
+	
+	if this_ab < bound then set the_sum to (the_sum - this_ab)
+	
+	
+end repeat
+
+return the_sum
+
+</pre>
+</body>
+</html>

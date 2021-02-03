@@ -1,0 +1,55 @@
+<html><head><title>Euler - Problem 709</title>
+<p><a href="http://projecteuler.net/problem=709" target="_blank">View Problem</a></p>
+<pre>
+
+COMMENTS:
+
+I started by creating a brute force problem along with tests.  Of course this
+was going to be too slow.  I tried a couple of things to try to speed it up,
+but all were too minute.  I then started to look for patterns in the output.
+I printed the number possibilities for the number of bags in the cupboard after
+each one is added.  There were a couple of patterns I noticed, but the most
+important is that the odd numbered rows start with a value that is the sum of
+the previous row.  Since I was looking for the sum of a row, this was the
+solution I was looking for.  It is important that the number of bags he puts
+into the closet is even.
+
+I then went to search OEIS for this sequence and learned about Euler Numbers.
+There's lots of sequences based off them.  I grabbed a generating function from
+there and got the answer in under 4 seconds.
+
+I do feel strange that I grabbed some code off OEIS for this.  Does that count
+as me solving the problem?  Do I get points for searching and coming across the
+right number sequence?  I think in the future I will try to understand the
+problem a bit better and be able to come up with my own generating function.
+
+
+CODE:
+
+modulo = 1020202009
+
+
+def solve(n):
+    num = 0
+    A = {-1: 0, 0: 1}
+    k = 0
+    e = 1
+    for i in range(0, n+1):
+        Am = 0
+        A[k + e] = 0
+        e = -e
+        for j in range(0, i+1):
+            Am += A[k]
+            A[k] = Am % modulo
+            k += e
+        if e < 0:
+            num = A[-i//2]
+    return num % modulo
+
+
+if __name__ == '__main__':
+    import sys
+    n = int(sys.argv[1])
+    print(solve(n))
+
+</pre></body></html>

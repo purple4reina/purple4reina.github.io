@@ -1,0 +1,148 @@
+<html>
+
+<head>
+<title>Euler - Problem 361</title>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16960753-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<p><a href="../index.html">Back</a></p>
+<p><a href="http://projecteuler.net/problem=361" target="_blank">View Problem</a></p>
+<pre>
+
+TRY ONE:
+
+COMMENTS:
+
+This is a great problem! It is really all about finding patterns. I've got an initial code prepared. But I realize now that it would take 
+years and years and years to complete the process. The issue is finding all the elements of An. If I go through all the integers one by one 
+as this code does, it will take forever. I now realize I must go about it differently. I'll change the code so that instead of finding the 
+integers themselves within the 0's and 1's, I'll use the 0's and 1's themselves to derive each of the integers that are found. This should 
+be a much faster process. At least I hope!
+
+
+CODE:
+
+from time import time
+start_time= time()
+print """Process started
+----------"""
+
+
+#Step 1: Create {Tn}
+
+t = [0]
+for n in range(100000000):
+	print n
+	t[2*n:] = [t[n]]
+	t[(2*n + 1):] = [1 - t[n]]
+t = ''.join(map(str, t))
+print t
+
+
+#Step 2: Create {An}
+
+a = []
+j = 0
+while len(a) < (10**18 +1):
+	print j
+	i = bin(j).lstrip('0b')
+	if t.find(i) != -1:
+		a.append(j)
+	j = j+1
+print a
+
+
+#Step 3: Do the sigma
+
+sigma = 0
+for k in range(1, 19):
+	sigma = sigma + a[10**k]
+	
+print sigma
+		
+
+end_time= time()
+elapse_time= end_time - start_time
+print '----------'
+print elapse_time, 'seconds have passed'
+
+
+TRY TWO:
+
+COMMENTS:
+
+This was a valient effort. I think I'm getting closer. I'm starting to learn the details of this sequence. Next step I think is to create a 
+derivation formula that makes all the elements of An.
+
+
+CODE:
+
+from time import time
+start_time= time()
+print """Process started
+----------"""
+
+
+#Step 1: Create {Tn}
+
+t = [0]
+for n in range(10**6):
+	print n
+	t[2*n:] = [t[n]]
+	t[(2*n + 1):] = [1 - t[n]]
+t = ''.join(map(str, t))
+
+
+#Step 2: Create {An}
+
+a = [0]
+for l in range(1, 10**4):
+	if len(a) > (10**5):
+		break
+	for i in range(1, len(t) - l):
+		itest = int(str(t[i:(i+l)]), 2)
+		print l, i, len(a)
+		if (a.count(itest) == 0):
+			a.append(itest)
+		elif a.count(itest) > 0:
+			break
+
+
+a = sorted(a)
+print len(a)
+
+
+#Step 3: Do the sigma
+
+#sigma = 0
+#for k in range(1, 19):
+#	sigma = sigma + a[10**k]
+	
+#print sigma
+		
+
+end_time= time()
+elapse_time= end_time - start_time
+print '----------'
+print elapse_time, 'seconds have passed'
+
+
+</pre>
+</body>
+</html>
