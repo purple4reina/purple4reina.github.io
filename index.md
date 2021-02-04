@@ -6,6 +6,8 @@ layout: poem
 
 ## Problems
 
-{% for text in site.texts %}
-[Problem {{ text.title }}]({{ site.baseurl }}{{ text.url }})&nbsp;&nbsp;&nbsp;&nbsp;completed {{ text.completed }}
+{% for num in (1..750) %}
+{% assign title = "" | append: num %}
+{% assign text = site.texts | where: "title", title | first %}
+[Problem {{ title }}]({{ site.baseurl }}{{ text.url }}){% if text != nil %}&nbsp;&nbsp;&nbsp;&nbsp;completed {{ text.completed }}{% endif %}
 {% endfor %}
