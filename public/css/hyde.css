@@ -257,9 +257,12 @@ a.sidebar-nav-item:focus {
 
 /* Purple */
 .theme-base-1a .sidebar {
-  background-color: #7253ed;
+  background-color: #6b368f;
 }
 .theme-base-1a .content a,
 .theme-base-1a .related-posts li a:hover {
-  color: #7253ed;
+  color: #6b368f;
+}
+.theme-base-1a pre {
+  background-color: #fdfaff;
 }
