@@ -265,6 +265,7 @@ a.sidebar-nav-item:focus {
 }
 .theme-base-1a pre {
   background-color: #fdfaff;
+  tab-size: 4;
 }
 @media (min-width: 58em) {
   .theme-base-1a .content {
