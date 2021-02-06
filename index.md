@@ -15,5 +15,5 @@ looking for an easy answer.
 {% for num in (1..750) %}
 {% assign title = "" | append: num %}
 {% assign problem = site.problems | where: "title", title | first %}
-[Problem {{ title }}]({{ site.baseurl }}{{ problem.url }}){% if problem != nil %}&nbsp;&nbsp;&nbsp;&nbsp;completed {{ problem.completed }}{% endif %}
+[Problem {{ title }}]({{ site.url }}{{ site.baseurl }}{{ problem.url }}){% if problem != nil %}&nbsp;&nbsp;&nbsp;&nbsp;completed {{ problem.completed }}{% endif %}
 {% endfor %}
