@@ -266,3 +266,11 @@ a.sidebar-nav-item:focus {
 .theme-base-1a pre {
   background-color: #fdfaff;
 }
+@media (min-width: 58em) {
+  .theme-base-1a .content {
+    max-width: 41rem;
+  }
+}
+.theme-base-1a .force-fit {
+  font-size: .63vw;
+}
