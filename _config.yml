@@ -40,5 +40,6 @@ exclude:
   - _texts/new.md
 
 collections:
-  texts:
+  problems:
     output: true
+    permalink: /:collection/:title
