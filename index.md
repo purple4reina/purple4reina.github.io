@@ -2,6 +2,12 @@
 layout: poem
 ---
 
+This project began on Monday November 28, 2011. I am posting here my progress
+as I complete each problem. I will not include any answers nor will I say what
+website I am getting these problems from. I intend for this to be a repository
+for what I've learned from this experience and not a searchable site for those
+looking for an easy answer.
+
 ----------
 
 ## Problems
