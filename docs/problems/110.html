@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      110 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">110</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This was a more difficult version of <a href="108">problem 108</a>. But instead of just
+running through numbers one by one, I knew I had to be more strategic. I knew
+the number had to be the product of a lot of smaller primes.  So I set up an
+algorithm to dig through all powers on all primes less than 50.  That worked
+great.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+from time import time
+start = time()
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n &lt; 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+def nextprime(p):
+	if p == 2:
+		return 3
+	else:
+		while True:
+			p += 2
+			if isprime(p) == True:
+				return p
+
+def powerlist(n):
+	ans = []
+	p = 2
+	while n &gt; 1:
+		i = 1
+	 	while n%(p**i) == 0:
+			i += 1
+		if i &gt; 1:
+			n /= p**(i-1)
+			ans.append(i-1)
+		p = nextprime(p)
+	return ans
+
+
+primes = []
+for n in range(50):
+	if isprime(n) == True:
+		primes.append(n)
+
+tlast = 0
+nlast = 63892555340714100
+for t in product(range(4), repeat=15):
+	if t[6] != tlast:
+		tlast = t[6]
+		print t
+	n = 1
+	for i in range(15):
+		n *= primes[-1-i]**t[i]
+	alist = powerlist(n)
+	ans = 1
+	for a in alist:
+		ans *= (1 + 2*a)
+	ans = (ans + 1)/2
+
+	if ans &gt; 4*10**6 and n &lt; nlast:
+		nlast = n
+		print n
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

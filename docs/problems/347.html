@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      347 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">347</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I ended up working so hard trying to get my benchmark time down that I ended up
+solving the problem in under 2 seconds without even knowing it!</p>
+
+<p>This problem was easier since I had recently completed one that re-reminded me
+of the Sieve of Eratosthenes.  I thought about it here too and it worked out
+really well in just counting the number of prime divisors.  I think the code is
+a bit hard to read though so if this wasn’t just a one off program, I’d
+probably try to clean it up a bit and make it more readable.  It was fun though
+trying to micro optimize it all though.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-go">package main
+
+import (
+	"fmt"
+)
+
+func sieve(max int) [][3]int {
+	sieve := make([][3]int, max+1)
+	for i := 2; i &lt;= max; i++ {
+		if sieve[i][0] &gt; 0 {
+			continue
+		}
+		for j := i; j &lt;= max; j += i {
+			if sieve[j][0] == 0 {
+				sieve[j][0] = i
+			} else if sieve[j][1] == 0 {
+				sieve[j][1] = i
+			} else {
+				sieve[j][2] = i
+			}
+		}
+	}
+	return sieve
+}
+
+func S(N int) int {
+	divs := sieve(N)
+	dist := make(map[[3]int]int)
+	for num := 6; num &lt;= N; num++ {
+		a := divs[num][0]
+		b := divs[num][1]
+		c := divs[num][2]
+		if a == 0 || b == 0 || c != 0 {
+			continue
+		}
+		dist[divs[num]] = num
+	}
+	var total int
+	for _, val := range dist {
+		total += val
+	}
+	return total
+}
+
+func main() {
+	answer := S(10000000)
+	fmt.Printf("answer: %#v\n", answer)
+}
+</code></pre>
+
+<h2 id="tests-and-benchmarks">Tests and Benchmarks</h2>
+
+<pre><code class="language-go">package main
+
+import (
+	"testing"
+)
+
+func TestS(t *testing.T) {
+	if act := S(100); act != 2262 {
+		t.Error("Incorrect value for S(100):", act)
+	}
+}
+
+var result int
+
+func BenchmarkS(b *testing.B) {
+	var a int
+	for n := 0; n &lt; b.N; n++ {
+		a = S(100)
+	}
+	result = a
+}
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

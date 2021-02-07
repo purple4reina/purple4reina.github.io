@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      197 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">197</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I implemented the brute force solution, then realized that the solutions become
+cyclical starting at n = 516.  Since the cycle length is just 2, all I needed
+to do was return the sum of those two numbers.</p>
+
+<p>Use of the decimal module isn’t necessary.  I initially used it to ensure that
+I was getting accurate values.  However for the final answer, the only reason
+why I kept returning a decimal.Decimal was to make sure the tests pass.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">import decimal
+
+c = decimal.Decimal('30.403243784')
+e = decimal.Decimal('1e-9')
+
+def memoize(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+@memoize
+def f(n):
+    return int(2**(c-n**2)) * e
+
+@memoize
+def u(n):
+    if n == 0:
+        return -1
+    return f(u(n-1))
+
+def solve(n):
+    if n &gt; 515:
+        return decimal.Decimal('1.029461839') + decimal.Decimal('0.681175878')
+    return u(n) + u(n+1)
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest, decimal
+from problem import solve
+
+_test_solve = (
+        (10**0, decimal.Decimal('1.711242148')),
+        (10**1, decimal.Decimal('1.710098289')),
+        (10**2, decimal.Decimal('1.710575329')),
+        (10**3, decimal.Decimal('1.710637717')),
+        (10**4, decimal.Decimal('1.710637717')),
+        (10**5, decimal.Decimal('1.710637717')),
+        (10**6, decimal.Decimal('1.710637717')),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

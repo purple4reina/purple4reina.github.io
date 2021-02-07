@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      69 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">69</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>It took me several tries to come up with the most efficient way to get Euler’s
+totient of a number. Ends up the fastest one was the one that took the fewest
+number of times through a for loop. The final code along with the two previous
+tries are below.</p>
+
+<h2 id="resources">Resources</h2>
+
+<p>I used wikipedia to find several different algorithms for calculating Euler’s
+totient.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def isprime(n):
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+primes = []
+for n in range(10**6):
+	if isprime(n) == True:
+		primes.append(n)
+
+def phi(n):
+	pfact = []
+	answer = float(n)
+	if isprime(n) == True: pfact.append(n)
+	for p in primes:
+		if p &gt; (n**.5 + 1):
+			for f in pfact:
+				answer = answer * (1 - (1/float(f)))
+			return answer
+		elif n%p == 0:
+			pfact.append(p)
+
+phis = [[0]]
+for n in range(1, 10**6 +1):
+	phis.append([float(n/phi(n)), n])
+
+print max(phis)
+</code></pre>
+
+<h2 id="try-one">Try One</h2>
+
+<pre><code class="language-python">def phi(n):
+	if n == 1: return 1
+	count = 0
+	for k in range(1, n):
+		for i in range(2, k+1):
+			if (k%i == 0) and (n%i == 0):
+				break
+		else:
+			count += 1
+	return count
+
+maximum = [0, 0]
+for n in range(1, 10**6 + 1):
+	if n%1000 == 0: print n
+	if float(n / phi(n)) &gt; maximum[0]:
+		maximum = [float(n / phi(n)), n]
+	
+print maximum
+</code></pre>
+
+<h2 id="try-two">Try Two</h2>
+
+<pre><code class="language-python">def gcd(n, k):
+	if n%k == 0: return k
+	else: return gcd(k, n%k)
+
+def phi(n):
+	count = 0
+	for k in range(1, n+1):
+		if gcd(n, k) == 1:
+			count += 1
+	return count
+
+phis = [[0]]
+for n in range(10**6, 1, -1):
+	print n, max(phis)
+	phis.append([float(n/phi(n)), n])
+	
+print max(phis)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

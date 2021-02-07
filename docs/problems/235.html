@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      235 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">235</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I’m sure there’s got to be a way to either reduce this big sum or actually
+calculate the answer in some way.  But I don’t know how to do it.  So, I used
+binary search instead.  Requires the decimal modulo because the numbers are too
+precise for floating point arithmetic.  Runs in about 9 seconds on Pypy3.</p>
+
+<h2 id="update">Update</h2>
+
+<p>After reading through the forum posts once I finished the problem, I realized
+that I can vastly improve the performance of this code.  The slowest part is
+taking the large powers of <code>r**(k-1)</code>.  This can be avoided by storing the
+r-power in a variable, and just multiplying this by <code>r</code> for each loop.  Takes
+the time down to about 700 ms.</p>
+
+<pre><code class="language-python">r_k = 1
+for k in range(1, n + 1):
+    total += (900 - 3*k) * r_k
+    r_k *= r
+</code></pre>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">import decimal
+decimal.getcontext().prec = 15
+
+def s(n, r):
+    if r == 0:
+        return n
+    total = 0
+    for k in range(1, n + 1):
+        total += (900 - 3*k) * r**(k-1)
+    return total
+
+def solve(n, a):
+    top, bottom = 10, -10
+    last = 0
+    while True:
+        r = decimal.Decimal((top + bottom) / 2)
+        num = s(n, r)
+        if num == last:
+            return round(r, 12)
+        if num &gt; a:
+            bottom = r
+        else:
+            top = r
+        last = num
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    m = eval(sys.argv[2])
+    print(solve(n, m))
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

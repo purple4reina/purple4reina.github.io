@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      710 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">710</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>At first I thought this problem was an algorithms problem.  I spent several
+days perfecting an algorithm to create all the palendromic compositions of
+numbers that contained a 2.  But I realized that even if I made the world’s
+best algorithm, it still wouldn’t be fast enough because of the sheer number of
+compositions that I needed to sift through and count.</p>
+
+<p>So I took a step back and thought about the issue from a combinatorics lens.  I
+did a lot of reading and poking on the internet and discovered the “stars and
+bars” method.  This was a real breakthrough.  I was then able to very easily
+calculate the total number of compositions of a number that are palendromic.</p>
+
+<p>From there I searched for a way to find either compositions that included a 2
+or compositions that excluded 2s.  In playing around on oeis.org I found
+https://oeis.org/A005251 which was the exact sequence I needed!  I grabbed the
+generating function and that lead me to the solution.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">modulo = 1000000
+
+def solve(to=float('inf')):
+    last_no_2 = n = 0
+    while n &lt; to:
+        n += 1
+        total = 1 &lt;&lt; n // 2
+
+        if n % 2 == 0:
+            last_no_2 += no_2(n // 2)
+            total += no_2((n - 2) // 2)
+        total -= last_no_2 + 1
+
+        if total % modulo == 0 and total &gt; modulo:
+            break
+
+    return n, total
+
+_perms = {}
+def no_2(n):
+    if n in _perms:
+        return _perms[n]
+    elif n &lt; 0:
+        return 0
+    elif n &lt; 3:
+        return 1
+    p = no_2(n - 1) + no_2(n - 2) + no_2(n - 4)
+    _perms[n] = p
+    return p
+
+if __name__ == '__main__':
+    import sys
+    n = float(sys.argv[1])
+    a, _ = solve(n)
+    print(a)
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+
+from problem import solve
+
+_t_tests = (
+    (1, 0),
+    (2, 1),
+    (3, 0),
+    (4, 2),
+    (5, 1),
+    (6, 4),
+    (7, 3),
+    (8, 9),
+    (9, 7),
+    (10, 20),
+    (11, 16),
+    (12, 43),
+    (13, 36),
+    (14, 91),
+    (15, 79),
+    (16, 191),
+    (17, 170),
+    (18, 398),
+    (19, 361),
+    (20, 824),
+    (21, 759),
+    (22, 1697),
+    (23, 1583),
+    (24, 3480),
+    (25, 3280),
+    (26, 7111),
+    (27, 6760),
+    (28, 14487),
+    (29, 13871),
+    (30, 29439),
+    (42, 1999923),
+    (45, 3968274),
+    (50, 32632321),
+    (55, 130455888),
+    (60, 1058395038),
+    (70, 34104320267),
+    (80, 1095260678664),
+    (90, 35113623115748),
+    (100, 1124722424576767),
+)
+
+@pytest.mark.parametrize('to,expect', _t_tests)
+def test_solve(to, expect):
+    n, actual = solve(to)
+    assert n == to
+    assert expect == actual
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

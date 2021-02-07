@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      125 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">125</h1>
+  <h2 id="resources">Resources</h2>
+
+<p>I used wikipedia to find the formula for a pyramidal number. This is the same
+thing as finding the sum of squares of integers from 1 to n.</p>
+
+<h2 id="comments">Comments</h2>
+
+<p>Finding that formula on wikipedia is what made this problem so easy and run so
+fast. Instead of having to test every single number below 10^8, I was able to
+quickly produce all the values. Then I tested that they were palindromic.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def pal(n):
+	n = str(n)
+	for i in range(int(len(n)/2)):
+		if n[i] != n[-1-i]:
+			return False
+	return True
+
+def pyr(n):
+	return (2*n**3 + 3*n**2 + n)/6
+
+used = set()
+bound = 10**8
+bigger = 1
+total = 0
+
+while bigger &lt;= bound**.5:
+	bigger += 1
+	if bigger%100 == 0: print bigger
+	for smaller in range(bigger-1):
+		this = pyr(bigger)-pyr(smaller)
+		if this &lt; bound and pal(pyr(bigger)-pyr(smaller)) == True and this not in used:
+			total += this
+			used.add(this)
+
+print total
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      203 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">203</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This one was pretty easy. I took some definition snippets from a previous
+script. I wrote the nCk function, though I bet Python already has it.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from math import factorial
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n &lt; 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+def nextprime(p):
+	if p == 2:
+		return 3
+	else:
+		while True:
+			p += 2
+			if isprime(p) == True:
+				return p
+
+def squarefree(n):
+	p = 2
+	while n &gt; 1:
+		i = 1
+	 	while n%(p**i) == 0:
+			i += 1
+		if i == 2:
+			n /= p**(i-1)
+		elif i &gt; 2:
+			return False
+		p = nextprime(p)
+	return True
+
+def C(n, k):
+	return (factorial(n)/(factorial(k)*factorial(n-k)))
+
+
+total = 0
+tested = set()
+for n in xrange(51):
+	for k in xrange(n+1):
+		this = C(n, k)
+		if this not in tested:
+			tested.add(this)
+			if squarefree(this) == True:
+				total += this
+
+print total
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

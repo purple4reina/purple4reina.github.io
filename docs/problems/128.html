@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      128 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">128</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I enjoyed this problem.  I knew there would be an easy way to solve it, as my
+final solution shows.  However, in order to get there, I wanted to implement a
+brute force solution first (code for this is not included).  Once that brute
+force solution was in place I was able to see that only the first and last
+hexes from each row were ever able to have 3 primes.  This greatly reduced the
+amount of searching needed.  From there, it was just a matter of figuring out
+the formulas to calculate the differences between neighbors.</p>
+
+<p>What I liked most about this problem was that while working on my brute force
+solution, I was forced to find a way to represent a hexagonal tiling in memory.
+To do this I followed the “cube coordinates” method from
+<a href="[https://www.redblobgames.com/grids/hexagons/#coordinates-cube">https://www.redblobgames.com/grids/hexagons/#coordinates-cube</a>.
+What this method does is align three axes on the grid and thus assign three
+different numbers to indicate the location on the grid itself.  From that
+website, there are tons of ways that I could have done this, but I chose this
+way because it seemed the best fit for working in rings.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def memoize(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+@memoize
+def isprime(n):
+    if n &lt; 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for p in range(3, int(n**0.5) + 1, 2):
+        if n % p == 0:
+            return False
+    return True
+
+def solve(n):
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
+    if n == 3:
+        return 8
+    count = 3
+    r = 2
+    while True:
+        if all((isprime(6*r-1), isprime(12*r-7), isprime(6*(r+1)-1))):
+            count += 1
+            if count == n:
+                return 3 * r * (r + 1) + 1
+
+        if all((isprime(6*(r+1)+1), isprime(6*(r+1)-1), isprime(12*r+17))):
+            count += 1
+            if count == n:
+                return 3 * r * (r + 1) + 2
+
+        r += 1
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (1, 1),
+        (2, 2),
+        (3, 8),
+        (4, 19),
+        (5, 20),
+        (6, 37),
+        (7, 61),
+        (8, 128),
+        (9, 217),
+        (10, 271),
+        (20, 5677),
+        (30, 26227),
+        (40, 75367),
+        (50, 169220),
+        (100, 1790270),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

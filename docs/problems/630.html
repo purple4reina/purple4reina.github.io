@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      630 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">630</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I thought I was making a really inefficient algorithm for this, but then it
+ends up I was getting the answer in less than 5 seconds.  The challenge thus
+was not the algorithm or the math, but actually in how I was going to deal with
+possible floating point arithmetic.  I first submitted my answer by actually
+calculating the float values of the slope and y-intercept.  However, this got
+me the wrong answer.  I tried again using Python’s Decimal module.  This
+yielded a different result, but it was still wrong.  Instead I decided to go
+the route of reduced fractions.  I implemented a quick greatest common divisor
+function and used that to reduce the fractions.  I was worried this would be
+really inefficient, but it wasn’t.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def points(n):
+    s0 = 290797
+    i = 0
+    pnts = []
+    while i &lt; n:
+        s1 = (s0 ** 2) % 50515093
+        t0 = (s1 % 2000) - 1000
+        s2 = (s1 ** 2) % 50515093
+        t1 = (s2 % 2000) - 1000
+        pnts.append((t0, t1))
+        s0 = s2
+        i += 1
+    return pnts
+
+def gcd(x, y):
+    while y:
+       x, y = y, x % y
+    return x
+
+def reduce(a, b):
+    d = gcd(a, b)
+    return a // d, b // d
+
+def equation(p0, p1):
+    rise = p0[1] - p1[1]
+    run = p0[0] - p1[0]
+
+    if run == 0:
+        return (1, 0, p0[0], 1)
+
+    rise, run = reduce(rise, run)
+
+    y_num = (p0[1] * run) - (p0[0] * rise)
+    y_den = run
+    y_num, y_den = reduce(y_num, y_den)
+
+    return (rise, run, y_num, y_den)
+
+def equations(n):
+    equ = {}
+    pnts = points(n)
+    while pnts:
+        pnt = pnts.pop()
+        for p in pnts:
+            equ[equation(pnt, p)] = True
+    return equ
+
+def solve(n):
+    slopes = {}
+    for rise, run, _, _ in equations(n):
+        slopes[(rise, run)] = slopes.get((rise, run), 0) + 1
+    counts = list(slopes.values())
+
+    total = 0
+    summ = sum(counts)
+    while counts:
+        count = counts.pop()
+        summ -= count
+        total += count * summ
+    return total * 2
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve, points
+
+_test_solve = (
+        (3, 6),
+        (100, 24477690),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+_test_points = (
+        (3, [(527, 144), (-488, 732), (-454, -947)]),
+)
+
+@pytest.mark.parametrize('n,expect', _test_points)
+def test_points(n, expect):
+    assert expect == points(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

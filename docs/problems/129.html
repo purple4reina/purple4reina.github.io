@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      129 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">129</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>For a while I was choosing problems based on their difficulty percentage.  The
+last few days I’ve been doing them based on the number of people who have
+completed them.  Seems like that is a better predictor of the difficulty of a
+problem for me.</p>
+
+<p>I started with a basic, slow brute force implementation.  This allowed me to
+print out values of A(n) that were the largest yet seen.  I noticed pretty
+quickly that all these values of n were either divisible by 3 or prime.</p>
+
+<p>From there it was just a matter of creating and testing the repunits.  The most
+time consuming things for this were creating the repunits and doing the
+division.  To speed things up, I applied the modulo as I went.  Runs in under a
+second.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def isprime(n):
+    for p in range(7, int(n**0.5) + 1, 2):
+        if n % p == 0:
+            return False
+    return True
+
+def solve(m):
+    n = m - 1
+    while True:
+        n += 2
+        if n % 5 == 0:
+            n += 2
+        if n % 3 == 0 or isprime(n):
+            k = r = 1
+            while r != 0:
+                r = (r * 10 + 1) % n
+                k += 1
+            if k &gt; m:
+                return n
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (10, 17),
+        (20, 23),
+        (30, 47),
+        (40, 47),
+        (50, 59),
+        (60, 69),
+        (70, 81),
+        (80, 81),
+        (90, 97),
+        (10**2, 109),
+        (10**3, 1017),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      137 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">137</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This was a really interesting problem!  I don’t think I’ve ever solved an
+infinitely polynomial series like this before so I definitely learned something
+new.  Which is super awesome.</p>
+
+<p>I did some research about how to solve these infinite polynomial series.  I
+found that Σx^n for n {0..∞} is 1/(1 - x).  That didn’t apply here, but what
+was interesting was how this solution was derived.  I then used a similar
+method to figure out the answer to this A(x).</p>
+
+<pre><code>        A(x) = Σ F(n)*x^n, for n {0..∞}, where F(n) is the Fibonacci sequence
+             = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
+</code></pre>
+
+<p>Multiply each side by x</p>
+
+<pre><code>      x*A(x) =     x^2 +  x^3 + 2x^4 + 3x^5 + 5x^6 + ...
+</code></pre>
+
+<p>Add A(x) and x*A(x) together</p>
+
+<pre><code>  A(x)*(x+1) = x +2x^2 + 3x^3 + 5x^4 + 8x^5 +13x^6 + ...
+</code></pre>
+
+<p>Multiply each side by x again</p>
+
+<pre><code>x*A(x)*(x+1) =     x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
+             = A(x) - x
+</code></pre>
+
+<p>Rearranging</p>
+
+<pre><code>           0 = A(x)*x^2 + (A(x)+1)*x - A(x)
+</code></pre>
+
+<p>And since we know A(x) and are solving for x, we can use the quadradic formula
+to solve for x.  This means that for x to be rational, then the determinant
+must be a perfect square.  This allows us to find all the values of A(x) for
+which x is rational.</p>
+
+<p>Since I knew the value of A(x) would probably be pretty large, I looked for a
+pattern in the values of the determinant for which x was rational.  These
+numbers followed the pattern in
+<a href="https://oeis.org/A033889">https://oeis.org/A033889</a>.  It was from here that I
+was able to get the answer.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def fib(n):
+    if n &lt; 3:
+        return 1
+    f1 = f2 = 1
+    for _ in range(n - 2):
+        f1, f2 = f2, f1 + f2
+    return f2
+
+def solve(n):
+    d = fib(4*n + 1)
+    return int((5*d**2 - 4)**0.5 - 1) // 5
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (1, 2),
+        (10, 74049690),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

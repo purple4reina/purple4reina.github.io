@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      68 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">68</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I found this one to be much easier than I expected it to be. It was
+intimidating because of the geometric shapes involved. However, by simply
+numbering each node, the problem because easily workable.</p>
+
+<p>I took all permutations of the numbers 1 through 10 and subjected them to three
+tests. First, whether each line in the ring summed to the same number.  Second,
+whether what I considered the top most node was in fact that with the lowest
+integer assignment. Finally, whether the concatenation was 16-digits in length.</p>
+
+<h2 id="results">Results</h2>
+
+<p>With this, the script ran in 3 seconds.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+
+works = set()
+prev = 'I love Peter and Charlie'
+
+for t in permutations(range(1,11)):
+	if t[0]+t[1]+t[2] == t[3]+t[2]+t[4] == t[5]+t[4]+t[6] == t[7]+t[6]+t[8] == t[9]+t[8]+t[1]:
+		if t[0] &lt; t[3] and t[0] &lt; t[5] and t[0] &lt; t[7] and t[0] &lt; t[9]:
+			new = ''.join(map(str, [t[0],t[1],t[2],t[3],t[2],t[4],t[5],t[4],t[6],t[7],t[6],t[8],t[9],t[8],t[1]]))
+			if len(new) == 16:
+				works.add(new)
+
+print max(works)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

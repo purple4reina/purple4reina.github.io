@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      659 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">659</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I wasn’t able to get this problem to run in under a couple hours.  I think the
+problem is neeeding to search through so many primes in order to get the
+largest prime factor of the form <code>p = 4*k + 1</code>.  I was hoping that Python
+slices would do the trick so I didn’t have to start at the very beginning of
+the primes list with every call to factor.  But, ends up that Python will make
+a copy of the list when creating the slice.  That’s really annoying because I
+know that Go will just point the slice to the same underlying array as the
+original.  I didn’t feel like rewriting the whole thing in Go though.  I tried
+many things to try to get the time down, but nothing seemed to work.  This form
+with the recursion was the fastest I could devise.</p>
+
+<p>The problem itself was pretty interesting and I found myself getting crosseyed
+trying to make sense of all the crazy patterns and interconnections I was
+discovering.  First off, I quickly figured that for the equation <code>q*p = n**2 +
+k**2</code> where q, n, and k are integers and p a prime, <code>p = 2*n + 1</code> and n must be
+even.  This lead me to the sequence of Pythagorean primes
+https://oeis.org/A002144.</p>
+
+<p>I next printed out the values of q, p, n, and k for the values of P(k) for k
+less than 100.  Here is where I found an interesting pattern!  For some reason
+that I was unable to prove, p always evenly divided <code>4 * k**2 + 1</code>.  I think
+used this fact to just run through all primes of the form <code>4*x + 1</code> and pick
+the largest that divides <code>4 * k**2 + 1</code>.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">_factor = {1: 0}
+def factor(n):
+    if n in _factor:
+        return _factor[n]
+    n_root = int(n ** 0.5) + 1
+    for p in primes:
+        if n % p == 0:
+            fact = max(p, factor(n // p))
+            break
+        if p &gt; n_root:
+            fact = n
+            break
+    else:
+        raise AssertionError('cannot factor %d' % n)
+    _factor[n] = fact
+    return fact
+
+modulo = 10 ** 18
+maxi = 10 ** 8
+sieve = [False, False] + [True] * (maxi - 1)
+primes = []
+for p, is_prime in enumerate(sieve):
+    if not is_prime:
+        continue
+    if (p - 1) % 4 == 0:
+        primes.append(p)
+    _factor[p] = p
+    num = p + p
+    while num &lt;= maxi:
+        sieve[num] = False
+        num += p
+
+def solve(top):
+    total = 0
+    for k in range(1, top + 1):
+        total += factor(4 * k ** 2 + 1)
+    return total % modulo
+
+if __name__ == '__main__':
+    import sys, time
+    n = eval(sys.argv[1])
+    st = time.time()
+    s = solve(n)
+    en = time.time()
+    print(s, en - st)
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (1, 5),
+        (2, 22),
+        (3, 59),
+        (4, 72),
+        (5, 173),
+        (6, 202),
+        (7, 399),
+        (8, 656),
+        (9, 669),
+        (10, 1070),
+        (11, 1167),
+        (12, 1744),
+        (13, 2421),
+        (14, 2578),
+        (15, 2631),
+        (16, 2672),
+        (17, 2761),
+        (18, 4058),
+        (19, 4075),
+        (20, 5676),
+        (100000, 178688812032788),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_P(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

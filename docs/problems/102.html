@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      102 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">102</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I found the one point that was alone on either side of the y-axis. Using this
+point, I found the y-intercepts of the two lines that are made through this
+one. If (0,0) was between these two y-intercepts, I knew the origin was inside
+the triangle.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">count = 0
+for p in tri:
+	x = sorted([(p[0], 0), (p[2], 2), (p[4], 4)])
+	if max(x)[0] &lt; 0 or min(x)[0] &gt; 0: continue
+	if x[1][0] &lt; 0:
+		test = max(x)
+	elif x[1][0] &gt; 0:
+		test = min(x)
+	if test[1] == 0:
+		a = (p[0], p[1])
+		b = (p[2], p[3])
+		c = (p[4], p[5])
+	elif test[1] == 2:
+		a = (p[2], p[3])
+		b = (p[0], p[1])
+		c = (p[4], p[5])
+	elif test[1] == 4:
+		a = (p[4], p[5])
+		b = (p[2], p[3])
+		c = (p[0], p[1])
+	gap = ((a[0]*b[1] - b[0]*a[1])/(a[0] - b[0]), (a[0]*c[1] - c[0]*a[1])/(a[0] - c[0]))
+	if (gap[0] &gt; 0 and gap[1] &lt; 0) or (gap[0] &lt; 0 and gap[1] &gt; 0):
+		count += 1
+
+print count
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

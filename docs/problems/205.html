@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      205 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">205</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I’m not very good with probability. I’ve never taken a stats class. So, before
+going into this one, I wanted to make sure I really understood what I was
+looking for.</p>
+
+<p>I did a bunch of reading on Wikipedia and Wolfram MathWorld about probability
+and realized I needed the Total Probability Theorem. P(B) = P(B|A1)P(A1) + …</p>
+<ul>
+  <li>P(B|An)P(An) where A1, A2, …, An are mutually exclusive. I chose Colin’s
+rolls of each given number sum as the A’s and the probability of Peter beating
+him as the B’s.</li>
+</ul>
+
+<h2 id="results">Results</h2>
+
+<p>With this knowledge, the script ran correctly the first time!</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+
+PeterDict = dict(zip(range(37), [0]*37))
+ColinDict = dict(zip(range(37), [0]*37))
+for game in product(range(1,5), range(1,5), range(1,5), range(1,5), range(1,5), range(1,5), range(1,5), range(1,5), range(1,5)):
+	PeterDict[sum(game)] += 1
+
+for game in product(range(1,7), range(1,7), range(1,7), range(1,7), range(1,7), range(1,7)):
+	ColinDict[sum(game)] += 1
+
+PeterSum = 0
+ColinSum = 0
+
+for Ps in PeterDict.itervalues():
+	PeterSum += Ps
+for Cs in ColinDict.itervalues():
+	ColinSum += Cs
+
+P = 0
+for Colin in ColinDict.iterkeys():
+	PeterWins = 0
+	ColinProb = (ColinDict[Colin]/float(ColinSum))
+	for Peter in PeterDict.iterkeys():
+		if Peter &gt; Colin:
+			PeterWins += PeterDict[Peter]
+	P += ColinProb * (PeterWins/float(PeterSum))
+
+print P
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

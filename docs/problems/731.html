@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      731 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">731</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>Before I started working on this problem, I wrote the following in my notes:</p>
+
+<blockquote>
+  <p>I’m excited to work on this problem because I know I will learn something
+   new about continued fractions and whatever these “stoneham numbers” are…</p>
+</blockquote>
+
+<p>I definitely learned something about continued fractions.  At first I thought I
+would have to find the exact period of each decimal expansion.  This lead me to
+learning about Multiplicative Order.  I still don’t totally grok what it is and
+why it can be useful.  I hope that further problems use it more.</p>
+
+<p>My final solution didn’t end up using Multiplicative Order at all though.  It
+was mostly by chance that I figured out that <code>n % t</code> gives the same value as <code>n
+% (multiplicative order of t)</code>.</p>
+
+<p>Update: and now after exploring a bit more, I realize that I don’t even need
+the mod in <code>n % t - 1</code>.  Simply <code>n - 1</code> will suffice.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def solve(n):
+    t, total = 3, 0
+    while t &lt;= n:
+        m, a = 1, 0
+        mod = n % t - 1
+        if mod &gt; 0:
+            m = pow(10, mod, t)
+        for _ in range(15):
+            d, m = divmod(m * 10, t)
+            a = (a * 10 + d)
+        total += a
+        t *= 3
+    return (total // 10**5) % 10**10
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (10**1, 4444444444),
+        (10**2, 4938271604),
+        (10**3, 8326474622),
+        (10**4, 5863435451),
+        (10**5, 2187843993),
+        (10**6, 9851385196),
+        (10**7, 5158680727),
+        (10**8, 2584642393),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

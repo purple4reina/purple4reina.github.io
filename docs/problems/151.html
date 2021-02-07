@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      151 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">151</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This is the first time I’ve used two classes in a problem. I’m pretty proud of
+that. It made a lot of sense because there were literally two objects in the
+problem: cut sheets and envelopes.</p>
+
+<p>My strategy was to simulate a week’s worth of work (all 16 batches completed)
+to see how many answers I got. I then ran this many, many, many times and
+averaged the answers.</p>
+
+<p>The problem with this approach was that with every subsequent week, the answer
+would have less and less effect on the running average. This meant that the
+first 2 decimal places converged rather quickly. It took over 180 million runs
+though to get just 5 decimal places.  From there, I have to admit, I just
+started guessing; not something I like to do, but after all that, I felt I
+deserved it.</p>
+
+<p>I believe a better way to solve this would be to calculate every single
+possible outcome.  There are a finite number of these. However, though I’m not
+sure, I believe this number is very high. From there, it would be easy to get
+the average.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from random import *
+
+class Envelope:
+
+    def __init__(self):
+        self.contents = ['A1']
+
+    def grab(self):
+        if len(self.contents) == 0:
+            raise IndexError('contents empty')
+        return self.contents.pop(randrange(len(self.contents)))
+
+    def replace(self, items): # items must be list
+        try:
+            self.contents += items
+        except:
+            pass
+
+    def size(self):
+        return len(self.contents)
+
+
+
+class Paper: # takes the size of paper and cuts it till it contains 2 size A5, returns list of the cut sizes
+
+    def __init__(self, sheetSize):
+        if sheetSize not in ['A1', 'A2', 'A3', 'A4', 'A5'] or sheetSize == None:
+            raise ValueError('not correct size type or None type')
+        else:
+            self.sheetSize = sheetSize
+
+    def cut(self):
+        if self.sheetSize == 'A1':
+            return ['A2', 'A3', 'A4', 'A5', 'A5']
+        elif self.sheetSize == 'A2':
+            return ['A3', 'A4', 'A5', 'A5']
+        elif self.sheetSize == 'A3':
+            return ['A4', 'A5', 'A5']
+        elif self.sheetSize == 'A4':
+            return ['A5', 'A5']
+        elif self.sheetSize == 'A5':
+            return ['A5']
+        else:
+            raise ValueError('not correct size type or None type')
+
+
+
+totalWeeks = float(0)
+totalOneSheets = float(0)
+runningAverage = float(0)
+
+while True:
+
+totalWeeks += 1
+
+thisWeek = Envelope()
+oneSheet = 0
+for i in xrange(16):
+    if thisWeek.size() == 1:
+        oneSheet += 1
+    randomSheet = Paper(thisWeek.grab())
+    cutSheet = randomSheet.cut()
+    cutSheet.remove(cutSheet[-1])
+    thisWeek.replace(cutSheet)
+
+totalOneSheets += oneSheet
+runningAverage = float( totalOneSheets / totalWeeks )
+
+if totalWeeks % 10**4 == 0:
+    print int(totalWeeks), int(totalOneSheets), runningAverage
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

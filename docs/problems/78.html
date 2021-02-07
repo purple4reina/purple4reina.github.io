@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      78 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">78</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>The first time through this problem I was using a recursive algorithm that
+required both n and k. Filling these into a dictionary used up way too much
+memory as well as giving a recursive depth error.</p>
+
+<p>I then found a second algorithm that, though still using k, used it as part of
+a sigma summation. This meant that it could be part of a for loop.</p>
+
+<p>With this change, the script gave the correct answer. However, it took just
+under an hour to do so. Upon reading other people’s answers in the forum, I
+realized I could break out of the for loop when one of the values dips below
+zero. That got me the answer in less than a minute.</p>
+
+<p>The code below is my origion one that took an hour to complete.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from time import time
+start = time()
+
+Pdict = dict()
+Pdict[0] = 1
+Pdict[-1] = 0
+
+def testP():
+	assert P(1) == 1
+	assert P(2) == 2
+	assert P(3) == 3
+	assert P(4) == 5
+	assert P(5) == 7
+	assert P(6) == 11
+	assert P(7) == 15
+	assert P(8) == 22
+#	assert P(100) == 190569292
+	
+
+def P(n):
+	n = int(n)
+	if n &lt; 0:
+		return 0
+	elif n in Pdict:
+		return Pdict[n]
+	sum = 0
+	for k in range(1, n+1):
+		key1 = max(n-.5*k*(3*k-1), -1)
+		key2 = max(n-.5*k*(3*k+1), -1)
+		sum += (-1)**(k+1)*(Pdict[key1]+Pdict[key2])
+	Pdict[n] = int(sum)
+	return Pdict[n]
+
+testP()
+
+n = 1
+while True:
+	n += 1
+	Part = P(n)
+	if Part%10**6 == 0:
+		print n
+		break
+	elif n%1000 == 0:
+		end = time()
+		print '		', n, end-start
+		start = end
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

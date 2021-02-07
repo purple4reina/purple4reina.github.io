@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      348 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">348</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>The hardest part about this one for me was trying to figure out the string
+slicing so I could create the palendromic numbers.  For the life of me I
+couldn’t figure out how to reverse a string, but omit the last character before
+reversing.</p>
+
+<p>After that the solution was pretty easy to get to.  At first I had this code
+create the squares then look for the cubes.  But that was problematic because
+floating point numbers don’t work well when dividing by three.  So I switched
+it to be create the cubes and look for the squares.  Answer in a little over 2
+seconds using Pypy3.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def palendromes():
+    pow0, pow1 = 1, 10
+    while True:
+        for n in range(pow0, pow1):
+            strn = str(n)
+            yield int(strn + strn[-2::-1])
+        for n in range(pow0, pow1):
+            strn = str(n)
+            yield int(strn + strn[::-1])
+        pow0, pow1 = pow1, pow1 * 10
+
+def is_square(n):
+    return int(n ** 0.5) ** 2 == n
+
+def solve(n):
+    squ_cubes = []
+    for p in palendromes():
+        found = 0
+        for cube in range(1, int(p ** (1/3)) + 1):
+            remain = p - cube ** 3
+            if is_square(remain):
+                found += 1
+                if found &gt; 4:
+                    break
+        if found == 4:
+            squ_cubes.append(p)
+            if len(squ_cubes) == n:
+                break
+    return sum(squ_cubes)
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

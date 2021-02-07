@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      7 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">7</h1>
+  <h2 id="try-one">Try One</h2>
+
+<h3 id="comments">Comments</h3>
+
+<p>This code works great. But it becomes incredibly slow when needing to reach
+into those highest numbers. I was able to get the 9500th prime using this.</p>
+
+<p>Making sure to refer to the list as “a reference to” in applescript helped
+speed things up. But I still think I need a new approach.</p>
+
+<h3 id="code">Code</h3>
+
+<pre><code class="language-applescript">set all_int to {}
+set all_int_ref to a reference to all_int
+set primes_list to {}
+set primes_list_ref to a reference to primes_list
+set bound to 10000
+set t to (time of (current date))
+
+repeat with i from 1 to bound
+	copy i to the end of all_int_ref
+end repeat
+
+set j to 2
+repeat while j &lt; (bound - 1)
+	
+	if item j of all_int_ref is not false then
+		copy item j of all_int_ref to the end of primes_list_ref
+		try
+			repeat with n from 2 to bound
+				set item (j * n) of all_int_ref to false
+			end repeat
+		end try
+	end if
+	set j to j + 1
+	
+end repeat
+
+log ((time of (current date)) - t)
+log (count primes_list)
+return primes_list
+</code></pre>
+
+<h2 id="try-two">Try Two</h2>
+
+<h3 id="comments-1">Comments</h3>
+
+<p>Trying to use google to find a list of the first 15000 consecutive integers
+found nothing. Generating this list on my own was fast, only a few seconds. But
+using this list gave a “stack overflow” error.</p>
+
+<p>This next script worked to make the list of consecutive numbers smaller with
+each repeat. While it worked great with bound=10,000 it was still not powerful
+enough to handle the number sizes I need.</p>
+
+<h3 id="code-1">Code</h3>
+
+<pre><code class="language-applescript">set all_int to {}
+set all_int_ref to a reference to all_int
+set primes_list to {}
+set primes_list_ref to a reference to primes_list
+set bound to 100000
+set t to (time of (current date))
+
+repeat with i from 2 to bound
+	copy i to the end of all_int_ref
+end repeat
+
+
+repeat
+	if item 1 of all_int_ref is not false then
+		copy (item 1 of all_int_ref) to this_prime
+		copy this_prime to the end of primes_list_ref
+		try
+			repeat with n from 1 to bound
+				set item ((this_prime * n) + 1) of all_int_ref to false
+			end repeat
+		end try
+	end if
+	try
+		copy (items 2 thru (count all_int_ref) of all_int_ref) to all_int
+	on error
+		exit repeat
+	end try
+end repeat
+
+log ((time of (current date)) - t)
+log (count primes_list)
+log primes_list
+try
+	return item 10001 of primes_list
+end try
+</code></pre>
+
+<h2 id="try-three">Try Three</h2>
+
+<h3 id="comments-2">Comments</h3>
+
+<p>I feel like I am getting no closer to the answer than when I began. I’ve added
+timing counts into the script so I can see how changes in it effect the load.
+It seems like the changes I’ve been making aren’t making it any more efficient.
+Time for a new strategy.</p>
+
+<h2 id="code-2">Code</h2>
+
+<pre><code class="language-applescript">set all_int to {}
+set all_int_ref to a reference to all_int
+set primes_list to {}
+set primes_list_ref to a reference to primes_list
+set new_int to {}
+set new_int_ref to a reference to new_int
+set bound to 30000
+set half_bound to (bound / 2)
+set t to (time of (current date))
+
+repeat with i from 2 to bound
+	copy i to the end of all_int_ref
+end repeat
+
+repeat
+	--log all_int
+	if (item 1 of all_int) &lt; half_bound then
+		set this_prime to (item 1 of all_int_ref)
+		copy this_prime to the end of primes_list_ref
+		repeat with m from 1 to (count all_int_ref)
+			copy (item m of all_int_ref) to n
+			if ((n / this_prime) mod 1 is not 0) and (n is not this_prime) then copy n to the end of new_int_ref
+		end repeat
+		copy new_int to all_int
+		set new_int to {}
+	else
+		log ((time of (current date)) - t)
+		return primes_list_ref &amp; all_int_ref
+		
+		
+	end if
+end repeat
+
+
+--log ((time of (current date)) - t)
+--log (count primes_list_ref)
+return primes_list
+try
+	return item 10001 of primes_list
+end try
+</code></pre>
+
+<h2 id="try-four">Try Four</h2>
+
+<h3 id="comments-3">Comments</h3>
+
+<p>This script has managed to cut 5 seconds off the time to evaluate 50,000
+integers. I’m hoping that will be enough of a difference when it comes to the
+biggest numbers. My strategy was to cut down the number of “repeat” statements
+I’m using, thus cutting the amount of computation. I used a handler that
+evaluates if an integer is prime or not. This way, I don’t have to create the
+big list of integers first, because a repeat statement already has ordered
+integers built in to it.</p>
+
+<h3 id="results">Results</h3>
+
+<p>It’s good!</p>
+
+<h3 id="code-3">Code</h3>
+
+<pre><code class="language-applescript">set primes_list to {}
+set primes_list_ref to a reference to primes_list
+set t to (time of (current date))
+
+
+repeat with this_num from 2 to 150000
+	copy is_this_prime(this_num, primes_list_ref) to this_eval
+	if this_eval is not {} then copy this_eval to the end of primes_list_ref
+	if (count (primes_list_ref)) = 10001 then return item 10001 of primes_list_ref
+end repeat
+
+to is_this_prime(a_num, primes_list)
+	repeat with a_prime in primes_list
+		if (a_num / a_prime mod 1 is 0) then
+			return {}
+		end if
+	end repeat
+	return a_num
+end is_this_prime
+
+log ((time of (current date)) - t)
+log (count primes_list_ref)
+return primes_list
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

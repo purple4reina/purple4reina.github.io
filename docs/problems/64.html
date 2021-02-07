@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      64 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">64</h1>
+  <h2 id="resources">Resources</h2>
+
+<p>Wolfram MathWorld was incredibly helpful for this problem. I used their
+articles on “Continued Fractions” and “Periodic Continued Fractions”.</p>
+
+<h2 id="comments">Comments</h2>
+
+<p>This problem was giving me troubles for a long time. I understood the math
+behind it, and knew how to go about getting the answer; but for some reason, it
+just never worked. Finally, I had the program test the first half of the
+continued fraction against the second half. When they were equal (and the last
+term being twice the very first), I knew I’d found the period.</p>
+
+<p>That worked until I ran across issues with rounding irrational numbers
+repeatedly. I pulled in the decimal module and had to set the precision really
+high in order to compensate. This meant it took a little longer to run that I’d
+have liked, but it gave me the correct answer nonetheless.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from math import *
+from decimal import *
+getcontext().prec = 1000
+bound = 10000
+
+def periodlength(sqrt):
+	r = []
+	a = []
+	r.append(sqrt)
+	a.append(Decimal(floor(r[0])))
+	while True:
+		for i in range(2):
+			r.append(1/Decimal(r[-1]-a[-1]))
+			a.append(int(floor(r[-1])))
+			del r[0]
+		Lh = (len(a)-1)/2
+		if a[1:1+Lh] == a[1+Lh:] and a[-1] == 2*a[0]:
+			r = []
+			a = []
+			return Lh
+
+
+count = 0
+for n in range(bound+1):
+	sqrt_n = n**Decimal(0.5)
+	if sqrt_n%1 == 0:
+		continue
+	else:
+		period = periodlength(sqrt_n)
+		if period%2 == 1:
+			print n, period
+			count += 1
+
+print count
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

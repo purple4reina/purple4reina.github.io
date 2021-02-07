@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      358 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">358</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This problem was different from most problems because there were no real great
+ways to write tests.  I was never quite certain that the code I was writing
+would eventually get me to the answer.  I did start out by writing a few tests,
+but they quickly became useless.</p>
+
+<p>There were a few things that I figured out about cyclic numbers.  After that,
+it just took me several days to figure out in which order to check each of them
+by until I found the answer.</p>
+
+<p>Firstly, I discovered that if you multiply a cyclical number by one more than
+its length, you get a string of all 9s.  Next, all cyclic numbers are just 1/p
+where p is a prime number called a full reptend prime.  Finally, those primes
+all follow the pattern of 10^k != 1 mod p, for k &lt; p - 1.  And furthermore,
+when k = p - 1, then 10^k must equal 1 mod p.  I also found a quick little
+algorithm to checking both if p is a full reptend prime and also return the
+cyclic number associated with it!  It was then a matter of figuring out in
+which order to apply all this knowledge.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">ten_5 = 10**5
+ten_11 = 10**11
+
+def the_far_right(p):
+    t, r, n = 0, 1, 0
+    summ = 0
+    while True:
+        t += 1
+        d, r = divmod(10 * r, p)
+        n = (10 * n + d) % ten_5
+        summ += d
+        if r == 1:
+            break
+    if t == p - 1:
+        return n, summ
+    return 0, 0
+
+def primes():
+    p = ten_11 // 138 - 10
+    while True:
+        top = int(pow(p, 0.5))
+        for n in range(3, top + 1):
+            if p % n == 0:
+                break
+        else:
+            yield p
+        p += 2
+
+def solve(left, right):
+    for p in primes():
+        ratio = ten_11 // p
+        if ratio &gt; left:
+            continue
+        elif ratio &lt; left:
+            raise AssertionError('should have found it by now!')
+
+        if (right * p) % ten_5 == 99999:
+            found_right, digit_sum = the_far_right(p)
+            if found_right == right:
+                return digit_sum
+
+if __name__ == '__main__':
+    import sys
+    left = eval(sys.argv[1])
+    right = eval(sys.argv[2])
+    print(solve(left, right))
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

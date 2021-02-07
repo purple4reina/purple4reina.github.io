@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      35 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">35</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>Again, I really must learn how to follow directions. Spent way too much time
+getting the wrong answer when all I had to do was read the instructions more
+closely.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">import re
+def num2str(n):
+	return re.split('_', re.sub('\B', '_', str(n)))
+
+def str2num(n):
+	return ''.join(map(str, n))	
+
+def circle(n):
+	return int(str2num([(list(num2str(n)))[-1]] + (list(num2str(n)))[:-1]))
+	
+def isprime(n):
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return 'FALSE'
+	return 'TRUE'
+			
+from math import log10
+circleprimes = []
+for n in range(2, 10**6):
+	if isprime(n) == 'TRUE':
+		m = n
+		circlelist = [m]
+		for x in range(int(log10(m))):
+			m = circle(m)
+			circlelist.append(m)
+		if 'FALSE' not in map(isprime, circlelist): 
+			circleprimes.append(n)
+			
+print circleprimes		
+print len(circleprimes)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

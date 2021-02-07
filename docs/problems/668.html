@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      668 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">668</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This problem was pretty easy for me.  I feel like I’ve gotten pretty good at
+this type of algorithm.  I used a similar approach to how I tackled problem 88
+just a couple weeks ago.</p>
+
+<p>The math behind this was pretty simple.  First thing I did was implement a
+brute force approach.  Then I printed all the solutions below 100 and wrote out
+their prime factorizations.  That confirmed my suspicions.  In order to find
+all the solutions, all I needed to do was find products of at least three
+primes where the last prime added is less than the product of the preceding
+ones.  I used recursion and the sieve of Eratosthenes to create the primes.
+Code runs in about 51 seconds.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def solve(n):
+
+    top = int(n ** 0.5)
+    sieve = [True] * (top + 1)
+    primes = []
+    for p, is_prime in enumerate(sieve):
+        if not is_prime or p &lt; 2:
+            continue
+        primes.append(p)
+        num = p + p
+        while num &lt;= top:
+            sieve[num] = False
+            num += p
+
+    def get_smooth(product, length, i):
+        length += 1
+        smooths = 0
+        for p in primes[i:]:
+            prod = product * p
+            if prod &gt; n:
+                break
+            elif length &gt; 2 and p &lt; product:
+                smooths += 1
+            if n // prod &gt;= p:
+                smooths += get_smooth(prod, length, i)
+            i += 1
+        return smooths
+
+    return get_smooth(1, 0, 0) + 1
+
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (10**1, 2),
+        (10**2, 29),
+        (10**3, 274),
+        (10**4, 2656),
+        (10**5, 26613),
+        (10**6, 268172),
+        (10**7, 2719288),
+        #(10**8, 27531694),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

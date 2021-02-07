@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      14 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">14</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>These are getting a lot easier now that I’m understanding Python better. For
+this script, I used a def(). This allowed me to split up the script into easier
+and more manageable chunks. It’s also just a good tool to have to make the
+script look cleaner. I’m glad it’s now in my repertoire.</p>
+
+<p>I also learned to use the while statement. Good one to use here. The != means
+not equal to.</p>
+
+<h2 id="results">Results</h2>
+
+<p>Took just 51 seconds!</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from time import time
+start_time= time()
+print 'Process started'
+
+#n  n/2 (n is even)
+#n  3n + 1 (n is odd)
+
+
+def seq(n):
+	iter = 1
+	while n != 1:
+		if n%2 == 1:
+			n = (3*n) + 1
+		elif n%2 == 0:
+			n = n/2
+		iter = iter + 1
+	return iter
+			
+seq_list = []
+for i in range(1000000, 0, -1):
+	seq_list.append([seq(i), i])
+
+print max(seq_list)
+
+
+end_time= time()
+elapse_time= end_time - start_time
+print elapse_time, 'seconds have passed'
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      709 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">709</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I started by creating a brute force problem along with tests.  Of course this
+was going to be too slow.  I tried a couple of things to try to speed it up,
+but all were too minute.  I then started to look for patterns in the output.
+I printed the number possibilities for the number of bags in the cupboard after
+each one is added.  There were a couple of patterns I noticed, but the most
+important is that the odd numbered rows start with a value that is the sum of
+the previous row.  Since I was looking for the sum of a row, this was the
+solution I was looking for.  It is important that the number of bags he puts
+into the closet is even.</p>
+
+<p>I then went to search OEIS for this sequence and learned about Euler Numbers.
+There’s lots of sequences based off them.  I grabbed a generating function from
+there and got the answer in under 4 seconds.</p>
+
+<p>I do feel strange that I grabbed some code off OEIS for this.  Does that count
+as me solving the problem?  Do I get points for searching and coming across the
+right number sequence?  I think in the future I will try to understand the
+problem a bit better and be able to come up with my own generating function.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">modulo = 1020202009
+
+
+def solve(n):
+    num = 0
+    A = {-1: 0, 0: 1}
+    k = 0
+    e = 1
+    for i in range(0, n+1):
+        Am = 0
+        A[k + e] = 0
+        e = -e
+        for j in range(0, i+1):
+            Am += A[k]
+            A[k] = Am % modulo
+            k += e
+        if e &lt; 0:
+            num = A[-i//2]
+    return num % modulo
+
+
+if __name__ == '__main__':
+    import sys
+    n = int(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      162 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">162</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>For this one I took a dynamic programming approach.  It’s actually quite
+similar to the FAREEFAREA problem number 679.  If all three of the things have
+been placed, add 1 and recurse.  Pretty simple, I don’t have much more to say.
+Runs in 46 ms.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def memoize(fn):
+    _cache = {}
+    def wrap(*args):
+        if args in _cache:
+            return _cache[args]
+        ret = fn(*args)
+        _cache[args] = ret
+        return ret
+    return wrap
+
+def solve(n):
+
+    @memoize
+    def hexas(zer, one, aye, left):
+        if left == 0:
+            return 0
+
+        total = 13 * (all((zer, one, aye)) + hexas(zer, one, aye, left - 1))
+        total += all((zer, 1, aye)) + hexas(zer, 1, aye, left - 1)
+        total += all((zer, one, 1)) + hexas(zer, one, 1, left - 1)
+
+        if left &lt; n:
+            total += all((1, one, aye)) + hexas(1, one, aye, left - 1)
+
+        return total
+
+    answer = hexas(0, 0, 0, n)
+    return answer, hex(answer)[2:].upper()
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (3, (4, '4')),
+        (4, (262, '106')),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

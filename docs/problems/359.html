@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      359 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">359</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This problem was cute.  I knew the reference in the title about the infinite
+hotel.  That didn’t come into play a whole lot though.</p>
+
+<p>This problem really benefitted from drawing it out on paper.  After doing so, I
+was able to see that there was definitely a pattern involved.  I started
+tackling the proble as I normally do, with a brute force solution.  This
+allowed me to create a set of tests I could use as I continued to amend the
+code.</p>
+
+<p>The formulas I came up with are super cumbersome and long.  I am sure they can
+be reduced (and probably combined into a single formula) but I was unsure of
+how to do it given the floor divisions.  Ends up this implementation was speedy
+enough.  If I were doing this as part of work or anything, I’d definitely look
+into cleaning up those formulas!</p>
+
+<p>Lastly, most of the code is for getting all the divisors of 71328803586048.  I
+probably didn’t need all of that, given I already knew it’s prime
+factorization.  However, it was essential if I was going to run tests with
+varying input values.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">mult = 71328803586048  # 2**27 * 3**12
+modulo = 10**8
+
+def divisors(maxx):
+    top = int(maxx ** 0.5)
+    sieve = {}
+    primes = []
+    for p in range(2, top + 1):
+        if sieve.get(p):
+            continue
+        primes.append(p)
+        num = p + p
+        while num &lt;= top:
+            sieve[num] = p
+            num += p
+
+    def _divisors(n):
+        if n == 1:
+            return [1]
+        if n &gt; top:
+            stop = n ** 0.5
+            for p in primes:
+                if p &gt; stop:
+                    return [1, n]
+                if n % p == 0:
+                    break
+            else:
+                return [1, n]
+        else:
+            p = sieve.get(n)
+            if not p:
+                return [1, n]
+        n //= p
+        exp = 1
+        while n % p == 0:
+            n //= p
+            exp += 1
+        return [d*p**e for d in _divisors(n) for e in range(0, exp + 1)]
+
+    return _divisors(maxx)
+
+def p(f, r):
+    if f == 1:
+        return r * (r + 1) // 2
+    n = f**2 // 2
+    if f % 2 == 0:
+        return n + (1 + (r-1)//2) * ((r-1)//2) + ((4*f + (r//2)*2) * (r//2))//2
+    return n + ((r//2)*2*(r//2))//2 + (((r-1)//2) * (2*f + 2*((r-3)//2 + f)))//2
+
+def solve(n):
+    total = 0
+    for d in divisors(n):
+        total += p(d, n//d) % modulo
+    return total % modulo
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve, p, divisors
+
+_test_divisors = (
+        (1, [1]),
+        (2, [1, 2]),
+        (10, [1, 2, 5, 10]),
+        (16, [1, 2, 4, 8, 16]),
+        (24, [1, 2, 4, 8, 3, 6, 12, 24]),
+)
+
+@pytest.mark.parametrize('n,expect', _test_divisors)
+def test_divisors(n, expect):
+    assert expect == divisors(n)
+
+_test_p = (
+        (1, 1, 1),
+        (1, 2, 3),
+
+        (2, 1, 2),
+        (2, 2, 7),
+        (2, 3, 9),
+        (2, 4, 16),
+        (2, 5, 20),
+
+        (3, 1, 4),
+        (3, 2, 5),
+        (3, 3, 11),
+        (3, 4, 14),
+        (3, 5, 22),
+        (3, 6, 27),
+        (3, 7, 37),
+        (3, 8, 44),
+        (3, 9, 56),
+
+        (4, 1, 8),
+        (4, 2, 17),
+        (4, 3, 19),
+        (4, 4, 30),
+        (4, 5, 34),
+
+        (5, 1, 12),
+        (5, 2, 13),
+        (5, 3, 23),
+        (5, 4, 26),
+        (5, 5, 38),
+        (5, 6, 43),
+        (5, 7, 57),
+        (5, 8, 64),
+        (5, 9, 80),
+
+        (6, 1, 18),
+        (6, 2, 31),
+        (6, 3, 33),
+        (6, 4, 48),
+        (6, 5, 52),
+
+        (7, 1, 24),
+        (7, 2, 25),
+        (7, 3, 39),
+        (7, 4, 42),
+        (7, 5, 58),
+        (7, 6, 63),
+        (7, 7, 81),
+        (7, 8, 88),
+        (7, 9, 108),
+
+        (10, 20, 440),
+        (25, 75, 4863),
+        (99, 100, 19454),
+)
+
+@pytest.mark.parametrize('f,r,expect', _test_p)
+def test_p(f,r, expect):
+    assert expect == p(f,r)
+
+_test_solve = (
+        (1, 1),
+        (2, 5),
+        (3, 10),
+        (4, 25),
+        (5, 27),
+        (6, 53),
+        (7, 52),
+        (8, 101),
+        (9, 96),
+        (10, 138),
+        (12, 243),
+        (24, 967),
+        (48, 3743),
+        (72, 8344),
+        (432, 286718),
+        (1152, 2011688),
+        (10**4, 38974589),
+        (10**5, 88817164),
+        (10**6, 50338373),
+        (10**7, 81965344),
+        (10**8, 31246565),
+        #(10**9, 37551092),  might be wrong
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

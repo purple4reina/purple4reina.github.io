@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      104 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">104</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I had to try this problem like 10 times. The biggest problem was the fact that
+I was working with really really large numbers, but only needing the first and
+last 9 digits of it.</p>
+
+<p>The way I solved that was to keep track of the length of the number, then only
+keep the first 15 digits and the last 10. It was some work to deal with lining
+up the first 15 digits correctly when adding them.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def panlast(n):
+	last = str(n)[-9:]
+	for d in range(1,10):
+		if str(d) not in last:
+			return False
+	return True
+
+def panfirst(n):
+	first = str(n)[:9]
+	for d in range(1,10):
+		if str(d) not in first:
+			return False
+	return True
+
+F = [0,1,1]
+for i in range(100):
+	F.append(F[-1]+F[-2])
+
+i = 80
+F = [[int(str(F[79])[:15]),len(str(F[79])),F[79]],[int(str(F[80])[:15]),len(str(F[80])),F[80]]]
+while True:
+	i += 1
+	nextF = [F[0][0]+F[1][0]*10**(F[1][1]-F[0][1]), 0, int(str(F[0][2])[-10:]) + int(str(F[1][2])[-10:])]
+	nextF[1] = F[1][1] + (len(str(nextF[0])) - len(str(F[1][0])) - (F[1][1]-F[0][1]))
+	nextF[0] = int(str(nextF[0])[:15])
+	F.append(nextF)
+	del F[0]
+	if panfirst(F[1][0]) == True and panlast(F[1][2]) == True:
+		print i
+		break
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

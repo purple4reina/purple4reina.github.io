@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      688 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">688</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I started by implementing a pretty brute force method of calculating.  But of
+course since it would mean going through 10**16 iterations, this would never
+have been feasible.  But, it allowed me to write some tests and do some
+analysis.</p>
+
+<p>I printed out the values for f(n, k) and noticed an easy pattern.</p>
+
+<pre><code>1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+      1  1  2  2  3  3  4  4  5  5  6  6  7  7  8  8  9  9
+               1  1  1  2  2  2  3  3  3  4  4  4  5  5  5
+                           1  1  1  1  2  2  2  2  3  3  3
+                                          1  1  1  1  1  2
+</code></pre>
+
+<p>The solution was just to put this pattern into code, and since I’d already
+written some good tests, that work was pretty easy.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">modulo = 1000000007
+
+def solve(num):
+    total = tri = addr = 0
+    while True:
+        addr += 1
+        tri += addr
+        if tri &gt; num:
+            break
+        div, mod = divmod(num - tri + 1, addr)
+        total += div * (div + 1) // 2 * addr + mod * (div + 1)
+    return total % modulo
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (1, 1),
+        (2, 3),
+        (3, 7),
+        (4, 12),
+        (5, 19),
+        (6, 28),
+        (7, 39),
+        (8, 51),
+        (9, 66),
+        (10**1, 83),
+        (10**2, 12656),
+        (10**3, 1817711),
+        (10**4, 238998218),
+        (10**5, 651877630),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

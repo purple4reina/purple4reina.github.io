@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      85 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">85</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>The math behind this one was pretty simple, which is what made this problem so
+cool. I calculated for each different size of rectangle within the larger
+rectangle, the number of possible places this size could be.  Then add all
+those together, and the final number of possible recangles appears!</p>
+
+<p>The challenge for some reason for me was finding how to get to the optimal
+rectangle. I knew I couldn’t search through every single one, of every single
+size, espcially knowing that the orientation of height and width didn’t matter.
+I used the guess and check method to figure out how to do it.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">close = [2*10**6, 0]
+for height in range(1, 2*10**6):
+	last_width = 0
+	for width in range(1, height):	
+		count = 0
+		for y in range(height):
+			for x in range(width):
+				count += ((width-x)*(height-y))
+		this_close = [abs(2*10**6 - count), count, height, width, width*height]
+		print this_close
+		if this_close[0] &lt; close[0]:
+			close = this_close
+			print '^ NEW ^'
+		if count &gt; 2*10**6 + close[0]:
+			last_width = width
+			break
+	if last_width == 1:
+		break
+	
+print close
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

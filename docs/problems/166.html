@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      166 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">166</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I’ve started including tests for any wrong answers that I get as well.  It’s
+more complete and also allows me to keep track and check against my mistakes.</p>
+
+<p>This problem was just a brute force solution.  No fancy equations here, though
+that would have been really really nice.</p>
+
+<p>I think if I had to do this again, I wouldn’t use recursion.  I’d just make a
+big old nested for loop.  I checked the forums and there was at least one
+person who did it that way.  I think I like to shy away from that method
+because it’s much much harder to write tests for.  What I really needed here to
+get this down to a more reasonable amount of time was to have access to my
+<code>reference</code> variable that I made up in the <code>check</code> method down in the <code>search</code>
+method.  This way I could have restricted the range of numbers that would be
+used when calling the recursive search.  This would have meant I’d not be
+wasting as much time with grids that could never have produced a viable
+solution.</p>
+
+<p>Runs in just over 6 minutes with Pypy3.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def solve(n):
+
+    nsqr = n ** 2
+    nsqrn = nsqr - n
+    grid = [0] * nsqr
+
+    def check(index):
+        if index &lt; n - 1:
+            return True
+        g = grid[:index+1]
+
+        # reference sum
+        reference = sum(g[:n])
+
+        # row
+        if (index + 1) % n == 0:
+            seqsum = sum(g[index-n+1:index+1])
+            if seqsum &gt; reference:
+                return None
+            if seqsum &lt; reference:
+                return False
+
+        # column and diagonal comparison
+        if index == nsqrn - n + 1:
+            if sum(g[:nsqrn-n+1:n]) != sum(g[n-1:nsqrn+1:n-1]):
+                return False
+
+        # first diagonal
+        if index == nsqrn and index &gt; 1:
+            seqsum = sum(g[n-1:nsqrn+1:n-1])
+            if seqsum &gt; reference:
+                return None
+            if seqsum &lt; reference:
+                return False
+
+        # column
+        if index &gt;= nsqrn:
+            seqsum = sum(g[index%n:index+1:n])
+            if seqsum &gt; reference:
+                return None
+            if seqsum &lt; reference:
+                return False
+
+        # last diagonal
+        if index == nsqr - 1:
+            seqsum = sum(g[::n+1])
+            if seqsum &gt; reference:
+                return None
+            if seqsum &lt; reference:
+                return False
+
+        return True
+
+    def search(index):
+        count = 0
+        end = 5 if index == 1 else 10
+        for n in range(end):
+            grid[index] = n
+            result = check(index)
+            if index == nsqr - 1 and result:
+                return 1
+            elif result:
+                count += search(index + 1)
+            elif result is None:
+                return count
+        if index == 1:
+            count *= 2
+        return count
+
+    return search(0)
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (2, 10),
+        (3, 170),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+_test_not_solve = (
+        (4, 1000),
+        (4, 10000),
+        (4, 2549976),
+        (4, 12003319),
+        (4, 12003309),
+        (4, 12003320),
+)
+
+@pytest.mark.parametrize('n,expect', _test_not_solve)
+def test_not_solve(n, expect):
+    assert expect != solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

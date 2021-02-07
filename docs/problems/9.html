@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      9 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">9</h1>
+  <h2 id="try-one">Try One</h2>
+
+<h3 id="comments">Comments</h3>
+
+<p>I was hoping I could just do this by brute force, that is, to test every
+integer in every combination for a, b, and c. But it will take roughly 40
+minutes to arrive at the answer with this method.</p>
+
+<h3 id="code">Code</h3>
+
+<pre><code class="language-applescript">set t to (time of (current date))
+set a to 1
+set b to 1
+set c to 1
+
+repeat
+	repeat
+		repeat
+			if ((a ^ 2 + b ^ 2) = (c ^ 2)) and (a + b + c = 1000) then
+				log ((time of (current date)) - t)
+				return {a, b, c, (a * b * c)}
+			end if
+			set a to a + 1
+		end repeat
+		set b to b + 1
+	end repeat
+	set c to c + 1
+end repeat
+</code></pre>
+
+<h2 id="try-two">Try Two</h2>
+
+<h3 id="resources">Resources</h3>
+
+<p>I used wikipedia to give me the formula for deriving all Pythagorean triples
+using the variables k, m, n.</p>
+
+<h3 id="comments-1">Comments</h3>
+
+<p>I was shocked when this code took only 1 sec to complete.</p>
+
+<h2 id="code-1">Code</h2>
+
+<pre><code class="language-applescript">set t to (time of (current date))
+set k to 1
+set m to 1
+set n to 1
+
+repeat until n = 1000
+	repeat until m = 1000
+		repeat until k = 1000
+			log {k, m, n}
+			set a to (k * (m ^ 2 - n ^ 2))
+			set b to (2 * k * m * n)
+			set c to (k * (m ^ 2 + n ^ 2))
+			if (a + b + c = 1000) and (a is not 0) and (b is not 0) then
+				log ((time of (current date)) - t)
+				return {a, b, c, a * b * c}
+			end if
+			set k to k + 1
+		end repeat
+		set k to 1
+		set m to m + 1
+	end repeat
+	set m to 1
+	set n to n + 1
+end repeat
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

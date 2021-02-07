@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      87 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">87</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>There were a couple of problems with this one that I needed to overcome. I
+wrote a good code that ran really fast, yet over and over came up with the same
+wrong answer. I think realized that it was because I was counting some numbers
+multiple times. Once I finally figured out the issue, I then came across the
+need to optimize the process. I was using a list before, but through digging
+around on the Python site I thought of using sets instead because they have
+good union, intersection, etc functions. Making that switch worked really well.
+This script ran in under 4 seconds.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def isprime(n):
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+primes = []
+n = 1
+while n**2 &lt; 5*10**7:
+	n += 1
+	if isprime(n) == True:
+		primes.append(n)
+
+belowset = set()
+for square in primes:
+	if square**2 &gt; 5*10**7:
+		break
+	for cube in primes:
+		if cube**3 &gt; 5*10**7:
+			break
+		for tesseract in primes:
+			if tesseract**4 &gt; 5*10**7:
+				break
+			below = square**2 + cube**3 + tesseract**4
+			if below &lt; 5*10**7:
+				belowset |= {below}
+				
+print len(belowset)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

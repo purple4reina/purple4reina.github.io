@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      76 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">76</h1>
+  <h2 id="try-one">Try One</h2>
+
+<h3 id="comments">Comments</h3>
+
+<p>I’m enjoying working on this problem. There is definitely a pattern to it that
+I really want to find. I started with the brute force method, but that would
+take way too long to find the answer. Plus, I really want to challenge myself
+to find the optimal solution.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+count = 0
+
+for length in range(2, 101):
+	print length
+	for nums in combinations_with_replacement(range(1, 101), length):
+		s = sum(nums)
+		if s == 100:
+			count += 1
+
+print count
+</code></pre>
+
+<h2 id="try-two">Try Two</h2>
+
+<h3 id="comments-1">Comments</h3>
+
+<p>After putting this problem away for a long time, I came back to it with
+determination and a new strategy.</p>
+
+<p>This problem was very difficult for me for some reason. It’s one of those that
+is very intuitive, and could be done easily enough by hand; but teaching a
+computer to go through this complicated thought process is quite tough.</p>
+
+<p>I made (for the first time!) a generator function that gives the next list,
+with the given sum, of that same length. I used a lot of loops and whiles and
+breaks to get it to work. But it finally did.</p>
+
+<p>This little bit of code will be super helpful for future problems!</p>
+
+<h2 id="code-1">Code</h2>
+
+<pre><code class="language-python">total = 100
+
+def plus_one(l):
+	global total
+	n = 2
+	while True:
+		if l[0] &lt; l[1] + 2:
+			save = l
+			rep = True
+			while rep == True:
+				try:
+					while True:
+						if l[n] + 1 &lt;= l[n-1]:
+							break
+						else:
+							n += 1
+				except:
+					return
+				l[n] += 1
+				l[1:n] = [l[n]]*len(l[1:n])
+				l[0] = total - sum(l[1:])
+				if l[0] &lt; l[1]:
+					l = save
+					continue
+				else:
+					rep = False
+					yield l
+		else:
+			l[1] += 1
+			l[0] -= 1
+			n = 2
+			yield l
+
+
+count = 0
+for length in range(2, total+1):
+	build = [0]*length
+	build[1:] = [1]*(length-1)
+	build[0] = total - sum(build)
+	print build
+	count += 1
+	for l in plus_one(build):
+		count += 1
+
+	
+print count
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

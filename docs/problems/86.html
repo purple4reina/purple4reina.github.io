@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      86 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">86</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>So sweet that I got this one right! Finally, got one. I used two tools to get
+this question correct. First, binary search. I didn’t want to have to dig
+through every number one by one until I found the right one. Using this
+technique, I was able to find the answer after testing only 15 values for M.</p>
+
+<p>Second, in order to speed up the checking of each value, I relied on the total
+count from the next smallest check. I started with this value, then ran through
+all the cuboids that weren’t yet checked, adding to the final value. This
+technique worked very nicely.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def my_answer(low, mid, high):
+	global lowestM
+	count = lowestM[1]
+	M = mid; print M
+	for L in range(1, M+1):
+		for W in range(L, M+1):
+			for H in range(max([W, lowestM[0]+1]), M+1):
+				one = (L**2 + (W+H)**2)**.5
+				two = (H**2 + (L+W)**2)**.5
+				three = (W**2 + (H+L)**2)**.5
+				smallest = min([one, two, three])
+				if smallest%1 == 0:
+					count += 1
+	
+	print M, count
+	if high &lt; low:
+		return 'not found'
+	if count &gt; 10**6:
+		return my_answer(low, int((3*low+mid)/4), mid)
+	elif count &lt; 10**6:
+		lowestM = [M, count]
+		return my_answer(mid, int((3*mid+high)/4), high)
+	else:
+		return mid, 'found'
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      136 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">136</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I used the same solution for this problem as I did for problem 135.  Just
+changed the inputs.  Runs in about a minute.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def solve(n, m):
+    solutions = {}
+    for i in range(3, 5*m//4+1):
+        for j in range(4*i//5, i//2, -1):
+            key = 4*i*j - 5*j**2
+            if key &gt;= m:
+                break
+            solutions[key] = solutions.get(key, 0) + 1
+    count = 0
+    for val in solutions.values():
+        count += val == n
+    return count
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    m = eval(sys.argv[2])
+    print(solve(n, m))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (1, 100, 25),
+        (2, 100, 8),
+        (3, 100, 8),
+        (4, 100, 2),
+        (5, 100, 0),
+        (1, 200, 44),
+        (2, 200, 20),
+        (3, 200, 16),
+        (4, 200, 5),
+        (5, 200, 2),
+        (6, 200, 0),
+)
+
+@pytest.mark.parametrize('n,m,expect', _test_solve)
+def test_solve(n, m, expect):
+    assert expect == solve(n, m)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

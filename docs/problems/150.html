@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      150 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">150</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I feel like I’m getting to the point with these problems where Python is just
+not going to be fast enough. It took over an hour for this one to run and
+unless there’s some clever and more logical way to do it, then I’m at a loss to
+figure out how it could run any faster than that.</p>
+
+<p>With my first try at this problem, I found that I was having it calculate the
+same thing multiple times. This meant going through many for and while loops
+for each test. I solved this by creating a couple of arrays to store the values
+in. I think this is one place that I could find a way to work up the speed.
+There are probably faster ways to store data with Python, but I’m not sure how.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python"># bounds
+
+low = 1
+high = 500500
+rows = 1000
+
+
+# definitions
+
+def random(low, high):
+	t = 0 
+	for k in range(low, high): 
+	    t = (615949*t + 797807) % 2**20 
+	    yield t - 2**19
+
+def trirow(k):
+	n = 1
+	while k &gt; (n * (n + 1) / 2):
+		n += 1
+	return n
+
+def trisum(start, depth):
+	diff = trirowdict[start]
+	total = randlist[start]
+	r = 1
+	while r &lt; depth:
+		r += 1
+		next = start + diff
+		total += randlist[next]
+		for i in range(1, r):
+			total += randlist[next + i]
+		start = next + i
+	return total	
+
+def trisumiter(start, depth):
+	diff = trirowdict[start]
+	total = randlist[start]
+	yield total
+	r = 1
+	while r &lt; depth:
+		r += 1
+		next = start + diff
+		total += randlist[next]
+		for i in range(1, r):
+			total += randlist[next + i]
+		start = next + i
+		yield total
+
+
+# create arrays
+
+randlist = [0]
+for r in random(low, high + 1):
+	randlist.append(r)
+randlist = tuple(randlist)
+
+trirowdict = dict()
+for n in range(low, high + 1):
+	trirowdict[n] = trirow(n)
+
+
+# search by brute force
+
+prev = 10**7
+for start in range(len(randlist)):
+	if start == 0: continue
+	startrow = trirowdict[start]
+	if startrow == rows: continue
+	trisumdict = dict()
+	print start
+	for thissum in trisumiter(start, rows + 1 - startrow):
+		if thissum &lt; prev:
+			prev = thissum
+			
+
+print prev
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

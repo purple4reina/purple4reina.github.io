@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      516 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">516</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This problem took me several days to finish.  I keep spinning my wheels coming
+up with convoluted algorithms.  What I really needed to do was sit down with
+paper and pen and look at the actual math.  This isn’t an agorithms problem,
+it’s a math problem!</p>
+
+<p>What I found is that the totient of a number is hamming if two things about the
+number are true:</p>
+
+<ol>
+  <li>For every prime factor p of n, (p - 1) must be a hamming number</li>
+  <li>The only prime factors p of n that can have an exponent &gt;1 are p = 2, 3, 5</li>
+</ol>
+
+<p>These follow from the generating function for the totient:</p>
+
+<blockquote>
+  <p>Where n = p1^k1 * p2^k2 * … pr^kr, and p1, p2, … pr are distinct primes</p>
+
+  <p>φ(n) = p1^(k1 - 1)<em>(p1 - 1) * p2^(k2 - 1)</em>(p2 - 1) * … pr^(kr - 1)*(pr - 1)</p>
+</blockquote>
+
+<p>After figuring this out, I stopped trying to search for the correct answers and
+instead went about creating them.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">modulo = 1 &lt;&lt; 32
+
+_primes = []
+def is_prime(n):
+    n_root = int(n ** 0.5)
+    for p in _primes:
+        if p &gt; n_root:
+            return True
+        if n % p == 0:
+            return False
+    return True
+
+def solve(n):
+
+    hammings = [1]
+    for p in (2, 3, 5):
+        next_hammings = []
+        for h in hammings:
+            if h == 1 and (p == 3 or p == 5):
+                continue
+            for e in range(1, n):
+                num = h * p ** e
+                if num &gt;= n:
+                    break
+                next_hammings.append(num)
+        hammings.extend(next_hammings)
+
+    top = int(n ** 0.5)
+    sieve = [True] * (top + 1)
+    for p, prime in enumerate(sieve):
+        if not prime or p &lt; 2:
+            continue
+        _primes.append(p)
+        num = p + p
+        while num &lt;= top:
+            sieve[num] = False
+            num += p
+
+    hamming_primes = []
+    for h in hammings:
+        if is_prime(h + 1):
+            hamming_primes.append(h + 1)
+
+    hamming_totients = [1]
+    for p in hamming_primes:
+        next_hammings = []
+        for h in hamming_totients:
+            if p &gt; 5:
+                num = h * p
+                if num &gt; n:
+                    break
+                next_hammings.append(num)
+            else:
+                for e in range(1, n):
+                    num = h * p ** e
+                    if num &gt; n:
+                        break
+                    next_hammings.append(num)
+        hamming_totients.extend(next_hammings)
+        hamming_totients.sort()
+
+    return sum(hamming_totients) % modulo
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (10 ** 1, 55),
+        (10 ** 2, 3728),
+        (10 ** 3, 203813),
+        (10 ** 4, 9586559),
+        (10 ** 5, 397079942),
+        (10 ** 6, 2236471777),
+        (10 ** 7, 3567819736),
+        (10 ** 8, 3620613805),
+        (10 ** 9, 964002218),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

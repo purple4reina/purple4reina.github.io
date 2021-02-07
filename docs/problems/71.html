@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      71 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">71</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This problem frustrated me soooooo much! I worked for sooo long on it, then
+after hours and hours of toil, I realized the problem was in my division
+algorithm. After all that time, I had just forgotten to add a zero.</p>
+
+<p>When I was done, I looked at the forums for this problem. It made me really sad
+that everyone said how easy it was. Most everyone just did it in their heads.
+It really bummed me out to see that, but I think I’m going to keep checking the
+forums to get hints and new ideas for future problems.</p>
+
+<p>You can see in my final code, which I’ve included here, that I worked through
+many many different functions and definitions to try to get to the answer. Ends
+up, I used hardly any of them. Because, it was just an error in my division
+function that all along was causing me grief.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">bound = 10**6
+from math import *
+from time import time
+
+short = 7
+longs = 100
+
+n = 3; d = 7; m = 1; mult = []
+while d*m &lt;= 10**6:
+	mult.append([n*m, d*m])
+	m += 1
+	
+def reduce2(x, y):
+	if [x, y] in mult: return True
+	else: return False
+
+def reduce(x, y):
+	for i in range(2, x+1):
+		while x%i == y%i == 0:
+			x = x / i
+			y = y / i
+	return x, y
+
+def isprime(n):
+	if n == 1 or n == 0: return False
+	for i in range(2, int(n**.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+def primeslist(bounds):
+	primes = []
+	for n in range(bounds+1):
+		if isprime(n) == True: primes.append(n)
+	return primes
+
+def divide(x, y):
+	x = int(x)
+	y = int(y)
+	z = []
+	while len(z) &lt; short:
+		if (x / y) &gt;= 1:
+			z.append(x / y)
+			x = x%y * 10
+		else:
+			x = x*10
+			z.append(0)
+	return str(''.join(map(str, z[1:])))
+
+def dividelong(x, y):
+	x = int(x)
+	y = int(y)
+	z = []
+	while len(z) &lt; longs:
+		if (x / y) &gt;= 1:
+			z.append(x / y)
+			x = x%y * 10
+		else:
+			x = x*10
+			z.append(0)
+	return str(''.join(map(str, z[1:])))
+
+def addmult(n, d, mult):
+	m = 1
+	while d*m &lt;= 10**6:
+		mult.append([n*m, d*m])
+		m += 1
+	return mult
+
+
+answers = [[dividelong(3, 7), 3, 7]]
+test = divide(3, 7)
+start = time(); print 0, len(answers), 0
+for d in range(7, bound + 1):
+	if d%10000 == 0:
+		end = time()
+		print d, len(answers), end-start
+		start = end
+	
+	n = int(floor(float(d)*float(3)/float(7)))
+	this = divide(n, d)
+	if (this == test):
+		answers.append([dividelong(n, d), n, d])
+		
+
+print sorted(answers)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      111 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">111</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I started out with this one thinking that I’d have to run through every single
+10 digit number until I found all the primes. Then, run through all of those
+primes untill I found the longest strings of digits, and yada yada. That would,
+clearly, have taken years to complete.</p>
+
+<p>Instead, I realized that about 9 ones and some other digit would probably be
+prime.  And low and behold it was. That’s where I started from: 9 of one digit,
+and 1 of another. If that didn’t work, I did 8 of one digit and 2 others. And
+so on, until I got the answer.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+def isprime(n):
+	if n == 2:
+		return True
+	elif n &lt; 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+primes = []
+tested = set()
+
+repitit = 10
+intint = range(10)
+works = []
+
+while len(intint) &gt; 0:
+	repitit -= 1
+	for w in works:
+		try:
+			intint.remove(w)
+		except:
+			pass
+	for t in intint:
+		print t
+		for d in combinations_with_replacement(range(10), 10-repitit):
+			for n in permutations([t]*repitit + list(d), 10):
+				if n in tested: 
+					continue
+				number = int(''.join(map(str, n)))
+				tested.add(n)
+				if len(str(number)) &lt; 10:
+					continue
+				if isprime(number) == True:
+					primes.append(number)
+					works.append(t)
+
+print primes
+print len(primes)
+print sum(primes)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      95 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">95</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I used the same strategy as I used for <a href="179">Problem 179</a> in finding the number
+of factors of a number. I used a set to eliminate the numbers that I’d already
+dug through. This sped things up a bit. I also threw out any string of
+amicables where the next number was less than the first one.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">ans = [0,0]
+nset = set(range(10**6+1))
+
+def nextam(n):
+	fact = [1]
+	for i in range(2, int(n**.5)+1):
+		if n%i == 0:
+			fact.append(i)
+			if n/i != i:
+				fact.append(n/i)
+	return sum(fact)
+
+while len(nset) &gt; 0:
+	number = nset.pop()
+	n = number
+	if n%10**4 == 0: print n, len(nset), ans[0]
+	amlist = [n]
+	done = False
+	count = 0
+	while done == False:
+		next = nextam(n)
+		count += 1
+		if next &gt; 10**6 or count &gt; 10**3 or next &lt; number:
+			break
+		elif next == number:
+			done = True
+		else:
+			amlist.append(next)
+		n = next	
+	if done == True:
+		nset -= set(amlist)
+		if count &gt; ans[0]:
+			ans = [count, number]
+
+print ans
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

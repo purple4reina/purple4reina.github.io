@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      164 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">164</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I made a function that spat back all the possible next digits when you feed it
+two digits. I used a dictionary to keep track of the number of integers with
+each last two digit string. It’s really only those last two digits that you
+care about, after that, it’s just keeping track of how many numbers there are
+with those last two digits.</p>
+
+<h2 id="results">Results</h2>
+
+<p>Script runs in under 1 second!</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+
+def next_digit(a, b):
+	largest = 9 - a - b
+	return range(largest+1)
+
+
+trys = dict()
+
+for start in product(range(1,10), range(10)):
+	if sum(list(start)) &gt; 9:
+		continue
+	else:
+		trys[start] = 1
+
+
+for i in range(18):
+	new_trys = dict()
+	for t in trys.iterkeys():
+		for n in next_digit(t[0], t[1]):
+			try:
+				new_trys[(t[1], n)] += trys[(t[0], t[1])]
+			except:
+				new_trys[(t[1], n)] = trys[(t[0], t[1])]
+	trys = new_trys
+
+
+total = 0
+for s in trys.itervalues():
+	total += s
+
+print total
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

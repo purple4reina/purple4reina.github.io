@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      98 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">98</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This problem took a lot of futzing around with string methods. I used
+dictionaries to match numbers with letters and then replace them, returning an
+integer. I used the permutations iterator to give me all possible dictionaries.</p>
+
+<p>What was tough is that there’s one set of three anagrams in the list. That one
+I dealt with separately. I first pulled the words into a list, then used
+combinations to copy each pair into the pairs list.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+
+for words in open('words.txt','r'):
+	words = words.split('","')
+
+anagrams = []
+for w in words:
+	anagrams.append(''.join(sorted(w)))
+
+pairs = []
+triple = []
+for i in range(len(anagrams)):
+	if anagrams.count(anagrams[i]) == 2:
+		try:
+			pairs.append((words[i],words[anagrams.index(anagrams[i],i+1)]))
+		except:
+			pass
+	elif anagrams.count(anagrams[i]) &gt; 2:
+		for j in range(len(anagrams)):
+			if anagrams[j] == anagrams[i] and words[j] not in triple:
+				triple.append(words[j])
+
+for t in combinations(triple,2):
+	pairs.append(t)
+
+squares = []
+for pair in pairs:
+	for perm in permutations(range(10),len(pair[0])):
+		replace_dict = dict(zip(pair[0],perm))
+		pair0 = int(''.join([str(replace_dict[letter]) for letter in pair[0]]))
+		pair1 = int(''.join([str(replace_dict[letter]) for letter in pair[1]]))
+		if len(str(pair0)) != len(str(pair1)):
+			continue
+		elif (pair0**0.5)%1 != 0:
+			continue
+		elif (pair1**0.5)%1 != 0:
+			continue
+		else:
+			squares.append(pair0)
+			squares.append(pair1)
+
+print max(squares)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

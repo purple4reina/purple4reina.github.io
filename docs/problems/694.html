@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      694 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">694</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I grabbed this problem to work on because I feel like I’ve been doing a bunch
+of problems using divisors.  So I felt like I was well prepared for it.  I was
+able to solve it pretty quickly because of that.</p>
+
+<p>Seems like with a lot of these problems where you’re counting the occurance of
+something, I will start by running through all the numbers and checking for all
+the things.  Then I’ll realize how slow that’ll be and change to trying to
+produce the things instead.  That was my exact process in this case.  10 ** 18
+is a very large number to be running all the way through!  I do think starting
+by running all the numbers is a good idea because then I can write some good
+working tests.  Once I do that I have confidence to make sweeping changes to
+the code.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from sympy import sieve
+
+def S(n):
+    total = n
+    cube_fulls = set([1])
+    for p in sieve.primerange(1, int(n ** (1 / 3)) + 1):
+        new_cube_fulls = set(cube_fulls)
+        cube = p ** 3
+        max_add = n // cube
+        for full in cube_fulls:
+            mult = full * cube
+            while mult &lt;= n:
+                total += n // mult
+                if mult &lt; max_add:
+                    new_cube_fulls.add(mult)
+                mult *= p
+        cube_fulls = new_cube_fulls
+
+    return total
+
+if __name__ == '__main__':
+    import sys
+    n = int(sys.argv[1])
+    print(S(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import S
+
+_test_S = (
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+        (6, 6),
+        (7, 7),
+        (8, 9),
+        (9, 10),
+        (10, 11),
+        (11, 12),
+        (13, 14),
+        (14, 15),
+        (15, 16),
+        (16, 19),
+        (17, 20),
+        (18, 21),
+        (19, 22),
+        (20, 23),
+        (21, 24),
+        (22, 25),
+        (23, 26),
+        (24, 28),
+        (25, 29),
+        (26, 30),
+        (27, 32),
+        (28, 33),
+        (29, 34),
+        (30, 35),
+        (31, 36),
+        (32, 40),
+        (100, 126),
+        (10000, 13344),
+)
+
+@pytest.mark.parametrize('n,expect', _test_S)
+def test_S(n, expect):
+    assert expect == S(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      23 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">23</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This is taking a lot of work to fix the bugs in here. This dictionary class is
+really helping out a lot though. It means I don’t have to go through a whole
+bunch of numbers a million times just to get an answer. I’ve managed to cut the
+time back on this significantly, but it still has some work to do. It also give
+the wrong answer, which isn’t a surprise. But I think it’s on the right track.</p>
+
+<p>Oh great, I found my mistake. Note to self: be causious when changing a
+variable’s name. Not changing the name everywhere makes the script not work!</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from time import time
+start_time= time()
+print """Process started
+----------"""
+
+bound = 28123+1
+
+#Create function to determine if a number is perfect
+def perfect(n):
+	a = 0
+	for i in range(1, n):
+		if n%i == 0:
+			a = a + i
+	if a &gt; n:
+		return 1
+	elif a &lt; n:
+		return -1
+	else:
+		return 0
+
+#Build list of all abundant numbers
+abundantsums = []
+abundant = dict()
+collected = 'FALSE'
+for i in range(bound):
+	if perfect(i) &lt; 1: continue
+	for j in range(i, bound):
+		if collected is 'FALSE':
+			abundant[j] = perfect(j)
+		if abundant.get(j) &lt; 1: continue
+		if i + j &gt; bound:
+			collected = 'TRUE'; break
+		elif ((i + j) not in abundant):
+			print i, j
+			abundantsums.append(i + j)
+
+#Find the sum of all numbers not in the previous list
+sum = 0
+for r in range(bound):
+	if r not in abundant:
+		sum = sum + r
+		
+print sum
+
+
+end_time= time()
+elapse_time= end_time - start_time
+print '----------'
+print elapse_time, 'seconds have passed'
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

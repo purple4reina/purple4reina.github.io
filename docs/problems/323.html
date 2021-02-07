@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      323 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">323</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This problem was a delightful change in pace.  There were no test cases given,
+and really it wasn’t as much about finding an efficient algorithm as it was for
+actually trying to figure out what the answer is mathemtically.</p>
+
+<p>I started by attempting a brute force method that just ran the example as given
+in the problem over and over again and printed the average as it went.  This
+was nice because it gave me a good ballpark estimate of what the answer would
+be.  However, since the problem asked for 10 digits after the decimal and my
+brute force (Monte Carlo?) method was converging only at 4-5 digits, I knew I’d
+need a different approach.</p>
+
+<p>This is when I started to think about it mathematically.  I began by trying to
+solve the problem for if it was just a single digit number.  This is the same
+as asking how many times on average do you need to flip a coin before you will
+get a Heads.  I read several explanations on the internet; the answer is 2
+flips.  By hand I followed their example and figured out what it would be if I
+flipped two coins, how many flips until each of them have gotten a Heads.  I
+started to see a continued fraction evolving.  I was able to put together a
+function that solved the problem for 1 and 2 bits respectively, then used
+oeis.org to find the patterns.  From here it was an simple walk to the correct
+answer.  Using Pypy3, it runs in about 0.10 seconds.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def solve(n):
+    num = it = prev = 0
+    while True:
+        it += 1
+        denom = 2**(n*it)
+        a = (2**it - 1)**n - (2**it - 2)**n
+        num += (a / denom) * it
+        if num - prev &lt; 0.00000000001:
+            break
+        prev = num
+    return round(num, 10)
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (1, 2.0),
+        (2, 2.6666666667),
+        (3, 3.1428571428),
+        (4, 3.5047619048),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

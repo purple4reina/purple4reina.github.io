@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      679 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">679</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>Wow, this problem took me a long time and a lot of struggle.  But, eventually I
+tried enough things explored far enough that I came up with an excellent
+solution!</p>
+
+<p>This final solution was I think my fourth attempt at this problem, each time it
+got faster and faster.  I started with a simple brute-force implementation
+where I looked through all possible strings, checked if each word was in it
+once and only once, and incremented a counter.  This allowed me to get some
+tests and check that the test value given in the problem was correct.</p>
+
+<p>From there, I implemented what I called a “half brute-force” algorithm.  I
+figured in my brute-force implementation I was wasting a ton of time on strings
+that didn’t have all four of the words in them.  So instead, I figured out all
+the possible ways that the words could overlap.  This let me be smarter in my
+creation of strings to test.  I knew this wouldn’t be a good enough solution,
+but I figured it could help me get more tests written.</p>
+
+<p>I spent at least a couple of weeks on another deadend solution that was so
+complex I had to just throw it away.  I figured this was a combinatorics
+problem, so I should just do the math.  Woh, would have been nice… but this
+got complex very quickly and I was never able to get the tests to pass for more
+than a 3 or 4 string lengths.</p>
+
+<p>So, I decided to try something new.  Instead of searching through all the
+strings, why not create correct ones and count them.</p>
+
+<p>I figured too that instead of using characters and strings, I could do the
+problem just using the numbers 1 through 4.  This made comparisons much much
+faster and abstracted the problem in a fun and interesting way.</p>
+
+<p>I made a recursive function that given the last three letters of the string
+would try putting each of the available letters onto it.  Then, count the
+number of words created.  If the string is long enough and all the words are
+there only once, increment the counter by one.</p>
+
+<p>This solution passed all the tests grandly.  However, it was even slower than
+my “half brute” method.  That seemed silly to me, so I went about looking for
+ways to speed it up.  I won’t go through all of them here, because I think I
+spent at least a week trying to come up with different things.  But needless to
+say, the code started getting very very long.  I would never have committed
+that code at work!</p>
+
+<p>So, wait a minute, what was I doing?  I realized that all I was doing was
+caching the return value of my recursive function based on the input.  Duh!
+It’s not like the output would change if the input doesn’t!  So, I tore out all
+the grossness and replaced it with a simple dictionary cache.  And voila!
+Solution in under a second!</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">_search = {}
+def search(word, left, w1, w2, w3, w4):
+    left -= 1
+
+    key = (left, word, w1, w2, w3, w4)
+    if key in _search:
+        return _search[key]
+
+    total = 0
+    for letter in range(1, 5):
+        worded = word + letter
+        wd1, wd2, wd3, wd4 = w1, w2, w3, w4
+        if worded == 4223:
+            if wd2:
+                continue
+            wd2 = True
+        elif worded == 1421:
+            if wd4:
+                continue
+            wd4 = True
+        elif worded == 3142:
+            if wd3:
+                continue
+            wd3 = True
+        elif worded == 3422:
+            if wd1:
+                continue
+            wd1 = True
+
+        if left == 0:
+            if wd1 + wd2 + wd3 + wd4 == 4:
+                total += 1
+        else:
+            total += search((worded % 1000) * 10, left, wd1, wd2, wd3, wd4)
+
+    _search[key] = total
+    return total
+
+
+def solve(n):
+    return search(0, n, False, False, False, False)
+
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (9, 1),
+        (10, 10),
+        (11, 72),
+        (12, 450),
+        (13, 2582),
+        (14, 13998),
+        (15, 72863),
+        (16, 367804),
+        (17, 1812443),
+        (18, 8759228),
+        (19, 41657663),
+        (20, 195461958),
+        (21, 906624134),
+        (22, 4163603956),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

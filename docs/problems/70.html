@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      70 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">70</h1>
+  <h2 id="resources">Resources</h2>
+
+<p>The page on wikipedia about euler’s totient was really helpful.</p>
+
+<h2 id="comments">Comments</h2>
+
+<p>This problem was great! I realized, from reading the wikipedia article on
+euler’s totient, that the smallest ratio of n/φ(n) will be one when n is
+prime. For prime numbers, φ(n) = n-1, so there was no need for me to use
+the φ function at all.</p>
+
+<p>There is no way that φ(n) could be a palendrome of n because φ(n) =
+n-1.  This told me that the next best way for n/φ(n) to be minimized was if
+n was the product of just two primes.</p>
+
+<p>So, I generated a list of all the primes listed in ordered pairs with their
+φ(n). I then used the combinations iterator to generate all pairs of those
+primes until I found the smallest value.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def isperm(n, m):
+	n = sorted(map(int, str(n)))
+	m = sorted(map(int, str(m)))
+	if n == m:
+		return True
+	else:
+		return False
+
+def isprime(n):
+	if n == 0 or n == 1: return False
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return False
+	return True
+
+
+n = 1
+primes = []
+ratio = [10**7, 10**7]
+
+while n &lt;= 10**7/2:
+	n += 1	
+	if isprime(n) == True: 
+		primes.append([n, n-1])
+
+from itertools import combinations
+
+for pairs in combinations(primes, 2):
+	n = pairs[0][0]*pairs[1][0]
+	if n &gt;= 10**7:
+		continue
+	ph = pairs[0][1]*pairs[1][1]
+	nph = n/float(ph)
+	if isperm(n, ph) == True and nph &lt; ratio[1]:
+		ratio = [n, nph]
+		print ratio
+		
+print ratio
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

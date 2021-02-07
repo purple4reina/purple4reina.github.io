@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      214 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">214</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I do not understand why this one is marked as 40% difficulty, because it felt
+waaaaaay easier to me than even some of the 20% ones.  Mayb though it is
+because I’ve been doing a lot of totient problems recently and I feel like I
+have a good handle of it.</p>
+
+<p>I started out by grabbing the code snippet I’d saved for Euler’s totient.  The
+only other thing to do after that was create a function that recursively calls
+this totient function and return how deap the recursion was.</p>
+
+<p>The test passed so I figured I might as well try it with the I was suppose to
+input for the solution.  I wanted to see just how slow it would be and what I
+was “going to be up against” in a way.  And then it just finished.  And then I
+just entered the answer into the form.  And that was it.</p>
+
+<p>There’s gotta be things that can be improved in here though I think this is the
+minimal complexity solution.  After submitting I figured I might as well try to
+make some of these improvements.  That’s when I figured out that this is the
+most efficient solution.</p>
+
+<h2 id="update">Update</h2>
+
+<p>I was wrong, this can get faster.  When creating the primes, once you have
+processsed all the primes less than or equal to the square root of n, you don’t
+need to do the while loop at all.  That change reduces the total time from
+about 22 seconds to about 18 seconds.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def memoize(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+def solve(n, l):
+    sieve = {}
+    primes = []
+    for p in range(2, n + 1):
+        if sieve.get(p):
+            continue
+        primes.append(p)
+        num = p + p
+        while num &lt;= n:
+            sieve[num] = p
+            num += p
+
+    @memoize
+    def totient(n):
+        if n == 1:
+            return 1
+        p = sieve.get(n)
+        if not p:
+            return n - 1
+        n //= p
+        e = 0
+        while n % p == 0:
+            n //= p
+            e += 1
+        return p**e * (p - 1) * totient(n)
+
+    @memoize
+    def chain(n):
+        if n == 1:
+            return 1
+        t = totient(n)
+        return 1 + chain(t)
+
+    total = 0
+    for p in primes:
+        if chain(p) == l:
+            total += p
+
+    return total
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    l = eval(sys.argv[2])
+    print(solve(n, l))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (20, 4, 12),
+)
+
+@pytest.mark.parametrize('n,l,expect', _test_solve)
+def test_solve(n, l, expect):
+    assert expect == solve(n, l)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

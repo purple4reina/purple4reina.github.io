@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      134 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">134</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>The trick I used in this problem to get the runtime to 90sec is the use of a
+dictionary to store all possible values of any odd number times another odd
+number, both less than 1000.  This told me what possible multipliers I would
+need for p2. Thus, with each loop, I increased each multiplier by 1000 from the
+previous round. This cut runtime down incredibly.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def isprime(n):
+	if n == 2:
+		return True
+	elif n &lt; 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+def nextprime(p):
+	if p == 2:
+		return 3
+	else:
+		while True:
+			p += 2
+			if isprime(p) == True:
+				return p
+
+def multfind(p1, p2):
+	if p2 &lt; 1000:
+		return strconcfind(p1, p2)
+	p1_last = int(str(p1)[-3:])
+	p2_last = int(str(p2)[-3:])
+	n_list = []
+	for pair in multDict[p1_last]:
+		if pair[0] == p2_last:
+			n_list.append(pair[1])
+	while True:
+		for n in n_list:
+			test = n * p2
+			if str(test)[-1 * len(p1):] == p1:
+				return test
+			else:
+				n_list = [(n+1000) for n in n_list]
+
+def strconcfind(p1, p2):
+	n = 1
+	while True:
+		test = int(str(n) + p1)
+		if test%p2 == 0:
+			return test
+		else:
+			n += 1
+
+def Build():
+	
+	global primes
+	global multDict
+		
+	multDict = dict(zip(range(1000), [[] for i in range(1000)]))
+	for a in xrange(1, 1000, 2):
+		for b in xrange(1, 1000, 2):
+			multDict[int(str(a*b)[-3:])].append((a,b))
+			
+	primes = []
+	for n in xrange(7, 10**6):
+		if isprime(n) == True:
+			primes.append(n)
+	primes.append(nextprime(primes[-1]))
+	
+
+
+Build()
+p1 = '5'
+total = 0
+for p2 in primes:
+	print p2
+	S = multfind(p1, p2)
+	total += S
+	p1 = str(p2)
+
+print total
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

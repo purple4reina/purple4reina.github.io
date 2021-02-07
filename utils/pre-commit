@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
 bundle install
-rm -rf _site/
-jekyll build
-git add _site/
+rm -rf docs/
+JEKYLL_ENV=production jekyll build --trace --config _config.yml,_config.production.yml
+git add docs/

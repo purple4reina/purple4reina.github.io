@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      172 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">172</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>Got this one on the first try. That rocks. I used dictionaries to track the
+progress as new digits were added. If a digit had reach its limit, then that
+digit was not added on.  It took almost 4 minutes to run, but that’s alright by
+me!</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+
+numDict = dict(zip(product(range(4), repeat=10), [0]*4**10))
+saved = numDict.copy()
+
+
+numDict[(0,0,0,0,0,0,0,0,0,1)] = 1
+numDict[(0,0,0,0,0,0,0,0,1,0)] = 1
+numDict[(0,0,0,0,0,0,0,1,0,0)] = 1
+numDict[(0,0,0,0,0,0,1,0,0,0)] = 1
+numDict[(0,0,0,0,0,1,0,0,0,0)] = 1
+numDict[(0,0,0,0,1,0,0,0,0,0)] = 1
+numDict[(0,0,0,1,0,0,0,0,0,0)] = 1
+numDict[(0,0,1,0,0,0,0,0,0,0)] = 1
+numDict[(0,1,0,0,0,0,0,0,0,0)] = 1
+
+i = 1
+while i &lt; 18:
+	print i
+	i += 1
+	newDict = saved.copy()
+	for key in numDict.iterkeys():
+		for j in range(len(key)):
+			if key[j] &lt; 3 and numDict[key] &gt; 0:
+				newkey = list(key)
+				newkey[j] += 1
+				newkey = tuple(newkey)
+				newDict[newkey] += numDict[key]
+	numDict = newDict.copy()
+
+total = 0
+for value in numDict.itervalues():
+	total += value
+
+print total
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

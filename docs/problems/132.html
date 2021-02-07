@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      132 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">132</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This was a tough one mathematics wise. R(10^9) is way way way too large for any
+computer to handle (it’s a billion digits long). So, I had to think more
+creatively.</p>
+
+<p>I found on Wolfram MathWorld that the formul for a base 10 repunit is (10^n -
+1)/ (10 - 1) where n is the number of concatenated 1’s. This means, R(10^9)’s
+factors must be the factors of (10^(a billion) - 1).</p>
+
+<p>After doing a little more research, and from just looking at the lists of prime
+factors of small values of R(n), I discovered that all R(k) are divisors of
+R(n) where k’s are all the divisors of n. I used this to make a list of all the
+divisors of R(10^9).</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+
+def R(k):
+	n = '1'*k
+	return int(n)
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n &lt; 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+def nextprime(n):
+	if n &lt; 2:
+		return 2
+	elif n == 2:
+		return 3
+	else:
+		while True:
+			n += 2
+			if isprime(n) == True:
+				return n
+
+def primefactors(n):
+	num = n
+	fact = []
+	p = 1
+	while n != 1:
+		p = nextprime(p)
+		while n%p == 0:
+			fact.append(p)
+			n /= p
+		if p &gt; (2*10**5) and n != 1:
+			break
+	return sorted(fact)
+
+def factors(n):
+	factorss = primefactors(n)
+	fact = set()
+	for length in range(1, len(factorss)):
+		for num in combinations(factorss, length):
+			number = 1
+			for n in num:
+				number *= n
+			fact.add(number)
+	return sorted(list(fact))
+
+
+n = 10**9
+fact = set()
+humbug = False
+for r in factors(n):
+	if humbug == True or len(fact) &gt; 40:
+		break
+	try:
+		fact |= set(primefactors(R(r)))
+	except:
+		humbug = True
+	print r, len(fact)
+
+fact = sorted(list(fact))
+print fact
+print sum(fact[:40])
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

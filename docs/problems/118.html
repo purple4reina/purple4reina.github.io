@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      118 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">118</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>My strategy with this problem was to take every permutation of the digits 1
+through 9 and impose all distinct ways of cutting them into pieces. I first
+tried writing out all the ways to add numbers and get 9, but of course I forgot
+one. I then wrote a quick algorithm that would give me all of these different
+cuts (which is what showed me that I had missed one) and then used that to
+start the code off.</p>
+
+<h2 id="results">Results</h2>
+
+<p>It takes a little longer than I’d like to run, but otherwise it works
+wonderfully.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">from itertools import *
+
+def isprime(n):
+	if n == 2:
+		return True
+	elif n &lt; 2 or n%2 == 0:
+		return False
+	else:
+		for i in range(3, int(n**0.5 + 1), 2):
+			if n%i == 0: return False
+		return True
+
+answers = set()
+
+for p in combinations_with_replacement(range(0,10), 9):
+	if sum(list(p)) == 9:
+		answers.add(tuple(sorted(list(p))))
+
+divisions = []
+	
+for group in answers:
+	new_group = []
+	for digit in group:
+		if digit != 0:
+			new_group.append(digit)
+	divisions.append(new_group)
+	
+answers = set()
+prev = 0
+
+for p in permutations(range(1, 10)):
+	if p[2] != prev:
+		print p
+		prev = p[2]
+	for div in divisions:
+		this = []
+		this_p = list(p)
+		for comma in div:
+			this.append(int(''.join(map(str, this_p[:comma]))))
+			del this_p[:comma]
+		hum = True
+		for number in this:
+			if isprime(number) == False:
+				hum = False
+				break
+		if hum == True:
+			answers.add(tuple(sorted(this)))
+
+print len(answers)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

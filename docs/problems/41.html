@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      41 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">41</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>If I could just learn how to read directions correctly the first time, I
+wouldn’t have to bang my head against the wall when I don’t get the correct
+answer. Also, it ends up the question they were actually asking was easier than
+what I thought they were asking.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">#evaluate if a number is prime or not
+def isprime(n):
+	for i in range(2, int(n**0.5 + 1)):
+		if n%i == 0: return 'FALSE'
+	return 'TRUE'
+
+#take a string of form (1, 2, a, b) and make it into one word or number of form 12ab
+def str2num(n):
+	return ''.join(map(str, n))
+
+import itertools
+for r in range(1, 10):
+	for n in itertools.permutations(range(1, r+1), r):
+		thisnumber = int(str2num(n))
+		if (isprime(thisnumber) == 'TRUE'):
+			print thisnumber, 'is prime'
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

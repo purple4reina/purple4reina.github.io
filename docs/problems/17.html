@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      17 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">17</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>It’s a little silly how long I waited to try this problem again. The first time
+I did it, I worked for a long time just to get the wrong answer (I think I was
+spelling ‘forty’ as ‘fourty’). It frustrated me so much that I have now
+progressed to the point where I’m working on problems that only 2000 people
+have completed rather than doing this one that over 40,000 have completed.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def letters(n):
+	ans = []
+	if n == 1000:
+		ans.append('one')
+		ans.append('thousand')
+	
+	d1 = n%10
+	d2 = (n%100 - d1)/10
+	d3 = (n%1000 - d1 - d2)/100
+	
+	if d3 != 0:
+		if d3 == 1:
+			ans.append('one')
+		elif d3 == 2:
+			ans.append('two')
+		elif d3 == 3:
+			ans.append('three')
+		elif d3 == 4:
+			ans.append('four')
+		elif d3 == 5:
+			ans.append('five')
+		elif d3 == 6:
+			ans.append('six')
+		elif d3 == 7:
+			ans.append('seven')
+		elif d3 == 8:
+			ans.append('eight')
+		elif d3 == 9:
+			ans.append('nine')
+		ans.append('hundred')
+	
+	if d3 != 0 and (d2 != 0 or d1 != 0):
+		ans.append('and')
+	
+	if d2 != 0:
+		if d2 == 2:
+			ans.append('twenty')
+		elif d2 == 3:
+			ans.append('thirty')
+		elif d2 == 4:
+			ans.append('forty')
+		elif d2 == 5:
+			ans.append('fifty')
+		elif d2 == 6:
+			ans.append('sixty')
+		elif d2 == 7:
+			ans.append('seventy')
+		elif d2 == 8:
+			ans.append('eighty')
+		elif d2 == 9:
+			ans.append('ninety')
+		
+		if d2 == 1 and d1 != 0:
+			if d1 == 1:
+				ans.append('eleven')
+			elif d1 == 2:
+				ans.append('twelve')
+			elif d1 == 3:
+				ans.append('thirteen')
+			elif d1 == 4:
+				ans.append('fourteen')
+			elif d1 == 5:
+				ans.append('fifteen')
+			elif d1 == 6:
+				ans.append('sixteen')
+			elif d1 == 7:
+				ans.append('seventeen')
+			elif d1 == 8:
+				ans.append('eighteen')
+			elif d1 == 9:
+				ans.append('nineteen')
+		
+	if d2 == 1 and d1 == 0:
+		ans.append('ten')
+	
+	if d2 != 1 and d1 != 0:
+		if d1 == 1:
+			ans.append('one')
+		elif d1 == 2:
+			ans.append('two')
+		elif d1 == 3:
+			ans.append('three')
+		elif d1 == 4:
+			ans.append('four')
+		elif d1 == 5:
+			ans.append('five')
+		elif d1 == 6:
+			ans.append('six')
+		elif d1 == 7:
+			ans.append('seven')
+		elif d1 == 8:
+			ans.append('eight')
+		elif d1 == 9:
+			ans.append('nine')
+	
+	return ans
+
+
+total = 0	
+for n in range(1, 1001):
+	for w in letters(n):
+		total += len(w)
+
+print total
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      609 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">609</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>My solution wasn’t all that efficient.  It took about 5 minutes to run.  But I
+figured in the time it would take me to make it faster, I could probably just
+get the answer, so that’s what I did :-)</p>
+
+<p>For this problem I created a little <code>@cache</code> wrapper because I was tired of
+writing the same thing over and over again.  The wrapper memoizes the function.
+Hmm, maybe I should have named it <code>@memoize</code> instead then…</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">modulo = 1000000007
+
+def cache(fn):
+    _cache = {}
+    def wrap(n):
+        if n in _cache:
+            return _cache[n]
+        ret = fn(n)
+        _cache[n] = ret
+        return ret
+    return wrap
+
+@cache
+def is_prime(p):
+    if p &lt; 2:
+        return False
+    if p == 2:
+        return True
+    if p % 2 == 0:
+        return False
+    for n in range(3, int(p**0.5) + 1, 2):
+        if p % n == 0:
+            return False
+    return True
+
+@cache
+def pi(n):
+    if n == 1:
+        return 0
+    return is_prime(n) + pi(n - 1)
+
+def c(u):
+    totals = {}
+    t = 0 if is_prime(u) else 1
+    while u != 1:
+        u = pi(u)
+        t += 0 if is_prime(u) else 1
+        totals[t] = totals.get(t, 0) + 1
+    return totals
+
+def solve(n):
+    prod = 1
+    totals = {k: 0 for k in range(n + 1)}
+    prev_c = {}
+    for u in range(1, n + 1):
+        if is_prime(u):
+            prev_c.clear()
+            for t, v in c(u).items():
+                totals[t] += v
+                prev_c[t+1] = v
+        else:
+            for t, v in prev_c.items():
+                totals[t] += v
+    for val in totals.values():
+        if val &gt; 1:
+            prod *= val
+    return prod % modulo
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve, pi
+
+_test_solve = (
+        (10**1, 648),
+        (10**2, 31038676032 % 1000000007),
+        (10**3, 649720175),
+        (10**4, 929483685),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+
+_test_pi = (
+        (6, 3),
+        (100, 25),
+)
+
+@pytest.mark.parametrize('n,expect', _test_pi)
+def test_pi(n, expect):
+    assert expect == pi(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

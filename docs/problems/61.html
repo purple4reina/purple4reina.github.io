@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      61 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">61</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This one frustrated me. I had problems dealing with how to arrange all the data
+that I needed to keep track of throughout the process. I tried ordered pairs,
+then a dictionary, then back to ordered pairs. It was tough trying to make sure
+that I got all the indexes correct for all the lists.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def P(k, n):
+	if k == 3:
+		return n*(n+1)/2
+	if k == 4:
+		return n**2
+	if k == 5:
+		return n*(3*n-1)/2
+	if k == 6:
+		return n*(2*n-1)
+	if k == 7:
+		return n*(5*n-3)/2
+	if k == 8:
+		return n*(3*n-2)
+
+def end(n):
+	n = str(n)
+	return n[2] + n[3]
+
+def begin(n):
+	n = str(n)
+	return n[0] + n[1]
+
+k = 3; n = 1; num = []
+while k &lt;= 8:
+	while len(str(P(k, n))) &lt;=4:
+		if len(str(P(k, n))) == 4:
+			num.append([P(k, n), k])
+		n += 1
+	k += 1; n = 1
+
+circles = []
+for a in num:
+	for b in num:
+		if end(a[0]) == begin(b[0]):
+			for c in num:
+				if end(b[0]) == begin(c[0]):
+					for d in num:
+						if end(c[0]) == begin(d[0]):
+							for e in num:
+								if end(d[0]) == begin(e[0]):
+									for f in num:
+										if end(e[0]) == begin(f[0]) and end(f[0]) == begin(a[0]):
+											circles.append([a, b, c, d, e, f])
+
+
+for q in circles:
+	poly_list = []
+	for poly in q:
+		poly = poly[1]
+		if poly not in poly_list:
+			poly_list.append(poly)
+	if len(poly_list) == 6:
+		total = 0
+		for number in q:
+			total += number[0]
+		print total
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

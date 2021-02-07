@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      133 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">133</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>Another repunits problem!  I chose it because I’ve already done I think two
+other repunit related problems in the last couple of days so I figured I would
+have some good context on it.</p>
+
+<p>When prime p is not 2 or 5, there will always be a value i that divides
+R(10<strong>n).  In fact, if i divides R(10</strong>n) then so does 2<em>i and 3</em>i, etc.  It is
+possible to find the period by finding the first value of i that divides any
+length repunit.  From there, if the value of this period is only divisible by 2
+or 5, then we know that multiplying it enough times by a constant, we will
+eventually reach a power of 10.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def solve(n):
+    total = 0
+    sieve = [True] * (n + 1)
+    for p, isprime in enumerate(sieve):
+        if not isprime or p &lt; 2:
+            continue
+        num = p + p
+        while num &lt;= n:
+            sieve[num] = False
+            num += p
+
+        if p == 2 or p == 5:
+            total += p
+            continue
+
+        i = r = 1
+        while r != 0:
+            i += 1
+            r = (r * 10 + 1) % p
+
+        while i % 2 == 0:
+            i //= 2
+        while i % 5 == 0:
+            i //= 5
+
+        if i != 1:
+            total += p
+
+    return total
+
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve
+
+_test_solve = (
+        (100, 1060 - (11 + 17 + 41 + 73)),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

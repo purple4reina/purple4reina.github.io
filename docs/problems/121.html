@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      121 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">121</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I first tried to not use any brains and just play the game a million times and
+see if the bank lost. That didn’t work out because it was really really slow,
+and didn’t always come up with the correct value.</p>
+
+<p>Instead, I did the math. There were two steps to it. The first and toughest
+part was getting the probability of winning. This depended on there being a
+greater number of blues pulled than reds. So, I needed to find the product of
+1’s and some numbers, where those numbers were based on the exact turn from
+which the blue was pulled. That took a little work to get it to come out right.</p>
+
+<p>The easier part was figuring out if the bank won. I wrote out the simple
+algorithm for this. I had the payout variable increase until the bank lost.</p>
+
+<p>Below I’ve included both of the tries I made, the latter being the one that
+worked.</p>
+
+<h2 id="try-one">Try One</h2>
+
+<h3 id="code">Code</h3>
+
+<pre><code class="language-python">from random import choice
+
+turns = 15
+bound = 10**6
+
+payout = 2000
+while True:
+	payout += 1
+	wins = 0
+	money = 0
+	for i in range(bound):
+		bag = ['r', 'b']
+		money += 1
+		blues = 0
+		for j in range(turns):
+			take = choice(bag)
+			bag.append('r')
+			if take == 'b':
+				blues += 1
+		if blues &gt; turns/2.0:
+			money -= payout
+			wins += 1
+	print payout, money, wins
+</code></pre>
+
+<h2 id="try-two">Try Two</h2>
+
+<h3 id="code-1">Code</h3>
+
+<pre><code class="language-python">from operator import mul
+from math import factorial
+from itertools import product
+
+turns = 15
+
+work = range(1,turns+1)
+prob = 0
+
+for mult in product([0,1], repeat=turns):
+	if sum(mult) &gt;= turns/2.0:
+		continue
+	next = 1
+	for i in map(mul, mult, work):
+		if i == 0:
+			continue
+		else:
+			next *= i
+	prob += next
+
+payout = 0
+while True:
+	payout += 1
+	if (factorial(turns+1)-prob) - prob*(payout-1) &lt; 0:
+		print payout - 1
+		break
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

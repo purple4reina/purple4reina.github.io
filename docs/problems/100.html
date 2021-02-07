@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      100 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">100</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>Three things made this problem run in 0.25 seconds.</p>
+
+<p>Avoidance of floating point numbers. Because the numbers I was working with
+were so precise – out to many decimal places – this made the use of floating
+point numbers problematic. When a number should have been 0.5, the program did
+not recognize it. In order to avoid this all together, I used a little algebra
+and made sure each side of the equation did not use division.</p>
+
+<p>Multiplication by square root of two over two. As this problem reaches
+infinity, the subtraction of 1 from the numerator and denominator will all but
+disappear. Thus, the limit reaches (number of blue)^2 / (total)^2. But since
+this will equal 1/2, therefore, (number of blue)/(total) will equal the square
+root of two over two. For each total number of discs that I ran through, I
+multiplied this by the square root of two over two. This because an irrational
+number and was going to be too low to be the number of blue discs. The ceiling
+function then gave the number of blue discs. This allowed the program to run at
+O(N).</p>
+
+<p>Use of a multiplier to jump to the next number. I noticed that the ratio
+between each succeeding correct value of the total discs increases. I therefore
+used the ration between the last two total discs to jump to a number that would
+be closer to the next correct answer.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">root2 = float(2.0**0.5)/float(2.0)
+br = 2
+prev = 1
+
+while True:
+	b = int(br*root2) + 1
+	if 2*b*(b-1) == br*(br-1):
+		print b, br
+		if br &gt; 10**12:
+			break
+		mult = br/float(prev)
+		prev = br
+		br = int(br*mult)
+	else:
+		br += 1
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      361 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">361</h1>
+  <h2 id="try-one">Try One</h2>
+
+<h3 id="comments">Comments</h3>
+
+<p>This is a great problem! It is really all about finding patterns. I’ve got an
+initial code prepared. But I realize now that it would take years and years and
+years to complete the process. The issue is finding all the elements of An. If
+I go through all the integers one by one as this code does, it will take
+forever. I now realize I must go about it differently. I’ll change the code so
+that instead of finding the integers themselves within the 0’s and 1’s, I’ll
+use the 0’s and 1’s themselves to derive each of the integers that are found.
+This should be a much faster process. At least I hope!</p>
+
+<h3 id="code">Code</h3>
+
+<pre><code class="language-python">from time import time
+start_time= time()
+print """Process started
+----------"""
+
+
+#Step 1: Create {Tn}
+
+t = [0]
+for n in range(100000000):
+	print n
+	t[2*n:] = [t[n]]
+	t[(2*n + 1):] = [1 - t[n]]
+t = ''.join(map(str, t))
+print t
+
+
+#Step 2: Create {An}
+
+a = []
+j = 0
+while len(a) &lt; (10**18 +1):
+	print j
+	i = bin(j).lstrip('0b')
+	if t.find(i) != -1:
+		a.append(j)
+	j = j+1
+print a
+
+
+#Step 3: Do the sigma
+
+sigma = 0
+for k in range(1, 19):
+	sigma = sigma + a[10**k]
+	
+print sigma
+		
+
+end_time= time()
+elapse_time= end_time - start_time
+print '----------'
+print elapse_time, 'seconds have passed'
+</code></pre>
+
+<h2 id="try-two">Try Two</h2>
+
+<h3 id="comments-1">Comments</h3>
+
+<p>This was a valient effort. I think I’m getting closer. I’m starting to learn
+the details of this sequence. Next step I think is to create a derivation
+formula that makes all the elements of An.</p>
+
+<h3 id="code-1">Code</h3>
+
+<pre><code class="language-python">from time import time
+start_time= time()
+print """Process started
+----------"""
+
+
+#Step 1: Create {Tn}
+
+t = [0]
+for n in range(10**6):
+	print n
+	t[2*n:] = [t[n]]
+	t[(2*n + 1):] = [1 - t[n]]
+t = ''.join(map(str, t))
+
+
+#Step 2: Create {An}
+
+a = [0]
+for l in range(1, 10**4):
+	if len(a) &gt; (10**5):
+		break
+	for i in range(1, len(t) - l):
+		itest = int(str(t[i:(i+l)]), 2)
+		print l, i, len(a)
+		if (a.count(itest) == 0):
+			a.append(itest)
+		elif a.count(itest) &gt; 0:
+			break
+
+
+a = sorted(a)
+print len(a)
+
+
+#Step 3: Do the sigma
+
+#sigma = 0
+#for k in range(1, 19):
+#	sigma = sigma + a[10**k]
+	
+#print sigma
+		
+
+end_time= time()
+elapse_time= end_time - start_time
+print '----------'
+print elapse_time, 'seconds have passed'
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      587 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">587</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>I do love geometry and trigonometry!  This one really got my brain working and
+it was really fun to do.  I drew many many pictures and spent time relearning
+all I used to know of trig.  Despite this, I kept getting the wrong answer.  I
+checked my work about 5 times and everytime saw that I was doing it correctly.
+I finally realized that it was the value for <code>l_section_area</code> that I’d
+miscalculated.  Here’s all this hard trig and I’m fine, but some simple
+sibtraction I couldn’t even do!  Upon fixing that I was able to get the answer
+super fast!</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">import math
+
+l_section_area = 1 - (math.pi / 4)
+
+
+def solve(n):
+    k = 1
+    while percent(k) &gt; n:
+        k += 1
+    return k
+
+
+def percent(n):
+    theta = math.atan(1 / n)
+    alpha = math.asin((n - 1) / (n ** 2 + 1) ** 0.5)
+    beta = math.pi / 2 - theta - alpha
+
+    segment_area = (beta - math.sin(beta)) / 2
+    triangle_area = (1 - math.cos(beta)) / 2
+    concave_triangle_area = triangle_area - segment_area
+
+    return concave_triangle_area / l_section_area
+
+
+if __name__ == '__main__':
+    import sys
+    n = eval(sys.argv[1])
+    print(solve(n))
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import pytest
+from problem import solve, percent
+
+_test_percent = (
+        (1, 0.50),
+        (2, 0.36462616929172803),
+)
+
+@pytest.mark.parametrize('n,expect', _test_percent)
+def test_percent(n, expect):
+    assert expect == percent(n)
+
+_test_solve = (
+        (0.10, 15),
+)
+
+@pytest.mark.parametrize('n,expect', _test_solve)
+def test_solve(n, expect):
+    assert expect == solve(n)
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

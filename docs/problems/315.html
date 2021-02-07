@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      315 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">315</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>This was another easier seeming problem (though it is marked as 20% difficulty
+out of 100%, so obviously others must think it was harder than I did).
+Initially I read the problem wrong.  I thought I was suppose to just find the
+transitions from one prime to the next.  When I kept getting the wrong answer
+over and over, I reread the problem and found there was a step I was missing.
+I needed to find the “digital root” of each prime number.</p>
+
+<p>I’m in a book club at work where we are reading and learning together about Go
+Programming.  In the book this last week we read about integer types.  One of
+the things they covered was bitwise operations.  For some reason, even though
+this wasn’t the first time I’d read about them, they finally seem to have made
+sense to me.  So, I decided to pull out an XOR in this problem to help solve
+it.  I had initially started by actually counting to figure out the transition
+changes between each number, but after finding so many errors in my code, I
+knew I needed a different way.</p>
+
+<p>Lastly, I had initially created a custom prime generator.  It was rather slow.
+The problem took over 11 minutes to complete.  When done, I read the forum to
+see what other people did.  There I was reminded of the Sieve of Eratosthenes!
+Oh yeah!  Duh, this is a great application of that.  So, I rewrote my generator
+and found the problem being soved in about 56 seconds!  Nice work, thanks
+Eratosthenes!!</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">_prime_sieve = [False, False]
+_binary_repr = {
+        ' ': 0b0000000,
+        '0': 0b1110111,
+        '1': 0b0010010,
+        '2': 0b1011101,
+        '3': 0b1011011,
+        '4': 0b0111010,
+        '5': 0b1101011,
+        '6': 0b1101111,
+        '7': 0b1110010,
+        '8': 0b1111111,
+        '9': 0b1111011,
+}
+_switch_cache = {}
+
+def prime_generator(min, max):
+    if len(_prime_sieve) &gt; max:
+        for i, isprime in enumerate(_prime_sieve[:max+1]):
+            if isprime and i &gt;= min:
+                yield i
+        return
+
+    num_to_add = max - len(_prime_sieve) + 1
+    _prime_sieve.extend([True] * num_to_add)
+
+    for i in range(2, int(max ** 0.5) + 1):
+        if not _prime_sieve[i]:
+            continue
+        for j in range(i ** 2, max + 1, i):
+            _prime_sieve[j] = False
+
+    for i, isprime in enumerate(_prime_sieve[:max+1]):
+        if isprime and i &gt;= min:
+            yield i
+    return
+
+def switch_digit(frm, to):
+    tpl = (frm, to)
+    if tpl in _switch_cache:
+        return _switch_cache[tpl]
+
+    diff = _binary_repr[frm] ^ _binary_repr[to]
+    strdiff = str(bin(diff))
+    cnt = strdiff.count('1')
+
+    _switch_cache[tpl] = cnt
+    return cnt
+
+def switch_num(frm, to):
+    energy = 0
+    strfrm = str(frm)
+    strto = str(to)
+    lenfrm = len(strfrm)
+    lento = len(strto)
+    if lenfrm &gt; lento:
+        strto = strto.rjust(lenfrm)
+    elif lento &gt; lenfrm:
+        strfrm = strfrm.rjust(lento)
+    for i, j in zip(strfrm, strto):
+        energy += switch_digit(i, j)
+    return energy
+
+def next_digital_sum(num):
+    total = 0
+    for d in num:
+        total += int(d)
+    return total
+
+def sam_energy(gen):
+    total_energy = 0
+    for num in gen:
+        total_energy += sam_process_num(num)
+    return total_energy
+
+def sam_process_num(num):
+    total_energy = 2 * switch_num(' ', num)
+    strnum = str(num)
+    while len(strnum) &gt; 1:
+        strnum = str(next_digital_sum(strnum))
+        total_energy += 2 * switch_num(' ', strnum)
+    return total_energy
+
+def max_energy(gen):
+    total_energy = 0
+    for num in gen:
+        total_energy += max_process_num(num)
+    return total_energy
+
+def max_process_num(num):
+    total_energy = switch_num(' ', num)
+    strnum = str(num)
+    while len(strnum) &gt; 1:
+        nextnum = str(next_digital_sum(strnum))
+        total_energy += switch_num(strnum, nextnum)
+        strnum = nextnum
+    total_energy += switch_num(strnum, ' ')
+    return total_energy
+
+if __name__ == '__main__':
+    lower = 10**7
+    upper = 2*lower
+    sam = sam_energy(prime_generator(lower, upper))
+    max = max_energy(prime_generator(lower, upper))
+    print(sam)
+    print(max)
+    print(sam - max)
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-python">import problem
+
+def test_prime_generator():
+    problem._prime_sieve = [False, False]
+    expected = (11, 13, 17, 19)
+    for i, j in zip(problem.prime_generator(11, 20), expected):
+        assert i == j
+
+    problem._prime_sieve = [False, False]
+    expected = (2, 3, 5, 7, 11, 13, 17, 19)
+    for i, j in zip(problem.prime_generator(0, 20), expected):
+        assert i == j
+
+def test_sam_energy():
+    actual = problem.sam_energy((137,))
+    assert actual == 40
+
+    actual = problem.sam_energy(range(10))
+    assert actual == 100
+
+def test_max_energy():
+    actual = problem.max_energy((137,))
+    assert actual == 30
+
+    actual = problem.max_energy(range(10))
+    assert actual == 100
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

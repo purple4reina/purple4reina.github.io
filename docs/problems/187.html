@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      187 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">187</h1>
+  <h2 id="comments">Comments</h2>
+
+<p>Once the list of primes was compiled, this script took under a second to run.
+I’d like to create a new function that pops out a list of primes for me so I
+don’t have to spend 30 minutes compiling primes lists again.</p>
+
+<h2 id="code">Code</h2>
+
+<pre><code class="language-python">def isprime(n):
+	if n &lt; 2 or n%2 == 0: return False
+	if n == 2: return True
+	for i in range(3, int(n**0.5 + 1), 2):
+		if n%i == 0: return False
+	return True
+
+primes = [2]
+n = 1
+while True:
+	n += 2
+	if (n-1)%10**6 == 0: print (n-1)/10**6
+	if isprime(n) == True:
+		primes.append(n)
+	if n &gt;= 10**8/2 + 10**4:
+		break
+
+count = 0	
+while len(primes) &gt; 0:
+	this_a = primes[0]
+	if this_a**2 &gt; 10**8: break
+	print this_a
+	for b in range(len(primes)):
+		this = this_a*primes[b]
+		if this &lt; 10**8:
+			count += 1
+		elif this &gt; 10**8:
+			del primes[0]
+			del primes[b+1:]
+			break
+
+print count
+</code></pre>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
