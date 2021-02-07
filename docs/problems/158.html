@@ -81,15 +81,15 @@
 frustratingly slow, but not too slow that it feels unreasonable.</p>
 
 <p>My solution was another recursive one.  It was the memoization that tripped me
-up because simply adding my @memoize decorator wasn’t enough.  Firstly, caching
-values for every value of n sent to P(n) didn’t work.  The values had to be
-cached on a per n basis.  That still produced a solution that was impossibly
-slow.  I then started playing around with and seeing which args from the P(n)
-signature were required and which were not for memoization.  Ends up that not
-all 4 of them are needed and really all that’s required is just the <code class="language-plaintext highlighter-rouge">used</code>
-argument.  Also turns out that only when the first and only lexicographically
-after characters have been placed is memoization required.  All of these things
-cut down on the execution time significantly.</p>
+up because simply adding my <code class="language-plaintext highlighter-rouge">@memoize</code> decorator wasn’t enough.  Firstly,
+caching values for every value of n sent to P(n) didn’t work.  The values had
+to be cached on a per n basis.  That still produced a solution that was
+impossibly slow.  I then started playing around with and seeing which args from
+the P(n) signature were required and which were not for memoization.  Ends up
+that not all 4 of them are needed and really all that’s required is just the
+<code class="language-plaintext highlighter-rouge">used</code> argument.  Also turns out that only when the first and only
+lexicographically after characters have been placed is memoization required.
+All of these things cut down on the execution time significantly.</p>
 
 <p>The thing I’m most proud of in this code is how I implemented <code class="language-plaintext highlighter-rouge">used</code>.  I needed
 a way to track which letters had been used and which hadn’t.  For this I used a
