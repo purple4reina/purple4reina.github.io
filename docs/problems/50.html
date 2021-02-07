@@ -75,41 +75,41 @@
   <h1 class="page-title">50</h1>
   <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def isprime(n):
-	if n == 0 or n == 1: return 'false'
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return 'false'
-	return 'true'
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="s">'false'</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'false'</span>
+	<span class="k">return</span> <span class="s">'true'</span>
 
 
-#compile primes list
-primeslist = []
-for p in range(10**6):
-	if isprime(p) == 'true': primeslist.append(p)
+<span class="c1">#compile primes list
+</span><span class="n">primeslist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="s">'true'</span><span class="p">:</span> <span class="n">primeslist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-print len(primeslist)
-print sum(primeslist[0:2])
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">primeslist</span><span class="p">)</span>
+<span class="k">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">primeslist</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
 
-#test all lists of primes
-consecutiveprimes = []
-i = 0
-for j in range(0, len(primeslist), 2):
-	print i, j
-	thissum = sum(primeslist[i:j])
-	if thissum &gt; 10**6: break; break
-	if isprime(thissum) == 'true':
-		consecutiveprimes.append((j-i, thissum))
-print max(consecutiveprimes)
-for i in range(1, len(primeslist)-1):
-	for j in range(i+1, len(primeslist), 2):
-		print i, j
-		thissum = sum(primeslist[i:j])
-		if thissum &gt; 10**6: 
-			print max(consecutiveprimes)
-			break; break
-		if isprime(thissum) == 'true':
-			consecutiveprimes.append((j-i, thissum))
-</code></pre>
+<span class="c1">#test all lists of primes
+</span><span class="n">consecutiveprimes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primeslist</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
+	<span class="n">thissum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">primeslist</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">])</span>
+	<span class="k">if</span> <span class="n">thissum</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span> <span class="k">break</span><span class="p">;</span> <span class="k">break</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">thissum</span><span class="p">)</span> <span class="o">==</span> <span class="s">'true'</span><span class="p">:</span>
+		<span class="n">consecutiveprimes</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="n">thissum</span><span class="p">))</span>
+<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">consecutiveprimes</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primeslist</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primeslist</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
+		<span class="n">thissum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">primeslist</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">])</span>
+		<span class="k">if</span> <span class="n">thissum</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span> 
+			<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">consecutiveprimes</span><span class="p">)</span>
+			<span class="k">break</span><span class="p">;</span> <span class="k">break</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">thissum</span><span class="p">)</span> <span class="o">==</span> <span class="s">'true'</span><span class="p">:</span>
+			<span class="n">consecutiveprimes</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="n">thissum</span><span class="p">))</span>
+</code></pre></div></div>
 
 </div>
 

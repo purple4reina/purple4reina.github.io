@@ -86,56 +86,56 @@ variable’s name. Not changing the name everywhere makes the script not work!</
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from time import time
-start_time= time()
-print """Process started
-----------"""
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">"""Process started
+----------"""</span>
 
-bound = 28123+1
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">28123</span><span class="o">+</span><span class="mi">1</span>
 
-#Create function to determine if a number is perfect
-def perfect(n):
-	a = 0
-	for i in range(1, n):
-		if n%i == 0:
-			a = a + i
-	if a &gt; n:
-		return 1
-	elif a &lt; n:
-		return -1
-	else:
-		return 0
+<span class="c1">#Create function to determine if a number is perfect
+</span><span class="k">def</span> <span class="nf">perfect</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span>
+	<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">1</span>
+	<span class="k">elif</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">0</span>
 
-#Build list of all abundant numbers
-abundantsums = []
-abundant = dict()
-collected = 'FALSE'
-for i in range(bound):
-	if perfect(i) &lt; 1: continue
-	for j in range(i, bound):
-		if collected is 'FALSE':
-			abundant[j] = perfect(j)
-		if abundant.get(j) &lt; 1: continue
-		if i + j &gt; bound:
-			collected = 'TRUE'; break
-		elif ((i + j) not in abundant):
-			print i, j
-			abundantsums.append(i + j)
+<span class="c1">#Build list of all abundant numbers
+</span><span class="n">abundantsums</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">abundant</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">collected</span> <span class="o">=</span> <span class="s">'FALSE'</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">perfect</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
+	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">collected</span> <span class="ow">is</span> <span class="s">'FALSE'</span><span class="p">:</span>
+			<span class="n">abundant</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">perfect</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">abundant</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">bound</span><span class="p">:</span>
+			<span class="n">collected</span> <span class="o">=</span> <span class="s">'TRUE'</span><span class="p">;</span> <span class="k">break</span>
+		<span class="k">elif</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">abundant</span><span class="p">):</span>
+			<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
+			<span class="n">abundantsums</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
 
-#Find the sum of all numbers not in the previous list
-sum = 0
-for r in range(bound):
-	if r not in abundant:
-		sum = sum + r
+<span class="c1">#Find the sum of all numbers not in the previous list
+</span><span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">r</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">abundant</span><span class="p">:</span>
+		<span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="n">r</span>
 		
-print sum
+<span class="k">print</span> <span class="nb">sum</span>
 
 
-end_time= time()
-elapse_time= end_time - start_time
-print '----------'
-print elapse_time, 'seconds have passed'
-</code></pre>
+<span class="n">end_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">elapse_time</span><span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="k">print</span> <span class="s">'----------'</span>
+<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="s">'seconds have passed'</span>
+</code></pre></div></div>
 
 </div>
 

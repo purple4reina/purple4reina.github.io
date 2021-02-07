@@ -81,52 +81,52 @@ After each iteration, I counted how many numbers were pandigital.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import product
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
 
-stepDict = dict()
+<span class="n">stepDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-for i in product(range(2), repeat=10):
-	for j in range(10):
-		stepDict[(i,j)] = 0
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+		<span class="n">stepDict</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
 
-copyDict = stepDict.copy()
+<span class="n">copyDict</span> <span class="o">=</span> <span class="n">stepDict</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
 
-for key in stepDict.iterkeys():
-	if sum(key[0]) == 1 and key[0][0] != 1:
-		for i in range(10):
-			if key[0][i] == 1 and key[1] == i:
-				stepDict[key] = 1
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">stepDict</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+	<span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+				<span class="n">stepDict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-total = 0
-i = 1
-while i &lt; 40:
-	i += 1; print i
-	newDict = copyDict.copy()
-	for pair in stepDict.iterkeys():
-		if pair[1] != 9:
-			upTuple = list(pair[0])
-			upTuple[pair[1] + 1] = 1
-			upTuple = tuple(upTuple)
-			upPair = (upTuple, pair[1] + 1)
-			newDict[upPair] += stepDict[pair]
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">:</span>
+	<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="k">print</span> <span class="n">i</span>
+	<span class="n">newDict</span> <span class="o">=</span> <span class="n">copyDict</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+	<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">stepDict</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+		<span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">9</span><span class="p">:</span>
+			<span class="n">upTuple</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+			<span class="n">upTuple</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+			<span class="n">upTuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">upTuple</span><span class="p">)</span>
+			<span class="n">upPair</span> <span class="o">=</span> <span class="p">(</span><span class="n">upTuple</span><span class="p">,</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+			<span class="n">newDict</span><span class="p">[</span><span class="n">upPair</span><span class="p">]</span> <span class="o">+=</span> <span class="n">stepDict</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span>
 
 		
-		if pair[1] != 0:
-			downTuple = list(pair[0])
-			downTuple[pair[1] - 1] = 1
-			downTuple = tuple(downTuple)
-			downPair = (downTuple, pair[1] - 1)
-			newDict[downPair] += stepDict[pair]
+		<span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">downTuple</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+			<span class="n">downTuple</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+			<span class="n">downTuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">downTuple</span><span class="p">)</span>
+			<span class="n">downPair</span> <span class="o">=</span> <span class="p">(</span><span class="n">downTuple</span><span class="p">,</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+			<span class="n">newDict</span><span class="p">[</span><span class="n">downPair</span><span class="p">]</span> <span class="o">+=</span> <span class="n">stepDict</span><span class="p">[</span><span class="n">pair</span><span class="p">]</span>
 	
 		
-	for key in newDict.iterkeys():
-		if sum(key[0]) == 10:
-			total += newDict[key]
+	<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">newDict</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+		<span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="n">newDict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 	
-	stepDict = newDict.copy()
+	<span class="n">stepDict</span> <span class="o">=</span> <span class="n">newDict</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
 		
-print total
-</code></pre>
+<span class="k">print</span> <span class="n">total</span>
+</code></pre></div></div>
 
 </div>
 

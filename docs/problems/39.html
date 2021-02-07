@@ -86,25 +86,25 @@ though not uniquely.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">triplets = []
-perimeters = []
-for k in range(1, 340):
-	for m in range(1, 40):
-		for n in range(1, 40):
-			print (k, m, n)
-			a = k*(m**2-n**2)
-			b = k*2*m*n
-			c = k*(m**2+n**2)
-			if ((a+b+c) &lt;= 1000) and ((a, b, c) not in triplets) and (a &gt; 0):
-				triplets.append((a, b, c))
-				perimeters.append(a+b+c)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">triplets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">perimeters</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">340</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span>
+			<span class="k">print</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+			<span class="n">b</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">n</span>
+			<span class="n">c</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+			<span class="k">if</span> <span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1000</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">triplets</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+				<span class="n">triplets</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+				<span class="n">perimeters</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span>
 
-countlist = []
-for n in range(1001):
-	countlist.append((perimeters.count(n), n))
+<span class="n">countlist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">):</span>
+	<span class="n">countlist</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">perimeters</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="p">))</span>
 	
-print max(countlist)
-</code></pre>
+<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">countlist</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

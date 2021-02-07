@@ -95,62 +95,62 @@ worked.</p>
 
 <h3 id="code">Code</h3>
 
-<pre><code class="language-python">from random import choice
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
 
-turns = 15
-bound = 10**6
+<span class="n">turns</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
 
-payout = 2000
-while True:
-	payout += 1
-	wins = 0
-	money = 0
-	for i in range(bound):
-		bag = ['r', 'b']
-		money += 1
-		blues = 0
-		for j in range(turns):
-			take = choice(bag)
-			bag.append('r')
-			if take == 'b':
-				blues += 1
-		if blues &gt; turns/2.0:
-			money -= payout
-			wins += 1
-	print payout, money, wins
-</code></pre>
+<span class="n">payout</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="n">payout</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="n">wins</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">money</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+		<span class="n">bag</span> <span class="o">=</span> <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
+		<span class="n">money</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="n">blues</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">turns</span><span class="p">):</span>
+			<span class="n">take</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">bag</span><span class="p">)</span>
+			<span class="n">bag</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'r'</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">take</span> <span class="o">==</span> <span class="s">'b'</span><span class="p">:</span>
+				<span class="n">blues</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="n">blues</span> <span class="o">&gt;</span> <span class="n">turns</span><span class="o">/</span><span class="mf">2.0</span><span class="p">:</span>
+			<span class="n">money</span> <span class="o">-=</span> <span class="n">payout</span>
+			<span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">print</span> <span class="n">payout</span><span class="p">,</span> <span class="n">money</span><span class="p">,</span> <span class="n">wins</span>
+</code></pre></div></div>
 
 <h2 id="try-two">Try Two</h2>
 
 <h3 id="code-1">Code</h3>
 
-<pre><code class="language-python">from operator import mul
-from math import factorial
-from itertools import product
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">mul</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
 
-turns = 15
+<span class="n">turns</span> <span class="o">=</span> <span class="mi">15</span>
 
-work = range(1,turns+1)
-prob = 0
+<span class="n">work</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">turns</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="mi">0</span>
 
-for mult in product([0,1], repeat=turns):
-	if sum(mult) &gt;= turns/2.0:
-		continue
-	next = 1
-	for i in map(mul, mult, work):
-		if i == 0:
-			continue
-		else:
-			next *= i
-	prob += next
+<span class="k">for</span> <span class="n">mult</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">turns</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mult</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">turns</span><span class="o">/</span><span class="mf">2.0</span><span class="p">:</span>
+		<span class="k">continue</span>
+	<span class="nb">next</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="n">mult</span><span class="p">,</span> <span class="n">work</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">continue</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="nb">next</span> <span class="o">*=</span> <span class="n">i</span>
+	<span class="n">prob</span> <span class="o">+=</span> <span class="nb">next</span>
 
-payout = 0
-while True:
-	payout += 1
-	if (factorial(turns+1)-prob) - prob*(payout-1) &lt; 0:
-		print payout - 1
-		break
-</code></pre>
+<span class="n">payout</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="n">payout</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">turns</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">prob</span><span class="p">)</span> <span class="o">-</span> <span class="n">prob</span><span class="o">*</span><span class="p">(</span><span class="n">payout</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">print</span> <span class="n">payout</span> <span class="o">-</span> <span class="mi">1</span>
+		<span class="k">break</span>
+</code></pre></div></div>
 
 </div>
 

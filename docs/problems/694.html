@@ -90,77 +90,77 @@ the code.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from sympy import sieve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">sieve</span>
 
-def S(n):
-    total = n
-    cube_fulls = set([1])
-    for p in sieve.primerange(1, int(n ** (1 / 3)) + 1):
-        new_cube_fulls = set(cube_fulls)
-        cube = p ** 3
-        max_add = n // cube
-        for full in cube_fulls:
-            mult = full * cube
-            while mult &lt;= n:
-                total += n // mult
-                if mult &lt; max_add:
-                    new_cube_fulls.add(mult)
-                mult *= p
-        cube_fulls = new_cube_fulls
+<span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="n">cube_fulls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sieve</span><span class="p">.</span><span class="n">primerange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">new_cube_fulls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">cube_fulls</span><span class="p">)</span>
+        <span class="n">cube</span> <span class="o">=</span> <span class="n">p</span> <span class="o">**</span> <span class="mi">3</span>
+        <span class="n">max_add</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="n">cube</span>
+        <span class="k">for</span> <span class="n">full</span> <span class="ow">in</span> <span class="n">cube_fulls</span><span class="p">:</span>
+            <span class="n">mult</span> <span class="o">=</span> <span class="n">full</span> <span class="o">*</span> <span class="n">cube</span>
+            <span class="k">while</span> <span class="n">mult</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span> <span class="o">//</span> <span class="n">mult</span>
+                <span class="k">if</span> <span class="n">mult</span> <span class="o">&lt;</span> <span class="n">max_add</span><span class="p">:</span>
+                    <span class="n">new_cube_fulls</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">mult</span><span class="p">)</span>
+                <span class="n">mult</span> <span class="o">*=</span> <span class="n">p</span>
+        <span class="n">cube_fulls</span> <span class="o">=</span> <span class="n">new_cube_fulls</span>
 
-    return total
+    <span class="k">return</span> <span class="n">total</span>
 
-if __name__ == '__main__':
-    import sys
-    n = int(sys.argv[1])
-    print(S(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import S
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">S</span>
 
-_test_S = (
-        (1, 1),
-        (2, 2),
-        (3, 3),
-        (4, 4),
-        (5, 5),
-        (6, 6),
-        (7, 7),
-        (8, 9),
-        (9, 10),
-        (10, 11),
-        (11, 12),
-        (13, 14),
-        (14, 15),
-        (15, 16),
-        (16, 19),
-        (17, 20),
-        (18, 21),
-        (19, 22),
-        (20, 23),
-        (21, 24),
-        (22, 25),
-        (23, 26),
-        (24, 28),
-        (25, 29),
-        (26, 30),
-        (27, 32),
-        (28, 33),
-        (29, 34),
-        (30, 35),
-        (31, 36),
-        (32, 40),
-        (100, 126),
-        (10000, 13344),
-)
+<span class="n">_test_S</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">29</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">126</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">13344</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_S)
-def test_S(n, expect):
-    assert expect == S(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_S</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_S</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">S</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

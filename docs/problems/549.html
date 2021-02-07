@@ -93,157 +93,157 @@ future problems now!</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from sympy import sieve, isprime
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">sieve</span><span class="p">,</span> <span class="n">isprime</span>
 
-_prime_fact = {}
-def num_of_primes(n, p):
-    key = (n, p)
-    if key in _prime_fact:
-        exp = _prime_fact[key]
-    else:
-        exp = 0
-        while n % p == 0:
-            exp += 1
-            n //= p
-        _prime_fact[key] = exp
-    return exp
+<span class="n">_prime_fact</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">def</span> <span class="nf">num_of_primes</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_prime_fact</span><span class="p">:</span>
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">_prime_fact</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">exp</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">exp</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">n</span> <span class="o">//=</span> <span class="n">p</span>
+        <span class="n">_prime_fact</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">exp</span>
+    <span class="k">return</span> <span class="n">exp</span>
 
-_s = {}
-def s(n):
-    if n in _s:
-        return _s[n]
+<span class="n">_s</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">def</span> <span class="nf">s</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">_s</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_s</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
 
-    orig_n = n
+    <span class="n">orig_n</span> <span class="o">=</span> <span class="n">n</span>
 
-    if isprime(n):
-        _s[orig_n] = n
-        return n
+    <span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">_s</span><span class="p">[</span><span class="n">orig_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">n</span>
 
-    max_num = 1
-    for p in sieve:
-        if n % p != 0:
-            continue
+    <span class="n">max_num</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sieve</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
 
-        exp = num_of_primes(n, p)
-        n //= p ** exp
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">num_of_primes</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">//=</span> <span class="n">p</span> <span class="o">**</span> <span class="n">exp</span>
 
-        mults = num = 0
-        while mults &lt; exp:
-            num += p
-            mults += num_of_primes(num, p)
+        <span class="n">mults</span> <span class="o">=</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">mults</span> <span class="o">&lt;</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">p</span>
+            <span class="n">mults</span> <span class="o">+=</span> <span class="n">num_of_primes</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 
-        if num &gt; max_num:
-            max_num = num
-        if n == 1:
-            _s[orig_n] = max_num
-            return max_num
-        else:
-            a = max(max_num, s(n))
-            _s[orig_n] = a
-            return a
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">max_num</span><span class="p">:</span>
+            <span class="n">max_num</span> <span class="o">=</span> <span class="n">num</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">_s</span><span class="p">[</span><span class="n">orig_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_num</span>
+            <span class="k">return</span> <span class="n">max_num</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_num</span><span class="p">,</span> <span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+            <span class="n">_s</span><span class="p">[</span><span class="n">orig_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+            <span class="k">return</span> <span class="n">a</span>
 
-def S(n):
-    total = 0
-    for k in range(2, n + 1):
-        total += s(k)
-    return total
+<span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">s</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total</span>
 
-if __name__ == '__main__':
-    import sys
-    n = int(sys.argv[1])
-    print(S(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import s, S
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">s</span><span class="p">,</span> <span class="n">S</span>
 
-_test_s = (
-        (2, 2),
-        (3, 3),
-        (4, 4),
-        (5, 5),
-        (6, 3),
-        (7, 7),
-        (8, 4),
-        (9, 6),
-        (10, 5),
-        (11, 11),
-        (12, 4),
-        (13, 13),
-        (14, 7),
-        (15, 5),
-        (16, 6),
-        (17, 17),
-        (18, 6),
-        (19, 19),
-        (20, 5),
-        (21, 7),
-        (22, 11),
-        (23, 23),
-        (24, 4),
-        (25, 10),
-        (26, 13),
-        (27, 9),
-        (28, 7),
-        (29, 29),
-        (30, 5),
-        (31, 31),
-        (32, 8),
-        (33, 11),
-        (34, 17),
-        (35, 7),
-        (36, 6),
-        (37, 37),
-        (38, 19),
-        (39, 13),
-        (40, 5),
-        (41, 41),
-        (42, 7),
-        (43, 43),
-        (44, 11),
-        (45, 6),
-        (46, 23),
-        (47, 47),
-        (48, 6),
-        (49, 14),
-        (50, 10),
-        (51, 17),
-        (52, 13),
-        (53, 53),
-        (54, 9),
-        (55, 11),
-        (56, 7),
-        (57, 19),
-        (58, 29),
-        (59, 59),
-        (60, 5),
-)
+<span class="n">_test_s</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">29</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="mi">37</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">38</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">39</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="mi">41</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">43</span><span class="p">,</span> <span class="mi">43</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">46</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">49</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">51</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">53</span><span class="p">,</span> <span class="mi">53</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">54</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">56</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">57</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">58</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">59</span><span class="p">,</span> <span class="mi">59</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_s)
-def test_s(n, expect):
-    assert expect == s(n)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_s</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_s</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-_test_S = (
-        (2, 2),
-        (3, 5),
-        (4, 9),
-        (5, 14),
-        (6, 17),
-        (7, 24),
-        (8, 28),
-        (9, 34),
-        (10, 39),
-        (10 ** 2, 2012),
-        (10 ** 3, 136817),
-        (10 ** 4, 10125843),
-)
+<span class="n">_test_S</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2012</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">136817</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10125843</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_S)
-def test_S(n, expect):
-    assert expect == S(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_S</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_S</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">S</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

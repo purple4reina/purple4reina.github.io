@@ -81,175 +81,175 @@ I don’t yet know how to do combinatoric things with the algebraic functions
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-def target(l):
-	ans = []
-	for s in permutations(list(l)):
-		a = float(s[0]); b = float(s[1]); c = float(s[2]); d = float(s[3])
-		ans.append(((a+b)-c)*d)
-		ans.append(((a+b)-c)/d)
-		ans.append(((a+b)*c)-d)
-		ans.append(((a+b)*c)/d)
-		ans.append(((a+b)/c)-d)
-		ans.append(((a+b)/c)*d)
-		ans.append(((a-b)+c)*d)
-		ans.append(((a-b)+c)/d)
-		ans.append(((a-b)*c)+d)
-		ans.append(((a-b)*c)/d)
-		ans.append(((a-b)/c)+d)
-		ans.append(((a-b)/c)*d)
-		ans.append(((a*b)+c)-d)
-		ans.append(((a*b)+c)/d)			
-		ans.append(((a*b)-c)+d)
-		ans.append(((a*b)-c)/d)
-		ans.append(((a*b)/c)+d)
-		ans.append(((a*b)/c)-d)
-		ans.append(((a/b)+c)-d)
-		ans.append(((a/b)+c)*d)
-		ans.append(((a/b)-c)+d)
-		ans.append(((a/b)-c)*d)
-		ans.append(((a/b)*c)+d)
-		ans.append(((a/b)*c)-d)
+<span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+		<span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>			
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
 			
-		ans.append(((a+b)+c)-d)
-		ans.append(((a+b)-c)+d)
-		ans.append(((a-b)+c)+d)
-		ans.append(((a+b)+c)*d)
-		ans.append(((a+b)*c)+d)
-		ans.append(((a*b)+c)+d)
-		ans.append(((a+b)+c)/d)
-		ans.append(((a+b)/c)+d)
-		ans.append(((a/b)+c)+d)
-		ans.append(((a-b)-c)*d)
-		ans.append(((a-b)*c)-d)
-		ans.append(((a*b)-c)-d)
-		ans.append(((a-b)-c)/d)
-		ans.append(((a-b)/c)-d)
-		ans.append(((a/b)-c)-d)
-		ans.append(((a*b)*c)/d)
-		ans.append(((a*b)/c)*d)
-		ans.append(((a/b)*c)*d)
-		ans.append(((a-b)-c)+d)
-		ans.append(((a-b)+c)-d)
-		ans.append(((a+b)-c)-d)
-		ans.append(((a*b)*c)+d)
-		ans.append(((a*b)+c)*d)
-		ans.append(((a+b)*c)*d)
-		ans.append(((a/b)/c)+d)
-		ans.append(((a/b)+c)/d)
-		ans.append(((a+b)/c)/d)
-		ans.append(((a*b)*c)-d)
-		ans.append(((a*b)-c)*d)
-		ans.append(((a-b)*c)*d)
-		ans.append(((a/b)/c)-d)
-		ans.append(((a/b)-c)/d)
-		ans.append(((a-b)/c)/d)
-		ans.append(((a/b)/c)*d)
-		ans.append(((a/b)*c)/d)
-		ans.append(((a*b)/c)/d)	
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>	
 		
-		ans.append(((a+b)+c)+d)
-		ans.append(((a-b)-c)-d)
-		ans.append(((a*b)*c)*d)
-		ans.append(((a/b)/c)/d)
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
 		
 		
-		ans.append((a+b)-(c*d))
-		ans.append((a+b)-(c/d))
-		ans.append((a+b)*(c-d))
-		ans.append((a+b)*(c/d))
-		ans.append((a+b)/(c-d))
-		ans.append((a+b)/(c*d))
-		ans.append((a-b)+(c*d))
-		ans.append((a-b)+(c/d))
-		ans.append((a-b)*(c+d))
-		ans.append((a-b)*(c/d))
-		ans.append((a-b)/(c+d))
-		ans.append((a-b)/(c*d))
-		ans.append((a*b)+(c-d))
-		ans.append((a*b)+(c/d))			
-		ans.append((a*b)-(c+d))
-		ans.append((a*b)-(c/d))
-		ans.append((a*b)/(c+d))
-		ans.append((a*b)/(c-d))
-		ans.append((a/b)+(c-d))
-		ans.append((a/b)+(c*d))
-		ans.append((a/b)-(c+d))
-		ans.append((a/b)-(c*d))
-		ans.append((a/b)*(c+d))
-		ans.append((a/b)*(c-d))
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>			
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
 			
-		ans.append((a+b)+(c-d))
-		ans.append((a+b)-(c+d))
-		ans.append((a-b)+(c+d))
-		ans.append((a+b)+(c*d))
-		ans.append((a+b)*(c+d))
-		ans.append((a*b)+(c+d))
-		ans.append((a+b)+(c/d))
-		ans.append((a+b)/(c+d))
-		ans.append((a/b)+(c+d))
-		ans.append((a-b)-(c*d))
-		ans.append((a-b)*(c-d))
-		ans.append((a*b)-(c-d))
-		ans.append((a-b)-(c/d))
-		ans.append((a-b)/(c-d))
-		ans.append((a/b)-(c-d))
-		ans.append((a*b)*(c/d))
-		ans.append((a*b)/(c*d))
-		ans.append((a/b)*(c*d))
-		ans.append((a-b)-(c+d))
-		ans.append((a-b)+(c-d))
-		ans.append((a+b)-(c-d))
-		ans.append((a*b)*(c+d))
-		ans.append((a*b)+(c*d))
-		ans.append((a+b)*(c*d))
-		ans.append((a/b)/(c+d))
-		ans.append((a/b)+(c/d))
-		ans.append((a+b)/(c/d))
-		ans.append((a*b)*(c-d))
-		ans.append((a*b)-(c*d))
-		ans.append((a-b)*(c*d))
-		ans.append((a/b)/(c-d))
-		ans.append((a/b)-(c/d))
-		ans.append((a-b)/(c/d))
-		ans.append((a/b)/(c*d))
-		ans.append((a/b)*(c/d))
-		ans.append((a*b)/(c/d))	
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>	
 		
-		ans.append((a+b)+(c+d))
-		ans.append((a-b)-(c-d))
-		ans.append((a*b)*(c*d))
-		ans.append((a/b)/(c/d))
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">))</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
 		
-	return sorted(clean(ans))
+	<span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">clean</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
 
 
-def clean(l):
-	ans = set()
-	for n in l:
-		if n%1 == 0 and n &gt; 0:
-			ans.add(int(n))
-	return list(ans)
+<span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
 
 
-def longest(l):
-	i = 0
-	for n in l:
-		i += 1
-		if n != i:
-			return i-1
+<span class="k">def</span> <span class="nf">longest</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span>
 
 
-big = [0,0]
-for l in combinations(range(1, 10), 4):
-	this = longest(target(l))
-	if this &gt; big[0]:
-		big = [this, l]
-		print l, big
+<span class="n">big</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">4</span><span class="p">):</span>
+	<span class="n">this</span> <span class="o">=</span> <span class="n">longest</span><span class="p">(</span><span class="n">target</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+	<span class="k">if</span> <span class="n">this</span> <span class="o">&gt;</span> <span class="n">big</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+		<span class="n">big</span> <span class="o">=</span> <span class="p">[</span><span class="n">this</span><span class="p">,</span> <span class="n">l</span><span class="p">]</span>
+		<span class="k">print</span> <span class="n">l</span><span class="p">,</span> <span class="n">big</span>
 	
-print big
-</code></pre>
+<span class="k">print</span> <span class="n">big</span>
+</code></pre></div></div>
 
 </div>
 

@@ -88,83 +88,83 @@ There are probably faster ways to store data with Python, but I’m not sure how
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python"># bounds
-
-low = 1
-high = 500500
-rows = 1000
-
-
-# definitions
-
-def random(low, high):
-	t = 0 
-	for k in range(low, high): 
-	    t = (615949*t + 797807) % 2**20 
-	    yield t - 2**19
-
-def trirow(k):
-	n = 1
-	while k &gt; (n * (n + 1) / 2):
-		n += 1
-	return n
-
-def trisum(start, depth):
-	diff = trirowdict[start]
-	total = randlist[start]
-	r = 1
-	while r &lt; depth:
-		r += 1
-		next = start + diff
-		total += randlist[next]
-		for i in range(1, r):
-			total += randlist[next + i]
-		start = next + i
-	return total	
-
-def trisumiter(start, depth):
-	diff = trirowdict[start]
-	total = randlist[start]
-	yield total
-	r = 1
-	while r &lt; depth:
-		r += 1
-		next = start + diff
-		total += randlist[next]
-		for i in range(1, r):
-			total += randlist[next + i]
-		start = next + i
-		yield total
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bounds
+</span>
+<span class="n">low</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">high</span> <span class="o">=</span> <span class="mi">500500</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="mi">1000</span>
 
 
-# create arrays
+<span class="c1"># definitions
+</span>
+<span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+	<span class="n">t</span> <span class="o">=</span> <span class="mi">0</span> 
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span> 
+	    <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">615949</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mi">797807</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="o">**</span><span class="mi">20</span> 
+	    <span class="k">yield</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">2</span><span class="o">**</span><span class="mi">19</span>
 
-randlist = [0]
-for r in random(low, high + 1):
-	randlist.append(r)
-randlist = tuple(randlist)
+<span class="k">def</span> <span class="nf">trirow</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">while</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">return</span> <span class="n">n</span>
 
-trirowdict = dict()
-for n in range(low, high + 1):
-	trirowdict[n] = trirow(n)
+<span class="k">def</span> <span class="nf">trisum</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
+	<span class="n">diff</span> <span class="o">=</span> <span class="n">trirowdict</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+	<span class="n">total</span> <span class="o">=</span> <span class="n">randlist</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+	<span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">while</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">depth</span><span class="p">:</span>
+		<span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="nb">next</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">diff</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="n">randlist</span><span class="p">[</span><span class="nb">next</span><span class="p">]</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="n">randlist</span><span class="p">[</span><span class="nb">next</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="n">start</span> <span class="o">=</span> <span class="nb">next</span> <span class="o">+</span> <span class="n">i</span>
+	<span class="k">return</span> <span class="n">total</span>	
+
+<span class="k">def</span> <span class="nf">trisumiter</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
+	<span class="n">diff</span> <span class="o">=</span> <span class="n">trirowdict</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+	<span class="n">total</span> <span class="o">=</span> <span class="n">randlist</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+	<span class="k">yield</span> <span class="n">total</span>
+	<span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">while</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">depth</span><span class="p">:</span>
+		<span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="nb">next</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">diff</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="n">randlist</span><span class="p">[</span><span class="nb">next</span><span class="p">]</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="n">randlist</span><span class="p">[</span><span class="nb">next</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="n">start</span> <span class="o">=</span> <span class="nb">next</span> <span class="o">+</span> <span class="n">i</span>
+		<span class="k">yield</span> <span class="n">total</span>
 
 
-# search by brute force
+<span class="c1"># create arrays
+</span>
+<span class="n">randlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">random</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+	<span class="n">randlist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="n">randlist</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">randlist</span><span class="p">)</span>
 
-prev = 10**7
-for start in range(len(randlist)):
-	if start == 0: continue
-	startrow = trirowdict[start]
-	if startrow == rows: continue
-	trisumdict = dict()
-	print start
-	for thissum in trisumiter(start, rows + 1 - startrow):
-		if thissum &lt; prev:
-			prev = thissum
+<span class="n">trirowdict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+	<span class="n">trirowdict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">trirow</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+
+<span class="c1"># search by brute force
+</span>
+<span class="n">prev</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">7</span>
+<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">randlist</span><span class="p">)):</span>
+	<span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+	<span class="n">startrow</span> <span class="o">=</span> <span class="n">trirowdict</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+	<span class="k">if</span> <span class="n">startrow</span> <span class="o">==</span> <span class="n">rows</span><span class="p">:</span> <span class="k">continue</span>
+	<span class="n">trisumdict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+	<span class="k">print</span> <span class="n">start</span>
+	<span class="k">for</span> <span class="n">thissum</span> <span class="ow">in</span> <span class="n">trisumiter</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">rows</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">startrow</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">thissum</span> <span class="o">&lt;</span> <span class="n">prev</span><span class="p">:</span>
+			<span class="n">prev</span> <span class="o">=</span> <span class="n">thissum</span>
 			
 
-print prev
-</code></pre>
+<span class="k">print</span> <span class="n">prev</span>
+</code></pre></div></div>
 
 </div>
 

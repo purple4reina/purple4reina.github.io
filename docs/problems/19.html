@@ -80,31 +80,31 @@ biggest issue was reading the directions.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def leap(y):
-	if y in [1900, 2000]: return 'FALSE'
-	elif y%4 == 0: return 'TRUE'
-	else: return 'FALSE'
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">leap</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
+	<span class="k">elif</span> <span class="n">y</span><span class="o">%</span><span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'TRUE'</span>
+	<span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
 	
-def monthlength(m, y):
-	if m in [1, 3, 5, 7, 8, 10, 12]: return 31
-	elif m in [4, 6, 9, 11]: return 30
-	elif m == 2:
-		if leap(y) == 'TRUE': return 29
-		else: return 28
+<span class="k">def</span> <span class="nf">monthlength</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">]:</span> <span class="k">return</span> <span class="mi">31</span>
+	<span class="k">elif</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]:</span> <span class="k">return</span> <span class="mi">30</span>
+	<span class="k">elif</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">leap</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="s">'TRUE'</span><span class="p">:</span> <span class="k">return</span> <span class="mi">29</span>
+		<span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="mi">28</span>
 
-dayofweek = 1
-sum = 0
-for y in range(1900, 2001):
-	for m in range(1, 13):
-		for d in range(1, monthlength(m, y)+1):
-			print y, m, d, dayofweek
-			if y &gt;= 1901 and dayofweek == 0 and d == 1:
-				sum = sum + 1
-			if dayofweek == 6: dayofweek = 0
-			else: dayofweek = dayofweek + 1
+<span class="n">dayofweek</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">2001</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">monthlength</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+			<span class="k">print</span> <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">dayofweek</span>
+			<span class="k">if</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">1901</span> <span class="ow">and</span> <span class="n">dayofweek</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+				<span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="mi">1</span>
+			<span class="k">if</span> <span class="n">dayofweek</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span> <span class="n">dayofweek</span> <span class="o">=</span> <span class="mi">0</span>
+			<span class="k">else</span><span class="p">:</span> <span class="n">dayofweek</span> <span class="o">=</span> <span class="n">dayofweek</span> <span class="o">+</span> <span class="mi">1</span>
 
-print sum
-</code></pre>
+<span class="k">print</span> <span class="nb">sum</span>
+</code></pre></div></div>
 
 </div>
 

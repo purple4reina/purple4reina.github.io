@@ -81,27 +81,27 @@ very handle with this problem</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import re
-def num2str(n):
-	return re.split('_', re.sub('\B', '_', str(n)))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'\B'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
 	
-def ispalendrome(n):
-	n = num2str(n)
-	for i in range(len(n)):
-		if n[i] == n[-(i+1)]: continue
-		else: return 'FALSE'
-	return 'TRUE'
+<span class="k">def</span> <span class="nf">ispalendrome</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="n">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]:</span> <span class="k">continue</span>
+		<span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
+	<span class="k">return</span> <span class="s">'TRUE'</span>
 
-sum = 0
-for n in range(10**6):
-	ten = n
-	two = bin(n); two = str(two).lstrip('0b')
-	if ispalendrome(ten) == 'TRUE' and ispalendrome(two) == 'TRUE':
-		sum = sum + n
-		print n
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+	<span class="n">ten</span> <span class="o">=</span> <span class="n">n</span>
+	<span class="n">two</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="n">two</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">two</span><span class="p">).</span><span class="n">lstrip</span><span class="p">(</span><span class="s">'0b'</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">ispalendrome</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span> <span class="o">==</span> <span class="s">'TRUE'</span> <span class="ow">and</span> <span class="n">ispalendrome</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="o">==</span> <span class="s">'TRUE'</span><span class="p">:</span>
+		<span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="n">n</span>
+		<span class="k">print</span> <span class="n">n</span>
 
-print sum
-</code></pre>
+<span class="k">print</span> <span class="nb">sum</span>
+</code></pre></div></div>
 
 </div>
 

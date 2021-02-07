@@ -79,101 +79,101 @@
 figured in the time it would take me to make it faster, I could probably just
 get the answer, so that’s what I did :-)</p>
 
-<p>For this problem I created a little <code>@cache</code> wrapper because I was tired of
+<p>For this problem I created a little <code class="language-plaintext highlighter-rouge">@cache</code> wrapper because I was tired of
 writing the same thing over and over again.  The wrapper memoizes the function.
-Hmm, maybe I should have named it <code>@memoize</code> instead then…</p>
+Hmm, maybe I should have named it <code class="language-plaintext highlighter-rouge">@memoize</code> instead then…</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">modulo = 1000000007
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">1000000007</span>
 
-def cache(fn):
-    _cache = {}
-    def wrap(n):
-        if n in _cache:
-            return _cache[n]
-        ret = fn(n)
-        _cache[n] = ret
-        return ret
-    return wrap
+<span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">_cache</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrap</span>
 
-@cache
-def is_prime(p):
-    if p &lt; 2:
-        return False
-    if p == 2:
-        return True
-    if p % 2 == 0:
-        return False
-    for n in range(3, int(p**0.5) + 1, 2):
-        if p % n == 0:
-            return False
-    return True
+<span class="o">@</span><span class="n">cache</span>
+<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
 
-@cache
-def pi(n):
-    if n == 1:
-        return 0
-    return is_prime(n) + pi(n - 1)
+<span class="o">@</span><span class="n">cache</span>
+<span class="k">def</span> <span class="nf">pi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">pi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-def c(u):
-    totals = {}
-    t = 0 if is_prime(u) else 1
-    while u != 1:
-        u = pi(u)
-        t += 0 if is_prime(u) else 1
-        totals[t] = totals.get(t, 0) + 1
-    return totals
+<span class="k">def</span> <span class="nf">c</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+    <span class="n">totals</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">u</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">pi</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="n">totals</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">totals</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">totals</span>
 
-def solve(n):
-    prod = 1
-    totals = {k: 0 for k in range(n + 1)}
-    prev_c = {}
-    for u in range(1, n + 1):
-        if is_prime(u):
-            prev_c.clear()
-            for t, v in c(u).items():
-                totals[t] += v
-                prev_c[t+1] = v
-        else:
-            for t, v in prev_c.items():
-                totals[t] += v
-    for val in totals.values():
-        if val &gt; 1:
-            prod *= val
-    return prod % modulo
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">prod</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">totals</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
+    <span class="n">prev_c</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+            <span class="n">prev_c</span><span class="p">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">c</span><span class="p">(</span><span class="n">u</span><span class="p">).</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">totals</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+=</span> <span class="n">v</span>
+                <span class="n">prev_c</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">prev_c</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">totals</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+=</span> <span class="n">v</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">totals</span><span class="p">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">prod</span> <span class="o">*=</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">prod</span> <span class="o">%</span> <span class="n">modulo</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve, pi
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">pi</span>
 
-_test_solve = (
-        (10**1, 648),
-        (10**2, 31038676032 % 1000000007),
-        (10**3, 649720175),
-        (10**4, 929483685),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">648</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31038676032</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">649720175</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">929483685</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-_test_pi = (
-        (6, 3),
-        (100, 25),
-)
+<span class="n">_test_pi</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_pi)
-def test_pi(n, expect):
-    assert expect == pi(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_pi</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_pi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">pi</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

@@ -89,67 +89,67 @@ any larger is python’s recursion limit.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import math
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
-def solve_by_power(k):
-    # the n will be (2**e - 1)
-    last = 0
-    total = 0
-    for e in range(1, k+1):
-        this = int((e-1)*2**(e-2)) + last
-        total += this
-        last = this
-    return total
+<span class="k">def</span> <span class="nf">solve_by_power</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="c1"># the n will be (2**e - 1)
+</span>    <span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">this</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">last</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">this</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">this</span>
+    <span class="k">return</span> <span class="n">total</span>
 
-_solve = {0: 0, 1: 0}
-def solve(n):
-    if n in _solve:
-        return _solve[n]
+<span class="n">_solve</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">_solve</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_solve</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
 
-    # total to nearest power of 2
-    nearest_power_of_2 = int(math.log(n, 2))
-    total = solve_by_power(nearest_power_of_2)
+    <span class="c1"># total to nearest power of 2
+</span>    <span class="n">nearest_power_of_2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">solve_by_power</span><span class="p">(</span><span class="n">nearest_power_of_2</span><span class="p">)</span>
 
-    # figure out how many numbers are left total
-    total_num_left = n - 2**nearest_power_of_2 + 1
+    <span class="c1"># figure out how many numbers are left total
+</span>    <span class="n">total_num_left</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">**</span><span class="n">nearest_power_of_2</span> <span class="o">+</span> <span class="mi">1</span>
 
-    # figure out how many numbers are left from previous
-    num_from_prev = total_num_left // 2
-    further_power_of_2 = 2 ** (nearest_power_of_2 - 1) - 1
-    total += solve(further_power_of_2 + num_from_prev) - solve(further_power_of_2)
+    <span class="c1"># figure out how many numbers are left from previous
+</span>    <span class="n">num_from_prev</span> <span class="o">=</span> <span class="n">total_num_left</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">further_power_of_2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">nearest_power_of_2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">solve</span><span class="p">(</span><span class="n">further_power_of_2</span> <span class="o">+</span> <span class="n">num_from_prev</span><span class="p">)</span> <span class="o">-</span> <span class="n">solve</span><span class="p">(</span><span class="n">further_power_of_2</span><span class="p">)</span>
 
-    # get the alternator number
-    total += nearest_power_of_2 * (total_num_left - num_from_prev)
+    <span class="c1"># get the alternator number
+</span>    <span class="n">total</span> <span class="o">+=</span> <span class="n">nearest_power_of_2</span> <span class="o">*</span> <span class="p">(</span><span class="n">total_num_left</span> <span class="o">-</span> <span class="n">num_from_prev</span><span class="p">)</span>
 
-    _solve[n] = total
-    return total
+    <span class="n">_solve</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span>
+    <span class="k">return</span> <span class="n">total</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (10**1, 14),
-        (10**2, 389),
-        (10**3, 7002),
-        (10**4, 103649),
-        (10**5, 1368968),
-        (10**6, 16951471),
-        (10**7, 203222840),
-        (10**8, 2365782338),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">389</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7002</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">103649</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1368968</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16951471</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="mi">203222840</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2365782338</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

@@ -86,71 +86,71 @@ I only had to search through the square-root of n number of numbers.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">modulo = 10**9
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
 
-def _sum_of_squares(n):
-    return n * (2 * n + 1) * (n + 1) // 6
+<span class="k">def</span> <span class="nf">_sum_of_squares</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">6</span>
 
-def sum_of_squares(minn, maxx):
-    return _sum_of_squares(maxx) - _sum_of_squares(minn)
+<span class="k">def</span> <span class="nf">sum_of_squares</span><span class="p">(</span><span class="n">minn</span><span class="p">,</span> <span class="n">maxx</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_sum_of_squares</span><span class="p">(</span><span class="n">maxx</span><span class="p">)</span> <span class="o">-</span> <span class="n">_sum_of_squares</span><span class="p">(</span><span class="n">minn</span><span class="p">)</span>
 
-def solve(n):
-    total = 0
-    for k in range(1, int(n ** 0.5) + 1):
-        total += (k ** 2) * (n // k)
-    for k in range(1, int(n ** 0.5) + 1):
-        group = k * sum_of_squares(n//(k+1), n//k)
-        total += group
-    if k ** 3 == group:
-        total -= group
-    return total % modulo
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="n">k</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">sum_of_squares</span><span class="p">(</span><span class="n">n</span><span class="o">//</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">n</span><span class="o">//</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">group</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">==</span> <span class="n">group</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">-=</span> <span class="n">group</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">%</span> <span class="n">modulo</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (1, 1),
-        (2, 6),
-        (3, 16),
-        (4, 37),
-        (5, 63),
-        (6, 113),
-        (7, 163),
-        (8, 248),
-        (9, 339),
-        (10, 469),
-        (11, 591),
-        (12, 801),
-        (13, 971),
-        (14, 1221),
-        (15, 1481),
-        (16, 1822),
-        (17, 2112),
-        (18, 2567),
-        (19, 2929),
-        (20, 3475),
-        (10**2, 407819),
-        (10**3, 401382971),
-        (10**4, 757638164),
-        (10**5, 683389101),
-        (10**6, 385965077),
-        (10**7, 499946270),
-        (10**8, 401132515),
-        (10**9, 73475174),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">37</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">63</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">113</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">163</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">248</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">339</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">469</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">591</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">801</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">971</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">1221</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1481</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">1822</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">2112</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">2567</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">2929</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3475</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">407819</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">401382971</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">757638164</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">683389101</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">385965077</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="mi">499946270</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="mi">401132515</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="p">,</span> <span class="mi">73475174</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

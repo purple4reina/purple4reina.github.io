@@ -82,51 +82,51 @@ bit.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">bound = 10**6
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bound</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
 
-def issquare(n):
-	if n**.5%1 == 0:
-		return True
-	else:
-		return False
+<span class="k">def</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="o">%</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
 
-def squaretest(x,y,z):
-	if issquare(x+y) == False:
-		return False
-	elif issquare(x+z) == False:
-		return False
-	elif issquare(y+z) == False:
-		return False
-	elif issquare(x-z) == False:
-		return False
-	elif issquare(x-y) == False:
-		return False
-	elif issquare(y-z) == False:
-		return False
-	else:
-		return True
+<span class="k">def</span> <span class="nf">squaretest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
 
-squares = []
-for n in range(1, bound+1):
-	if issquare(n) == True:
-		squares.append(n)
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">issquare</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">squares</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-for x in xrange(3, bound):
-	if x%1000 == 0: print x
-	for yi in squares:
-		y = x - yi
-		if y &lt; 0:
-			break
-		elif issquare(x+y) == False:
-			continue
-		for zi in squares:
-			z = y - zi
-			if z &lt; 0:
-				break
-			elif squaretest(x,y,z) == True:
-				print x, y, z, x+y+z
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">x</span>
+	<span class="k">for</span> <span class="n">yi</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">:</span>
+		<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">yi</span>
+		<span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">break</span>
+		<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="k">continue</span>
+		<span class="k">for</span> <span class="n">zi</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">:</span>
+			<span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">zi</span>
+			<span class="k">if</span> <span class="n">z</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+				<span class="k">break</span>
+			<span class="k">elif</span> <span class="n">squaretest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="k">print</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">+</span><span class="n">z</span>
 				
-</code></pre>
+</code></pre></div></div>
 
 </div>
 

@@ -99,37 +99,37 @@ would be printed.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
-from operator import xor
-from string import ascii_lowercase
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">xor</span>
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span>
 
-cipherFile = open('cipher1.txt', 'r')
-decipherFile = open('decipher.txt', 'w')
+<span class="n">cipherFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'cipher1.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+<span class="n">decipherFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'decipher.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span>
 
-for key in product(ascii_lowercase, repeat=3):
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">ascii_lowercase</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
 	
-	for n in cipherFile:
-		fixedFile = n.split(',')
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">cipherFile</span><span class="p">:</span>
+		<span class="n">fixedFile</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)</span>
 
-	iikey = []
-	for l in key:
-		iikey.append(ord(l)) 
+	<span class="n">iikey</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+		<span class="n">iikey</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> 
 	
-	decipherFile.write(str(key))
-	for decode in izip(cycle(iikey), map(int, fixedFile)):
-		decipherFile.write(chr(xor(decode[0], decode[1])))
+	<span class="n">decipherFile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+	<span class="k">for</span> <span class="n">decode</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">cycle</span><span class="p">(</span><span class="n">iikey</span><span class="p">),</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">fixedFile</span><span class="p">)):</span>
+		<span class="n">decipherFile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">xor</span><span class="p">(</span><span class="n">decode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">decode</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
 	
-decipherFile.close()
+<span class="n">decipherFile</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
 
 
-total = 0
-with open('59.decipher.txt', 'r') as d:
-	for w in d:
-		for c in w:
-			total += ord(c)
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'59.decipher.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">d</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">w</span><span class="p">:</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
-print total
-</code></pre>
+<span class="k">print</span> <span class="n">total</span>
+</code></pre></div></div>
 
 </div>
 

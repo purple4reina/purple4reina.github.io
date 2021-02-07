@@ -86,7 +86,7 @@ big old nested for loop.  I checked the forums and there was at least one
 person who did it that way.  I think I like to shy away from that method
 because it’s much much harder to write tests for.  What I really needed here to
 get this down to a more reasonable amount of time was to have access to my
-<code>reference</code> variable that I made up in the <code>check</code> method down in the <code>search</code>
+<code class="language-plaintext highlighter-rouge">reference</code> variable that I made up in the <code class="language-plaintext highlighter-rouge">check</code> method down in the <code class="language-plaintext highlighter-rouge">search</code>
 method.  This way I could have restricted the range of numbers that would be
 used when calling the recursive search.  This would have meant I’d not be
 wasting as much time with grids that could never have produced a viable
@@ -96,110 +96,110 @@ solution.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def solve(n):
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 
-    nsqr = n ** 2
-    nsqrn = nsqr - n
-    grid = [0] * nsqr
+    <span class="n">nsqr</span> <span class="o">=</span> <span class="n">n</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">nsqrn</span> <span class="o">=</span> <span class="n">nsqr</span> <span class="o">-</span> <span class="n">n</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">nsqr</span>
 
-    def check(index):
-        if index &lt; n - 1:
-            return True
-        g = grid[:index+1]
+    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[:</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 
-        # reference sum
-        reference = sum(g[:n])
+        <span class="c1"># reference sum
+</span>        <span class="n">reference</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">g</span><span class="p">[:</span><span class="n">n</span><span class="p">])</span>
 
-        # row
-        if (index + 1) % n == 0:
-            seqsum = sum(g[index-n+1:index+1])
-            if seqsum &gt; reference:
-                return None
-            if seqsum &lt; reference:
-                return False
+        <span class="c1"># row
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">seqsum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">seqsum</span> <span class="o">&gt;</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">seqsum</span> <span class="o">&lt;</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
 
-        # column and diagonal comparison
-        if index == nsqrn - n + 1:
-            if sum(g[:nsqrn-n+1:n]) != sum(g[n-1:nsqrn+1:n-1]):
-                return False
+        <span class="c1"># column and diagonal comparison
+</span>        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="n">nsqrn</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">g</span><span class="p">[:</span><span class="n">nsqrn</span><span class="o">-</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">nsqrn</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="bp">False</span>
 
-        # first diagonal
-        if index == nsqrn and index &gt; 1:
-            seqsum = sum(g[n-1:nsqrn+1:n-1])
-            if seqsum &gt; reference:
-                return None
-            if seqsum &lt; reference:
-                return False
+        <span class="c1"># first diagonal
+</span>        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="n">nsqrn</span> <span class="ow">and</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">seqsum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">nsqrn</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">seqsum</span> <span class="o">&gt;</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">seqsum</span> <span class="o">&lt;</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
 
-        # column
-        if index &gt;= nsqrn:
-            seqsum = sum(g[index%n:index+1:n])
-            if seqsum &gt; reference:
-                return None
-            if seqsum &lt; reference:
-                return False
+        <span class="c1"># column
+</span>        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="n">nsqrn</span><span class="p">:</span>
+            <span class="n">seqsum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">index</span><span class="o">%</span><span class="n">n</span><span class="p">:</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">seqsum</span> <span class="o">&gt;</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">seqsum</span> <span class="o">&lt;</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
 
-        # last diagonal
-        if index == nsqr - 1:
-            seqsum = sum(g[::n+1])
-            if seqsum &gt; reference:
-                return None
-            if seqsum &lt; reference:
-                return False
+        <span class="c1"># last diagonal
+</span>        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="n">nsqr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">seqsum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">g</span><span class="p">[::</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">seqsum</span> <span class="o">&gt;</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">seqsum</span> <span class="o">&lt;</span> <span class="n">reference</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
 
-        return True
+        <span class="k">return</span> <span class="bp">True</span>
 
-    def search(index):
-        count = 0
-        end = 5 if index == 1 else 10
-        for n in range(end):
-            grid[index] = n
-            result = check(index)
-            if index == nsqr - 1 and result:
-                return 1
-            elif result:
-                count += search(index + 1)
-            elif result is None:
-                return count
-        if index == 1:
-            count *= 2
-        return count
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">10</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">end</span><span class="p">):</span>
+            <span class="n">grid</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="n">nsqr</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="n">search</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">result</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">count</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">*=</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">count</span>
 
-    return search(0)
+    <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (2, 10),
-        (3, 170),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">170</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-_test_not_solve = (
-        (4, 1000),
-        (4, 10000),
-        (4, 2549976),
-        (4, 12003319),
-        (4, 12003309),
-        (4, 12003320),
-)
+<span class="n">_test_not_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10000</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2549976</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12003319</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12003309</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12003320</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_not_solve)
-def test_not_solve(n, expect):
-    assert expect != solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_not_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_not_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">!=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

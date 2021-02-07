@@ -86,7 +86,7 @@ more chances that the cache will be available.</p>
 
 <p>Ultimately, I ended up hitting Python’s recursion limit which is 1000.  My
 implementation needed to be able to have a recursion depth of n where n in this
-case is 100,000.  I used the <code>sys.setrecursionlimit</code> to increase it but
+case is 100,000.  I used the <code class="language-plaintext highlighter-rouge">sys.setrecursionlimit</code> to increase it but
 consistently got seg faults.  I looked up what was going wrong here and found
 that there’s a hard limit of 65,000 and some change for my operating system.
 So, what I did to get around this was “prime” the cache by finding the answer
@@ -94,86 +94,86 @@ for n=60,000.  This meant that I never needed to hit the recursion limit.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import math
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
-modulo = 1000000007
+<span class="n">modulo</span> <span class="o">=</span> <span class="mi">1000000007</span>
 
-_first_digits = ((1, 3), (2, 3), (3, 3))
-_digits = ((1, 3), (2, 3), (3, 4))
+<span class="n">_first_digits</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">_digits</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
-def solve(n):
-    if n % 3 == 2:
-        return (3 * 10 ** (n-1)) % modulo
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">modulo</span>
 
-    def cache(fn):
-        _cache = {}
-        def wrap(*args, **kwargs):
-            if args in _cache:
-                return _cache[args]
-            ret = fn(*args, **kwargs)
-            _cache[args] = ret
-            return ret
-        return wrap
+    <span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+        <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+            <span class="k">return</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">wrap</span>
 
-    @cache
-    def search(parts, threes, left, digits=_first_digits):
-        left -= 1
-        total = 0
+    <span class="o">@</span><span class="n">cache</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">parts</span><span class="p">,</span> <span class="n">threes</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="n">_first_digits</span><span class="p">):</span>
+        <span class="n">left</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 
-        for digit, count in digits:
-            next_threes = (threes + parts[3 - digit]) % 3
+        <span class="k">for</span> <span class="n">digit</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">digits</span><span class="p">:</span>
+            <span class="n">next_threes</span> <span class="o">=</span> <span class="p">(</span><span class="n">threes</span> <span class="o">+</span> <span class="n">parts</span><span class="p">[</span><span class="mi">3</span> <span class="o">-</span> <span class="n">digit</span><span class="p">])</span> <span class="o">%</span> <span class="mi">3</span>
 
-            if left == 0:
-                total += count * (next_threes == 0)
+            <span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">count</span> <span class="o">*</span> <span class="p">(</span><span class="n">next_threes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 
-            else:
-                next_parts = ((parts[3-digit]+1)%3, parts[1-digit], parts[2-digit])
-                total += count * search(
-                        next_parts, next_threes, left, digits=_digits)
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">next_parts</span> <span class="o">=</span> <span class="p">((</span><span class="n">parts</span><span class="p">[</span><span class="mi">3</span><span class="o">-</span><span class="n">digit</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">,</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">digit</span><span class="p">],</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="o">-</span><span class="n">digit</span><span class="p">])</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">count</span> <span class="o">*</span> <span class="n">search</span><span class="p">(</span>
+                        <span class="n">next_parts</span><span class="p">,</span> <span class="n">next_threes</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="n">_digits</span><span class="p">)</span>
 
-        return total % modulo
+        <span class="k">return</span> <span class="n">total</span> <span class="o">%</span> <span class="n">modulo</span>
 
-    parts = (1, 0, 0)
-    search(parts, 0, 60000)
-    return search(parts, 0, n)
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">search</span><span class="p">(</span><span class="n">parts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">parts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    sys.setrecursionlimit(max(1000, n*2))
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">sys</span><span class="p">.</span><span class="n">setrecursionlimit</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (1, 6),
-        (4, 3534),
-        (7, 3023178),
-        (10, 987680024),
-        (13, 621045014),
-        (16, 383955427),
-        (19, 47568507),
-        (22, 340128871),
-        (25, 124780296),
-        (28, 119157965),
-        (31, 513633884),
-        (34, 445101666),
-        (37, 128623947),
-        (40, 567174137),
-        (43, 821069620),
-        (46, 498287604),
-        (49, 242640031),
-        (100, 131387729),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3534</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3023178</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">987680024</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">621045014</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">383955427</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">47568507</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">340128871</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">124780296</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">119157965</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">513633884</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="mi">445101666</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="mi">128623947</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">567174137</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">43</span><span class="p">,</span> <span class="mi">821069620</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">46</span><span class="p">,</span> <span class="mi">498287604</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">49</span><span class="p">,</span> <span class="mi">242640031</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">131387729</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

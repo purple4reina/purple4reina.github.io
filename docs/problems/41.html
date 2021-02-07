@@ -82,23 +82,23 @@ what I thought they were asking.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">#evaluate if a number is prime or not
-def isprime(n):
-	for i in range(2, int(n**0.5 + 1)):
-		if n%i == 0: return 'FALSE'
-	return 'TRUE'
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#evaluate if a number is prime or not
+</span><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
+	<span class="k">return</span> <span class="s">'TRUE'</span>
 
-#take a string of form (1, 2, a, b) and make it into one word or number of form 12ab
-def str2num(n):
-	return ''.join(map(str, n))
+<span class="c1">#take a string of form (1, 2, a, b) and make it into one word or number of form 12ab
+</span><span class="k">def</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-import itertools
-for r in range(1, 10):
-	for n in itertools.permutations(range(1, r+1), r):
-		thisnumber = int(str2num(n))
-		if (isprime(thisnumber) == 'TRUE'):
-			print thisnumber, 'is prime'
-</code></pre>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">itertools</span><span class="p">.</span><span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">r</span><span class="p">):</span>
+		<span class="n">thisnumber</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">(</span><span class="n">thisnumber</span><span class="p">)</span> <span class="o">==</span> <span class="s">'TRUE'</span><span class="p">):</span>
+			<span class="k">print</span> <span class="n">thisnumber</span><span class="p">,</span> <span class="s">'is prime'</span>
+</code></pre></div></div>
 
 </div>
 

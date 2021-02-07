@@ -88,95 +88,95 @@ really inefficient, but it wasn’t.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def points(n):
-    s0 = 290797
-    i = 0
-    pnts = []
-    while i &lt; n:
-        s1 = (s0 ** 2) % 50515093
-        t0 = (s1 % 2000) - 1000
-        s2 = (s1 ** 2) % 50515093
-        t1 = (s2 % 2000) - 1000
-        pnts.append((t0, t1))
-        s0 = s2
-        i += 1
-    return pnts
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">points</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">s0</span> <span class="o">=</span> <span class="mi">290797</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pnts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="p">(</span><span class="n">s0</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">50515093</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">%</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1000</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">50515093</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="p">(</span><span class="n">s2</span> <span class="o">%</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1000</span>
+        <span class="n">pnts</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">))</span>
+        <span class="n">s0</span> <span class="o">=</span> <span class="n">s2</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">pnts</span>
 
-def gcd(x, y):
-    while y:
-       x, y = y, x % y
-    return x
+<span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">y</span><span class="p">:</span>
+       <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">x</span>
 
-def reduce(a, b):
-    d = gcd(a, b)
-    return a // d, b // d
+<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">//</span> <span class="n">d</span><span class="p">,</span> <span class="n">b</span> <span class="o">//</span> <span class="n">d</span>
 
-def equation(p0, p1):
-    rise = p0[1] - p1[1]
-    run = p0[0] - p1[0]
+<span class="k">def</span> <span class="nf">equation</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">):</span>
+    <span class="n">rise</span> <span class="o">=</span> <span class="n">p0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">run</span> <span class="o">=</span> <span class="n">p0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    if run == 0:
-        return (1, 0, p0[0], 1)
+    <span class="k">if</span> <span class="n">run</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">p0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
 
-    rise, run = reduce(rise, run)
+    <span class="n">rise</span><span class="p">,</span> <span class="n">run</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">rise</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
 
-    y_num = (p0[1] * run) - (p0[0] * rise)
-    y_den = run
-    y_num, y_den = reduce(y_num, y_den)
+    <span class="n">y_num</span> <span class="o">=</span> <span class="p">(</span><span class="n">p0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">run</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">p0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">rise</span><span class="p">)</span>
+    <span class="n">y_den</span> <span class="o">=</span> <span class="n">run</span>
+    <span class="n">y_num</span><span class="p">,</span> <span class="n">y_den</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">y_num</span><span class="p">,</span> <span class="n">y_den</span><span class="p">)</span>
 
-    return (rise, run, y_num, y_den)
+    <span class="k">return</span> <span class="p">(</span><span class="n">rise</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">y_num</span><span class="p">,</span> <span class="n">y_den</span><span class="p">)</span>
 
-def equations(n):
-    equ = {}
-    pnts = points(n)
-    while pnts:
-        pnt = pnts.pop()
-        for p in pnts:
-            equ[equation(pnt, p)] = True
-    return equ
+<span class="k">def</span> <span class="nf">equations</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">equ</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">pnts</span> <span class="o">=</span> <span class="n">points</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">pnts</span><span class="p">:</span>
+        <span class="n">pnt</span> <span class="o">=</span> <span class="n">pnts</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pnts</span><span class="p">:</span>
+            <span class="n">equ</span><span class="p">[</span><span class="n">equation</span><span class="p">(</span><span class="n">pnt</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="n">equ</span>
 
-def solve(n):
-    slopes = {}
-    for rise, run, _, _ in equations(n):
-        slopes[(rise, run)] = slopes.get((rise, run), 0) + 1
-    counts = list(slopes.values())
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">slopes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">rise</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">equations</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">slopes</span><span class="p">[(</span><span class="n">rise</span><span class="p">,</span> <span class="n">run</span><span class="p">)]</span> <span class="o">=</span> <span class="n">slopes</span><span class="p">.</span><span class="n">get</span><span class="p">((</span><span class="n">rise</span><span class="p">,</span> <span class="n">run</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">slopes</span><span class="p">.</span><span class="n">values</span><span class="p">())</span>
 
-    total = 0
-    summ = sum(counts)
-    while counts:
-        count = counts.pop()
-        summ -= count
-        total += count * summ
-    return total * 2
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">summ</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">counts</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">counts</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">summ</span> <span class="o">-=</span> <span class="n">count</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">count</span> <span class="o">*</span> <span class="n">summ</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">*</span> <span class="mi">2</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve, points
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">points</span>
 
-_test_solve = (
-        (3, 6),
-        (100, 24477690),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">24477690</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-_test_points = (
-        (3, [(527, 144), (-488, 732), (-454, -947)]),
-)
+<span class="n">_test_points</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[(</span><span class="mi">527</span><span class="p">,</span> <span class="mi">144</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">488</span><span class="p">,</span> <span class="mi">732</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">454</span><span class="p">,</span> <span class="o">-</span><span class="mi">947</span><span class="p">)]),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_points)
-def test_points(n, expect):
-    assert expect == points(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_points</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_points</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">points</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

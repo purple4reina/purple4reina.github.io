@@ -82,26 +82,26 @@ correct answer came quickly.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def iterant(x):
-	return ((2*x[1] + x[0]), (x[1] + x[0]))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">iterant</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+	<span class="k">return</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-def digits(n):
-	n = str(n)
-	length = 0
-	for i in n:
-		length += 1
-	return length
+<span class="k">def</span> <span class="nf">digits</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">length</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
+		<span class="n">length</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">return</span> <span class="n">length</span>
 
-x = [1, 1]
-count = 0
-for n in range(1000):
-	x = iterant(x)
-	if digits(x[0]) &gt; digits(x[1]):
-		print x
-		count += 1
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="n">iterant</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">digits</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">digits</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+		<span class="k">print</span> <span class="n">x</span>
+		<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 		
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

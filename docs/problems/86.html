@@ -87,31 +87,31 @@ technique worked very nicely.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def my_answer(low, mid, high):
-	global lowestM
-	count = lowestM[1]
-	M = mid; print M
-	for L in range(1, M+1):
-		for W in range(L, M+1):
-			for H in range(max([W, lowestM[0]+1]), M+1):
-				one = (L**2 + (W+H)**2)**.5
-				two = (H**2 + (L+W)**2)**.5
-				three = (W**2 + (H+L)**2)**.5
-				smallest = min([one, two, three])
-				if smallest%1 == 0:
-					count += 1
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">my_answer</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+	<span class="k">global</span> <span class="n">lowestM</span>
+	<span class="n">count</span> <span class="o">=</span> <span class="n">lowestM</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+	<span class="n">M</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> <span class="k">print</span> <span class="n">M</span>
+	<span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">H</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">([</span><span class="n">W</span><span class="p">,</span> <span class="n">lowestM</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+				<span class="n">one</span> <span class="o">=</span> <span class="p">(</span><span class="n">L</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">W</span><span class="o">+</span><span class="n">H</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span>
+				<span class="n">two</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">L</span><span class="o">+</span><span class="n">W</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span>
+				<span class="n">three</span> <span class="o">=</span> <span class="p">(</span><span class="n">W</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">H</span><span class="o">+</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span>
+				<span class="n">smallest</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">three</span><span class="p">])</span>
+				<span class="k">if</span> <span class="n">smallest</span><span class="o">%</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+					<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 	
-	print M, count
-	if high &lt; low:
-		return 'not found'
-	if count &gt; 10**6:
-		return my_answer(low, int((3*low+mid)/4), mid)
-	elif count &lt; 10**6:
-		lowestM = [M, count]
-		return my_answer(mid, int((3*mid+high)/4), high)
-	else:
-		return mid, 'found'
-</code></pre>
+	<span class="k">print</span> <span class="n">M</span><span class="p">,</span> <span class="n">count</span>
+	<span class="k">if</span> <span class="n">high</span> <span class="o">&lt;</span> <span class="n">low</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'not found'</span>
+	<span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">my_answer</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="mi">3</span><span class="o">*</span><span class="n">low</span><span class="o">+</span><span class="n">mid</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span> <span class="n">mid</span><span class="p">)</span>
+	<span class="k">elif</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+		<span class="n">lowestM</span> <span class="o">=</span> <span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="n">count</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">my_answer</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="mi">3</span><span class="o">*</span><span class="n">mid</span><span class="o">+</span><span class="n">high</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span> <span class="n">high</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">mid</span><span class="p">,</span> <span class="s">'found'</span>
+</code></pre></div></div>
 
 </div>
 

@@ -90,38 +90,38 @@ those into another list, then found the 30th in the list.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def digadd(n):
-	n = str(n)
-	total = 0
-	for d in n:
-		total += int(d)
-	return total
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">digadd</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">total</span>
 
 
-trys = set()
-bound = 15
-b = 1
-while True:
-	b += 1
-	p = 1
-	if b &gt;= (bound+1)*9:
-		break
-	while True:
-		p += 1
-		this = b**p
-		if this &lt; 10**bound:
-			trys.add((this, b))
-		else:
-			break
+<span class="n">trys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="n">b</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">if</span> <span class="n">b</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">9</span><span class="p">:</span>
+		<span class="k">break</span>
+	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">p</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="n">this</span> <span class="o">=</span> <span class="n">b</span><span class="o">**</span><span class="n">p</span>
+		<span class="k">if</span> <span class="n">this</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">**</span><span class="n">bound</span><span class="p">:</span>
+			<span class="n">trys</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">this</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">break</span>
 
-a = []
-while len(trys) &gt; 0:
-	this = trys.pop()
-	if digadd(this[0]) == this[1]:
-		a.append(this[0])
+<span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">trys</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+	<span class="n">this</span> <span class="o">=</span> <span class="n">trys</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">digadd</span><span class="p">(</span><span class="n">this</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">this</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+		<span class="n">a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">this</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-print sorted(a)[29]
-</code></pre>
+<span class="k">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="p">)[</span><span class="mi">29</span><span class="p">]</span>
+</code></pre></div></div>
 
 </div>
 

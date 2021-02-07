@@ -84,9 +84,9 @@ from it this year.  I hope to continue working on them through 2021 and beyond.<
 
 <p>As for this specific problem, the code could really use some DRY’ing up (don’t
 repeat yourself).  But it works.  I made one code decision that wasn’t as
-performant but really improved readability.  I added a <code>probability</code> class to
+performant but really improved readability.  I added a <code class="language-plaintext highlighter-rouge">probability</code> class to
 keep track of the number of found and total words.  I considered going one step
-furture and implementing <code>__add__</code> so I could just <code>+=</code>.  I feel like that
+furture and implementing <code class="language-plaintext highlighter-rouge">__add__</code> so I could just <code class="language-plaintext highlighter-rouge">+=</code>.  I feel like that
 would probably be a lot cleaner looking, but probably more confusing and more
 error prone.</p>
 
@@ -95,122 +95,122 @@ it takes just under a minute to run.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def memoize(fn):
-    _cache = {}
-    def wrap(*args):
-        if args in _cache:
-            return _cache[args]
-        ret = fn(*args)
-        _cache[args] = ret
-        return ret
-    return wrap
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">memoize</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrap</span>
 
-def gcd(a, b):
-    while b:
-        a, b = b, a % b
-    return a
+<span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">a</span>
 
-class probability(object):
-    def __init__(self, found=0, total=0):
-        self.found = found
-        self.total = total
+<span class="k">class</span> <span class="nc">probability</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">found</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">found</span> <span class="o">=</span> <span class="n">found</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">total</span>
 
-    def add(self, other):
-        self.found += other.found
-        self.total += other.total
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">found</span> <span class="o">+=</span> <span class="n">other</span><span class="p">.</span><span class="n">found</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">total</span> <span class="o">+=</span> <span class="n">other</span><span class="p">.</span><span class="n">total</span>
 
-    def ratio(self):
-        div = gcd(self.found, self.total)
-        return self.found // div, self.total // div
+    <span class="k">def</span> <span class="nf">ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">div</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">found</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">total</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">found</span> <span class="o">//</span> <span class="n">div</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">total</span> <span class="o">//</span> <span class="n">div</span>
 
-def solve(n):
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 
-    top = 500
-    sieve = [False, False] + [True] * (top - 1)
-    for p, is_prime in enumerate(sieve):
-        if not is_prime:
-            continue
-        num = p + p
-        while num &lt;= top:
-            sieve[num] = False
-            num += p
+    <span class="n">top</span> <span class="o">=</span> <span class="mi">500</span>
+    <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">is_prime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_prime</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">p</span>
+        <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+            <span class="n">sieve</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">p</span>
 
-    search_word = 0b111100111011010 &gt;&gt; (15 - n)
+    <span class="n">search_word</span> <span class="o">=</span> <span class="mb">0b111100111011010</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mi">15</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span>
 
-    @memoize
-    def search(location, jumps, word):
-        if jumps == n:
-            if word == search_word:
-                return probability(1, 1)
-            return probability(0, 1)
-        jumps += 1
-        prob = probability()
-        word &lt;&lt;= 1
-        if sieve[location]:
-            if location != 1:
-                prob.add(search(location - 1, jumps, word + 1))
-                prob.add(search(location - 1, jumps, word + 1))
-                prob.add(search(location - 1, jumps, word))
-            else:
-                prob.add(search(location + 1, jumps, word + 1))
-                prob.add(search(location + 1, jumps, word + 1))
-                prob.add(search(location + 1, jumps, word))
-            if location != top:
-                prob.add(search(location + 1, jumps, word + 1))
-                prob.add(search(location + 1, jumps, word + 1))
-                prob.add(search(location + 1, jumps, word))
-            else:
-                prob.add(search(location - 1, jumps, word + 1))
-                prob.add(search(location - 1, jumps, word + 1))
-                prob.add(search(location - 1, jumps, word))
-        else:
-            if location != 1:
-                prob.add(search(location - 1, jumps, word + 1))
-                prob.add(search(location - 1, jumps, word))
-                prob.add(search(location - 1, jumps, word))
-            else:
-                prob.add(search(location + 1, jumps, word + 1))
-                prob.add(search(location + 1, jumps, word))
-                prob.add(search(location + 1, jumps, word))
-            if location != top:
-                prob.add(search(location + 1, jumps, word + 1))
-                prob.add(search(location + 1, jumps, word))
-                prob.add(search(location + 1, jumps, word))
-            else:
-                prob.add(search(location - 1, jumps, word + 1))
-                prob.add(search(location - 1, jumps, word))
-                prob.add(search(location - 1, jumps, word))
-        return prob
+    <span class="o">@</span><span class="n">memoize</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">jumps</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="n">search_word</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">probability</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">probability</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">jumps</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">probability</span><span class="p">()</span>
+        <span class="n">word</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">sieve</span><span class="p">[</span><span class="n">location</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">location</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">location</span> <span class="o">!=</span> <span class="n">top</span><span class="p">:</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">location</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">location</span> <span class="o">!=</span> <span class="n">top</span><span class="p">:</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+                <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">location</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jumps</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">prob</span>
 
-    prob = probability()
-    for loc in range(1, top + 1):
-        prob.add(search(loc, 0, 0))
+    <span class="n">prob</span> <span class="o">=</span> <span class="n">probability</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">prob</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">search</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 
-    return prob.ratio()
+    <span class="k">return</span> <span class="n">prob</span><span class="p">.</span><span class="n">ratio</span><span class="p">()</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (1, (119, 300)),
-        (2, (173, 1125)),
-        (3, (283, 4500)),
-        (4, (449, 18000)),
-        (5, (157, 10800)),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">119</span><span class="p">,</span> <span class="mi">300</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">173</span><span class="p">,</span> <span class="mi">1125</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">283</span><span class="p">,</span> <span class="mi">4500</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="mi">449</span><span class="p">,</span> <span class="mi">18000</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">157</span><span class="p">,</span> <span class="mi">10800</span><span class="p">)),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

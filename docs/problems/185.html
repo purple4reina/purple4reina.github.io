@@ -79,88 +79,88 @@
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from random import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="o">*</span>
 
-def crossover(a, b):
-	a = str(a)
-	b = str(b)
-	cut = randrange(digitLen)
-	return int(a[:cut] + b[cut:])
+<span class="k">def</span> <span class="nf">crossover</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+	<span class="n">cut</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="n">cut</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">cut</span><span class="p">:])</span>
 
-def mutation(a):
-	a = str(a)
-	while len(a) &lt; digitLen:
-		a = '0' + a
-	aList = []
-	for d in a:
-		aList.append(d)
-	randindex = randrange(digitLen)
-	aList[randindex] = str(randrange(10))
-	return int(''.join(aList))
+<span class="k">def</span> <span class="nf">mutation</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+	<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
+		<span class="n">a</span> <span class="o">=</span> <span class="s">'0'</span> <span class="o">+</span> <span class="n">a</span>
+	<span class="n">aList</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+		<span class="n">aList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+	<span class="n">randindex</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
+	<span class="n">aList</span><span class="p">[</span><span class="n">randindex</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">aList</span><span class="p">))</span>
 
-def exchange(a):
-	a = str(a)
-	while len(a) &lt; digitLen:
-		a = '0' + a
-	aList = []
-	for d in a:
-		aList.append(d)
-	randindex1 = randrange(digitLen)
-	randindex2 = randrange(digitLen)
-	aList[randindex1], aList[randindex2] = aList[randindex2], aList[randindex1]
-	return int(''.join(aList))
+<span class="k">def</span> <span class="nf">exchange</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+	<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
+		<span class="n">a</span> <span class="o">=</span> <span class="s">'0'</span> <span class="o">+</span> <span class="n">a</span>
+	<span class="n">aList</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+		<span class="n">aList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+	<span class="n">randindex1</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
+	<span class="n">randindex2</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
+	<span class="n">aList</span><span class="p">[</span><span class="n">randindex1</span><span class="p">],</span> <span class="n">aList</span><span class="p">[</span><span class="n">randindex2</span><span class="p">]</span> <span class="o">=</span> <span class="n">aList</span><span class="p">[</span><span class="n">randindex2</span><span class="p">],</span> <span class="n">aList</span><span class="p">[</span><span class="n">randindex1</span><span class="p">]</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">aList</span><span class="p">))</span>
 
-def fitness(n):
-	n = str(n)
-	while len(n) &lt; digitLen:
-		n = '0' + n
-	fitLevel = 0
-	for rule in guessList:
-		correct = 0
-		test = str(rule[0])
-		for i in range(digitLen):
-			if test[i] == n[i]:
-				correct += 1
-		if correct == rule[1]:
-			fitLevel += 1
-	return ruleLen - fitLevel
+<span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
+		<span class="n">n</span> <span class="o">=</span> <span class="s">'0'</span> <span class="o">+</span> <span class="n">n</span>
+	<span class="n">fitLevel</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">guessList</span><span class="p">:</span>
+		<span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="n">test</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">digitLen</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+				<span class="n">correct</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="n">correct</span> <span class="o">==</span> <span class="n">rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+			<span class="n">fitLevel</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">return</span> <span class="n">ruleLen</span> <span class="o">-</span> <span class="n">fitLevel</span>
 
 
-guessesTest = [(90342, 2), (70794, 0), (39458, 2), (34109, 1), (51545, 2), (12531, 1)]
-guesses = [(5616185650518293, 2), (3847439647293047, 1), (5855462940810587, 3), (9742855507068353, 3), (4296849643607543, 3), (3174248439465858, 1), (4513559094146117, 2), (7890971548908067, 3), (8157356344118483, 1), (2615250744386899, 2), (8690095851526254, 3), (6375711915077050, 1), (6913859173121360, 1), (6442889055042768, 2), (2321386104303845, 0), (2326509471271448, 2), (5251583379644322, 2), (1748270476758276, 3), (4895722652190306, 1), (3041631117224635, 3), (1841236454324589, 3), (2659862637316867, 2)]
+<span class="n">guessesTest</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">90342</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">70794</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">39458</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">34109</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">51545</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">12531</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">5616185650518293</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3847439647293047</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5855462940810587</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">9742855507068353</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4296849643607543</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3174248439465858</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4513559094146117</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">7890971548908067</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">8157356344118483</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2615250744386899</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">8690095851526254</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">6375711915077050</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6913859173121360</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6442889055042768</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2321386104303845</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2326509471271448</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">5251583379644322</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1748270476758276</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4895722652190306</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3041631117224635</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1841236454324589</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2659862637316867</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
 
-guessList = guesses
-digitLen = len(str(guessList[0][0]))
-ruleLen = len(guessList)
+<span class="n">guessList</span> <span class="o">=</span> <span class="n">guesses</span>
+<span class="n">digitLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">guessList</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">ruleLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">guessList</span><span class="p">)</span>
 
-parent = [(ruleLen, randrange(10**digitLen)) for i in range(100)]
+<span class="n">parent</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ruleLen</span><span class="p">,</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">digitLen</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
 
-z = 0
-while True:
-	z += 1
-	print z, parent[0], parent[-1]
-	child = {parent[0]}
-	for k in range(300):
+<span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="n">z</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">print</span> <span class="n">z</span><span class="p">,</span> <span class="n">parent</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parent</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+	<span class="n">child</span> <span class="o">=</span> <span class="p">{</span><span class="n">parent</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
 		
-		child1 = crossover(choice(parent)[1], choice(parent)[1])
-		fitness1 = fitness(child1)
-		child.add((fitness1, child1))
+		<span class="n">child1</span> <span class="o">=</span> <span class="n">crossover</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="n">fitness1</span> <span class="o">=</span> <span class="n">fitness</span><span class="p">(</span><span class="n">child1</span><span class="p">)</span>
+		<span class="n">child</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">fitness1</span><span class="p">,</span> <span class="n">child1</span><span class="p">))</span>
 		
-		child2 = mutation(choice(parent)[1])
-		fitness2 = fitness(child2)
-		child.add((fitness2, child2))
+		<span class="n">child2</span> <span class="o">=</span> <span class="n">mutation</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="n">fitness2</span> <span class="o">=</span> <span class="n">fitness</span><span class="p">(</span><span class="n">child2</span><span class="p">)</span>
+		<span class="n">child</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">fitness2</span><span class="p">,</span> <span class="n">child2</span><span class="p">))</span>
 		
-		child3 = exchange(choice(parent)[1])
-		fitness3 = fitness(child3)
-		child.add((fitness3, child3))		
+		<span class="n">child3</span> <span class="o">=</span> <span class="n">exchange</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="n">fitness3</span> <span class="o">=</span> <span class="n">fitness</span><span class="p">(</span><span class="n">child3</span><span class="p">)</span>
+		<span class="n">child</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">fitness3</span><span class="p">,</span> <span class="n">child3</span><span class="p">))</span>		
 	
-	child = sorted(list(child))
-	if child[0][0] == 0:
-		print child[0][1]
-		break
-	else:
-		parent = child[:100]
-</code></pre>
+	<span class="n">child</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">child</span><span class="p">))</span>
+	<span class="k">if</span> <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">print</span> <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+		<span class="k">break</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">parent</span> <span class="o">=</span> <span class="n">child</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+</code></pre></div></div>
 
 </div>
 

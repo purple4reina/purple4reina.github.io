@@ -89,56 +89,56 @@ wonderfully.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-def isprime(n):
-	if n == 2:
-		return True
-	elif n &lt; 2 or n%2 == 0:
-		return False
-	else:
-		for i in range(3, int(n**0.5 + 1), 2):
-			if n%i == 0: return False
-		return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
+	<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+		<span class="k">return</span> <span class="bp">True</span>
 
-answers = set()
+<span class="n">answers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-for p in combinations_with_replacement(range(0,10), 9):
-	if sum(list(p)) == 9:
-		answers.add(tuple(sorted(list(p))))
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">combinations_with_replacement</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="mi">9</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+		<span class="n">answers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="p">))))</span>
 
-divisions = []
+<span class="n">divisions</span> <span class="o">=</span> <span class="p">[]</span>
 	
-for group in answers:
-	new_group = []
-	for digit in group:
-		if digit != 0:
-			new_group.append(digit)
-	divisions.append(new_group)
+<span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">answers</span><span class="p">:</span>
+	<span class="n">new_group</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">group</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">digit</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">new_group</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+	<span class="n">divisions</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_group</span><span class="p">)</span>
 	
-answers = set()
-prev = 0
+<span class="n">answers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span>
 
-for p in permutations(range(1, 10)):
-	if p[2] != prev:
-		print p
-		prev = p[2]
-	for div in divisions:
-		this = []
-		this_p = list(p)
-		for comma in div:
-			this.append(int(''.join(map(str, this_p[:comma]))))
-			del this_p[:comma]
-		hum = True
-		for number in this:
-			if isprime(number) == False:
-				hum = False
-				break
-		if hum == True:
-			answers.add(tuple(sorted(this)))
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+	<span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev</span><span class="p">:</span>
+		<span class="k">print</span> <span class="n">p</span>
+		<span class="n">prev</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+	<span class="k">for</span> <span class="n">div</span> <span class="ow">in</span> <span class="n">divisions</span><span class="p">:</span>
+		<span class="n">this</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="n">this_p</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">comma</span> <span class="ow">in</span> <span class="n">div</span><span class="p">:</span>
+			<span class="n">this</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">this_p</span><span class="p">[:</span><span class="n">comma</span><span class="p">]))))</span>
+			<span class="k">del</span> <span class="n">this_p</span><span class="p">[:</span><span class="n">comma</span><span class="p">]</span>
+		<span class="n">hum</span> <span class="o">=</span> <span class="bp">True</span>
+		<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">this</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+				<span class="n">hum</span> <span class="o">=</span> <span class="bp">False</span>
+				<span class="k">break</span>
+		<span class="k">if</span> <span class="n">hum</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">answers</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">this</span><span class="p">)))</span>
 
-print len(answers)
-</code></pre>
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

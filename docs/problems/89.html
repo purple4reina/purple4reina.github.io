@@ -81,127 +81,127 @@
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def value(R):
-	total = 0
-	for i in range(len(R)):
-		d = R[i]
-		if d == 'I':
-			if 'V' in R[i:] or 'X' in R[i:]:
-				total -= 1
-			else:
-				total += 1
-		elif d == 'V':
-			total += 5
-		elif d == 'X':
-			if 'L' in R[i:] or 'C' in R[i:]:
-				total -= 10
-			else:
-				total += 10
-		elif d == 'L':
-			total += 50
-		elif d == 'C':
-			if 'D' in R[i:] or 'M' in R[i:]:
-				total -= 100
-			else:
-				total += 100
-		elif d == 'D':
-			total += 500
-		elif d == 'M':
-			total += 1000
-	return total
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
+	<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">)):</span>
+		<span class="n">d</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+		<span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'I'</span><span class="p">:</span>
+			<span class="k">if</span> <span class="s">'V'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="s">'X'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
+				<span class="n">total</span> <span class="o">-=</span> <span class="mi">1</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'V'</span><span class="p">:</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="mi">5</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'X'</span><span class="p">:</span>
+			<span class="k">if</span> <span class="s">'L'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="s">'C'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
+				<span class="n">total</span> <span class="o">-=</span> <span class="mi">10</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">total</span> <span class="o">+=</span> <span class="mi">10</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="mi">50</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'C'</span><span class="p">:</span>
+			<span class="k">if</span> <span class="s">'D'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="s">'M'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
+				<span class="n">total</span> <span class="o">-=</span> <span class="mi">100</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">total</span> <span class="o">+=</span> <span class="mi">100</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'D'</span><span class="p">:</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="mi">500</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'M'</span><span class="p">:</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="mi">1000</span>
+	<span class="k">return</span> <span class="n">total</span>
 
-def Roman(n):
-	thousand = n%10000 - n%1000
-	hundred = n%1000 - n%100
-	ten = n%100 - n%10
-	one = n%10
-	return Rthousand(thousand) + Rhundred(hundred) + Rten(ten) + Rone(one)
+<span class="k">def</span> <span class="nf">Roman</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">thousand</span> <span class="o">=</span> <span class="n">n</span><span class="o">%</span><span class="mi">10000</span> <span class="o">-</span> <span class="n">n</span><span class="o">%</span><span class="mi">1000</span>
+	<span class="n">hundred</span> <span class="o">=</span> <span class="n">n</span><span class="o">%</span><span class="mi">1000</span> <span class="o">-</span> <span class="n">n</span><span class="o">%</span><span class="mi">100</span>
+	<span class="n">ten</span> <span class="o">=</span> <span class="n">n</span><span class="o">%</span><span class="mi">100</span> <span class="o">-</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span>
+	<span class="n">one</span> <span class="o">=</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span>
+	<span class="k">return</span> <span class="n">Rthousand</span><span class="p">(</span><span class="n">thousand</span><span class="p">)</span> <span class="o">+</span> <span class="n">Rhundred</span><span class="p">(</span><span class="n">hundred</span><span class="p">)</span> <span class="o">+</span> <span class="n">Rten</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span> <span class="o">+</span> <span class="n">Rone</span><span class="p">(</span><span class="n">one</span><span class="p">)</span>
 
-def Rthousand(n):
-	if n == 4000:
-		return 'MMMM'
-	if n == 3000:
-		return 'MMM'
-	if n == 2000:
-		return 'MM'
-	if n == 1000:
-		return 'M'
-	if n == 0:
-		return ''
+<span class="k">def</span> <span class="nf">Rthousand</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4000</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'MMMM'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">3000</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'MMM'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2000</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'MM'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1000</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'M'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">''</span>
 
-def Rhundred(n):
-	if n == 900:
-		return 'CM'
-	if n == 800:
-		return 'DCCC'
-	if n == 700:
-		return 'DCC'
-	if n == 600:
-		return 'DC'
-	if n == 500:
-		return 'D'
-	if n == 400:
-		return 'CD'
-	if n == 300:
-		return 'CCC'
-	if n == 200:
-		return 'CC'
-	if n == 100:
-		return 'C'
-	if n == 0:
-		return ''
+<span class="k">def</span> <span class="nf">Rhundred</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">900</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'CM'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">800</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'DCCC'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">700</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'DCC'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">600</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'DC'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">500</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'D'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">400</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'CD'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">300</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'CCC'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'CC'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'C'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">''</span>
 
-def Rten(n):
-	if n == 90:
-		return 'XC'
-	if n == 80:
-		return 'LXXX'
-	if n == 70:
-		return 'LXX'
-	if n == 60:
-		return 'LX'
-	if n == 50:
-		return 'L'
-	if n == 40:
-		return 'XL'
-	if n == 30:
-		return 'XXX'
-	if n == 20:
-		return 'XX'
-	if n == 10:
-		return 'X'
-	if n == 0:
-		return ''
+<span class="k">def</span> <span class="nf">Rten</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">90</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'XC'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">80</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'LXXX'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">70</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'LXX'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">60</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'LX'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">50</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'L'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">40</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'XL'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">30</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'XXX'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'XX'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'X'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">''</span>
 
-def Rone(n):
-	if n == 9:
-		return 'IX'
-	if n == 8:
-		return 'VIII'
-	if n == 7:
-		return 'VII'
-	if n == 6:
-		return 'VI'
-	if n == 5:
-		return 'V'
-	if n == 4:
-		return 'IV'
-	if n == 3:
-		return 'III'
-	if n == 2:
-		return 'II'
-	if n == 1:
-		return 'I'
-	if n == 0:
-		return ''
+<span class="k">def</span> <span class="nf">Rone</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'IX'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'VIII'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'VII'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'VI'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'V'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'IV'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'III'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'II'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">'I'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s">''</span>
 
 
-count = 0
-for R in LIST:
-	count += len(R) - len(Roman(value(R)))
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">R</span> <span class="ow">in</span> <span class="n">LIST</span><span class="p">:</span>
+	<span class="n">count</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">Roman</span><span class="p">(</span><span class="n">value</span><span class="p">(</span><span class="n">R</span><span class="p">)))</span>
 
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

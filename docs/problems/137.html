@@ -84,30 +84,30 @@ found that Σx^n for n {0..∞} is 1/(1 - x).  That didn’t apply here, but wha
 was interesting was how this solution was derived.  I then used a similar
 method to figure out the answer to this A(x).</p>
 
-<pre><code>        A(x) = Σ F(n)*x^n, for n {0..∞}, where F(n) is the Fibonacci sequence
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        A(x) = Σ F(n)*x^n, for n {0..∞}, where F(n) is the Fibonacci sequence
              = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
-</code></pre>
+</code></pre></div></div>
 
 <p>Multiply each side by x</p>
 
-<pre><code>      x*A(x) =     x^2 +  x^3 + 2x^4 + 3x^5 + 5x^6 + ...
-</code></pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      x*A(x) =     x^2 +  x^3 + 2x^4 + 3x^5 + 5x^6 + ...
+</code></pre></div></div>
 
 <p>Add A(x) and x*A(x) together</p>
 
-<pre><code>  A(x)*(x+1) = x +2x^2 + 3x^3 + 5x^4 + 8x^5 +13x^6 + ...
-</code></pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  A(x)*(x+1) = x +2x^2 + 3x^3 + 5x^4 + 8x^5 +13x^6 + ...
+</code></pre></div></div>
 
 <p>Multiply each side by x again</p>
 
-<pre><code>x*A(x)*(x+1) =     x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x*A(x)*(x+1) =     x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
              = A(x) - x
-</code></pre>
+</code></pre></div></div>
 
 <p>Rearranging</p>
 
-<pre><code>           0 = A(x)*x^2 + (A(x)+1)*x - A(x)
-</code></pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>           0 = A(x)*x^2 + (A(x)+1)*x - A(x)
+</code></pre></div></div>
 
 <p>And since we know A(x) and are solving for x, we can use the quadradic formula
 to solve for x.  This means that for x to be rational, then the determinant
@@ -122,38 +122,38 @@ was able to get the answer.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def fib(n):
-    if n &lt; 3:
-        return 1
-    f1 = f2 = 1
-    for _ in range(n - 2):
-        f1, f2 = f2, f1 + f2
-    return f2
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">f2</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f1</span> <span class="o">+</span> <span class="n">f2</span>
+    <span class="k">return</span> <span class="n">f2</span>
 
-def solve(n):
-    d = fib(4*n + 1)
-    return int((5*d**2 - 4)**0.5 - 1) // 5
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="mi">5</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">5</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (1, 2),
-        (10, 74049690),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">74049690</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

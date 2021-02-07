@@ -82,30 +82,30 @@ when it started to work.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def F(m, n):
-	colorDict = dict()
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+	<span class="n">colorDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-	for k in xrange(-1, n+1):
-		colorDict[k] = 0
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="n">colorDict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-	for length in range(m, n+1):
-		for start in range(1, length):
-			for end in range(m, n+1):
-				if start + end - 1 &gt; length: continue
-				colorDict[length] += 1
-				colorDict[length] += colorDict[length-(start+end)]
+	<span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">start</span> <span class="o">+</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">length</span><span class="p">:</span> <span class="k">continue</span>
+				<span class="n">colorDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+				<span class="n">colorDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="n">colorDict</span><span class="p">[</span><span class="n">length</span><span class="o">-</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="n">end</span><span class="p">)]</span>
 	
-	return colorDict[n] + 1
+	<span class="k">return</span> <span class="n">colorDict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
 
 
-n = 50
-while True:
-	if F(50, n) &gt; 10**6:
-		print n
-		break
-	else:
-		n += 1
-</code></pre>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">F</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+		<span class="k">print</span> <span class="n">n</span>
+		<span class="k">break</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
 
 </div>
 

@@ -83,16 +83,16 @@ manageable.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def timestwo(x):
-	return str(2 * int(x))[-14:]
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">timestwo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+	<span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">))[</span><span class="o">-</span><span class="mi">14</span><span class="p">:]</span>
 
-a = 1
-for i in range(7830457):
-	print i
-	a = timestwo(a)
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7830457</span><span class="p">):</span>
+	<span class="k">print</span> <span class="n">i</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="n">timestwo</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 	
-print 28433 * int(a) + 1
-</code></pre>
+<span class="k">print</span> <span class="mi">28433</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
 
 </div>
 

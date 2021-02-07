@@ -84,18 +84,18 @@ to find the optimal solution.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
-count = 0
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-for length in range(2, 101):
-	print length
-	for nums in combinations_with_replacement(range(1, 101), length):
-		s = sum(nums)
-		if s == 100:
-			count += 1
+<span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
+	<span class="k">print</span> <span class="n">length</span>
+	<span class="k">for</span> <span class="n">nums</span> <span class="ow">in</span> <span class="n">combinations_with_replacement</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">),</span> <span class="n">length</span><span class="p">):</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+			<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 <h2 id="try-two">Try Two</h2>
 
@@ -116,53 +116,53 @@ breaks to get it to work. But it finally did.</p>
 
 <h2 id="code-1">Code</h2>
 
-<pre><code class="language-python">total = 100
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total</span> <span class="o">=</span> <span class="mi">100</span>
 
-def plus_one(l):
-	global total
-	n = 2
-	while True:
-		if l[0] &lt; l[1] + 2:
-			save = l
-			rep = True
-			while rep == True:
-				try:
-					while True:
-						if l[n] + 1 &lt;= l[n-1]:
-							break
-						else:
-							n += 1
-				except:
-					return
-				l[n] += 1
-				l[1:n] = [l[n]]*len(l[1:n])
-				l[0] = total - sum(l[1:])
-				if l[0] &lt; l[1]:
-					l = save
-					continue
-				else:
-					rep = False
-					yield l
-		else:
-			l[1] += 1
-			l[0] -= 1
-			n = 2
-			yield l
+<span class="k">def</span> <span class="nf">plus_one</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+	<span class="k">global</span> <span class="n">total</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">:</span>
+			<span class="n">save</span> <span class="o">=</span> <span class="n">l</span>
+			<span class="n">rep</span> <span class="o">=</span> <span class="bp">True</span>
+			<span class="k">while</span> <span class="n">rep</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="k">try</span><span class="p">:</span>
+					<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+						<span class="k">if</span> <span class="n">l</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">l</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+							<span class="k">break</span>
+						<span class="k">else</span><span class="p">:</span>
+							<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+				<span class="k">except</span><span class="p">:</span>
+					<span class="k">return</span>
+				<span class="n">l</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+				<span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="n">n</span><span class="p">]]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">])</span>
+				<span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+				<span class="k">if</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+					<span class="n">l</span> <span class="o">=</span> <span class="n">save</span>
+					<span class="k">continue</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">rep</span> <span class="o">=</span> <span class="bp">False</span>
+					<span class="k">yield</span> <span class="n">l</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+			<span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+			<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+			<span class="k">yield</span> <span class="n">l</span>
 
 
-count = 0
-for length in range(2, total+1):
-	build = [0]*length
-	build[1:] = [1]*(length-1)
-	build[0] = total - sum(build)
-	print build
-	count += 1
-	for l in plus_one(build):
-		count += 1
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">total</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="n">build</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">length</span>
+	<span class="n">build</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+	<span class="n">build</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">build</span><span class="p">)</span>
+	<span class="k">print</span> <span class="n">build</span>
+	<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">plus_one</span><span class="p">(</span><span class="n">build</span><span class="p">):</span>
+		<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
 	
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

@@ -82,16 +82,16 @@ mistake, the script worked nicely.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">num = 1000000000
-squ = str(pow(num, 2))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num</span> <span class="o">=</span> <span class="mi">1000000000</span>
+<span class="n">squ</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
-while len(squ) == 19:
-	if [squ[0], squ[2], squ[4], squ[6], squ[8], squ[10], squ[12], squ[14], squ[16], squ[18]] == map(str, (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)):
-		print [[[[num]]]]
-		break
-	num += 10
-	squ = str(num**2)
-</code></pre>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">squ</span><span class="p">)</span> <span class="o">==</span> <span class="mi">19</span><span class="p">:</span>
+	<span class="k">if</span> <span class="p">[</span><span class="n">squ</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">squ</span><span class="p">[</span><span class="mi">18</span><span class="p">]]</span> <span class="o">==</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
+		<span class="k">print</span> <span class="p">[[[[</span><span class="n">num</span><span class="p">]]]]</span>
+		<span class="k">break</span>
+	<span class="n">num</span> <span class="o">+=</span> <span class="mi">10</span>
+	<span class="n">squ</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

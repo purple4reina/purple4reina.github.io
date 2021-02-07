@@ -93,97 +93,97 @@ generating function and that lead me to the solution.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">modulo = 1000000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">1000000</span>
 
-def solve(to=float('inf')):
-    last_no_2 = n = 0
-    while n &lt; to:
-        n += 1
-        total = 1 &lt;&lt; n // 2
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)):</span>
+    <span class="n">last_no_2</span> <span class="o">=</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">to</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
 
-        if n % 2 == 0:
-            last_no_2 += no_2(n // 2)
-            total += no_2((n - 2) // 2)
-        total -= last_no_2 + 1
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">last_no_2</span> <span class="o">+=</span> <span class="n">no_2</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">no_2</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">-=</span> <span class="n">last_no_2</span> <span class="o">+</span> <span class="mi">1</span>
 
-        if total % modulo == 0 and total &gt; modulo:
-            break
+        <span class="k">if</span> <span class="n">total</span> <span class="o">%</span> <span class="n">modulo</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="n">modulo</span><span class="p">:</span>
+            <span class="k">break</span>
 
-    return n, total
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">total</span>
 
-_perms = {}
-def no_2(n):
-    if n in _perms:
-        return _perms[n]
-    elif n &lt; 0:
-        return 0
-    elif n &lt; 3:
-        return 1
-    p = no_2(n - 1) + no_2(n - 2) + no_2(n - 4)
-    _perms[n] = p
-    return p
+<span class="n">_perms</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">def</span> <span class="nf">no_2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">_perms</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_perms</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">no_2</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">no_2</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">no_2</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">_perms</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">return</span> <span class="n">p</span>
 
-if __name__ == '__main__':
-    import sys
-    n = float(sys.argv[1])
-    a, _ = solve(n)
-    print(a)
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
 
-from problem import solve
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_t_tests = (
-    (1, 0),
-    (2, 1),
-    (3, 0),
-    (4, 2),
-    (5, 1),
-    (6, 4),
-    (7, 3),
-    (8, 9),
-    (9, 7),
-    (10, 20),
-    (11, 16),
-    (12, 43),
-    (13, 36),
-    (14, 91),
-    (15, 79),
-    (16, 191),
-    (17, 170),
-    (18, 398),
-    (19, 361),
-    (20, 824),
-    (21, 759),
-    (22, 1697),
-    (23, 1583),
-    (24, 3480),
-    (25, 3280),
-    (26, 7111),
-    (27, 6760),
-    (28, 14487),
-    (29, 13871),
-    (30, 29439),
-    (42, 1999923),
-    (45, 3968274),
-    (50, 32632321),
-    (55, 130455888),
-    (60, 1058395038),
-    (70, 34104320267),
-    (80, 1095260678664),
-    (90, 35113623115748),
-    (100, 1124722424576767),
-)
+<span class="n">_t_tests</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">43</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">91</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">79</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">191</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">170</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">398</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">361</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">824</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">759</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">1697</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">1583</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">3480</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">3280</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">7111</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">6760</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">14487</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">29</span><span class="p">,</span> <span class="mi">13871</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">29439</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">1999923</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">3968274</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">32632321</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">130455888</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">1058395038</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">34104320267</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">1095260678664</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">35113623115748</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1124722424576767</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('to,expect', _t_tests)
-def test_solve(to, expect):
-    n, actual = solve(to)
-    assert n == to
-    assert expect == actual
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'to,expect'</span><span class="p">,</span> <span class="n">_t_tests</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">actual</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">n</span> <span class="o">==</span> <span class="n">to</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">actual</span>
+</code></pre></div></div>
 
 </div>
 

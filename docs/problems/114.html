@@ -80,24 +80,24 @@ the code up for it.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">bound = 50
-count = 0
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bound</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-colorDict = dict()
+<span class="n">colorDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-for k in xrange(-1, bound+1):
-	colorDict[k] = 0
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="n">colorDict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-for length in range(3, bound+1):
-	for start in range(1, length):
-		for end in range(3, bound+1):
-			if start + end - 1 &gt; length: continue
-			colorDict[length] += 1
-			colorDict[length] += colorDict[length-(start+end)]
+<span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">start</span> <span class="o">+</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">length</span><span class="p">:</span> <span class="k">continue</span>
+			<span class="n">colorDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+			<span class="n">colorDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="n">colorDict</span><span class="p">[</span><span class="n">length</span><span class="o">-</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="n">end</span><span class="p">)]</span>
 
-count = colorDict[bound] + 1
-print count
-</code></pre>
+<span class="n">count</span> <span class="o">=</span> <span class="n">colorDict</span><span class="p">[</span><span class="n">bound</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

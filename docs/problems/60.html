@@ -90,419 +90,419 @@ prime at a time to the list until five were found.</p>
 
 <h3 id="code">Code</h3>
 
-<pre><code class="language-python">from itertools import *
-bound = 1000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">1000</span>
 
-def glue(n):
-	return ''.join(map(str, n))
+<span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-def isprime(n):
-	n = int(n)
-	if n == 0 or n == 1: return False
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return False
-	return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def isdifferent(list):
-	for n in permutations(list, 2):
-		if n[0] == n[1]: return False
-	return True
+<span class="k">def</span> <span class="nf">isdifferent</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-primes = []
-for n in range(3, bound):
-	if isprime(n) == True: primes.append(n)
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-def theanswer():
-	i = 0
-	for numberlist in combinations(primes, 5):
-		if i%100000 == 0: print numberlist
-		i += 1
-		answer = True
-		for x in permutations(numberlist, 2):
-			if isprime(int(glue(x))) == False:
-				answer = False
-				break
-		if answer == True:
-			return numberlist, sum(numberlist)
+<span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">numberlist</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">100000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">numberlist</span>
+		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="n">answer</span> <span class="o">=</span> <span class="bp">True</span>
+		<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">numberlist</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+				<span class="n">answer</span> <span class="o">=</span> <span class="bp">False</span>
+				<span class="k">break</span>
+		<span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">numberlist</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numberlist</span><span class="p">)</span>
 
-print theanswer()
-</code></pre>
+<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+</code></pre></div></div>
 
 <h2 id="try-two">Try Two</h2>
 
 <h3 id="code-1">Code</h3>
 
-<pre><code class="language-python">from itertools import *
-bound = 1000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">1000</span>
 
-def glue(n):
-	return ''.join(map(str, n))
+<span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-def isprime(n):
-	n = int(n)
-	if n == 0 or n == 1: return False
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return False
-	return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def isdifferent(list):
-	for n in permutations(list, 2):
-		if n[0] == n[1]: return False
-	return True
+<span class="k">def</span> <span class="nf">isdifferent</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-primes = []
-for n in range(3, bound):
-	if isprime(n) == True: primes.append(n)
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-def theanswer():
-	twos = []
-	threes = []
-	answers = []
-	for a in primes:
-		for b in primes:
-			if isprime(int(glue([a, b]))) == True and isprime(int(glue([b, a]))) == True:
-				twos.append([a, b])
-	for a in primes:
-		for b in primes:
-			for c in primes:
-				answer = True
-				for test in permutations([a, b, c], 2):
-					if isprime(int(glue(test))) == False: 
-						answer = False
-						break
-				if answer == True: 
-					threes.append([a, b, c])
-	for two in twos:
-		for three in threes:
-			five = two + three
-			answer = True
-			for test in permutations(five, 2):
-				if isprime(int(glue(test))) == False:
-					answer = False
-					break
-			if answer == True:
-				answers.append(five); print five
-	return answers	
+<span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
+	<span class="n">twos</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">threes</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])))</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">])))</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="n">twos</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+				<span class="n">answer</span> <span class="o">=</span> <span class="bp">True</span>
+				<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="mi">2</span><span class="p">):</span>
+					<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> 
+						<span class="n">answer</span> <span class="o">=</span> <span class="bp">False</span>
+						<span class="k">break</span>
+				<span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> 
+					<span class="n">threes</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
+	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">twos</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">three</span> <span class="ow">in</span> <span class="n">threes</span><span class="p">:</span>
+			<span class="n">five</span> <span class="o">=</span> <span class="n">two</span> <span class="o">+</span> <span class="n">three</span>
+			<span class="n">answer</span> <span class="o">=</span> <span class="bp">True</span>
+			<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">five</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+					<span class="n">answer</span> <span class="o">=</span> <span class="bp">False</span>
+					<span class="k">break</span>
+			<span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">five</span><span class="p">);</span> <span class="k">print</span> <span class="n">five</span>
+	<span class="k">return</span> <span class="n">answers</span>	
 
-print theanswer()
-</code></pre>
+<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+</code></pre></div></div>
 
 <h2 id="try-three">Try Three</h2>
 
 <h3 id="code-2">Code</h3>
 
-<pre><code class="language-python">from itertools import *
-bound = 10000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">10000</span>
 
-def glue(n):
-	return ''.join(map(str, n))
+<span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-def isprime(n):
-	n = int(n)
-	if n == 0 or n == 1: return False
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return False
-	return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def makeprimes(bound):
-	p = []
-	for n in range(3, bound):
-		if isprime(n) == True: p.append(n)
-	return p
+<span class="k">def</span> <span class="nf">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">p</span>
 
-def flipprime(n):
-	for test in permutations(n, 2):
-		if isprime(int(glue(test))) == False: return False
-	return True
+<span class="k">def</span> <span class="nf">flipprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
 
-def theanswer():
-	answers = []
-	primes = makeprimes(bound)
+<span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
+	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="n">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span>
 	
-	for a in primes:
-		print [a]
-		for b in primes:
-			if b &lt;= a: continue
-			if flipprime([a, b]) == True:
-				for c in primes:
-					if c &lt;= b: continue
-					if flipprime([a, b, c]) == True:
-						for d in primes:
-							if d &lt;= c: continue
-							if flipprime([a, b, c, d]) == True:
-								for e in primes:
-									if e &lt;= d: continue
-									if flipprime([a, b, c, d, e]) == True:
-										answers.append([a, b, c, d, e])
-										print [a, b, c, d, e]
-	return answers
+	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+		<span class="k">print</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">:</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+					<span class="k">if</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span> <span class="k">continue</span>
+					<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+						<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+							<span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">:</span> <span class="k">continue</span>
+							<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+								<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+									<span class="k">if</span> <span class="n">e</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">:</span> <span class="k">continue</span>
+									<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+										<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span>
+										<span class="k">print</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]</span>
+	<span class="k">return</span> <span class="n">answers</span>
 
-print theanswer()
-</code></pre>
+<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+</code></pre></div></div>
 
 <h2 id="try-four">Try Four</h2>
 
 <h3 id="code-3">Code</h3>
 
-<pre><code class="language-python">from itertools import *
-lower = 5000
-bound = 10000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">lower</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">10000</span>
 
-def glue(n):
-	return ''.join(map(str, n))
+<span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-def isprime(n):
-	n = int(n)
-	if n == 0 or n == 1: return False
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return False
-	return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def isdifferent(list):
-	for n in permutations(list, 2):
-		if n[0] == n[1]: return False
-	return True
+<span class="k">def</span> <span class="nf">isdifferent</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def primelist(start, finish):
-	primes = []
-	for n in range(start, finish):
-		if isprime(n) == True: primes.append(n)
-	return primes
+<span class="k">def</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">primes</span>
 
-def flipprimelist(n, primes):
-	for test in permutations(n, 2):
-		if int(glue(test)) not in primes: return False
-	return True
+<span class="k">def</span> <span class="nf">flipprimelist</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">primes</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def flipprimeloop(n):
-	for test in permutations(n, 2):
-		if isprime(int(glue(test))) == False: return False
-	return True
+<span class="k">def</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def mixup(element, listt):
-	for mix in permutations(element, len(element)):
-		if mix in listt: return True
-	return False
+<span class="k">def</span> <span class="nf">mixup</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">listt</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">listt</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
+	<span class="k">return</span> <span class="bp">False</span>
 
 
-def theanswer():
-	answers = []
-	twos = []
-	fours = []
-	primes = primelist(lower, bound)
+<span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
+	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">twos</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">fours</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="n">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
 	
-	print 'primes compiled', len(primes)
+	<span class="k">print</span> <span class="s">'primes compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
 	
-	for two in combinations(primes, 2):
-		if flipprimeloop(two) == True:
-			twos.append(two)
-			print two
+	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">twos</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">two</span><span class="p">)</span>
+			<span class="k">print</span> <span class="n">two</span>
 	
-	print 'twos compiled', len(twos)
+	<span class="k">print</span> <span class="s">'twos compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">twos</span><span class="p">)</span>
 	
-	for four in combinations(twos, 2):
-		four = four[0] + four[1]
-		if flipprimeloop(four) == True and mixup(four, fours) == False:
-			fours.append(four)
-			print four
-			for one in primes:
-				five = list(four) + [one]
-				if flipprimeloop(five) == True:
-					answers.append([five, sum(five)])
-					print five, sum(five)
+	<span class="k">for</span> <span class="n">four</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">twos</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="n">four</span> <span class="o">=</span> <span class="n">four</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">four</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+		<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">four</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">mixup</span><span class="p">(</span><span class="n">four</span><span class="p">,</span> <span class="n">fours</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="n">fours</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">four</span><span class="p">)</span>
+			<span class="k">print</span> <span class="n">four</span>
+			<span class="k">for</span> <span class="n">one</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+				<span class="n">five</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">four</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">one</span><span class="p">]</span>
+				<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+					<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)])</span>
+					<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)</span>
 	
-	return answers
+	<span class="k">return</span> <span class="n">answers</span>
 
-print theanswer()
-</code></pre>
+<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+</code></pre></div></div>
 
 <h2 id="try-five">Try Five</h2>
 
 <h3 id="code-4">Code</h3>
 
-<pre><code class="language-python">from itertools import *
-lower = 3
-bound = 2000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">lower</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">2000</span>
 
-def glue(n):
-	return ''.join(map(str, n))
+<span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-def isprime(n):
-	n = int(n)
-	if n == 0 or n == 1: return False
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return False
-	return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def isdifferent(list):
-	for n in permutations(list, 2):
-		if n[0] == n[1]: return False
-	return True
+<span class="k">def</span> <span class="nf">isdifferent</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def primelist(start, finish):
-	primes = []
-	for n in range(start, finish):
-		if isprime(n) == True: primes.append(n)
-	return primes
+<span class="k">def</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">primes</span>
 
-def flipprimelist(n, primes):
-	for test in permutations(n, 2):
-		if int(glue(test)) not in primes: return False
-	return True
+<span class="k">def</span> <span class="nf">flipprimelist</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">primes</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def flipprimeloop(n):
-	for test in permutations(n, 2):
-		if isprime(int(glue(test))) == False: return False
-	return True
+<span class="k">def</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def mixup(element, listt):
-	for mix in permutations(element, len(element)):
-		if mix in listt: return True
-	return False
+<span class="k">def</span> <span class="nf">mixup</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">listt</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">listt</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
+	<span class="k">return</span> <span class="bp">False</span>
 
 
-def theanswer():
-	answers = []
-	twos = []
-	threes = []
-	fours = []
-	primes = primelist(lower, bound)
+<span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
+	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">twos</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">threes</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">fours</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="n">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
 	
-	print 'primes compiled', len(primes)
+	<span class="k">print</span> <span class="s">'primes compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
 	
-	for two in combinations(primes, 2):
-		if flipprimeloop(two) == True:
-			twos.append(list(two))
+	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">twos</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">two</span><span class="p">))</span>
 	
-	print 'twos compiled', len(twos)
+	<span class="k">print</span> <span class="s">'twos compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">twos</span><span class="p">)</span>
 	
-	for two in twos:
-		for one in primes:
-			if one in two: continue
-			three = two + [one]
-			if flipprimeloop(three) == True:
-				threes.append(three)
+	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">twos</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">one</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">one</span> <span class="ow">in</span> <span class="n">two</span><span class="p">:</span> <span class="k">continue</span>
+			<span class="n">three</span> <span class="o">=</span> <span class="n">two</span> <span class="o">+</span> <span class="p">[</span><span class="n">one</span><span class="p">]</span>
+			<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">three</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="n">threes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">three</span><span class="p">)</span>
 	
-	print 'threes compiled', len(threes)
+	<span class="k">print</span> <span class="s">'threes compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">threes</span><span class="p">)</span>
 	
-	for two in twos:
-		for three in threes:
-			five = two + three
-			#print five
-			if flipprimeloop(five) == True:
-				answers.append([five, sum(five)])
-				print five, sum(five), '&lt;-------------------------------'
+	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">twos</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">three</span> <span class="ow">in</span> <span class="n">threes</span><span class="p">:</span>
+			<span class="n">five</span> <span class="o">=</span> <span class="n">two</span> <span class="o">+</span> <span class="n">three</span>
+			<span class="c1">#print five
+</span>			<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)])</span>
+				<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">),</span> <span class="s">'&lt;-------------------------------'</span>
 	
-	return answers
+	<span class="k">return</span> <span class="n">answers</span>
 
-print theanswer()
-</code></pre>
+<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+</code></pre></div></div>
 
 <h2 id="try-six">Try Six</h2>
 
 <h3 id="code-5">Code</h3>
 
-<pre><code class="language-python">from itertools import *
-lower = 3
-bound = 1000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">lower</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">1000</span>
 
-def glue(n):
-	return ''.join(map(str, n))
+<span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-def isprime(n):
-	if n == 0 or n == 1: return False
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return False
-	return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def primelist(start, finish):
-	p = []
-	for n in range(start, finish):
-		if isprime(n) == True: p.append(n)
-	return p
+<span class="k">def</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">p</span>
 
-def flipprime(n):
-	for test in permutations(n, 2):
-		if isprime(int(glue(test))) == False: return False
-	return True
+<span class="k">def</span> <span class="nf">flipprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def mixup(element, listt):
-	for mix in permutations(element, len(element)):
-		if mix in listt: return True
-	return False
+<span class="k">def</span> <span class="nf">mixup</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">listt</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">listt</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
+	<span class="k">return</span> <span class="bp">False</span>
 
 
-def theanswer():
-	answers = []
-	primes = primelist(lower, bound)
+<span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
+	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="n">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
 	
-	print 'primes compiled', len(primes)
+	<span class="k">print</span> <span class="s">'primes compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
 	
-	for five in combinations(primes, 5):
-		print five
-		if flipprime(five) == True:
-			answers.append(list(five))
-			print five, sum(five)
+	<span class="k">for</span> <span class="n">five</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+		<span class="k">print</span> <span class="n">five</span>
+		<span class="k">if</span> <span class="n">flipprime</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">five</span><span class="p">))</span>
+			<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)</span>
 	
-	return answers
+	<span class="k">return</span> <span class="n">answers</span>
 
-print theanswer()
-</code></pre>
+<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+</code></pre></div></div>
 
 <h2 id="try-seven">Try Seven</h2>
 
 <h3 id="code-6">Code</h3>
 
-<pre><code class="language-python">from itertools import *
-bound = 10000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">10000</span>
 
-def glue(n):
-	return ''.join(map(str, n))
+<span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-def isprime(n):
-	n = int(n)
-	if n == 0 or n == 1: return False
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return False
-	return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def makeprimes(bound):
-	p = []
-	for n in range(3, bound):
-		if isprime(n) == True: p.append(n)
-	return p
+<span class="k">def</span> <span class="nf">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">p</span>
 
-def flipprime(n):
-	for test in permutations(n, 2):
-		if isprime(int(glue(test))) == False: return False
-	return True
+<span class="k">def</span> <span class="nf">flipprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
 
-def theanswer():
-	answers = []
-	primes = makeprimes(bound)
+<span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
+	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="n">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span>
 	
-	for a in primes:
-		print [a]
-		for b in primes:
-			if b &lt;= a: continue
-			if flipprime([a, b]) == True:
-				for c in primes:
-					if c &lt;= b: continue
-					if flipprime([a, b, c]) == True:
-						for d in primes:
-							if d &lt;= c: continue
-							if flipprime([a, b, c, d]) == True:
-								for e in primes:
-									if e &lt;= d: continue
-									if flipprime([a, b, c, d, e]) == True:
-										answers.append([a, b, c, d, e])
-										print [a, b, c, d, e]
-	return answers
+	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+		<span class="k">print</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">:</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+					<span class="k">if</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span> <span class="k">continue</span>
+					<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+						<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+							<span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">:</span> <span class="k">continue</span>
+							<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+								<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+									<span class="k">if</span> <span class="n">e</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">:</span> <span class="k">continue</span>
+									<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+										<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span>
+										<span class="k">print</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]</span>
+	<span class="k">return</span> <span class="n">answers</span>
 
-print theanswer()
-</code></pre>
+<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+</code></pre></div></div>
 
 </div>
 

@@ -82,33 +82,33 @@ tile in it.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def isprime(n):
-	for i in range(2, int(n**.5)+1):
-		if n%i == 0: return False
-	return True
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
 
-def str2num(n):
-	return ''.join(map(str, n))
+<span class="k">def</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 
-def replace(n):
-	replaceset = []
-	for i in range(10):
-		new = str2num(n.replace('_', str(i)))
-		replaceset.append(str2num(new))
-	return map(int, replaceset)
+<span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">replaceset</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+		<span class="n">new</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+		<span class="n">replaceset</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">str2num</span><span class="p">(</span><span class="n">new</span><span class="p">))</span>
+	<span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">replaceset</span><span class="p">)</span>
 
 
-from itertools import product
-choice = '0123456789_'
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="n">choice</span> <span class="o">=</span> <span class="s">'0123456789_'</span>
 
-for n in product(choice, repeat=6):
-	if '_' not in n: continue
-	this = map(isprime, replace(str(str2num(n))))
-	count = this.count(True)
-	if count == 8: print n, count
-</code></pre>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">choice</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+	<span class="k">if</span> <span class="s">'_'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span> <span class="k">continue</span>
+	<span class="n">this</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">isprime</span><span class="p">,</span> <span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
+	<span class="n">count</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span> <span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

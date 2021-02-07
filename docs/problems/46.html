@@ -75,28 +75,28 @@
   <h1 class="page-title">46</h1>
   <h2 id="code">Code</h2>
 
-<pre><code class="language-python">primeslist = [2]
-def iscomposite(n):
-	for i in range(2, int(n**.5)+1):
-		if n%i == 0: return 'true'
-	primeslist.append(n)
-	return 'false'
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">primeslist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">iscomposite</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'true'</span>
+	<span class="n">primeslist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="s">'false'</span>
 
-def conjecture(n):
-	for i in range(int((n/2)**.5)+1):
-		for p in primeslist:
-			if n == p + 2*(i**2): return 'true'
-	return 'false'
+<span class="k">def</span> <span class="nf">conjecture</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primeslist</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">):</span> <span class="k">return</span> <span class="s">'true'</span>
+	<span class="k">return</span> <span class="s">'false'</span>
 
-c = 'true'
-n = 3
-while c != 'false':
-	n += 2; print n
-	if iscomposite(n) == 'true':
-		c = conjecture(n)
+<span class="n">c</span> <span class="o">=</span> <span class="s">'true'</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">while</span> <span class="n">c</span> <span class="o">!=</span> <span class="s">'false'</span><span class="p">:</span>
+	<span class="n">n</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span> <span class="k">print</span> <span class="n">n</span>
+	<span class="k">if</span> <span class="n">iscomposite</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="s">'true'</span><span class="p">:</span>
+		<span class="n">c</span> <span class="o">=</span> <span class="n">conjecture</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-print n, 'makes the conjecture false'
-</code></pre>
+<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="s">'makes the conjecture false'</span>
+</code></pre></div></div>
 
 </div>
 

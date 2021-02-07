@@ -90,128 +90,128 @@ primes (and mostly coming up empty too!).</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def cache(fn):
-    _cache = {}
-    _seen = {}
-    _twos_rel = {}
-    def wrap(*args):
-        if _twos_rel.get(args[0]):
-            return True
-        if args in _cache:
-            return _cache[args]
-        if args in _seen:
-            _cache[args] = False
-            return False
-        _seen[args] = True
-        ret = fn(*args)
-        _cache[args] = ret
-        if ret:
-            _twos_rel[args[0]] = True
-        return ret
-    return wrap
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_seen</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_twos_rel</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">_twos_rel</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">_seen</span><span class="p">:</span>
+            <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">_seen</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">if</span> <span class="n">ret</span><span class="p">:</span>
+            <span class="n">_twos_rel</span><span class="p">[</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrap</span>
 
-def is_connected(a, b):
-    while a:
-        b, bmod = divmod(b, 10)
-        a, amod = divmod(a, 10)
-        if amod != bmod:
-            return a == b
-    return not b // 10
+<span class="k">def</span> <span class="nf">is_connected</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">a</span><span class="p">:</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">bmod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">amod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">amod</span> <span class="o">!=</span> <span class="n">bmod</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">b</span> <span class="o">//</span> <span class="mi">10</span>
 
-def solve(n):
-    sieve = [False, False] + [True] * (n - 1)
-    primes = []
-    for p, is_prime in enumerate(sieve):
-        if not is_prime:
-            continue
-        primes.append(p)
-        num = p + p
-        while num &lt;= n:
-            sieve[num] = False
-            num += p
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">is_prime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_prime</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">p</span>
+        <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">sieve</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">p</span>
 
-    relatives_of = {}
-    for p in primes:
-        relatives_of[p] = []
-        for q in primes:
-            if q == p:
-                break
-            if is_connected(q, p):
-                relatives_of[p].append(q)
-                relatives_of[q].append(p)
+    <span class="n">relatives_of</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+        <span class="n">relatives_of</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">q</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">is_connected</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+                <span class="n">relatives_of</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+                <span class="n">relatives_of</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-    @cache
-    def is_twos_relative(num, top):
-        if num == 2:
-            return True
-        for p in relatives_of[num]:
-            if p &gt;= top:
-                break
-            if is_twos_relative(p, top):
-                return True
-        return False
+    <span class="o">@</span><span class="n">cache</span>
+    <span class="k">def</span> <span class="nf">is_twos_relative</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">top</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">relatives_of</span><span class="p">[</span><span class="n">num</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="n">top</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">is_twos_relative</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">top</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
 
-    total = 0
-    for p in primes:
-        if not is_twos_relative(p, p):
-            total += p
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_twos_relative</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">p</span>
 
-    return total
+    <span class="k">return</span> <span class="n">total</span>
 
-if __name__ == '__main__':
-    import sys
-    sys.setrecursionlimit(60000)
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">sys</span><span class="p">.</span><span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">60000</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="amended-code">Amended Code</h2>
 
-<pre><code class="language-python">def relatives_below(p):
-    below = []
-    digits = int(math.log(p, 10)) + 1
-    num = p % (10**(digits-1))
-    if num and int(math.log(num, 10)) + 1 == digits - 1:
-        below.append(p % (10**(digits-1)))
-    for digit in range(digits):
-        num = (p // (10**(digit+1)) * (10**(digit+1))) + (p % (10**digit))
-        if digit == digits - 1 and digits &gt; 1:
-            num += 10**digit
-        while num &lt; p:
-            below.append(num)
-            num += 10**digit
-    return below
-</code></pre>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">relatives_below</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">below</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">digits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">%</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">digits</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">digits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">below</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span> <span class="o">%</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">digits</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">digits</span><span class="p">):</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">//</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">digit</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">digit</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span> <span class="o">%</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">digit</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">digit</span> <span class="o">==</span> <span class="n">digits</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">digits</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="mi">10</span><span class="o">**</span><span class="n">digit</span>
+        <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">:</span>
+            <span class="n">below</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="mi">10</span><span class="o">**</span><span class="n">digit</span>
+    <span class="k">return</span> <span class="n">below</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve, is_connected
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">is_connected</span>
 
-_test_is_connected = (
-        (2, 5, True),
-        (7, 17, True),
-        (7, 217, False),
-        (1, 101, False),
-)
+<span class="n">_test_is_connected</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('a,b,expect', _test_is_connected)
-def test_is_connected(a, b, expect):
-    assert expect is is_connected(a, b)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'a,b,expect'</span><span class="p">,</span> <span class="n">_test_is_connected</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_is_connected</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="ow">is</span> <span class="n">is_connected</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
-_test_solve = (
-        (10**1, 0),
-        (10**2, 11),
-        (10**3, 431),
-        (10**4, 78728),
-        (10**5, 5134953),
-        #(10**6, 532658671),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">431</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">78728</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5134953</span><span class="p">),</span>
+        <span class="c1">#(10**6, 532658671),
+</span><span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

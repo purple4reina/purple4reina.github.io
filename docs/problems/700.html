@@ -90,159 +90,159 @@ learning opportunity for next time.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-ruby">class Problem
-  class &lt;&lt; self
-    def solve(coin_count: Float::INFINITY)
-      birthday = 1_504_170_715_041_707  # prime factors: [17, 1249, 12043, 5882353]
-      modulo   = 4_503_599_627_370_517  # is prime (but not mersenne) 2 ** 52 + 21
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Problem</span>
+  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="ss">coin_count: </span><span class="no">Float</span><span class="o">::</span><span class="no">INFINITY</span><span class="p">)</span>
+      <span class="n">birthday</span> <span class="o">=</span> <span class="mi">1_504_170_715_041_707</span>  <span class="c1"># prime factors: [17, 1249, 12043, 5882353]</span>
+      <span class="n">modulo</span>   <span class="o">=</span> <span class="mi">4_503_599_627_370_517</span>  <span class="c1"># is prime (but not mersenne) 2 ** 52 + 21</span>
 
-      one_down        = birthday - modulo
-      one_up_one_down = birthday + one_down
-      two_up_one_down = birthday + one_up_one_down
-      five_hundred    = (166 * two_up_one_down) + (2 * birthday)
+      <span class="n">one_down</span>        <span class="o">=</span> <span class="n">birthday</span> <span class="o">-</span> <span class="n">modulo</span>
+      <span class="n">one_up_one_down</span> <span class="o">=</span> <span class="n">birthday</span> <span class="o">+</span> <span class="n">one_down</span>
+      <span class="n">two_up_one_down</span> <span class="o">=</span> <span class="n">birthday</span> <span class="o">+</span> <span class="n">one_up_one_down</span>
+      <span class="n">five_hundred</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">166</span> <span class="o">*</span> <span class="n">two_up_one_down</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">birthday</span><span class="p">)</span>
 
-      sum = 0
-      min = modulo
-      number = 0
-      coins = 0
-      cnt = 0
-      prev_cnt = 0
+      <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">min</span> <span class="o">=</span> <span class="n">modulo</span>
+      <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">coins</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">prev_cnt</span> <span class="o">=</span> <span class="mi">0</span>
 
-      # first coin
-      cnt += 1
-      number += birthday
-      sum += number
-      coins += 1
-      return sum if coin_count == 1
+      <span class="c1"># first coin</span>
+      <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">number</span> <span class="o">+=</span> <span class="n">birthday</span>
+      <span class="n">sum</span> <span class="o">+=</span> <span class="n">number</span>
+      <span class="n">coins</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">return</span> <span class="n">sum</span> <span class="k">if</span> <span class="n">coin_count</span> <span class="o">==</span> <span class="mi">1</span>
 
-      # second coin
-      cnt += 2
-      number += one_up_one_down
-      sum += number
-      coins += 1
-      return sum if coin_count == 2
+      <span class="c1"># second coin</span>
+      <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">2</span>
+      <span class="n">number</span> <span class="o">+=</span> <span class="n">one_up_one_down</span>
+      <span class="n">sum</span> <span class="o">+=</span> <span class="n">number</span>
+      <span class="n">coins</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">return</span> <span class="n">sum</span> <span class="k">if</span> <span class="n">coin_count</span> <span class="o">==</span> <span class="mi">2</span>
 
-      # remaining coins
-      while
-        cnt += 503
+      <span class="c1"># remaining coins</span>
+      <span class="k">while</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">503</span>
 
-        number += five_hundred
-        number -= modulo if number &gt; modulo
-        prev_number = number
+        <span class="n">number</span> <span class="o">+=</span> <span class="n">five_hundred</span>
+        <span class="n">number</span> <span class="o">-=</span> <span class="n">modulo</span> <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="n">modulo</span>
+        <span class="n">prev_number</span> <span class="o">=</span> <span class="n">number</span>
 
-        number += one_down
-        prev_prev_number_diff = number - prev_number
+        <span class="n">number</span> <span class="o">+=</span> <span class="n">one_down</span>
+        <span class="n">prev_prev_number_diff</span> <span class="o">=</span> <span class="n">number</span> <span class="o">-</span> <span class="n">prev_number</span>
 
-        number += birthday
-        prev_number = number
+        <span class="n">number</span> <span class="o">+=</span> <span class="n">birthday</span>
+        <span class="n">prev_number</span> <span class="o">=</span> <span class="n">number</span>
 
-        number += birthday
-        number -= modulo if number &gt; modulo
-        number_diff = number - prev_number
+        <span class="n">number</span> <span class="o">+=</span> <span class="n">birthday</span>
+        <span class="n">number</span> <span class="o">-=</span> <span class="n">modulo</span> <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="n">modulo</span>
+        <span class="n">number_diff</span> <span class="o">=</span> <span class="n">number</span> <span class="o">-</span> <span class="n">prev_number</span>
 
-        unless number_diff == prev_prev_number_diff
-          cnt += 3
-          number += two_up_one_down
-          number -= modulo if number &gt; modulo
-        end
+        <span class="k">unless</span> <span class="n">number_diff</span> <span class="o">==</span> <span class="n">prev_prev_number_diff</span>
+          <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">3</span>
+          <span class="n">number</span> <span class="o">+=</span> <span class="n">two_up_one_down</span>
+          <span class="n">number</span> <span class="o">-=</span> <span class="n">modulo</span> <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="n">modulo</span>
+        <span class="k">end</span>
 
-        if number &lt;= min
-          return sum if number == 0
-          return sum + 1 if number == 1
-          return sum if number == min
+        <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="n">min</span>
+          <span class="k">return</span> <span class="n">sum</span> <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span>
+          <span class="k">return</span> <span class="n">sum</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">1</span>
+          <span class="k">return</span> <span class="n">sum</span> <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="n">min</span>
 
-          min = number
-          sum += number
+          <span class="n">min</span> <span class="o">=</span> <span class="n">number</span>
+          <span class="n">sum</span> <span class="o">+=</span> <span class="n">number</span>
 
-          coins += 1
-          puts "%20d%20d%20d" % [modulo - cnt, number, sum]
-          return sum if coins == coin_count
+          <span class="n">coins</span> <span class="o">+=</span> <span class="mi">1</span>
+          <span class="nb">puts</span> <span class="s2">"%20d%20d%20d"</span> <span class="o">%</span> <span class="p">[</span><span class="n">modulo</span> <span class="o">-</span> <span class="n">cnt</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">sum</span><span class="p">]</span>
+          <span class="k">return</span> <span class="n">sum</span> <span class="k">if</span> <span class="n">coins</span> <span class="o">==</span> <span class="n">coin_count</span>
 
-          coin_diff = cnt - prev_cnt - 503
-          cnt += coin_diff
-          number += coin_diff * birthday
-          number %= modulo
-          prev_cnt = cnt
-        end
-      end
-    end
-  end
-end
+          <span class="n">coin_diff</span> <span class="o">=</span> <span class="n">cnt</span> <span class="o">-</span> <span class="n">prev_cnt</span> <span class="o">-</span> <span class="mi">503</span>
+          <span class="n">cnt</span> <span class="o">+=</span> <span class="n">coin_diff</span>
+          <span class="n">number</span> <span class="o">+=</span> <span class="n">coin_diff</span> <span class="o">*</span> <span class="n">birthday</span>
+          <span class="n">number</span> <span class="o">%=</span> <span class="n">modulo</span>
+          <span class="n">prev_cnt</span> <span class="o">=</span> <span class="n">cnt</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-if __FILE__ == $0
-  puts "Problem.solve: #{Problem.solve.inspect}"
-end
-</code></pre>
+<span class="k">if</span> <span class="kp">__FILE__</span> <span class="o">==</span> <span class="vg">$0</span>
+  <span class="nb">puts</span> <span class="s2">"Problem.solve: </span><span class="si">#{</span><span class="no">Problem</span><span class="p">.</span><span class="nf">solve</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-ruby">require 'test/unit'
-require './problem'
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'test/unit'</span>
+<span class="nb">require</span> <span class="s1">'./problem'</span>
 
-class TestProblem &lt; Test::Unit::TestCase
-  [
-    [1,  1504170715041707],
-    [2,  1513083232796311],
-    [3,  1515128018282680],
-    [4,  1516439427959921],
-    [5,  1517017461828034],
-    [6,  1517440153755132],
-    [7,  1517707503741215],
-    [8,  1517819511786283],
-    [9,  1517888185935404],
-    [10, 1517913526188578],
-    [11, 1517920872798979],
-    [12, 1517924918987409],
-    [13, 1517925664753868],
-    [14, 1517926093164192],
-    [15, 1517926204218381],
-    [16, 1517926220024813],
-    [17, 1517926235422080],
-    [18, 1517926250410182],
-    [19, 1517926264989119],
-    [20, 1517926279158891],
-    [21, 1517926292919498],
-    [22, 1517926306270940],
-    [23, 1517926319213217],
-    [24, 1517926331746329],
-    [25, 1517926343870276],
-    [26, 1517926355585058],
-    [27, 1517926366890675],
-    [28, 1517926377787127],
-    [29, 1517926388274414],
-    [30, 1517926398352536],
-    [31, 1517926408021493],
-    [32, 1517926417281285],
-    [33, 1517926426131912],
-    [34, 1517926434573374],
-    [35, 1517926442605671],
-    [36, 1517926450228803],
-    [37, 1517926457442770],
-    [38, 1517926464247572],
-    [39, 1517926470643209],
-    [40, 1517926476629681],
-    [41, 1517926482206988],
-    [42, 1517926487375130],
-    [43, 1517926492134107],
-    [44, 1517926496483919],
-    [45, 1517926500424566],
-    [46, 1517926503956048],
-    [47, 1517926507078365],
-    [48, 1517926509791517],
-    [49, 1517926512095504],
-    [50, 1517926513990326],
-    [51, 1517926515475983],
-    [52, 1517926516552475],
-    [53, 1517926517219802],
-    [54, 1517926517477964],
-    [55, 1517926517585123],
-  ].each do |coins, expect|
-    define_method "test_solve_#{coins.to_s.rjust(3, '0')}" do
-      assert_equal expect, Problem.solve(coin_count: coins)
-    end
-  end
-end
-</code></pre>
+<span class="k">class</span> <span class="nc">TestProblem</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">1504170715041707</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span>  <span class="mi">1513083232796311</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">1515128018282680</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span>  <span class="mi">1516439427959921</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span>  <span class="mi">1517017461828034</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">6</span><span class="p">,</span>  <span class="mi">1517440153755132</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span>  <span class="mi">1517707503741215</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">8</span><span class="p">,</span>  <span class="mi">1517819511786283</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">9</span><span class="p">,</span>  <span class="mi">1517888185935404</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1517913526188578</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1517920872798979</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1517924918987409</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">1517925664753868</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">1517926093164192</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1517926204218381</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">1517926220024813</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">1517926235422080</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">1517926250410182</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">1517926264989119</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1517926279158891</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">1517926292919498</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">1517926306270940</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">1517926319213217</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">1517926331746329</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">1517926343870276</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">26</span><span class="p">,</span> <span class="mi">1517926355585058</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">1517926366890675</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">1517926377787127</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">1517926388274414</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">1517926398352536</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">1517926408021493</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1517926417281285</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">33</span><span class="p">,</span> <span class="mi">1517926426131912</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">1517926434573374</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">1517926442605671</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">1517926450228803</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">37</span><span class="p">,</span> <span class="mi">1517926457442770</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">38</span><span class="p">,</span> <span class="mi">1517926464247572</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">39</span><span class="p">,</span> <span class="mi">1517926470643209</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">1517926476629681</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">41</span><span class="p">,</span> <span class="mi">1517926482206988</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">1517926487375130</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">43</span><span class="p">,</span> <span class="mi">1517926492134107</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">44</span><span class="p">,</span> <span class="mi">1517926496483919</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">1517926500424566</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">46</span><span class="p">,</span> <span class="mi">1517926503956048</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">47</span><span class="p">,</span> <span class="mi">1517926507078365</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">48</span><span class="p">,</span> <span class="mi">1517926509791517</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">49</span><span class="p">,</span> <span class="mi">1517926512095504</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1517926513990326</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">51</span><span class="p">,</span> <span class="mi">1517926515475983</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">52</span><span class="p">,</span> <span class="mi">1517926516552475</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">53</span><span class="p">,</span> <span class="mi">1517926517219802</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">54</span><span class="p">,</span> <span class="mi">1517926517477964</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">1517926517585123</span><span class="p">],</span>
+  <span class="p">].</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">coins</span><span class="p">,</span> <span class="n">expect</span><span class="o">|</span>
+    <span class="n">define_method</span> <span class="s2">"test_solve_</span><span class="si">#{</span><span class="n">coins</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">rjust</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">'0'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span> <span class="k">do</span>
+      <span class="n">assert_equal</span> <span class="n">expect</span><span class="p">,</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">solve</span><span class="p">(</span><span class="ss">coin_count: </span><span class="n">coins</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
 
 </div>
 

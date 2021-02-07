@@ -93,41 +93,41 @@ have liked, but it gave me the correct answer nonetheless.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from math import *
-from decimal import *
-getcontext().prec = 1000
-bound = 10000
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">getcontext</span><span class="p">().</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">10000</span>
 
-def periodlength(sqrt):
-	r = []
-	a = []
-	r.append(sqrt)
-	a.append(Decimal(floor(r[0])))
-	while True:
-		for i in range(2):
-			r.append(1/Decimal(r[-1]-a[-1]))
-			a.append(int(floor(r[-1])))
-			del r[0]
-		Lh = (len(a)-1)/2
-		if a[1:1+Lh] == a[1+Lh:] and a[-1] == 2*a[0]:
-			r = []
-			a = []
-			return Lh
+<span class="k">def</span> <span class="nf">periodlength</span><span class="p">(</span><span class="n">sqrt</span><span class="p">):</span>
+	<span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">r</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">sqrt</span><span class="p">)</span>
+	<span class="n">a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+			<span class="n">r</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+			<span class="n">a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+			<span class="k">del</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+		<span class="n">Lh</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+		<span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="o">+</span><span class="n">Lh</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="n">Lh</span><span class="p">:]</span> <span class="ow">and</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+			<span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">return</span> <span class="n">Lh</span>
 
 
-count = 0
-for n in range(bound+1):
-	sqrt_n = n**Decimal(0.5)
-	if sqrt_n%1 == 0:
-		continue
-	else:
-		period = periodlength(sqrt_n)
-		if period%2 == 1:
-			print n, period
-			count += 1
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="n">sqrt_n</span> <span class="o">=</span> <span class="n">n</span><span class="o">**</span><span class="n">Decimal</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">sqrt_n</span><span class="o">%</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">continue</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">period</span> <span class="o">=</span> <span class="n">periodlength</span><span class="p">(</span><span class="n">sqrt_n</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">period</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">period</span>
+			<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

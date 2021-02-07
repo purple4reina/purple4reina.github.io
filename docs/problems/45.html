@@ -83,35 +83,35 @@ than a minute!  Hurray!</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">bound = 10**5
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bound</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
 
-T = []
-for t in range(286, bound):
-	T.append(int((0.5)*(t)*(t+1)))
+<span class="n">T</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">286</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+	<span class="n">T</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
 
-tmax = max(T)
+<span class="n">tmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
 
-P = []
-for p in range(bound):
-	pi = int((p)*(3*p-1)*(0.5))
-	P.append(pi)
-	if pi &gt; tmax: break
+<span class="n">P</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="n">pi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+	<span class="n">P</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">pi</span> <span class="o">&gt;</span> <span class="n">tmax</span><span class="p">:</span> <span class="k">break</span>
 
-H = []
-for h in range(bound):
-	hi = int((h)*(2*h-1))
-	H.append(hi)
-	if hi &gt; tmax: break
+<span class="n">H</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="n">hi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+	<span class="n">H</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">hi</span> <span class="o">&gt;</span> <span class="n">tmax</span><span class="p">:</span> <span class="k">break</span>
 
-print len(T), max(T), max(P), max(H)
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 
-for n in H:
-	if n in P:
-		print '**', n
-		if n in T:
-			print n
-			break; break; break
-</code></pre>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">P</span><span class="p">:</span>
+		<span class="k">print</span> <span class="s">'**'</span><span class="p">,</span> <span class="n">n</span>
+		<span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">T</span><span class="p">:</span>
+			<span class="k">print</span> <span class="n">n</span>
+			<span class="k">break</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span> <span class="k">break</span>
+</code></pre></div></div>
 
 </div>
 

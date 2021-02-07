@@ -84,49 +84,49 @@ precise for floating point arithmetic.  Runs in about 9 seconds on Pypy3.</p>
 
 <p>After reading through the forum posts once I finished the problem, I realized
 that I can vastly improve the performance of this code.  The slowest part is
-taking the large powers of <code>r**(k-1)</code>.  This can be avoided by storing the
-r-power in a variable, and just multiplying this by <code>r</code> for each loop.  Takes
+taking the large powers of <code class="language-plaintext highlighter-rouge">r**(k-1)</code>.  This can be avoided by storing the
+r-power in a variable, and just multiplying this by <code class="language-plaintext highlighter-rouge">r</code> for each loop.  Takes
 the time down to about 700 ms.</p>
 
-<pre><code class="language-python">r_k = 1
-for k in range(1, n + 1):
-    total += (900 - 3*k) * r_k
-    r_k *= r
-</code></pre>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r_k</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">900</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">r_k</span>
+    <span class="n">r_k</span> <span class="o">*=</span> <span class="n">r</span>
+</code></pre></div></div>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import decimal
-decimal.getcontext().prec = 15
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">decimal</span>
+<span class="n">decimal</span><span class="p">.</span><span class="n">getcontext</span><span class="p">().</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">15</span>
 
-def s(n, r):
-    if r == 0:
-        return n
-    total = 0
-    for k in range(1, n + 1):
-        total += (900 - 3*k) * r**(k-1)
-    return total
+<span class="k">def</span> <span class="nf">s</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">900</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total</span>
 
-def solve(n, a):
-    top, bottom = 10, -10
-    last = 0
-    while True:
-        r = decimal.Decimal((top + bottom) / 2)
-        num = s(n, r)
-        if num == last:
-            return round(r, 12)
-        if num &gt; a:
-            bottom = r
-        else:
-            top = r
-        last = num
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">((</span><span class="n">top</span> <span class="o">+</span> <span class="n">bottom</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">last</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">:</span>
+            <span class="n">bottom</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">num</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    m = eval(sys.argv[2])
-    print(solve(n, m))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
+</code></pre></div></div>
 
 </div>
 

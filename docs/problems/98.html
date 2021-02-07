@@ -85,49 +85,49 @@ combinations to copy each pair into the pairs list.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-for words in open('words.txt','r'):
-	words = words.split('","')
+<span class="k">for</span> <span class="n">words</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s">'words.txt'</span><span class="p">,</span><span class="s">'r'</span><span class="p">):</span>
+	<span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'","'</span><span class="p">)</span>
 
-anagrams = []
-for w in words:
-	anagrams.append(''.join(sorted(w)))
+<span class="n">anagrams</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+	<span class="n">anagrams</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">w</span><span class="p">)))</span>
 
-pairs = []
-triple = []
-for i in range(len(anagrams)):
-	if anagrams.count(anagrams[i]) == 2:
-		try:
-			pairs.append((words[i],words[anagrams.index(anagrams[i],i+1)]))
-		except:
-			pass
-	elif anagrams.count(anagrams[i]) &gt; 2:
-		for j in range(len(anagrams)):
-			if anagrams[j] == anagrams[i] and words[j] not in triple:
-				triple.append(words[j])
+<span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">triple</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">anagrams</span><span class="p">)):</span>
+	<span class="k">if</span> <span class="n">anagrams</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">anagrams</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">pairs</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">words</span><span class="p">[</span><span class="n">anagrams</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">anagrams</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]))</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">pass</span>
+	<span class="k">elif</span> <span class="n">anagrams</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">anagrams</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">anagrams</span><span class="p">)):</span>
+			<span class="k">if</span> <span class="n">anagrams</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">anagrams</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">words</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">triple</span><span class="p">:</span>
+				<span class="n">triple</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 
-for t in combinations(triple,2):
-	pairs.append(t)
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">triple</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+	<span class="n">pairs</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
-squares = []
-for pair in pairs:
-	for perm in permutations(range(10),len(pair[0])):
-		replace_dict = dict(zip(pair[0],perm))
-		pair0 = int(''.join([str(replace_dict[letter]) for letter in pair[0]]))
-		pair1 = int(''.join([str(replace_dict[letter]) for letter in pair[1]]))
-		if len(str(pair0)) != len(str(pair1)):
-			continue
-		elif (pair0**0.5)%1 != 0:
-			continue
-		elif (pair1**0.5)%1 != 0:
-			continue
-		else:
-			squares.append(pair0)
-			squares.append(pair1)
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+		<span class="n">replace_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">perm</span><span class="p">))</span>
+		<span class="n">pair0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">replace_dict</span><span class="p">[</span><span class="n">letter</span><span class="p">])</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]]))</span>
+		<span class="n">pair1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">replace_dict</span><span class="p">[</span><span class="n">letter</span><span class="p">])</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pair0</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pair1</span><span class="p">)):</span>
+			<span class="k">continue</span>
+		<span class="k">elif</span> <span class="p">(</span><span class="n">pair0</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">%</span><span class="mi">1</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">continue</span>
+		<span class="k">elif</span> <span class="p">(</span><span class="n">pair1</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">%</span><span class="mi">1</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">continue</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">squares</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair0</span><span class="p">)</span>
+			<span class="n">squares</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair1</span><span class="p">)</span>
 
-print max(squares)
-</code></pre>
+<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

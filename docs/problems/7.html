@@ -85,36 +85,36 @@ speed things up. But I still think I need a new approach.</p>
 
 <h3 id="code">Code</h3>
 
-<pre><code class="language-applescript">set all_int to {}
-set all_int_ref to a reference to all_int
-set primes_list to {}
-set primes_list_ref to a reference to primes_list
-set bound to 10000
-set t to (time of (current date))
+<div class="language-applescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span><span class="w"> </span><span class="nv">all_int</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="ow">reference to</span><span class="w"> </span><span class="nv">all_int</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">primes_list</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="ow">reference to</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">bound</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w">
 
-repeat with i from 1 to bound
-	copy i to the end of all_int_ref
-end repeat
+</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">bound</span><span class="w">
+	</span><span class="nb">copy</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
-set j to 2
-repeat while j &lt; (bound - 1)
+</span><span class="k">set</span><span class="w"> </span><span class="nv">j</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="k">repeat</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="nv">bound</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
 	
-	if item j of all_int_ref is not false then
-		copy item j of all_int_ref to the end of primes_list_ref
-		try
-			repeat with n from 2 to bound
-				set item (j * n) of all_int_ref to false
-			end repeat
-		end try
-	end if
-	set j to j + 1
+	</span><span class="k">if</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="nv">j</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w"> </span><span class="ow">is not</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="k">then</span><span class="w">
+		</span><span class="nb">copy</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="nv">j</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w">
+		</span><span class="k">try</span><span class="w">
+			</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">bound</span><span class="w">
+				</span><span class="k">set</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="p">(</span><span class="nv">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">n</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">false</span><span class="w">
+			</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+		</span><span class="k">end</span><span class="w"> </span><span class="k">try</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">j</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
 	
-end repeat
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
-log ((time of (current date)) - t)
-log (count primes_list)
-return primes_list
-</code></pre>
+</span><span class="nb">log</span><span class="w"> </span><span class="p">((</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">t</span><span class="p">)</span><span class="w">
+</span><span class="nb">log</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="nv">primes_list</span><span class="p">)</span><span class="w">
+</span><span class="nb">return</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="try-two">Try Two</h2>
 
@@ -130,42 +130,42 @@ enough to handle the number sizes I need.</p>
 
 <h3 id="code-1">Code</h3>
 
-<pre><code class="language-applescript">set all_int to {}
-set all_int_ref to a reference to all_int
-set primes_list to {}
-set primes_list_ref to a reference to primes_list
-set bound to 100000
-set t to (time of (current date))
+<div class="language-applescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span><span class="w"> </span><span class="nv">all_int</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="ow">reference to</span><span class="w"> </span><span class="nv">all_int</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">primes_list</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="ow">reference to</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">bound</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">100000</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w">
 
-repeat with i from 2 to bound
-	copy i to the end of all_int_ref
-end repeat
+</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">bound</span><span class="w">
+	</span><span class="nb">copy</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
 
-repeat
-	if item 1 of all_int_ref is not false then
-		copy (item 1 of all_int_ref) to this_prime
-		copy this_prime to the end of primes_list_ref
-		try
-			repeat with n from 1 to bound
-				set item ((this_prime * n) + 1) of all_int_ref to false
-			end repeat
-		end try
-	end if
-	try
-		copy (items 2 thru (count all_int_ref) of all_int_ref) to all_int
-	on error
-		exit repeat
-	end try
-end repeat
+</span><span class="k">repeat</span><span class="w">
+	</span><span class="k">if</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w"> </span><span class="ow">is not</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="k">then</span><span class="w">
+		</span><span class="nb">copy</span><span class="w"> </span><span class="p">(</span><span class="nb">item</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="p">)</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">this_prime</span><span class="w">
+		</span><span class="nb">copy</span><span class="w"> </span><span class="nv">this_prime</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w">
+		</span><span class="k">try</span><span class="w">
+			</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">bound</span><span class="w">
+				</span><span class="k">set</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="p">((</span><span class="nv">this_prime</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">n</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">false</span><span class="w">
+			</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+		</span><span class="k">end</span><span class="w"> </span><span class="k">try</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+	</span><span class="k">try</span><span class="w">
+		</span><span class="nb">copy</span><span class="w"> </span><span class="p">(</span><span class="nb">items</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nb">thru</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="p">)</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">all_int</span><span class="w">
+	</span><span class="nb">on</span><span class="w"> </span><span class="k">error</span><span class="w">
+		</span><span class="k">exit</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">try</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
-log ((time of (current date)) - t)
-log (count primes_list)
-log primes_list
-try
-	return item 10001 of primes_list
-end try
-</code></pre>
+</span><span class="nb">log</span><span class="w"> </span><span class="p">((</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">t</span><span class="p">)</span><span class="w">
+</span><span class="nb">log</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="nv">primes_list</span><span class="p">)</span><span class="w">
+</span><span class="nb">log</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span><span class="k">try</span><span class="w">
+	</span><span class="nb">return</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="mi">10001</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">try</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="try-three">Try Three</h2>
 
@@ -178,47 +178,47 @@ Time for a new strategy.</p>
 
 <h2 id="code-2">Code</h2>
 
-<pre><code class="language-applescript">set all_int to {}
-set all_int_ref to a reference to all_int
-set primes_list to {}
-set primes_list_ref to a reference to primes_list
-set new_int to {}
-set new_int_ref to a reference to new_int
-set bound to 30000
-set half_bound to (bound / 2)
-set t to (time of (current date))
+<div class="language-applescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span><span class="w"> </span><span class="nv">all_int</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="ow">reference to</span><span class="w"> </span><span class="nv">all_int</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">primes_list</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="ow">reference to</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">new_int</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">new_int_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="ow">reference to</span><span class="w"> </span><span class="nv">new_int</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">bound</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">30000</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">half_bound</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">bound</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w">
 
-repeat with i from 2 to bound
-	copy i to the end of all_int_ref
-end repeat
+</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">bound</span><span class="w">
+	</span><span class="nb">copy</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
-repeat
-	--log all_int
-	if (item 1 of all_int) &lt; half_bound then
-		set this_prime to (item 1 of all_int_ref)
-		copy this_prime to the end of primes_list_ref
-		repeat with m from 1 to (count all_int_ref)
-			copy (item m of all_int_ref) to n
-			if ((n / this_prime) mod 1 is not 0) and (n is not this_prime) then copy n to the end of new_int_ref
-		end repeat
-		copy new_int to all_int
-		set new_int to {}
-	else
-		log ((time of (current date)) - t)
-		return primes_list_ref &amp; all_int_ref
+</span><span class="k">repeat</span><span class="w">
+	</span><span class="c1">--log all_int</span><span class="w">
+	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">item</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nv">half_bound</span><span class="w"> </span><span class="k">then</span><span class="w">
+		</span><span class="k">set</span><span class="w"> </span><span class="nv">this_prime</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nb">item</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="p">)</span><span class="w">
+		</span><span class="nb">copy</span><span class="w"> </span><span class="nv">this_prime</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w">
+		</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="p">)</span><span class="w">
+			</span><span class="nb">copy</span><span class="w"> </span><span class="p">(</span><span class="nb">item</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="p">)</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">n</span><span class="w">
+			</span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nv">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">this_prime</span><span class="p">)</span><span class="w"> </span><span class="ow">mod</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">is not</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="w"> </span><span class="ow">is not</span><span class="w"> </span><span class="nv">this_prime</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">copy</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">new_int_ref</span><span class="w">
+		</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+		</span><span class="nb">copy</span><span class="w"> </span><span class="nv">new_int</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">all_int</span><span class="w">
+		</span><span class="k">set</span><span class="w"> </span><span class="nv">new_int</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+	</span><span class="k">else</span><span class="w">
+		</span><span class="nb">log</span><span class="w"> </span><span class="p">((</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">t</span><span class="p">)</span><span class="w">
+		</span><span class="nb">return</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nv">all_int_ref</span><span class="w">
 		
 		
-	end if
-end repeat
+	</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
 
---log ((time of (current date)) - t)
---log (count primes_list_ref)
-return primes_list
-try
-	return item 10001 of primes_list
-end try
-</code></pre>
+</span><span class="c1">--log ((time of (current date)) - t)</span><span class="w">
+</span><span class="c1">--log (count primes_list_ref)</span><span class="w">
+</span><span class="nb">return</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span><span class="k">try</span><span class="w">
+	</span><span class="nb">return</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="mi">10001</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">try</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="try-four">Try Four</h2>
 
@@ -238,30 +238,30 @@ integers built in to it.</p>
 
 <h3 id="code-3">Code</h3>
 
-<pre><code class="language-applescript">set primes_list to {}
-set primes_list_ref to a reference to primes_list
-set t to (time of (current date))
+<div class="language-applescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span><span class="w"> </span><span class="nv">primes_list</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="ow">reference to</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w">
 
 
-repeat with this_num from 2 to 150000
-	copy is_this_prime(this_num, primes_list_ref) to this_eval
-	if this_eval is not {} then copy this_eval to the end of primes_list_ref
-	if (count (primes_list_ref)) = 10001 then return item 10001 of primes_list_ref
-end repeat
+</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">this_num</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">150000</span><span class="w">
+	</span><span class="nb">copy</span><span class="w"> </span><span class="nv">is_this_prime</span><span class="p">(</span><span class="nv">this_num</span><span class="p">,</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="p">)</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">this_eval</span><span class="w">
+	</span><span class="k">if</span><span class="w"> </span><span class="nv">this_eval</span><span class="w"> </span><span class="ow">is not</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">copy</span><span class="w"> </span><span class="nv">this_eval</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nb">the</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w">
+	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="p">(</span><span class="nv">primes_list_ref</span><span class="p">))</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10001</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">return</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="mi">10001</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
-to is_this_prime(a_num, primes_list)
-	repeat with a_prime in primes_list
-		if (a_num / a_prime mod 1 is 0) then
-			return {}
-		end if
-	end repeat
-	return a_num
-end is_this_prime
+</span><span class="k">to</span> <span class="nv">is_this_prime</span><span class="p">(</span><span class="nv">a_num</span><span class="p">,</span><span class="w"> </span><span class="nv">primes_list</span><span class="p">)</span><span class="w">
+	</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">a_prime</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nv">a_num</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">a_prime</span><span class="w"> </span><span class="ow">mod</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+			</span><span class="nb">return</span><span class="w"> </span><span class="p">{}</span><span class="w">
+		</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+	</span><span class="nb">return</span><span class="w"> </span><span class="nv">a_num</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="nv">is_this_prime</span><span class="w">
 
-log ((time of (current date)) - t)
-log (count primes_list_ref)
-return primes_list
-</code></pre>
+</span><span class="nb">log</span><span class="w"> </span><span class="p">((</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">t</span><span class="p">)</span><span class="w">
+</span><span class="nb">log</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="nv">primes_list_ref</span><span class="p">)</span><span class="w">
+</span><span class="nb">return</span><span class="w"> </span><span class="nv">primes_list</span><span class="w">
+</span></code></pre></div></div>
 
 </div>
 

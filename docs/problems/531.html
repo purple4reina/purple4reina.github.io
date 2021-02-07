@@ -92,110 +92,110 @@ actual totient function.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">_stop = int(1005000 ** 0.5)
-_sieve = [False, False] + [True] * _stop
-_primes = []
-for p, is_pr in enumerate(_sieve):
-    if not is_pr:
-        continue
-    _primes.append(p)
-    n = p + p
-    while n &lt;= _stop:
-        _sieve[n] = False
-        n += p
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_stop</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1005000</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">_sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="n">_stop</span>
+<span class="n">_primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">is_pr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_sieve</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_pr</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">_primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">p</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">_stop</span><span class="p">:</span>
+        <span class="n">_sieve</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="n">p</span>
 
-def cache(fn):
-    _cache = {}
-    def wrap(*args):
-        if args in _cache:
-            return _cache[args]
-        ret = fn(*args)
-        _cache[args] = ret
-        return ret
-    return wrap
+<span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrap</span>
 
-@cache
-def totient(n):
-    if n == 1:
-        return 1
-    top = n ** 0.5
-    for p in _primes:
-        if p &gt; top:
-            break
-        if n % p == 0:
-            n //= p
-            e = 1
-            while n % p == 0:
-                n //= p
-                e += 1
-            return p ** e * (1 - 1/p) * totient(n)
-    return n - 1
+<span class="o">@</span><span class="n">cache</span>
+<span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">_primes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">top</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">//=</span> <span class="n">p</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">//=</span> <span class="n">p</span>
+                <span class="n">e</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">p</span> <span class="o">**</span> <span class="n">e</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">totient</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
 
-def g(a, n, b, m):
-    r, s, t = gcd(n, m)
-    if a%r != b%r:
-        return 0
-    return (a*t*m + b*s*n) % (n * m) // r
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">%</span><span class="n">r</span> <span class="o">!=</span> <span class="n">b</span><span class="o">%</span><span class="n">r</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">s</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">//</span> <span class="n">r</span>
 
-def gcd(a, b):
-    old_r, r = a, b
-    old_s, s = 1, 0
-    old_t, t = 0, 1
+<span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">old_r</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+    <span class="n">old_s</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">old_t</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
 
-    while r:
-        quotient = old_r // r
-        old_r, r = r, old_r - quotient * r
-        old_s, s = s, old_s - quotient * s
-        old_t, t = t, old_t - quotient * t
+    <span class="k">while</span> <span class="n">r</span><span class="p">:</span>
+        <span class="n">quotient</span> <span class="o">=</span> <span class="n">old_r</span> <span class="o">//</span> <span class="n">r</span>
+        <span class="n">old_r</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span> <span class="n">old_r</span> <span class="o">-</span> <span class="n">quotient</span> <span class="o">*</span> <span class="n">r</span>
+        <span class="n">old_s</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">,</span> <span class="n">old_s</span> <span class="o">-</span> <span class="n">quotient</span> <span class="o">*</span> <span class="n">s</span>
+        <span class="n">old_t</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">old_t</span> <span class="o">-</span> <span class="n">quotient</span> <span class="o">*</span> <span class="n">t</span>
 
-    return old_r, old_s, old_t
+    <span class="k">return</span> <span class="n">old_r</span><span class="p">,</span> <span class="n">old_s</span><span class="p">,</span> <span class="n">old_t</span>
 
-def f(n, m):
-    return g(int(totient(n)), n, int(totient(m)), m)
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">totient</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">totient</span><span class="p">(</span><span class="n">m</span><span class="p">)),</span> <span class="n">m</span><span class="p">)</span>
 
-def solve(bottom=1000000, top=1005000):
-    total= 0
-    for n in range(bottom, top):
-        for m in range(n + 1, top):
-            total += f(n, m)
-    return int(total)
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">1005000</span><span class="p">):</span>
+    <span class="n">total</span><span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">top</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">top</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    m = eval(sys.argv[2])
-    print(solve(n, m))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import g, f
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">g</span><span class="p">,</span> <span class="n">f</span>
 
-_test_g = (
-        ((2, 4, 4, 6), 10),
-        ((3, 4, 4, 6), 0),
-        ((1, 3, 3, 4), 7),
-        ((1, 5, 5, 9), 41),
-)
+<span class="n">_test_g</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="mi">41</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_g)
-def test_g(n, expect):
-    assert expect == g(*n)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_g</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_g</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">g</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
 
-_test_f = (
-        ((1, 2), 1),
-        ((2, 3), 5),
-        ((2, 5), 9),
-        ((4, 6), 2),
-        ((5, 10), 4),
-        ((10, 15), 0),
-)
+<span class="n">_test_f</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_f)
-def test_f(n, expect):
-    assert expect == f(*n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_f</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_f</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

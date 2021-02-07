@@ -101,96 +101,96 @@ instead went about creating them.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">modulo = 1 &lt;&lt; 32
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span>
 
-_primes = []
-def is_prime(n):
-    n_root = int(n ** 0.5)
-    for p in _primes:
-        if p &gt; n_root:
-            return True
-        if n % p == 0:
-            return False
-    return True
+<span class="n">_primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">n_root</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">_primes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">n_root</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
 
-def solve(n):
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 
-    hammings = [1]
-    for p in (2, 3, 5):
-        next_hammings = []
-        for h in hammings:
-            if h == 1 and (p == 3 or p == 5):
-                continue
-            for e in range(1, n):
-                num = h * p ** e
-                if num &gt;= n:
-                    break
-                next_hammings.append(num)
-        hammings.extend(next_hammings)
+    <span class="n">hammings</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="n">next_hammings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hammings</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">5</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">p</span> <span class="o">**</span> <span class="n">e</span>
+                <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">next_hammings</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="n">hammings</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">next_hammings</span><span class="p">)</span>
 
-    top = int(n ** 0.5)
-    sieve = [True] * (top + 1)
-    for p, prime in enumerate(sieve):
-        if not prime or p &lt; 2:
-            continue
-        _primes.append(p)
-        num = p + p
-        while num &lt;= top:
-            sieve[num] = False
-            num += p
+    <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">prime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">prime</span> <span class="ow">or</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">_primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">p</span>
+        <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+            <span class="n">sieve</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">p</span>
 
-    hamming_primes = []
-    for h in hammings:
-        if is_prime(h + 1):
-            hamming_primes.append(h + 1)
+    <span class="n">hamming_primes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hammings</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">h</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">hamming_primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">h</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-    hamming_totients = [1]
-    for p in hamming_primes:
-        next_hammings = []
-        for h in hamming_totients:
-            if p &gt; 5:
-                num = h * p
-                if num &gt; n:
-                    break
-                next_hammings.append(num)
-            else:
-                for e in range(1, n):
-                    num = h * p ** e
-                    if num &gt; n:
-                        break
-                    next_hammings.append(num)
-        hamming_totients.extend(next_hammings)
-        hamming_totients.sort()
+    <span class="n">hamming_totients</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">hamming_primes</span><span class="p">:</span>
+        <span class="n">next_hammings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hamming_totients</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">p</span>
+                <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">next_hammings</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                    <span class="n">num</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">p</span> <span class="o">**</span> <span class="n">e</span>
+                    <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="n">next_hammings</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="n">hamming_totients</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">next_hammings</span><span class="p">)</span>
+        <span class="n">hamming_totients</span><span class="p">.</span><span class="n">sort</span><span class="p">()</span>
 
-    return sum(hamming_totients) % modulo
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">hamming_totients</span><span class="p">)</span> <span class="o">%</span> <span class="n">modulo</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (10 ** 1, 55),
-        (10 ** 2, 3728),
-        (10 ** 3, 203813),
-        (10 ** 4, 9586559),
-        (10 ** 5, 397079942),
-        (10 ** 6, 2236471777),
-        (10 ** 7, 3567819736),
-        (10 ** 8, 3620613805),
-        (10 ** 9, 964002218),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">55</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3728</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">203813</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9586559</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">397079942</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2236471777</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3567819736</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3620613805</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">964002218</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

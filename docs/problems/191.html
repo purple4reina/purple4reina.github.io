@@ -82,26 +82,26 @@ grouping to its possible new locations.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">attendDict = {'O': 1, 'one L': 1, 'one A': 1, 'two A': 0, 'one L one A': 0, 'one L two A': 0}
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">attendDict</span> <span class="o">=</span> <span class="p">{</span><span class="s">'O'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'one L'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'one A'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'two A'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'one L one A'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'one L two A'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
-i = 1
-while i &lt; 30:
-	i += 1
-	newDict = {'O': 0, 'one L': 0, 'one A': 0, 'two A': 0, 'one L one A': 0, 'one L two A': 0}
-	newDict['O'] = attendDict['O'] + attendDict['one A'] + attendDict['two A']
-	newDict['one L'] = attendDict['O'] + attendDict['one A'] + attendDict['two A'] + attendDict['one L one A'] + attendDict['one L two A'] + attendDict['one L']
-	newDict['one A'] = attendDict['O']
-	newDict['two A'] = attendDict['one A']
-	newDict['one L one A'] = attendDict['one L']
-	newDict['one L two A'] = attendDict['one L one A']
-	attendDict = newDict.copy()
+<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+	<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="n">newDict</span> <span class="o">=</span> <span class="p">{</span><span class="s">'O'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'one L'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'one A'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'two A'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'one L one A'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'one L two A'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+	<span class="n">newDict</span><span class="p">[</span><span class="s">'O'</span><span class="p">]</span> <span class="o">=</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'O'</span><span class="p">]</span> <span class="o">+</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'one A'</span><span class="p">]</span> <span class="o">+</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'two A'</span><span class="p">]</span>
+	<span class="n">newDict</span><span class="p">[</span><span class="s">'one L'</span><span class="p">]</span> <span class="o">=</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'O'</span><span class="p">]</span> <span class="o">+</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'one A'</span><span class="p">]</span> <span class="o">+</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'two A'</span><span class="p">]</span> <span class="o">+</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'one L one A'</span><span class="p">]</span> <span class="o">+</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'one L two A'</span><span class="p">]</span> <span class="o">+</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'one L'</span><span class="p">]</span>
+	<span class="n">newDict</span><span class="p">[</span><span class="s">'one A'</span><span class="p">]</span> <span class="o">=</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'O'</span><span class="p">]</span>
+	<span class="n">newDict</span><span class="p">[</span><span class="s">'two A'</span><span class="p">]</span> <span class="o">=</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'one A'</span><span class="p">]</span>
+	<span class="n">newDict</span><span class="p">[</span><span class="s">'one L one A'</span><span class="p">]</span> <span class="o">=</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'one L'</span><span class="p">]</span>
+	<span class="n">newDict</span><span class="p">[</span><span class="s">'one L two A'</span><span class="p">]</span> <span class="o">=</span> <span class="n">attendDict</span><span class="p">[</span><span class="s">'one L one A'</span><span class="p">]</span>
+	<span class="n">attendDict</span> <span class="o">=</span> <span class="n">newDict</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
 	
-total = 0
-for t in attendDict.itervalues():
-	total += t
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">attendDict</span><span class="p">.</span><span class="n">itervalues</span><span class="p">():</span>
+	<span class="n">total</span> <span class="o">+=</span> <span class="n">t</span>
 
-print total
-</code></pre>
+<span class="k">print</span> <span class="n">total</span>
+</code></pre></div></div>
 
 </div>
 

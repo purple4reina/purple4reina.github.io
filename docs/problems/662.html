@@ -86,61 +86,61 @@ week.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">modulo = 1000000007
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">1000000007</span>
 
-def fibonacci(top):
-    a, b = 1, 1
-    while b &lt;= top:
-        yield b
-        a, b = b, b + a
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">b</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="n">a</span>
 
-def solve(warg, harg):
-    fibs = tuple(fibonacci(harg * 2))
-    grid = {(w, h): 0 for h in range(harg + 1) for w in range(warg + 1)}
-    grid[(0, 0)] = 1
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">warg</span><span class="p">,</span> <span class="n">harg</span><span class="p">):</span>
+    <span class="n">fibs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">harg</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="p">{(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">harg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">warg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
+    <span class="n">grid</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
 
-    reaches = []
-    for h in range(harg + 1):
-        for w in range(warg + 1):
-            if (w**2 + h**2) ** 0.5 in fibs:
-                reaches.append((w, h))
+    <span class="n">reaches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">harg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">warg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="ow">in</span> <span class="n">fibs</span><span class="p">:</span>
+                <span class="n">reaches</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
 
-    for (width, height), mult in grid.items():
-        mult %= modulo
-        for w, h in reaches:
-            if height + h &gt; harg:
-                break
-            if width + w &gt; warg:
-                continue
-            reached = (width + w, height + h)
-            grid[reached] += mult
+    <span class="k">for</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">mult</span> <span class="ow">in</span> <span class="n">grid</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">mult</span> <span class="o">%=</span> <span class="n">modulo</span>
+        <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">reaches</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">height</span> <span class="o">+</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="n">harg</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">width</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">warg</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">reached</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
+            <span class="n">grid</span><span class="p">[</span><span class="n">reached</span><span class="p">]</span> <span class="o">+=</span> <span class="n">mult</span>
 
-    return grid[reached] % modulo
+    <span class="k">return</span> <span class="n">grid</span><span class="p">[</span><span class="n">reached</span><span class="p">]</span> <span class="o">%</span> <span class="n">modulo</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    m = eval(sys.argv[1])
-    print(solve(n,m))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (3, 4, 278),
-        (10, 10, 215846462),
-        (100, 100, 804752316),
-        (500, 500, 708290453),
-        (1000, 1000, 790802713),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">278</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">215846462</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">804752316</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">708290453</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">790802713</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('w,h,expect', _test_solve)
-def test_solve(w, h, expect):
-    assert expect == solve(w, h)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'w,h,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

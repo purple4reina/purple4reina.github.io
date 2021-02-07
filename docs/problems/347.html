@@ -87,80 +87,80 @@ trying to micro optimize it all though.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-go">package main
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
 
-import (
-	"fmt"
-)
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"fmt"</span>
+<span class="p">)</span>
 
-func sieve(max int) [][3]int {
-	sieve := make([][3]int, max+1)
-	for i := 2; i &lt;= max; i++ {
-		if sieve[i][0] &gt; 0 {
-			continue
-		}
-		for j := i; j &lt;= max; j += i {
-			if sieve[j][0] == 0 {
-				sieve[j][0] = i
-			} else if sieve[j][1] == 0 {
-				sieve[j][1] = i
-			} else {
-				sieve[j][2] = i
-			}
-		}
-	}
-	return sieve
-}
+<span class="k">func</span> <span class="n">sieve</span><span class="p">(</span><span class="n">max</span> <span class="kt">int</span><span class="p">)</span> <span class="p">[][</span><span class="m">3</span><span class="p">]</span><span class="kt">int</span> <span class="p">{</span>
+	<span class="n">sieve</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([][</span><span class="m">3</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span> <span class="n">max</span><span class="o">+</span><span class="m">1</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">max</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">sieve</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="m">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="p">{</span>
+			<span class="k">continue</span>
+		<span class="p">}</span>
+		<span class="k">for</span> <span class="n">j</span> <span class="o">:=</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">max</span><span class="p">;</span> <span class="n">j</span> <span class="o">+=</span> <span class="n">i</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="n">sieve</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="m">0</span><span class="p">]</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
+				<span class="n">sieve</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="m">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">sieve</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="m">1</span><span class="p">]</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
+				<span class="n">sieve</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="m">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="n">sieve</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="m">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">sieve</span>
+<span class="p">}</span>
 
-func S(N int) int {
-	divs := sieve(N)
-	dist := make(map[[3]int]int)
-	for num := 6; num &lt;= N; num++ {
-		a := divs[num][0]
-		b := divs[num][1]
-		c := divs[num][2]
-		if a == 0 || b == 0 || c != 0 {
-			continue
-		}
-		dist[divs[num]] = num
-	}
-	var total int
-	for _, val := range dist {
-		total += val
-	}
-	return total
-}
+<span class="k">func</span> <span class="n">S</span><span class="p">(</span><span class="n">N</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="n">divs</span> <span class="o">:=</span> <span class="n">sieve</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+	<span class="n">dist</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[[</span><span class="m">3</span><span class="p">]</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">num</span> <span class="o">:=</span> <span class="m">6</span><span class="p">;</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">num</span><span class="o">++</span> <span class="p">{</span>
+		<span class="n">a</span> <span class="o">:=</span> <span class="n">divs</span><span class="p">[</span><span class="n">num</span><span class="p">][</span><span class="m">0</span><span class="p">]</span>
+		<span class="n">b</span> <span class="o">:=</span> <span class="n">divs</span><span class="p">[</span><span class="n">num</span><span class="p">][</span><span class="m">1</span><span class="p">]</span>
+		<span class="n">c</span> <span class="o">:=</span> <span class="n">divs</span><span class="p">[</span><span class="n">num</span><span class="p">][</span><span class="m">2</span><span class="p">]</span>
+		<span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="m">0</span> <span class="o">||</span> <span class="n">b</span> <span class="o">==</span> <span class="m">0</span> <span class="o">||</span> <span class="n">c</span> <span class="o">!=</span> <span class="m">0</span> <span class="p">{</span>
+			<span class="k">continue</span>
+		<span class="p">}</span>
+		<span class="n">dist</span><span class="p">[</span><span class="n">divs</span><span class="p">[</span><span class="n">num</span><span class="p">]]</span> <span class="o">=</span> <span class="n">num</span>
+	<span class="p">}</span>
+	<span class="k">var</span> <span class="n">total</span> <span class="kt">int</span>
+	<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">dist</span> <span class="p">{</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="n">val</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">total</span>
+<span class="p">}</span>
 
-func main() {
-	answer := S(10000000)
-	fmt.Printf("answer: %#v\n", answer)
-}
-</code></pre>
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">answer</span> <span class="o">:=</span> <span class="n">S</span><span class="p">(</span><span class="m">10000000</span><span class="p">)</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"answer: %#v</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="tests-and-benchmarks">Tests and Benchmarks</h2>
 
-<pre><code class="language-go">package main
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
 
-import (
-	"testing"
-)
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"testing"</span>
+<span class="p">)</span>
 
-func TestS(t *testing.T) {
-	if act := S(100); act != 2262 {
-		t.Error("Incorrect value for S(100):", act)
-	}
-}
+<span class="k">func</span> <span class="n">TestS</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="n">act</span> <span class="o">:=</span> <span class="n">S</span><span class="p">(</span><span class="m">100</span><span class="p">);</span> <span class="n">act</span> <span class="o">!=</span> <span class="m">2262</span> <span class="p">{</span>
+		<span class="n">t</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s">"Incorrect value for S(100):"</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-var result int
+<span class="k">var</span> <span class="n">result</span> <span class="kt">int</span>
 
-func BenchmarkS(b *testing.B) {
-	var a int
-	for n := 0; n &lt; b.N; n++ {
-		a = S(100)
-	}
-	result = a
-}
-</code></pre>
+<span class="k">func</span> <span class="n">BenchmarkS</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">B</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="n">a</span> <span class="kt">int</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">N</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span> <span class="p">{</span>
+		<span class="n">a</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="n">result</span> <span class="o">=</span> <span class="n">a</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 </div>
 

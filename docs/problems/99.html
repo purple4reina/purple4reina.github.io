@@ -82,24 +82,24 @@ inefficient to use the power function with these large numbers.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def power(b, e):
-	answer = 1
-	for i in range(e):
-		answer = answer * b
-	return answer
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+	<span class="n">answer</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+		<span class="n">answer</span> <span class="o">=</span> <span class="n">answer</span> <span class="o">*</span> <span class="n">b</span>
+	<span class="k">return</span> <span class="n">answer</span>
 
-n = 1
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 
-number = [0, 0]
-for p in pairs[:5]:
-	print p, n
-	big = power(p[0], p[1])
-	if big &gt; number[0]:
-		number = [big, n]
-	n += 1
+<span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+	<span class="k">print</span> <span class="n">p</span><span class="p">,</span> <span class="n">n</span>
+	<span class="n">big</span> <span class="o">=</span> <span class="n">power</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+	<span class="k">if</span> <span class="n">big</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+		<span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">big</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span>
+	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
 
-print number[1]
-</code></pre>
+<span class="k">print</span> <span class="n">number</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
 
 <h2 id="try-two">Try Two</h2>
 
@@ -111,14 +111,14 @@ solvable in under 1 second.</p>
 
 <h2 id="code-1">Code</h2>
 
-<pre><code class="language-python">big = [0, 0]
-for i in range(len(p)):
-	this = [p[i][1]*log(p[i][0]), i+1]
-	if this[0] &gt; big[0]:
-		big = this
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">big</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span>
+	<span class="n">this</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+	<span class="k">if</span> <span class="n">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">big</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+		<span class="n">big</span> <span class="o">=</span> <span class="n">this</span>
 
-print big
-</code></pre>
+<span class="k">print</span> <span class="n">big</span>
+</code></pre></div></div>
 
 </div>
 

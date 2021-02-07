@@ -83,25 +83,25 @@ minutes to arrive at the answer with this method.</p>
 
 <h3 id="code">Code</h3>
 
-<pre><code class="language-applescript">set t to (time of (current date))
-set a to 1
-set b to 1
-set c to 1
+<div class="language-applescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-repeat
-	repeat
-		repeat
-			if ((a ^ 2 + b ^ 2) = (c ^ 2)) and (a + b + c = 1000) then
-				log ((time of (current date)) - t)
-				return {a, b, c, (a * b * c)}
-			end if
-			set a to a + 1
-		end repeat
-		set b to b + 1
-	end repeat
-	set c to c + 1
-end repeat
-</code></pre>
+</span><span class="k">repeat</span><span class="w">
+	</span><span class="k">repeat</span><span class="w">
+		</span><span class="k">repeat</span><span class="w">
+			</span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nv">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nv">c</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+				</span><span class="nb">log</span><span class="w"> </span><span class="p">((</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">t</span><span class="p">)</span><span class="w">
+				</span><span class="nb">return</span><span class="w"> </span><span class="p">{</span><span class="nv">a</span><span class="p">,</span><span class="w"> </span><span class="nv">b</span><span class="p">,</span><span class="w"> </span><span class="nv">c</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">c</span><span class="p">)}</span><span class="w">
+			</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+			</span><span class="k">set</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+		</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+		</span><span class="k">set</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="try-two">Try Two</h2>
 
@@ -116,31 +116,31 @@ using the variables k, m, n.</p>
 
 <h2 id="code-1">Code</h2>
 
-<pre><code class="language-applescript">set t to (time of (current date))
-set k to 1
-set m to 1
-set n to 1
+<div class="language-applescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">k</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-repeat until n = 1000
-	repeat until m = 1000
-		repeat until k = 1000
-			log {k, m, n}
-			set a to (k * (m ^ 2 - n ^ 2))
-			set b to (2 * k * m * n)
-			set c to (k * (m ^ 2 + n ^ 2))
-			if (a + b + c = 1000) and (a is not 0) and (b is not 0) then
-				log ((time of (current date)) - t)
-				return {a, b, c, a * b * c}
-			end if
-			set k to k + 1
-		end repeat
-		set k to 1
-		set m to m + 1
-	end repeat
-	set m to 1
-	set n to n + 1
-end repeat
-</code></pre>
+</span><span class="k">repeat</span><span class="w"> </span><span class="k">until</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w">
+	</span><span class="k">repeat</span><span class="w"> </span><span class="k">until</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w">
+		</span><span class="k">repeat</span><span class="w"> </span><span class="k">until</span><span class="w"> </span><span class="nv">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w">
+			</span><span class="nb">log</span><span class="w"> </span><span class="p">{</span><span class="nv">k</span><span class="p">,</span><span class="w"> </span><span class="nv">m</span><span class="p">,</span><span class="w"> </span><span class="nv">n</span><span class="p">}</span><span class="w">
+			</span><span class="k">set</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nv">m</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w">
+			</span><span class="k">set</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">n</span><span class="p">)</span><span class="w">
+			</span><span class="k">set</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nv">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nv">m</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w">
+			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="ow">is not</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="p">(</span><span class="nv">b</span><span class="w"> </span><span class="ow">is not</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+				</span><span class="nb">log</span><span class="w"> </span><span class="p">((</span><span class="nv">time</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="p">(</span><span class="nb">current date</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">t</span><span class="p">)</span><span class="w">
+				</span><span class="nb">return</span><span class="w"> </span><span class="p">{</span><span class="nv">a</span><span class="p">,</span><span class="w"> </span><span class="nv">b</span><span class="p">,</span><span class="w"> </span><span class="nv">c</span><span class="p">,</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">c</span><span class="p">}</span><span class="w">
+			</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+			</span><span class="k">set</span><span class="w"> </span><span class="nv">k</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+		</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+		</span><span class="k">set</span><span class="w"> </span><span class="nv">k</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
+		</span><span class="k">set</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+</span></code></pre></div></div>
 
 </div>
 

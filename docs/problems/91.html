@@ -83,30 +83,30 @@ duplicates and dumb ones like (0,0) and stuff like that. Took the script just
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">bound = 50
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bound</span> <span class="o">=</span> <span class="mi">50</span>
 
-def isright((x1, y1), (x2, y2)):
-	a = (x1**2 + y1**2)
-	b = (x2**2 + y2**2)
-	c = ((x1-x2)**2 + (y1-y2)**2)
-	if (a + b == c) or (b + c == a) or (c + a == b):
-		return True
-	else:
-		return False
+<span class="k">def</span> <span class="nf">isright</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)):</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+	<span class="n">c</span> <span class="o">=</span> <span class="p">((</span><span class="n">x1</span><span class="o">-</span><span class="n">x2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="n">y2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">==</span> <span class="n">a</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">True</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
 
 
-count = 0
-tested = set()
-for x1 in range(bound+1):
-	for y1 in range(bound+1):
-		for x2 in range(bound+1):
-			for y2 in range(bound+1):
-				if (isright((x1, y1), (x2, y2)) == True) and (((x2, y2), (x1, y1)) not in tested) and ((x1, y1) != (0,0)) and ((x2, y2) != (0,0)) and ((x1, y1) != (x2, y2)):
-					count += 1
-					tested.add(((x1, y1), (x2, y2)))
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tested</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">x1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">y1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">x2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">y2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+				<span class="k">if</span> <span class="p">(</span><span class="n">isright</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">))</span> <span class="o">==</span> <span class="bp">True</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(((</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">),</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tested</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)):</span>
+					<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+					<span class="n">tested</span><span class="p">.</span><span class="n">add</span><span class="p">(((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)))</span>
 
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

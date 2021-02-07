@@ -91,61 +91,61 @@ power of 2.  That made the search much easier.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from sympy import sieve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">sieve</span>
 
-modulo = 500500507
+<span class="n">modulo</span> <span class="o">=</span> <span class="mi">500500507</span>
 
-def solve(n):
-    count = 0
-    factorization = []
-    last_number = 1
-    while count &lt; n:
-        count += 1
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">factorization</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">last_number</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        smallest = float('inf')
-        for exponent, i in enumerate(factorization + [0]):
-            num = sieve[i+1] ** (1 &lt;&lt; exponent)
-            if num &lt; smallest:
-                smallest = num
-                prime_i = exponent
+        <span class="n">smallest</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">factorization</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">sieve</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">exponent</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">smallest</span><span class="p">:</span>
+                <span class="n">smallest</span> <span class="o">=</span> <span class="n">num</span>
+                <span class="n">prime_i</span> <span class="o">=</span> <span class="n">exponent</span>
 
-        last_number *= smallest
-        last_number %= modulo
-        if prime_i == len(factorization):
-            factorization.append(1)
-        else:
-            factorization[prime_i] += 1
+        <span class="n">last_number</span> <span class="o">*=</span> <span class="n">smallest</span>
+        <span class="n">last_number</span> <span class="o">%=</span> <span class="n">modulo</span>
+        <span class="k">if</span> <span class="n">prime_i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">factorization</span><span class="p">):</span>
+            <span class="n">factorization</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">factorization</span><span class="p">[</span><span class="n">prime_i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    return last_number
+    <span class="k">return</span> <span class="n">last_number</span>
 
-if __name__ == '__main__':
-    import sys
-    n = int(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-    (1, 2),
-    (2, 6),
-    (3, 24),
-    (4, 120),
-    (5, 840),
-    (6, 7560),
-    (7, 83160),
-    (8, 1081080),
-    (9, 17297280),
-    (10, 294053760),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">840</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7560</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">83160</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1081080</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">17297280</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">294053760</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

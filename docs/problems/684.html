@@ -76,9 +76,9 @@
   <h2 id="comments">Comments</h2>
 
 <p>For some reason this problem was harder than it initially seamed.  I pretty
-quickly figured out that there was a pattern to the values of <code>S(n)</code>.  You
-don’t need to run <code>s(n)</code> at all or do any digit counting.  Using just the
-number passed to <code>S</code> it is possible to determine its value.</p>
+quickly figured out that there was a pattern to the values of <code class="language-plaintext highlighter-rouge">S(n)</code>.  You
+don’t need to run <code class="language-plaintext highlighter-rouge">s(n)</code> at all or do any digit counting.  Using just the
+number passed to <code class="language-plaintext highlighter-rouge">S</code> it is possible to determine its value.</p>
 
 <p>The problem was that this value very very quickly overflowed.  I tried it with
 both Ruby and Python and while Python could handle larger numbers and was a bit
@@ -88,13 +88,13 @@ happening during the calculation of the large powers of 10.</p>
 <p>To overcome this I tried creating the number using strings then converting to
 an integer, but that was too much for the processor to handle still.  I tried
 creative ways of calculating the power, but they were all slower than the
-built-in <code>pow</code> methods of both languages.</p>
+built-in <code class="language-plaintext highlighter-rouge">pow</code> methods of both languages.</p>
 
 <p>The solution was to use modulo math.  The crux of it is the identity
-<code>(A + B) mod C == ((A mod C) + (B mod C)) mod C</code>.  This meant that I could
+<code class="language-plaintext highlighter-rouge">(A + B) mod C == ((A mod C) + (B mod C)) mod C</code>.  This meant that I could
 calculate the modulo of this large power of 10 up front and have it not affect
 the overall outcome.  This is where I learned that both Ruby and Python allow
-an extra argument to their <code>pow</code> methods for the modules.  They’re both
+an extra argument to their <code class="language-plaintext highlighter-rouge">pow</code> methods for the modules.  They’re both
 lightning fast and got me the final answer in what seemed like a few
 milliseconds.</p>
 
@@ -103,200 +103,200 @@ with it and using it at my new job.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-ruby">class Problem
-  MOD = 1_000_000_007
-  PREFEXES = {
-    0 =&gt; 10,
-    1 =&gt; 14,
-    2 =&gt; 19,
-    3 =&gt; 25,
-    4 =&gt; 32,
-    5 =&gt; 40,
-    6 =&gt; 49,
-    7 =&gt; 59,
-    8 =&gt; 79,
-  }
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Problem</span>
+  <span class="no">MOD</span> <span class="o">=</span> <span class="mi">1_000_000_007</span>
+  <span class="no">PREFEXES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">19</span><span class="p">,</span>
+    <span class="mi">3</span> <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="mi">4</span> <span class="o">=&gt;</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="mi">5</span> <span class="o">=&gt;</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="mi">6</span> <span class="o">=&gt;</span> <span class="mi">49</span><span class="p">,</span>
+    <span class="mi">7</span> <span class="o">=&gt;</span> <span class="mi">59</span><span class="p">,</span>
+    <span class="mi">8</span> <span class="o">=&gt;</span> <span class="mi">79</span><span class="p">,</span>
+  <span class="p">}</span>
 
-  class &lt;&lt; self
-    def S(num, mod: nil)
-      return 0 if num == 0
-      return 1 if num == 1
-      return 3 if num == 2
+  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+    <span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="ss">mod: </span><span class="kp">nil</span><span class="p">)</span>
+      <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span>
+      <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span>
+      <span class="k">return</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">2</span>
 
-      div, remain = (num - 2).divmod(9)
-      multiplier = 10.pow(div, mod)
-      base = multiplier - 6 - num
-      prefix = PREFEXES[remain] * multiplier
+      <span class="n">div</span><span class="p">,</span> <span class="n">remain</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span> <span class="o">-</span> <span class="mi">2</span><span class="p">).</span><span class="nf">divmod</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+      <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">10</span><span class="p">.</span><span class="nf">pow</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span>
+      <span class="n">base</span> <span class="o">=</span> <span class="n">multiplier</span> <span class="o">-</span> <span class="mi">6</span> <span class="o">-</span> <span class="n">num</span>
+      <span class="n">prefix</span> <span class="o">=</span> <span class="no">PREFEXES</span><span class="p">[</span><span class="n">remain</span><span class="p">]</span> <span class="o">*</span> <span class="n">multiplier</span>
 
-      return prefix + base
-    end
+      <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">base</span>
+    <span class="k">end</span>
 
-    def fibs max
-      fibs = []
-      f1, f2 = 0, 1
-      (2..max).each do |num|
-        f3 = f1 + f2
-        fibs &lt;&lt; f3
-        f1, f2 = f2, f3
-      end
-      fibs
-    end
+    <span class="k">def</span> <span class="nf">fibs</span> <span class="n">max</span>
+      <span class="n">fibs</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+      <span class="p">(</span><span class="mi">2</span><span class="o">..</span><span class="n">max</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">num</span><span class="o">|</span>
+        <span class="n">f3</span> <span class="o">=</span> <span class="n">f1</span> <span class="o">+</span> <span class="n">f2</span>
+        <span class="n">fibs</span> <span class="o">&lt;&lt;</span> <span class="n">f3</span>
+        <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span>
+      <span class="k">end</span>
+      <span class="n">fibs</span>
+    <span class="k">end</span>
 
-    def answer max: 90
-      total = 0
-      fibs(max).each do |fib|
-        total += S(fib, mod: MOD)
-      end
-      total % MOD
-    end
-  end
-end
+    <span class="k">def</span> <span class="nf">answer</span> <span class="ss">max: </span><span class="mi">90</span>
+      <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">fibs</span><span class="p">(</span><span class="n">max</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">fib</span><span class="o">|</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="no">S</span><span class="p">(</span><span class="n">fib</span><span class="p">,</span> <span class="ss">mod: </span><span class="no">MOD</span><span class="p">)</span>
+      <span class="k">end</span>
+      <span class="n">total</span> <span class="o">%</span> <span class="no">MOD</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-if __FILE__ == $0
-  puts Problem.answer
-end
-</code></pre>
+<span class="k">if</span> <span class="kp">__FILE__</span> <span class="o">==</span> <span class="vg">$0</span>
+  <span class="nb">puts</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">answer</span>
+<span class="k">end</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-ruby">require "test/unit"
-require_relative "./problem"
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"test/unit"</span>
+<span class="nb">require_relative</span> <span class="s2">"./problem"</span>
 
-class Test684 &lt; Test::Unit::TestCase
-  def test_S
-    assert_equal            0, Problem.S(0)
-    assert_equal            1, Problem.S(1)
-    assert_equal            3, Problem.S(2)
-    assert_equal            6, Problem.S(3)
-    assert_equal           10, Problem.S(4)
-    assert_equal           15, Problem.S(5)
-    assert_equal           21, Problem.S(6)
-    assert_equal           28, Problem.S(7)
-    assert_equal           36, Problem.S(8)
-    assert_equal           45, Problem.S(9)
-    assert_equal           64, Problem.S(10)
-    assert_equal           93, Problem.S(11)
-    assert_equal          132, Problem.S(12)
-    assert_equal          181, Problem.S(13)
-    assert_equal          240, Problem.S(14)
-    assert_equal          309, Problem.S(15)
-    assert_equal          388, Problem.S(16)
-    assert_equal          477, Problem.S(17)
-    assert_equal          576, Problem.S(18)
-    assert_equal          775, Problem.S(19)
-    assert_equal         1074, Problem.S(20)
-    assert_equal         1473, Problem.S(21)
-    assert_equal         1972, Problem.S(22)
-    assert_equal         2571, Problem.S(23)
-    assert_equal         3270, Problem.S(24)
-    assert_equal         4069, Problem.S(25)
-    assert_equal         4968, Problem.S(26)
-    assert_equal         5967, Problem.S(27)
-    assert_equal         7966, Problem.S(28)
-    assert_equal        10965, Problem.S(29)
-    assert_equal        14964, Problem.S(30)
-    assert_equal        19963, Problem.S(31)
-    assert_equal        25962, Problem.S(32)
-    assert_equal        32961, Problem.S(33)
-    assert_equal        40960, Problem.S(34)
-    assert_equal        49959, Problem.S(35)
-    assert_equal        59958, Problem.S(36)
-    assert_equal        79957, Problem.S(37)
-    assert_equal       109956, Problem.S(38)
-    assert_equal       149955, Problem.S(39)
-    assert_equal       199954, Problem.S(40)
-    assert_equal       259953, Problem.S(41)
-    assert_equal       329952, Problem.S(42)
-    assert_equal       409951, Problem.S(43)
-    assert_equal       499950, Problem.S(44)
-    assert_equal       599949, Problem.S(45)
-    assert_equal       799948, Problem.S(46)
-    assert_equal      1099947, Problem.S(47)
-    assert_equal      1499946, Problem.S(48)
-    assert_equal      1999945, Problem.S(49)
-    assert_equal      2599944, Problem.S(50)
-    assert_equal      3299943, Problem.S(51)
-    assert_equal      4099942, Problem.S(52)
-    assert_equal      4999941, Problem.S(53)
-    assert_equal      5999940, Problem.S(54)
-    assert_equal      7999939, Problem.S(55)
-    assert_equal     10999938, Problem.S(56)
-    assert_equal     14999937, Problem.S(57)
-    assert_equal     19999936, Problem.S(58)
-    assert_equal     25999935, Problem.S(59)
-    assert_equal     32999934, Problem.S(60)
-    assert_equal     40999933, Problem.S(61)
-    assert_equal     49999932, Problem.S(62)
-    assert_equal     59999931, Problem.S(63)
-    assert_equal     79999930, Problem.S(64)
-    assert_equal    109999929, Problem.S(65)
-    assert_equal    149999928, Problem.S(66)
-    assert_equal    199999927, Problem.S(67)
-    assert_equal    259999926, Problem.S(68)
-    assert_equal    329999925, Problem.S(69)
-    assert_equal    409999924, Problem.S(70)
-    assert_equal    499999923, Problem.S(71)
-    assert_equal    599999922, Problem.S(72)
-    assert_equal    799999921, Problem.S(73)
-    assert_equal   1099999920, Problem.S(74)
-    assert_equal   1499999919, Problem.S(75)
-    assert_equal   1999999918, Problem.S(76)
-    assert_equal   2599999917, Problem.S(77)
-    assert_equal   3299999916, Problem.S(78)
-    assert_equal   4099999915, Problem.S(79)
-    assert_equal   4999999914, Problem.S(80)
-    assert_equal   5999999913, Problem.S(81)
-    assert_equal   7999999912, Problem.S(82)
-    assert_equal  10999999911, Problem.S(83)
-    assert_equal  14999999910, Problem.S(84)
-    assert_equal  19999999909, Problem.S(85)
-    assert_equal  25999999908, Problem.S(86)
-    assert_equal  32999999907, Problem.S(87)
-    assert_equal  40999999906, Problem.S(88)
-    assert_equal  49999999905, Problem.S(89)
-    assert_equal  59999999904, Problem.S(90)
-    assert_equal  79999999903, Problem.S(91)
-    assert_equal 109999999902, Problem.S(92)
-    assert_equal 149999999901, Problem.S(93)
-    assert_equal 199999999900, Problem.S(94)
-    assert_equal 259999999899, Problem.S(95)
-    assert_equal 329999999898, Problem.S(96)
-    assert_equal 409999999897, Problem.S(97)
-    assert_equal 499999999896, Problem.S(98)
-    assert_equal 599999999895, Problem.S(99)
-  end
+<span class="k">class</span> <span class="nc">Test684</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="k">def</span> <span class="nf">test_S</span>
+    <span class="n">assert_equal</span>            <span class="mi">0</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">assert_equal</span>            <span class="mi">1</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">assert_equal</span>            <span class="mi">3</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">assert_equal</span>            <span class="mi">6</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">assert_equal</span>           <span class="mi">10</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">assert_equal</span>           <span class="mi">15</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">assert_equal</span>           <span class="mi">21</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">assert_equal</span>           <span class="mi">28</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">assert_equal</span>           <span class="mi">36</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">assert_equal</span>           <span class="mi">45</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">assert_equal</span>           <span class="mi">64</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">assert_equal</span>           <span class="mi">93</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">assert_equal</span>          <span class="mi">132</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">assert_equal</span>          <span class="mi">181</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">assert_equal</span>          <span class="mi">240</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">assert_equal</span>          <span class="mi">309</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">assert_equal</span>          <span class="mi">388</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">assert_equal</span>          <span class="mi">477</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+    <span class="n">assert_equal</span>          <span class="mi">576</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">assert_equal</span>          <span class="mi">775</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">1074</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">1473</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">1972</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">2571</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">3270</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">4069</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">4968</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">26</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">5967</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span>
+    <span class="n">assert_equal</span>         <span class="mi">7966</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">10965</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">29</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">14964</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">19963</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">25962</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">32961</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">33</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">40960</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">49959</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">59958</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>
+    <span class="n">assert_equal</span>        <span class="mi">79957</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">37</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">109956</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">38</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">149955</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">39</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">199954</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">259953</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">41</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">329952</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">409951</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">499950</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">44</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">599949</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>
+    <span class="n">assert_equal</span>       <span class="mi">799948</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">46</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">1099947</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">47</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">1499946</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">48</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">1999945</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">2599944</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">3299943</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">51</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">4099942</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">52</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">4999941</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">53</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">5999940</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">54</span><span class="p">)</span>
+    <span class="n">assert_equal</span>      <span class="mi">7999939</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">10999938</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">56</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">14999937</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">57</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">19999936</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">58</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">25999935</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">59</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">32999934</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">40999933</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">61</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">49999932</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">62</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">59999931</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">63</span><span class="p">)</span>
+    <span class="n">assert_equal</span>     <span class="mi">79999930</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">109999929</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">149999928</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">66</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">199999927</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">67</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">259999926</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">68</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">329999925</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">69</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">409999924</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">499999923</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">599999922</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">72</span><span class="p">)</span>
+    <span class="n">assert_equal</span>    <span class="mi">799999921</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">73</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">1099999920</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">74</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">1499999919</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">75</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">1999999918</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">76</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">2599999917</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">77</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">3299999916</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">78</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">4099999915</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">79</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">4999999914</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">5999999913</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span>
+    <span class="n">assert_equal</span>   <span class="mi">7999999912</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">82</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">10999999911</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">83</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">14999999910</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">19999999909</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">25999999908</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">86</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">32999999907</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">87</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">40999999906</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">49999999905</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">59999999904</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">assert_equal</span>  <span class="mi">79999999903</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">91</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">109999999902</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">92</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">149999999901</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">93</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">199999999900</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">94</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">259999999899</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">95</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">329999999898</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">96</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">409999999897</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">97</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">499999999896</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">98</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">599999999895</span><span class="p">,</span> <span class="no">Problem</span><span class="o">.</span><span class="no">S</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span>
+  <span class="k">end</span>
 
-  def test_fibs
-    exp = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597,
-           2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418,
-           317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 9227465,
-           14930352, 24157817, 39088169, 63245986, 102334155, 165580141,
-           267914296, 433494437, 701408733, 1134903170, 1836311903, 2971215073,
-           4807526976, 7778742049, 12586269025, 20365011074, 32951280099,
-           53316291173, 86267571272, 139583862445, 225851433717, 365435296162,
-           591286729879, 956722026041, 1548008755920, 2504730781961,
-           4052739537881, 6557470319842, 10610209857723, 17167680177565,
-           27777890035288, 44945570212853, 72723460248141, 117669030460994,
-           190392490709135, 308061521170129, 498454011879264, 806515533049393,
-           1304969544928657, 2111485077978050, 3416454622906707,
-           5527939700884757, 8944394323791464, 14472334024676221,
-           23416728348467685, 37889062373143906, 61305790721611591,
-           99194853094755497, 160500643816367088, 259695496911122585,
-           420196140727489673, 679891637638612258, 1100087778366101931,
-           1779979416004714189, 2880067194370816120]
-    assert_equal exp, Problem.fibs(90)
-  end
+  <span class="k">def</span> <span class="nf">test_fibs</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">377</span><span class="p">,</span> <span class="mi">610</span><span class="p">,</span> <span class="mi">987</span><span class="p">,</span> <span class="mi">1597</span><span class="p">,</span>
+           <span class="mi">2584</span><span class="p">,</span> <span class="mi">4181</span><span class="p">,</span> <span class="mi">6765</span><span class="p">,</span> <span class="mi">10946</span><span class="p">,</span> <span class="mi">17711</span><span class="p">,</span> <span class="mi">28657</span><span class="p">,</span> <span class="mi">46368</span><span class="p">,</span> <span class="mi">75025</span><span class="p">,</span> <span class="mi">121393</span><span class="p">,</span> <span class="mi">196418</span><span class="p">,</span>
+           <span class="mi">317811</span><span class="p">,</span> <span class="mi">514229</span><span class="p">,</span> <span class="mi">832040</span><span class="p">,</span> <span class="mi">1346269</span><span class="p">,</span> <span class="mi">2178309</span><span class="p">,</span> <span class="mi">3524578</span><span class="p">,</span> <span class="mi">5702887</span><span class="p">,</span> <span class="mi">9227465</span><span class="p">,</span>
+           <span class="mi">14930352</span><span class="p">,</span> <span class="mi">24157817</span><span class="p">,</span> <span class="mi">39088169</span><span class="p">,</span> <span class="mi">63245986</span><span class="p">,</span> <span class="mi">102334155</span><span class="p">,</span> <span class="mi">165580141</span><span class="p">,</span>
+           <span class="mi">267914296</span><span class="p">,</span> <span class="mi">433494437</span><span class="p">,</span> <span class="mi">701408733</span><span class="p">,</span> <span class="mi">1134903170</span><span class="p">,</span> <span class="mi">1836311903</span><span class="p">,</span> <span class="mi">2971215073</span><span class="p">,</span>
+           <span class="mi">4807526976</span><span class="p">,</span> <span class="mi">7778742049</span><span class="p">,</span> <span class="mi">12586269025</span><span class="p">,</span> <span class="mi">20365011074</span><span class="p">,</span> <span class="mi">32951280099</span><span class="p">,</span>
+           <span class="mi">53316291173</span><span class="p">,</span> <span class="mi">86267571272</span><span class="p">,</span> <span class="mi">139583862445</span><span class="p">,</span> <span class="mi">225851433717</span><span class="p">,</span> <span class="mi">365435296162</span><span class="p">,</span>
+           <span class="mi">591286729879</span><span class="p">,</span> <span class="mi">956722026041</span><span class="p">,</span> <span class="mi">1548008755920</span><span class="p">,</span> <span class="mi">2504730781961</span><span class="p">,</span>
+           <span class="mi">4052739537881</span><span class="p">,</span> <span class="mi">6557470319842</span><span class="p">,</span> <span class="mi">10610209857723</span><span class="p">,</span> <span class="mi">17167680177565</span><span class="p">,</span>
+           <span class="mi">27777890035288</span><span class="p">,</span> <span class="mi">44945570212853</span><span class="p">,</span> <span class="mi">72723460248141</span><span class="p">,</span> <span class="mi">117669030460994</span><span class="p">,</span>
+           <span class="mi">190392490709135</span><span class="p">,</span> <span class="mi">308061521170129</span><span class="p">,</span> <span class="mi">498454011879264</span><span class="p">,</span> <span class="mi">806515533049393</span><span class="p">,</span>
+           <span class="mi">1304969544928657</span><span class="p">,</span> <span class="mi">2111485077978050</span><span class="p">,</span> <span class="mi">3416454622906707</span><span class="p">,</span>
+           <span class="mi">5527939700884757</span><span class="p">,</span> <span class="mi">8944394323791464</span><span class="p">,</span> <span class="mi">14472334024676221</span><span class="p">,</span>
+           <span class="mi">23416728348467685</span><span class="p">,</span> <span class="mi">37889062373143906</span><span class="p">,</span> <span class="mi">61305790721611591</span><span class="p">,</span>
+           <span class="mi">99194853094755497</span><span class="p">,</span> <span class="mi">160500643816367088</span><span class="p">,</span> <span class="mi">259695496911122585</span><span class="p">,</span>
+           <span class="mi">420196140727489673</span><span class="p">,</span> <span class="mi">679891637638612258</span><span class="p">,</span> <span class="mi">1100087778366101931</span><span class="p">,</span>
+           <span class="mi">1779979416004714189</span><span class="p">,</span> <span class="mi">2880067194370816120</span><span class="p">]</span>
+    <span class="n">assert_equal</span> <span class="n">exp</span><span class="p">,</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">fibs</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+  <span class="k">end</span>
 
-  def test_answer
-    assert_equal 8042614, Problem.answer(max: 10)
-    assert_equal 692437619, Problem.answer(max: 25)
-    assert_equal 159166760, Problem.answer(max: 30)
-    assert_equal 645435163, Problem.answer(max: 35)
-    assert_equal 570500927, Problem.answer(max: 40)
-    assert_equal 922058210, Problem.answer(max: 90)
-  end
-end
-</code></pre>
+  <span class="k">def</span> <span class="nf">test_answer</span>
+    <span class="n">assert_equal</span> <span class="mi">8042614</span><span class="p">,</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">answer</span><span class="p">(</span><span class="ss">max: </span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">692437619</span><span class="p">,</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">answer</span><span class="p">(</span><span class="ss">max: </span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">159166760</span><span class="p">,</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">answer</span><span class="p">(</span><span class="ss">max: </span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">645435163</span><span class="p">,</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">answer</span><span class="p">(</span><span class="ss">max: </span><span class="mi">35</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">570500927</span><span class="p">,</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">answer</span><span class="p">(</span><span class="ss">max: </span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">assert_equal</span> <span class="mi">922058210</span><span class="p">,</span> <span class="no">Problem</span><span class="p">.</span><span class="nf">answer</span><span class="p">(</span><span class="ss">max: </span><span class="mi">90</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
 
 </div>
 

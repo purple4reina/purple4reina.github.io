@@ -125,81 +125,81 @@ Solution in under a second!</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">_search = {}
-def search(word, left, w1, w2, w3, w4):
-    left -= 1
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_search</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">w4</span><span class="p">):</span>
+    <span class="n">left</span> <span class="o">-=</span> <span class="mi">1</span>
 
-    key = (left, word, w1, w2, w3, w4)
-    if key in _search:
-        return _search[key]
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">w4</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_search</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_search</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
-    total = 0
-    for letter in range(1, 5):
-        worded = word + letter
-        wd1, wd2, wd3, wd4 = w1, w2, w3, w4
-        if worded == 4223:
-            if wd2:
-                continue
-            wd2 = True
-        elif worded == 1421:
-            if wd4:
-                continue
-            wd4 = True
-        elif worded == 3142:
-            if wd3:
-                continue
-            wd3 = True
-        elif worded == 3422:
-            if wd1:
-                continue
-            wd1 = True
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="n">worded</span> <span class="o">=</span> <span class="n">word</span> <span class="o">+</span> <span class="n">letter</span>
+        <span class="n">wd1</span><span class="p">,</span> <span class="n">wd2</span><span class="p">,</span> <span class="n">wd3</span><span class="p">,</span> <span class="n">wd4</span> <span class="o">=</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">w4</span>
+        <span class="k">if</span> <span class="n">worded</span> <span class="o">==</span> <span class="mi">4223</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">wd2</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">wd2</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">elif</span> <span class="n">worded</span> <span class="o">==</span> <span class="mi">1421</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">wd4</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">wd4</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">elif</span> <span class="n">worded</span> <span class="o">==</span> <span class="mi">3142</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">wd3</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">wd3</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">elif</span> <span class="n">worded</span> <span class="o">==</span> <span class="mi">3422</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">wd1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">wd1</span> <span class="o">=</span> <span class="bp">True</span>
 
-        if left == 0:
-            if wd1 + wd2 + wd3 + wd4 == 4:
-                total += 1
-        else:
-            total += search((worded % 1000) * 10, left, wd1, wd2, wd3, wd4)
+        <span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">wd1</span> <span class="o">+</span> <span class="n">wd2</span> <span class="o">+</span> <span class="n">wd3</span> <span class="o">+</span> <span class="n">wd4</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">search</span><span class="p">((</span><span class="n">worded</span> <span class="o">%</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">wd1</span><span class="p">,</span> <span class="n">wd2</span><span class="p">,</span> <span class="n">wd3</span><span class="p">,</span> <span class="n">wd4</span><span class="p">)</span>
 
-    _search[key] = total
-    return total
-
-
-def solve(n):
-    return search(0, n, False, False, False, False)
+    <span class="n">_search</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span>
+    <span class="k">return</span> <span class="n">total</span>
 
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (9, 1),
-        (10, 10),
-        (11, 72),
-        (12, 450),
-        (13, 2582),
-        (14, 13998),
-        (15, 72863),
-        (16, 367804),
-        (17, 1812443),
-        (18, 8759228),
-        (19, 41657663),
-        (20, 195461958),
-        (21, 906624134),
-        (22, 4163603956),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">72</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">450</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">2582</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">13998</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">72863</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">367804</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">1812443</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">8759228</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">41657663</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">195461958</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">906624134</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">4163603956</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

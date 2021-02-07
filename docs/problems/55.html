@@ -83,39 +83,39 @@ original and fed them into a new number.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def ispalindrome(n):
-	number = str(n)
-	backward = [[]] * len(number)
-	for i in range(len(number)):
-		backward[len(number) - i - 1] = number[i]
-	backward = ''.join(map(str, backward))
-	if backward == number: return True
-	else: return False
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">ispalindrome</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">number</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">backward</span> <span class="o">=</span> <span class="p">[[]]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">number</span><span class="p">)):</span>
+		<span class="n">backward</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">number</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+	<span class="n">backward</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">backward</span><span class="p">))</span>
+	<span class="k">if</span> <span class="n">backward</span> <span class="o">==</span> <span class="n">number</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
+	<span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 
 
-def reverse_and_add(n):
-	number = str(n)
-	backward = [[]] * len(number)
-	for i in range(len(number)):
-		backward[len(number) - i - 1] = number[i]
-	backward = ''.join(map(str, backward))
-	number = int(number)
-	backward = int(backward)
-	return number + backward
+<span class="k">def</span> <span class="nf">reverse_and_add</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">number</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">backward</span> <span class="o">=</span> <span class="p">[[]]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">number</span><span class="p">)):</span>
+		<span class="n">backward</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">number</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+	<span class="n">backward</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">backward</span><span class="p">))</span>
+	<span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+	<span class="n">backward</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">backward</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">number</span> <span class="o">+</span> <span class="n">backward</span>
 
-Lychrel = 0
+<span class="n">Lychrel</span> <span class="o">=</span> <span class="mi">0</span>
 
-for n in range(10000):
-	for x in range(50):
-		n = reverse_and_add(n)
-		if ispalindrome(n) == True:
-			break
-			break
-	else:
-		Lychrel += 1
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+		<span class="n">n</span> <span class="o">=</span> <span class="n">reverse_and_add</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">ispalindrome</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">break</span>
+			<span class="k">break</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">Lychrel</span> <span class="o">+=</span> <span class="mi">1</span>
 		
-print Lychrel
-</code></pre>
+<span class="k">print</span> <span class="n">Lychrel</span>
+</code></pre></div></div>
 
 </div>
 

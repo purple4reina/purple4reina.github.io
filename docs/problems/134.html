@@ -83,80 +83,80 @@ previous round. This cut runtime down incredibly.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def isprime(n):
-	if n == 2:
-		return True
-	elif n &lt; 2 or n%2 == 0:
-		return False
-	else:
-		for i in range(3, int(n**0.5 + 1), 2):
-			if n%i == 0: return False
-		return True
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
+	<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+		<span class="k">return</span> <span class="bp">True</span>
 
-def nextprime(p):
-	if p == 2:
-		return 3
-	else:
-		while True:
-			p += 2
-			if isprime(p) == True:
-				return p
+<span class="k">def</span> <span class="nf">nextprime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">3</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span>
+			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="k">return</span> <span class="n">p</span>
 
-def multfind(p1, p2):
-	if p2 &lt; 1000:
-		return strconcfind(p1, p2)
-	p1_last = int(str(p1)[-3:])
-	p2_last = int(str(p2)[-3:])
-	n_list = []
-	for pair in multDict[p1_last]:
-		if pair[0] == p2_last:
-			n_list.append(pair[1])
-	while True:
-		for n in n_list:
-			test = n * p2
-			if str(test)[-1 * len(p1):] == p1:
-				return test
-			else:
-				n_list = [(n+1000) for n in n_list]
+<span class="k">def</span> <span class="nf">multfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">p2</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">strconcfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+	<span class="n">p1_last</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p1</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+	<span class="n">p2_last</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p2</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+	<span class="n">n_list</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">multDict</span><span class="p">[</span><span class="n">p1_last</span><span class="p">]:</span>
+		<span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">p2_last</span><span class="p">:</span>
+			<span class="n">n_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_list</span><span class="p">:</span>
+			<span class="n">test</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">p2</span>
+			<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">p1</span><span class="p">):]</span> <span class="o">==</span> <span class="n">p1</span><span class="p">:</span>
+				<span class="k">return</span> <span class="n">test</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">n_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">n</span><span class="o">+</span><span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_list</span><span class="p">]</span>
 
-def strconcfind(p1, p2):
-	n = 1
-	while True:
-		test = int(str(n) + p1)
-		if test%p2 == 0:
-			return test
-		else:
-			n += 1
+<span class="k">def</span> <span class="nf">strconcfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">test</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">p1</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">test</span><span class="o">%</span><span class="n">p2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">test</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
 
-def Build():
+<span class="k">def</span> <span class="nf">Build</span><span class="p">():</span>
 	
-	global primes
-	global multDict
+	<span class="k">global</span> <span class="n">primes</span>
+	<span class="k">global</span> <span class="n">multDict</span>
 		
-	multDict = dict(zip(range(1000), [[] for i in range(1000)]))
-	for a in xrange(1, 1000, 2):
-		for b in xrange(1, 1000, 2):
-			multDict[int(str(a*b)[-3:])].append((a,b))
+	<span class="n">multDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]))</span>
+	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="n">multDict</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])].</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
 			
-	primes = []
-	for n in xrange(7, 10**6):
-		if isprime(n) == True:
-			primes.append(n)
-	primes.append(nextprime(primes[-1]))
+	<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">nextprime</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 	
 
 
-Build()
-p1 = '5'
-total = 0
-for p2 in primes:
-	print p2
-	S = multfind(p1, p2)
-	total += S
-	p1 = str(p2)
+<span class="n">Build</span><span class="p">()</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="s">'5'</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">p2</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+	<span class="k">print</span> <span class="n">p2</span>
+	<span class="n">S</span> <span class="o">=</span> <span class="n">multfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+	<span class="n">total</span> <span class="o">+=</span> <span class="n">S</span>
+	<span class="n">p1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
 
-print total
-</code></pre>
+<span class="k">print</span> <span class="n">total</span>
+</code></pre></div></div>
 
 </div>
 

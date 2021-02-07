@@ -85,37 +85,37 @@ up the first 15 digits correctly when adding them.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def panlast(n):
-	last = str(n)[-9:]
-	for d in range(1,10):
-		if str(d) not in last:
-			return False
-	return True
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">panlast</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">last</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="o">-</span><span class="mi">9</span><span class="p">:]</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">last</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def panfirst(n):
-	first = str(n)[:9]
-	for d in range(1,10):
-		if str(d) not in first:
-			return False
-	return True
+<span class="k">def</span> <span class="nf">panfirst</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">first</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[:</span><span class="mi">9</span><span class="p">]</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">first</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-F = [0,1,1]
-for i in range(100):
-	F.append(F[-1]+F[-2])
+<span class="n">F</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+	<span class="n">F</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">F</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 
-i = 80
-F = [[int(str(F[79])[:15]),len(str(F[79])),F[79]],[int(str(F[80])[:15]),len(str(F[80])),F[80]]]
-while True:
-	i += 1
-	nextF = [F[0][0]+F[1][0]*10**(F[1][1]-F[0][1]), 0, int(str(F[0][2])[-10:]) + int(str(F[1][2])[-10:])]
-	nextF[1] = F[1][1] + (len(str(nextF[0])) - len(str(F[1][0])) - (F[1][1]-F[0][1]))
-	nextF[0] = int(str(nextF[0])[:15])
-	F.append(nextF)
-	del F[0]
-	if panfirst(F[1][0]) == True and panlast(F[1][2]) == True:
-		print i
-		break
-</code></pre>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">F</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">79</span><span class="p">])[:</span><span class="mi">15</span><span class="p">]),</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">79</span><span class="p">])),</span><span class="n">F</span><span class="p">[</span><span class="mi">79</span><span class="p">]],[</span><span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">80</span><span class="p">])[:</span><span class="mi">15</span><span class="p">]),</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">80</span><span class="p">])),</span><span class="n">F</span><span class="p">[</span><span class="mi">80</span><span class="p">]]]</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="n">nextF</span> <span class="o">=</span> <span class="p">[</span><span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])]</span>
+	<span class="n">nextF</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nextF</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span> <span class="o">-</span> <span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+	<span class="n">nextF</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nextF</span><span class="p">[</span><span class="mi">0</span><span class="p">])[:</span><span class="mi">15</span><span class="p">])</span>
+	<span class="n">F</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">nextF</span><span class="p">)</span>
+	<span class="k">del</span> <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="k">if</span> <span class="n">panfirst</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">panlast</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="k">print</span> <span class="n">i</span>
+		<span class="k">break</span>
+</code></pre></div></div>
 
 </div>
 

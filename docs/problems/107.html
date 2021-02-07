@@ -86,36 +86,36 @@ effective algorithm.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">f = open('network.txt', 'r')
-network = []
-old_total = 0
-for r in f:
-	r = r[:-2].split(',')
-	for i in range(len(r)):
-		if r[i] == '-':
-			r[i] = 10**3
-		else:
-			r[i] = int(r[i])
-			old_total += r[i]/2.0
-	network.append(r)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'network.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">old_total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+	<span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'-'</span><span class="p">:</span>
+			<span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+			<span class="n">old_total</span> <span class="o">+=</span> <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mf">2.0</span>
+	<span class="n">network</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
-nodes_used = [0]
-total = 0
+<span class="n">nodes_used</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 
-while sorted(nodes_used) != range(40):
-	next = min(min(network[i]) for i in nodes_used)
+<span class="k">while</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">nodes_used</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">):</span>
+	<span class="nb">next</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">network</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes_used</span><span class="p">)</span>
 	
-	for i in nodes_used:
-		if next in network[i]:
-			index = [i,network[i].index(next)]
-	if index[1] not in nodes_used:
-		total += next
-		nodes_used.append(index[1])
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes_used</span><span class="p">:</span>
+		<span class="k">if</span> <span class="nb">next</span> <span class="ow">in</span> <span class="n">network</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">network</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">index</span><span class="p">(</span><span class="nb">next</span><span class="p">)]</span>
+	<span class="k">if</span> <span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nodes_used</span><span class="p">:</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="nb">next</span>
+		<span class="n">nodes_used</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 	
-	network[index[0]][index[1]] = 10**3
+	<span class="n">network</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span>
 
-print int(old_total - total)
-</code></pre>
+<span class="k">print</span> <span class="nb">int</span><span class="p">(</span><span class="n">old_total</span> <span class="o">-</span> <span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

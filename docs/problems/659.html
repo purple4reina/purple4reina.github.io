@@ -77,7 +77,7 @@
 
 <p>I wasn’t able to get this problem to run in under a couple hours.  I think the
 problem is neeeding to search through so many primes in order to get the
-largest prime factor of the form <code>p = 4*k + 1</code>.  I was hoping that Python
+largest prime factor of the form <code class="language-plaintext highlighter-rouge">p = 4*k + 1</code>.  I was hoping that Python
 slices would do the trick so I didn’t have to start at the very beginning of
 the primes list with every call to factor.  But, ends up that Python will make
 a copy of the list when creating the slice.  That’s really annoying because I
@@ -88,99 +88,99 @@ with the recursion was the fastest I could devise.</p>
 
 <p>The problem itself was pretty interesting and I found myself getting crosseyed
 trying to make sense of all the crazy patterns and interconnections I was
-discovering.  First off, I quickly figured that for the equation <code>q*p = n**2 +
-k**2</code> where q, n, and k are integers and p a prime, <code>p = 2*n + 1</code> and n must be
+discovering.  First off, I quickly figured that for the equation <code class="language-plaintext highlighter-rouge">q*p = n**2 +
+k**2</code> where q, n, and k are integers and p a prime, <code class="language-plaintext highlighter-rouge">p = 2*n + 1</code> and n must be
 even.  This lead me to the sequence of Pythagorean primes
 https://oeis.org/A002144.</p>
 
 <p>I next printed out the values of q, p, n, and k for the values of P(k) for k
 less than 100.  Here is where I found an interesting pattern!  For some reason
-that I was unable to prove, p always evenly divided <code>4 * k**2 + 1</code>.  I think
-used this fact to just run through all primes of the form <code>4*x + 1</code> and pick
-the largest that divides <code>4 * k**2 + 1</code>.</p>
+that I was unable to prove, p always evenly divided <code class="language-plaintext highlighter-rouge">4 * k**2 + 1</code>.  I think
+used this fact to just run through all primes of the form <code class="language-plaintext highlighter-rouge">4*x + 1</code> and pick
+the largest that divides <code class="language-plaintext highlighter-rouge">4 * k**2 + 1</code>.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">_factor = {1: 0}
-def factor(n):
-    if n in _factor:
-        return _factor[n]
-    n_root = int(n ** 0.5) + 1
-    for p in primes:
-        if n % p == 0:
-            fact = max(p, factor(n // p))
-            break
-        if p &gt; n_root:
-            fact = n
-            break
-    else:
-        raise AssertionError('cannot factor %d' % n)
-    _factor[n] = fact
-    return fact
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_factor</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="k">def</span> <span class="nf">factor</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">_factor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_factor</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">n_root</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fact</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">factor</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="n">p</span><span class="p">))</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">n_root</span><span class="p">:</span>
+            <span class="n">fact</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">AssertionError</span><span class="p">(</span><span class="s">'cannot factor %d'</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">_factor</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">fact</span>
+    <span class="k">return</span> <span class="n">fact</span>
 
-modulo = 10 ** 18
-maxi = 10 ** 8
-sieve = [False, False] + [True] * (maxi - 1)
-primes = []
-for p, is_prime in enumerate(sieve):
-    if not is_prime:
-        continue
-    if (p - 1) % 4 == 0:
-        primes.append(p)
-    _factor[p] = p
-    num = p + p
-    while num &lt;= maxi:
-        sieve[num] = False
-        num += p
+<span class="n">modulo</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">18</span>
+<span class="n">maxi</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">8</span>
+<span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">maxi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">is_prime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_prime</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">_factor</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">p</span>
+    <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">maxi</span><span class="p">:</span>
+        <span class="n">sieve</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">num</span> <span class="o">+=</span> <span class="n">p</span>
 
-def solve(top):
-    total = 0
-    for k in range(1, top + 1):
-        total += factor(4 * k ** 2 + 1)
-    return total % modulo
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">factor</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">k</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">%</span> <span class="n">modulo</span>
 
-if __name__ == '__main__':
-    import sys, time
-    n = eval(sys.argv[1])
-    st = time.time()
-    s = solve(n)
-    en = time.time()
-    print(s, en - st)
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">time</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">en</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">en</span> <span class="o">-</span> <span class="n">st</span><span class="p">)</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (1, 5),
-        (2, 22),
-        (3, 59),
-        (4, 72),
-        (5, 173),
-        (6, 202),
-        (7, 399),
-        (8, 656),
-        (9, 669),
-        (10, 1070),
-        (11, 1167),
-        (12, 1744),
-        (13, 2421),
-        (14, 2578),
-        (15, 2631),
-        (16, 2672),
-        (17, 2761),
-        (18, 4058),
-        (19, 4075),
-        (20, 5676),
-        (100000, 178688812032788),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">59</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">72</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">173</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">202</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">399</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">656</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">669</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1070</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1167</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1744</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">2421</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">2578</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2631</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">2672</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">2761</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">4058</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">4075</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5676</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">178688812032788</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_P(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_P</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

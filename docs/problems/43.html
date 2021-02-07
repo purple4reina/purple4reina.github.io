@@ -75,38 +75,38 @@
   <h1 class="page-title">43</h1>
   <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def str2num(n):
-	return int(''.join(map(str, n)))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
 
-from itertools import permutations
-thelist = []
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
+<span class="n">thelist</span> <span class="o">=</span> <span class="p">[]</span>
 
-for first in permutations(range(10), 4):
-	firstpiece = first
-	firstnumber = str2num(first)
-	if firstnumber%2 == 0:
-		thelist.append(firstpiece)
+<span class="k">for</span> <span class="n">first</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">4</span><span class="p">):</span>
+	<span class="n">firstpiece</span> <span class="o">=</span> <span class="n">first</span>
+	<span class="n">firstnumber</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">firstnumber</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="n">thelist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">firstpiece</span><span class="p">)</span>
 
-primes = [3, 5, 7, 11, 13, 17]
-for p in primes:
-	newlist = thelist
-	thelist = []
-	for new in newlist:
-	#	second = str(second)
-		#print new
-		for i in range(10):
-			#i = str(i)
-			if i not in new:
-				newpiece = list(new); newpiece.append(i)
-				#print newpiece
-				newnumber = str2num(newpiece[-3:])
-				if newnumber%p == 0:
-					thelist.append((newpiece))
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+	<span class="n">newlist</span> <span class="o">=</span> <span class="n">thelist</span>
+	<span class="n">thelist</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">new</span> <span class="ow">in</span> <span class="n">newlist</span><span class="p">:</span>
+	<span class="c1">#	second = str(second)
+</span>		<span class="c1">#print new
+</span>		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+			<span class="c1">#i = str(i)
+</span>			<span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new</span><span class="p">:</span>
+				<span class="n">newpiece</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">new</span><span class="p">);</span> <span class="n">newpiece</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+				<span class="c1">#print newpiece
+</span>				<span class="n">newnumber</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">newpiece</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+				<span class="k">if</span> <span class="n">newnumber</span><span class="o">%</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+					<span class="n">thelist</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">newpiece</span><span class="p">))</span>
 
-final = map(str2num, thelist)
-print final
-print sum(final)
-</code></pre>
+<span class="n">final</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">str2num</span><span class="p">,</span> <span class="n">thelist</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">final</span>
+<span class="k">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">final</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

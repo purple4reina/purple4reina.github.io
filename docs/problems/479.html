@@ -77,7 +77,7 @@
 
 <p>It was fun to watch this problem become simpler and simpler as I dug into it.
 It was really nice how a crazy cubic equation could all of a sudden reduce to
-<code>(1 - k**2)</code>.</p>
+<code class="language-plaintext highlighter-rouge">(1 - k**2)</code>.</p>
 
 <p>The most challenging part was making it performant.  The bottleneck was in
 calculating an already large number raised to the millionth power.  I knew that
@@ -96,60 +96,60 @@ faster.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">modulo = 1000000007
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">1000000007</span>
 
-def inv(n, mod):
-    t, newt = 0, 1
-    r, newr = mod, n
-    while newr:
-        q = r // newr
-        t, newt = newt, t - q * newt
-        r, newr = newr, r - q * newr
-    return t
+<span class="k">def</span> <span class="nf">inv</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mod</span><span class="p">):</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">newt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">newr</span> <span class="o">=</span> <span class="n">mod</span><span class="p">,</span> <span class="n">n</span>
+    <span class="k">while</span> <span class="n">newr</span><span class="p">:</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">r</span> <span class="o">//</span> <span class="n">newr</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">newt</span> <span class="o">=</span> <span class="n">newt</span><span class="p">,</span> <span class="n">t</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">newt</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">newr</span> <span class="o">=</span> <span class="n">newr</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">newr</span>
+    <span class="k">return</span> <span class="n">t</span>
 
-def solve(n):
-    total = 1 - n
-    for k in range(2, n + 1):
-        k_2 = k**2
-        big_pow = pow(k_2 - 1, n + 1, modulo)
-        total += (1 + big_pow) * inv(k_2, modulo)
-    return total % modulo
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">n</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">k_2</span> <span class="o">=</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">big_pow</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">k_2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">big_pow</span><span class="p">)</span> <span class="o">*</span> <span class="n">inv</span><span class="p">(</span><span class="n">k_2</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">%</span> <span class="n">modulo</span>
 
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve, inv
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">inv</span>
 
-_test_inv = (
-        (5, 7, 3),
-        (3, 7, 5),
-        (15, 26, 7),
-        (7, 26, 15),
-)
+<span class="n">_test_inv</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,mod,expect', _test_inv)
-def test_inv(n, mod, expect):
-    assert expect == inv(n, mod)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,mod,expect'</span><span class="p">,</span> <span class="n">_test_inv</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_inv</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mod</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">inv</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span>
 
-_test_solve = (
-        (4, 51160),
-        (10, 397585319),
-        (100, 113956045),
-        (1000, 373423977),
-        (10000, 866508622),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">51160</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">397585319</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">113956045</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">373423977</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">866508622</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

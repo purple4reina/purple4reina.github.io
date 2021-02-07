@@ -79,65 +79,65 @@
 it was really fun to do.  I drew many many pictures and spent time relearning
 all I used to know of trig.  Despite this, I kept getting the wrong answer.  I
 checked my work about 5 times and everytime saw that I was doing it correctly.
-I finally realized that it was the value for <code>l_section_area</code> that I’d
+I finally realized that it was the value for <code class="language-plaintext highlighter-rouge">l_section_area</code> that I’d
 miscalculated.  Here’s all this hard trig and I’m fine, but some simple
 sibtraction I couldn’t even do!  Upon fixing that I was able to get the answer
 super fast!</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import math
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
-l_section_area = 1 - (math.pi / 4)
-
-
-def solve(n):
-    k = 1
-    while percent(k) &gt; n:
-        k += 1
-    return k
+<span class="n">l_section_area</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
 
 
-def percent(n):
-    theta = math.atan(1 / n)
-    alpha = math.asin((n - 1) / (n ** 2 + 1) ** 0.5)
-    beta = math.pi / 2 - theta - alpha
-
-    segment_area = (beta - math.sin(beta)) / 2
-    triangle_area = (1 - math.cos(beta)) / 2
-    concave_triangle_area = triangle_area - segment_area
-
-    return concave_triangle_area / l_section_area
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">percent</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">k</span>
 
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">def</span> <span class="nf">percent</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">atan</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">asin</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">alpha</span>
+
+    <span class="n">segment_area</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta</span> <span class="o">-</span> <span class="n">math</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">triangle_area</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">math</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">concave_triangle_area</span> <span class="o">=</span> <span class="n">triangle_area</span> <span class="o">-</span> <span class="n">segment_area</span>
+
+    <span class="k">return</span> <span class="n">concave_triangle_area</span> <span class="o">/</span> <span class="n">l_section_area</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve, percent
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">percent</span>
 
-_test_percent = (
-        (1, 0.50),
-        (2, 0.36462616929172803),
-)
+<span class="n">_test_percent</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.36462616929172803</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_percent)
-def test_percent(n, expect):
-    assert expect == percent(n)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_percent</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_percent</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">percent</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-_test_solve = (
-        (0.10, 15),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mf">0.10</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

@@ -88,54 +88,54 @@ learning about Multiplicative Order.  I still don’t totally grok what it is an
 why it can be useful.  I hope that further problems use it more.</p>
 
 <p>My final solution didn’t end up using Multiplicative Order at all though.  It
-was mostly by chance that I figured out that <code>n % t</code> gives the same value as <code>n
+was mostly by chance that I figured out that <code class="language-plaintext highlighter-rouge">n % t</code> gives the same value as <code class="language-plaintext highlighter-rouge">n
 % (multiplicative order of t)</code>.</p>
 
 <p>Update: and now after exploring a bit more, I realize that I don’t even need
-the mod in <code>n % t - 1</code>.  Simply <code>n - 1</code> will suffice.</p>
+the mod in <code class="language-plaintext highlighter-rouge">n % t - 1</code>.  Simply <code class="language-plaintext highlighter-rouge">n - 1</code> will suffice.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def solve(n):
-    t, total = 3, 0
-    while t &lt;= n:
-        m, a = 1, 0
-        mod = n % t - 1
-        if mod &gt; 0:
-            m = pow(10, mod, t)
-        for _ in range(15):
-            d, m = divmod(m * 10, t)
-            a = (a * 10 + d)
-        total += a
-        t *= 3
-    return (total // 10**5) % 10**10
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">mod</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">mod</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">mod</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">a</span>
+        <span class="n">t</span> <span class="o">*=</span> <span class="mi">3</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">total</span> <span class="o">//</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="o">**</span><span class="mi">10</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (10**1, 4444444444),
-        (10**2, 4938271604),
-        (10**3, 8326474622),
-        (10**4, 5863435451),
-        (10**5, 2187843993),
-        (10**6, 9851385196),
-        (10**7, 5158680727),
-        (10**8, 2584642393),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4444444444</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4938271604</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8326474622</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5863435451</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2187843993</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9851385196</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5158680727</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2584642393</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

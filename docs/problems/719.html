@@ -84,61 +84,61 @@ https://oeis.org/A038206.  From there I learned that the square number must be
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def T(n):
-    total, r, s = 0, 4, 16
-    while s &lt;= n:
-        r += 1
-        s, mod = r ** 2, r % 9
-        if mod != 0 and mod != 1:
-            continue
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">16</span>
+    <span class="k">while</span> <span class="n">s</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">s</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="n">r</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">r</span> <span class="o">%</span> <span class="mi">9</span>
+        <span class="k">if</span> <span class="n">mod</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">mod</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">continue</span>
 
-        str_s = str(s)
-        for c in range(1, 1 &lt;&lt; len(str_s) - 1):
-            splits = ((c &gt;&gt; i) &amp; 1 for i in range(len(str_s)-1))
+        <span class="n">str_s</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">splits</span> <span class="o">=</span> <span class="p">((</span><span class="n">c</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str_s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
-            i = summ = 0
-            for j, split in enumerate(splits):
-                if not split:
-                    continue
-                summ += int(str_s[i:j+1])
-                if summ &gt; r:
-                    break
-                i = j+1
-            else:
-                summ += int(str_s[i:])
-                if summ == r:
-                    total += s
-                    break
+            <span class="n">i</span> <span class="o">=</span> <span class="n">summ</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">split</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">splits</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">split</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">summ</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">str_s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">summ</span> <span class="o">&gt;</span> <span class="n">r</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">summ</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">str_s</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
+                <span class="k">if</span> <span class="n">summ</span> <span class="o">==</span> <span class="n">r</span><span class="p">:</span>
+                    <span class="n">total</span> <span class="o">+=</span> <span class="n">s</span>
+                    <span class="k">break</span>
 
-    return total
+    <span class="k">return</span> <span class="n">total</span>
 
-if __name__ == '__main__':
-    import sys
-    p = int(sys.argv[1])
-    print(T(10 ** p))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">T</span><span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="n">p</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import T
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">T</span>
 
-_test_T = (
-    (10 ** 1, 0),
-    (10 ** 2, 181),
-    (10 ** 3, 181),
-    (10 ** 4, 41333),
-    (10 ** 5, 184767),
-    (10 ** 6, 10804656),
-    (10 ** 7, 30940313),
-    (10 ** 8, 2818842841),
-    (10 ** 9, 6222187932),
-)
+<span class="n">_test_T</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">181</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">181</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">41333</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">184767</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10804656</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">30940313</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2818842841</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">6222187932</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_T)
-def test_T(n, expect):
-    assert expect == T(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_T</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_T</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">T</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

@@ -82,63 +82,63 @@ analysis.</p>
 
 <p>I printed out the values for f(n, k) and noticed an easy pattern.</p>
 
-<pre><code>1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
       1  1  2  2  3  3  4  4  5  5  6  6  7  7  8  8  9  9
                1  1  1  2  2  2  3  3  3  4  4  4  5  5  5
                            1  1  1  1  2  2  2  2  3  3  3
                                           1  1  1  1  1  2
-</code></pre>
+</code></pre></div></div>
 
 <p>The solution was just to put this pattern into code, and since I’d already
 written some good tests, that work was pretty easy.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">modulo = 1000000007
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">1000000007</span>
 
-def solve(num):
-    total = tri = addr = 0
-    while True:
-        addr += 1
-        tri += addr
-        if tri &gt; num:
-            break
-        div, mod = divmod(num - tri + 1, addr)
-        total += div * (div + 1) // 2 * addr + mod * (div + 1)
-    return total % modulo
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">tri</span> <span class="o">=</span> <span class="n">addr</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">addr</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">tri</span> <span class="o">+=</span> <span class="n">addr</span>
+        <span class="k">if</span> <span class="n">tri</span> <span class="o">&gt;</span> <span class="n">num</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">num</span> <span class="o">-</span> <span class="n">tri</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">div</span> <span class="o">*</span> <span class="p">(</span><span class="n">div</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">addr</span> <span class="o">+</span> <span class="n">mod</span> <span class="o">*</span> <span class="p">(</span><span class="n">div</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">%</span> <span class="n">modulo</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (1, 1),
-        (2, 3),
-        (3, 7),
-        (4, 12),
-        (5, 19),
-        (6, 28),
-        (7, 39),
-        (8, 51),
-        (9, 66),
-        (10**1, 83),
-        (10**2, 12656),
-        (10**3, 1817711),
-        (10**4, 238998218),
-        (10**5, 651877630),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">66</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">83</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12656</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1817711</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">238998218</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">651877630</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

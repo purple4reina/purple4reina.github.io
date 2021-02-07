@@ -75,38 +75,38 @@
   <h1 class="page-title">49</h1>
   <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def isprime(n):
-	if n == 0 or n == 1: return 'false'
-	for i in range(2, int(n**.5) + 1):
-		if n%i == 0: return 'false'
-	return 'true'
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="s">'false'</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'false'</span>
+	<span class="k">return</span> <span class="s">'true'</span>
 
-def isperm(n1, n2, n3):
-	n1 = str(n1); n2 = str(n2); n3 = str(n3)
-	for d in n1:
-		if (d not in n2) or (d not in n3): return 'false'
-	for d in n2:
-		if (d not in n1) or (d not in n3): return 'false'
-	for d in n3:
-		if (d not in n1) or (d not in n2): return 'false'
-	return 'true'
+<span class="k">def</span> <span class="nf">isperm</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">):</span>
+	<span class="n">n1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n1</span><span class="p">);</span> <span class="n">n2</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n2</span><span class="p">);</span> <span class="n">n3</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">n1</span><span class="p">:</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n3</span><span class="p">):</span> <span class="k">return</span> <span class="s">'false'</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">n2</span><span class="p">:</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n3</span><span class="p">):</span> <span class="k">return</span> <span class="s">'false'</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">n3</span><span class="p">:</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n2</span><span class="p">):</span> <span class="k">return</span> <span class="s">'false'</span>
+	<span class="k">return</span> <span class="s">'true'</span>
 
-n1 = 1487
-answer = 'false'
-while n1 &lt; 10000 and answer == 'false':
-	n1 += 2
-	if isprime(n1) == 'false': continue
-	n3 = n2 = n1
-	step = 0
-	while n3 &lt; 9999 and answer == 'false':
-		step += 1
-		n2 = n1 + step; n3 = n2 + step
-		if (isprime(n2) == 'true') and (isprime(n3) == 'true') and (isperm(n1, n2, n3) == 'true'):
-			answerset = [n1, n2, n3]
-			answer = 'true'		
+<span class="n">n1</span> <span class="o">=</span> <span class="mi">1487</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="s">'false'</span>
+<span class="k">while</span> <span class="n">n1</span> <span class="o">&lt;</span> <span class="mi">10000</span> <span class="ow">and</span> <span class="n">answer</span> <span class="o">==</span> <span class="s">'false'</span><span class="p">:</span>
+	<span class="n">n1</span> <span class="o">+=</span> <span class="mi">2</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span> <span class="o">==</span> <span class="s">'false'</span><span class="p">:</span> <span class="k">continue</span>
+	<span class="n">n3</span> <span class="o">=</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">n1</span>
+	<span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">while</span> <span class="n">n3</span> <span class="o">&lt;</span> <span class="mi">9999</span> <span class="ow">and</span> <span class="n">answer</span> <span class="o">==</span> <span class="s">'false'</span><span class="p">:</span>
+		<span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="n">n2</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">step</span><span class="p">;</span> <span class="n">n3</span> <span class="o">=</span> <span class="n">n2</span> <span class="o">+</span> <span class="n">step</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span> <span class="o">==</span> <span class="s">'true'</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">isprime</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span> <span class="o">==</span> <span class="s">'true'</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">isperm</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">)</span> <span class="o">==</span> <span class="s">'true'</span><span class="p">):</span>
+			<span class="n">answerset</span> <span class="o">=</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">]</span>
+			<span class="n">answer</span> <span class="o">=</span> <span class="s">'true'</span>		
 			
-print answerset
-</code></pre>
+<span class="k">print</span> <span class="n">answerset</span>
+</code></pre></div></div>
 
 </div>
 

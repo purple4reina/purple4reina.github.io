@@ -92,20 +92,20 @@ by 2**10.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import combinations
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
 
-def solve():
-    all_digits = tuple(range(10)) + tuple(range(10))
-    elevens = 0
-    for combo in combinations(all_digits, 10):
-        if (2 * sum(combo) - 90) % 11 == 0:
-            elevens += sum(1 for i in combo if i != 0)
-    nine_fact = 9*8*7*6*5*4*3*2
-    return elevens * 10 * nine_fact ** 2 // (1 &lt;&lt; 10)
+<span class="k">def</span> <span class="nf">solve</span><span class="p">():</span>
+    <span class="n">all_digits</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">elevens</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">all_digits</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">90</span><span class="p">)</span> <span class="o">%</span> <span class="mi">11</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">elevens</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">combo</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">nine_fact</span> <span class="o">=</span> <span class="mi">9</span><span class="o">*</span><span class="mi">8</span><span class="o">*</span><span class="mi">7</span><span class="o">*</span><span class="mi">6</span><span class="o">*</span><span class="mi">5</span><span class="o">*</span><span class="mi">4</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">elevens</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">nine_fact</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">//</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">)</span>
 
-if __name__ == '__main__':
-    print(solve())
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">())</span>
+</code></pre></div></div>
 
 </div>
 

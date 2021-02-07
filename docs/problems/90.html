@@ -89,54 +89,54 @@ could be reversed. I just dealt with that by dividing by 2.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-def square(t):
-	num = int(t[0])*10 + int(t[1])
-	if num in [1, 4, 9, 16, 25, 36, 49, 64, 81]:
-		return num
-	elif num == 6:
-		return 9
-	elif num == 19:
-		return 16
-	elif num == 39:
-		return 36
-	elif num == 46:
-		return 49
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+	<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+	<span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">81</span><span class="p">]:</span>
+		<span class="k">return</span> <span class="n">num</span>
+	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">9</span>
+	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">19</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">16</span>
+	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">39</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">36</span>
+	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">46</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">49</span>
 	
-	num = int(t[1])*10 + int(t[0])
-	if num in [1, 4, 9, 16, 25, 36, 49, 64, 81]:
-		return num
-	elif num == 6:
-		return 9
-	elif num == 19:
-		return 16
-	elif num == 39:
-		return 36
-	elif num == 46:
-		return 49
+	<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+	<span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">81</span><span class="p">]:</span>
+		<span class="k">return</span> <span class="n">num</span>
+	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">9</span>
+	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">19</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">16</span>
+	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">39</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">36</span>
+	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">46</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">49</span>
 		
-	else:
-		return False
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
 
 
-count = 0
-for cube1 in combinations(range(10),6):
-	for cube2 in combinations(range(10),6):
-		this_combo = set()
-		for double in product(cube1,cube2):
-			test = square(double)
-			if test != False:
-				this_combo.add(test)
-				if test == 64:
-					this_combo.add(49)
-				elif test == 49:
-					this_combo.add(64)
-		if len(this_combo) == 9:
-			count += 1
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">cube1</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="mi">6</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">cube2</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="mi">6</span><span class="p">):</span>
+		<span class="n">this_combo</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">double</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">cube1</span><span class="p">,</span><span class="n">cube2</span><span class="p">):</span>
+			<span class="n">test</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">double</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">test</span> <span class="o">!=</span> <span class="bp">False</span><span class="p">:</span>
+				<span class="n">this_combo</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+				<span class="k">if</span> <span class="n">test</span> <span class="o">==</span> <span class="mi">64</span><span class="p">:</span>
+					<span class="n">this_combo</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
+				<span class="k">elif</span> <span class="n">test</span> <span class="o">==</span> <span class="mi">49</span><span class="p">:</span>
+					<span class="n">this_combo</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">this_combo</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+			<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-print count/2
-</code></pre>
+<span class="k">print</span> <span class="n">count</span><span class="o">/</span><span class="mi">2</span>
+</code></pre></div></div>
 
 </div>
 

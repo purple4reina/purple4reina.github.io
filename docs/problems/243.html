@@ -91,80 +91,80 @@ numbers was very consistent.  This lead me to an answer.  Program runs in about
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def memoize(fn):
-    _cache = {}
-    def wrap(*args):
-        if args in _cache:
-            return _cache[args]
-        ret = fn(*args)
-        _cache[args] = ret
-        return ret
-    return wrap
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">memoize</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">_cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrap</span>
 
-def is_prime(p):
-    for n in range(3, int(p**0.5) + 2, 2):
-        if p % n == 0:
-            return False
-    return True
+<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
 
-_primes = [2, 3]
-def primes():
-    for p in _primes:
-        yield p
-    while True:
-        p += 2
-        if is_prime(p):
-            _primes.append(p)
-            yield p
+<span class="n">_primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">primes</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">_primes</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">p</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="n">_primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="n">p</span>
 
-@memoize
-def totient(n):
-    if n == 1:
-        return 1
-    top = n ** 0.5
-    for p in primes():
-        if p &gt; top:
-            break
-        if n % p == 0:
-            n //= p
-            e = 1
-            while n % p == 0:
-                n //= p
-                e += 1
-            return p ** e * (1 - 1/p) * totient(n)
-    return n - 1
+<span class="o">@</span><span class="n">memoize</span>
+<span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">top</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">//=</span> <span class="n">p</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">//=</span> <span class="n">p</span>
+                <span class="n">e</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">p</span> <span class="o">**</span> <span class="n">e</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">totient</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
 
-def solve(n):
-    d, prevd, ratio, minn, diff = 1, 0, 1, 1, 1
-    while ratio &gt;= n:
-        d += diff
-        ratio = totient(d) / (d - 1)
-        if ratio &lt; minn:
-            diff = d - prevd
-            minn = ratio
-            prevd = d
-    return d
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">d</span><span class="p">,</span> <span class="n">prevd</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">minn</span><span class="p">,</span> <span class="n">diff</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">ratio</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">+=</span> <span class="n">diff</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="n">totient</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="n">minn</span><span class="p">:</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">d</span> <span class="o">-</span> <span class="n">prevd</span>
+            <span class="n">minn</span> <span class="o">=</span> <span class="n">ratio</span>
+            <span class="n">prevd</span> <span class="o">=</span> <span class="n">d</span>
+    <span class="k">return</span> <span class="n">d</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (4/10, 12),
-        (0.17102402829451352, 38798760),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">0.17102402829451352</span><span class="p">,</span> <span class="mi">38798760</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

@@ -81,52 +81,52 @@ helped immensely in solving this one.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-def isprime(n):
-	if n == 2:
-		return True
-	elif n &lt; 2 or n%2 == 0:
-		return False
-	else:
-		for i in range(3, int(n**0.5 + 1), 2):
-			if n%i == 0: return False
-		return True
-
-
-def primesbelow(h):
-	answer = [2]
-	for n in range(3, h, 2):
-		if isprime(n) == True:
-			answer.append(n)
-	return answer
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
+	<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+		<span class="k">return</span> <span class="bp">True</span>
 
 
+<span class="k">def</span> <span class="nf">primesbelow</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+	<span class="n">answer</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">answer</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">answer</span>
 
-upper = 1000
 
-while True:
-	countDict = dict(zip(range(upper+1), [0]*(upper+1)))
-	humbug = False
-	for length in range(2, upper/2 + 1):
-		print length
-		for test in combinations_with_replacement(primesbelow(upper - 2*(length-1)), length):
-			sumT = sum(list(test))
-			if sumT &lt;= upper:
-				countDict[sumT] += 1
-				if countDict[sumT] &gt; 5000 and sumT &lt; upper:
-					print sumT, countDict[sumT]
-					upper = sumT
-					humbug = True
-					break
-		if humbug == True:
-			break
-	if humbug == False:
-		break
+
+<span class="n">upper</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="n">countDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">upper</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">upper</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+	<span class="n">humbug</span> <span class="o">=</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">upper</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+		<span class="k">print</span> <span class="n">length</span>
+		<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">combinations_with_replacement</span><span class="p">(</span><span class="n">primesbelow</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="n">length</span><span class="p">):</span>
+			<span class="n">sumT</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+			<span class="k">if</span> <span class="n">sumT</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">:</span>
+				<span class="n">countDict</span><span class="p">[</span><span class="n">sumT</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+				<span class="k">if</span> <span class="n">countDict</span><span class="p">[</span><span class="n">sumT</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5000</span> <span class="ow">and</span> <span class="n">sumT</span> <span class="o">&lt;</span> <span class="n">upper</span><span class="p">:</span>
+					<span class="k">print</span> <span class="n">sumT</span><span class="p">,</span> <span class="n">countDict</span><span class="p">[</span><span class="n">sumT</span><span class="p">]</span>
+					<span class="n">upper</span> <span class="o">=</span> <span class="n">sumT</span>
+					<span class="n">humbug</span> <span class="o">=</span> <span class="bp">True</span>
+					<span class="k">break</span>
+		<span class="k">if</span> <span class="n">humbug</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">break</span>
+	<span class="k">if</span> <span class="n">humbug</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">break</span>
 					
 
-print countDict	
-</code></pre>
+<span class="k">print</span> <span class="n">countDict</span>	
+</code></pre></div></div>
 
 </div>
 

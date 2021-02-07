@@ -81,36 +81,36 @@ closely.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import re
-def num2str(n):
-	return re.split('_', re.sub('\B', '_', str(n)))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'\B'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
 
-def str2num(n):
-	return ''.join(map(str, n))	
+<span class="k">def</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>	
 
-def circle(n):
-	return int(str2num([(list(num2str(n)))[-1]] + (list(num2str(n)))[:-1]))
+<span class="k">def</span> <span class="nf">circle</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">str2num</span><span class="p">([(</span><span class="nb">list</span><span class="p">(</span><span class="n">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">)))[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">)))[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 	
-def isprime(n):
-	for i in range(2, int(n**0.5 + 1)):
-		if n%i == 0: return 'FALSE'
-	return 'TRUE'
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
+	<span class="k">return</span> <span class="s">'TRUE'</span>
 			
-from math import log10
-circleprimes = []
-for n in range(2, 10**6):
-	if isprime(n) == 'TRUE':
-		m = n
-		circlelist = [m]
-		for x in range(int(log10(m))):
-			m = circle(m)
-			circlelist.append(m)
-		if 'FALSE' not in map(isprime, circlelist): 
-			circleprimes.append(n)
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log10</span>
+<span class="n">circleprimes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="s">'TRUE'</span><span class="p">:</span>
+		<span class="n">m</span> <span class="o">=</span> <span class="n">n</span>
+		<span class="n">circlelist</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span>
+		<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">m</span><span class="p">))):</span>
+			<span class="n">m</span> <span class="o">=</span> <span class="n">circle</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+			<span class="n">circlelist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+		<span class="k">if</span> <span class="s">'FALSE'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">isprime</span><span class="p">,</span> <span class="n">circlelist</span><span class="p">):</span> 
+			<span class="n">circleprimes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 			
-print circleprimes		
-print len(circleprimes)
-</code></pre>
+<span class="k">print</span> <span class="n">circleprimes</span>		
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">circleprimes</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

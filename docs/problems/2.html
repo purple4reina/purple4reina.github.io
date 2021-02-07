@@ -75,30 +75,30 @@
   <h1 class="page-title">2</h1>
   <h2 id="code">Code</h2>
 
-<pre><code class="language-applescript">set bound to 4000000
-set the_list to {{1, 1}, {2, 2}} -- {item, value}
-set the_sum to 0
+<div class="language-applescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">set</span><span class="w"> </span><span class="nv">bound</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">4000000</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">the_list</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">{{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">}}</span><span class="w"> </span><span class="c1">-- {item, value}</span><span class="w">
+</span><span class="k">set</span><span class="w"> </span><span class="nv">the_sum</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">0</span><span class="w">
 
 
-repeat with i from 3 to 4000000
+</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">4000000</span><span class="w">
 	
-	if ((item 2 of item (i - 2) of the_list) + (item 2 of item (i - 1) of the_list)) &lt;= 4000000 then
-		set the_list to the_list &amp; {{i, (item 2 of item (i - 2) of the_list) + (item 2 of item (i - 1) of the_list)}}
-	else
-		exit repeat
-	end if
+	</span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nb">item</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="p">(</span><span class="nv">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">the_list</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nb">item</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="p">(</span><span class="nv">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">the_list</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4000000</span><span class="w"> </span><span class="k">then</span><span class="w">
+		</span><span class="k">set</span><span class="w"> </span><span class="nv">the_list</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">the_list</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">{{</span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nb">item</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="p">(</span><span class="nv">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">the_list</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nb">item</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="p">(</span><span class="nv">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">the_list</span><span class="p">)}}</span><span class="w">
+	</span><span class="k">else</span><span class="w">
+		</span><span class="k">exit</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
 	
-end repeat
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
-repeat with j from 1 to (count the_list)
+</span><span class="k">repeat</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">j</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="nv">the_list</span><span class="p">)</span><span class="w">
 	
-	if ((j * 3) - 1) &gt; (count the_list) then exit repeat
-	set the_sum to the_sum + (item 2 of item ((j * 3) - 1) of the_list)
+	</span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nv">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">count</span><span class="w"> </span><span class="nv">the_list</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="k">exit</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">the_sum</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">the_sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nb">item</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="p">((</span><span class="nv">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">the_list</span><span class="p">)</span><span class="w">
 	
-end repeat
+</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
 
-return the_sum
-</code></pre>
+</span><span class="nb">return</span><span class="w"> </span><span class="nv">the_sum</span><span class="w">
+</span></code></pre></div></div>
 
 
 </div>

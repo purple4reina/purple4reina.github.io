@@ -89,35 +89,35 @@ not equal to.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from time import time
-start_time= time()
-print 'Process started'
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">'Process started'</span>
 
-#n  n/2 (n is even)
+<span class="c1">#n  n/2 (n is even)
 #n  3n + 1 (n is odd)
+</span>
 
-
-def seq(n):
-	iter = 1
-	while n != 1:
-		if n%2 == 1:
-			n = (3*n) + 1
-		elif n%2 == 0:
-			n = n/2
-		iter = iter + 1
-	return iter
+<span class="k">def</span> <span class="nf">seq</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="nb">iter</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+		<span class="k">elif</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span>
+		<span class="nb">iter</span> <span class="o">=</span> <span class="nb">iter</span> <span class="o">+</span> <span class="mi">1</span>
+	<span class="k">return</span> <span class="nb">iter</span>
 			
-seq_list = []
-for i in range(1000000, 0, -1):
-	seq_list.append([seq(i), i])
+<span class="n">seq_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+	<span class="n">seq_list</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">seq</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="p">])</span>
 
-print max(seq_list)
+<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">seq_list</span><span class="p">)</span>
 
 
-end_time= time()
-elapse_time= end_time - start_time
-print elapse_time, 'seconds have passed'
-</code></pre>
+<span class="n">end_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">elapse_time</span><span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="s">'seconds have passed'</span>
+</code></pre></div></div>
 
 </div>
 

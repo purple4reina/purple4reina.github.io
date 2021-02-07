@@ -84,40 +84,40 @@ numbers. That has been a very useful skill in these last few problems.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">#evaluate if a number is prime or not
-def isprime(n):
-	if n == 1: return 'FALSE'
-	for i in range(2, int(n**0.5 + 1)):
-		if n%i == 0: return 'FALSE'
-	return 'TRUE'
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#evaluate if a number is prime or not
+</span><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
+	<span class="k">return</span> <span class="s">'TRUE'</span>
 	
-#define right truncation
-def rtrunk(n):
-	return int(str(n)[:-1])
+<span class="c1">#define right truncation
+</span><span class="k">def</span> <span class="nf">rtrunk</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-#define left truncation
-def ltrunk(n):
-	return int('0' + str(n)[1:])
+<span class="c1">#define left truncation
+</span><span class="k">def</span> <span class="nf">ltrunk</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">'0'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
 	
 
-from math import log10
-nlist = []
-n = 10
-while len(nlist) &lt; 11:
-	test = 'TRUE'
-	if isprime(n) == 'TRUE':
-		rn = ln = n
-		for r in range(int(log10(n))):
-			rn = rtrunk(rn)
-			if isprime(rn) == 'FALSE': test = 'FALSE'
-		for l in range(int(log10(n))):
-			ln = ltrunk(ln)
-			if isprime(ln) == 'FALSE': test = 'FALSE'
-		if test == 'TRUE': nlist.append(n)
-	n += 1
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log10</span>
+<span class="n">nlist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">nlist</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">11</span><span class="p">:</span>
+	<span class="n">test</span> <span class="o">=</span> <span class="s">'TRUE'</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="s">'TRUE'</span><span class="p">:</span>
+		<span class="n">rn</span> <span class="o">=</span> <span class="n">ln</span> <span class="o">=</span> <span class="n">n</span>
+		<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">))):</span>
+			<span class="n">rn</span> <span class="o">=</span> <span class="n">rtrunk</span><span class="p">(</span><span class="n">rn</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">rn</span><span class="p">)</span> <span class="o">==</span> <span class="s">'FALSE'</span><span class="p">:</span> <span class="n">test</span> <span class="o">=</span> <span class="s">'FALSE'</span>
+		<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">))):</span>
+			<span class="n">ln</span> <span class="o">=</span> <span class="n">ltrunk</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span> <span class="o">==</span> <span class="s">'FALSE'</span><span class="p">:</span> <span class="n">test</span> <span class="o">=</span> <span class="s">'FALSE'</span>
+		<span class="k">if</span> <span class="n">test</span> <span class="o">==</span> <span class="s">'TRUE'</span><span class="p">:</span> <span class="n">nlist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
 
-print sum(nlist)
-</code></pre>
+<span class="k">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nlist</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

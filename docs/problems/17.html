@@ -83,111 +83,111 @@ have completed rather than doing this one that over 40,000 have completed.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def letters(n):
-	ans = []
-	if n == 1000:
-		ans.append('one')
-		ans.append('thousand')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">letters</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1000</span><span class="p">:</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'one'</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'thousand'</span><span class="p">)</span>
 	
-	d1 = n%10
-	d2 = (n%100 - d1)/10
-	d3 = (n%1000 - d1 - d2)/100
+	<span class="n">d1</span> <span class="o">=</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span>
+	<span class="n">d2</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">100</span> <span class="o">-</span> <span class="n">d1</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+	<span class="n">d3</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">1000</span> <span class="o">-</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">d2</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span>
 	
-	if d3 != 0:
-		if d3 == 1:
-			ans.append('one')
-		elif d3 == 2:
-			ans.append('two')
-		elif d3 == 3:
-			ans.append('three')
-		elif d3 == 4:
-			ans.append('four')
-		elif d3 == 5:
-			ans.append('five')
-		elif d3 == 6:
-			ans.append('six')
-		elif d3 == 7:
-			ans.append('seven')
-		elif d3 == 8:
-			ans.append('eight')
-		elif d3 == 9:
-			ans.append('nine')
-		ans.append('hundred')
+	<span class="k">if</span> <span class="n">d3</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'one'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'two'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'three'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'four'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'five'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'six'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'seven'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'eight'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d3</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'nine'</span><span class="p">)</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'hundred'</span><span class="p">)</span>
 	
-	if d3 != 0 and (d2 != 0 or d1 != 0):
-		ans.append('and')
+	<span class="k">if</span> <span class="n">d3</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">d2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">d1</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'and'</span><span class="p">)</span>
 	
-	if d2 != 0:
-		if d2 == 2:
-			ans.append('twenty')
-		elif d2 == 3:
-			ans.append('thirty')
-		elif d2 == 4:
-			ans.append('forty')
-		elif d2 == 5:
-			ans.append('fifty')
-		elif d2 == 6:
-			ans.append('sixty')
-		elif d2 == 7:
-			ans.append('seventy')
-		elif d2 == 8:
-			ans.append('eighty')
-		elif d2 == 9:
-			ans.append('ninety')
+	<span class="k">if</span> <span class="n">d2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'twenty'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'thirty'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'forty'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'fifty'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'sixty'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'seventy'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'eighty'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'ninety'</span><span class="p">)</span>
 		
-		if d2 == 1 and d1 != 0:
-			if d1 == 1:
-				ans.append('eleven')
-			elif d1 == 2:
-				ans.append('twelve')
-			elif d1 == 3:
-				ans.append('thirteen')
-			elif d1 == 4:
-				ans.append('fourteen')
-			elif d1 == 5:
-				ans.append('fifteen')
-			elif d1 == 6:
-				ans.append('sixteen')
-			elif d1 == 7:
-				ans.append('seventeen')
-			elif d1 == 8:
-				ans.append('eighteen')
-			elif d1 == 9:
-				ans.append('nineteen')
+		<span class="k">if</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">d1</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'eleven'</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'twelve'</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'thirteen'</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'fourteen'</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'fifteen'</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'sixteen'</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'seventeen'</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'eighteen'</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'nineteen'</span><span class="p">)</span>
 		
-	if d2 == 1 and d1 == 0:
-		ans.append('ten')
+	<span class="k">if</span> <span class="n">d2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'ten'</span><span class="p">)</span>
 	
-	if d2 != 1 and d1 != 0:
-		if d1 == 1:
-			ans.append('one')
-		elif d1 == 2:
-			ans.append('two')
-		elif d1 == 3:
-			ans.append('three')
-		elif d1 == 4:
-			ans.append('four')
-		elif d1 == 5:
-			ans.append('five')
-		elif d1 == 6:
-			ans.append('six')
-		elif d1 == 7:
-			ans.append('seven')
-		elif d1 == 8:
-			ans.append('eight')
-		elif d1 == 9:
-			ans.append('nine')
+	<span class="k">if</span> <span class="n">d2</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">d1</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'one'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'two'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'three'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'four'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'five'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'six'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'seven'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'eight'</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">d1</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'nine'</span><span class="p">)</span>
 	
-	return ans
+	<span class="k">return</span> <span class="n">ans</span>
 
 
-total = 0	
-for n in range(1, 1001):
-	for w in letters(n):
-		total += len(w)
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>	
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
 
-print total
-</code></pre>
+<span class="k">print</span> <span class="n">total</span>
+</code></pre></div></div>
 
 </div>
 

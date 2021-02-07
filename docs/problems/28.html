@@ -85,18 +85,18 @@ super excited about it.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">bound = 1001
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bound</span> <span class="o">=</span> <span class="mi">1001</span>
 
-diagonals = [1]
-for r in range(1, ((bound-1)/2)+1):
-	adder =  2 * r
-	for c in range(1, 5):
-		next = max(diagonals) + adder
-		diagonals.append(next)
-		if next == (bound**2): break; break
+<span class="n">diagonals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">((</span><span class="n">bound</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="n">adder</span> <span class="o">=</span>  <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span>
+	<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+		<span class="nb">next</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diagonals</span><span class="p">)</span> <span class="o">+</span> <span class="n">adder</span>
+		<span class="n">diagonals</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nb">next</span> <span class="o">==</span> <span class="p">(</span><span class="n">bound</span><span class="o">**</span><span class="mi">2</span><span class="p">):</span> <span class="k">break</span><span class="p">;</span> <span class="k">break</span>
 		
-print sum(diagonals)
-</code></pre>
+<span class="k">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">diagonals</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

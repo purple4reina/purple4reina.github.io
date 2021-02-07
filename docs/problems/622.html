@@ -91,14 +91,14 @@ not one you can brute force your way to. So I tried something else.</p>
 <p>Stage two: reversing modulo. I had figured out that the algorithm had to do
 with modulus math. Instead of brute forcing, I needed to find a way to devise
 the answers. This meant reversing the modulo function. In other words, given
-<code>a mod b = c</code> we know that the answers are going to be in the form
-<code>a = n*b + c</code> where n is an integer. This solves for a, but I wanted to solve
-for b which ends up being <code>b = (a - c) / n</code>. I used this formua for a while and
+<code class="language-plaintext highlighter-rouge">a mod b = c</code> we know that the answers are going to be in the form
+<code class="language-plaintext highlighter-rouge">a = n*b + c</code> where n is an integer. This solves for a, but I wanted to solve
+for b which ends up being <code class="language-plaintext highlighter-rouge">b = (a - c) / n</code>. I used this formua for a while and
 still found it to be incredibly slow.</p>
 
-<p>Stage three: divisors of <code>(a - c)</code>. I looked closer and realized that if n does
-not divide <code>(a - c)</code> evenly, then there is no point in trying it. Therefore, I
-tried creating a slice of all integers that divide <code>(a - c)</code> evenly and only
+<p>Stage three: divisors of <code class="language-plaintext highlighter-rouge">(a - c)</code>. I looked closer and realized that if n does
+not divide <code class="language-plaintext highlighter-rouge">(a - c)</code> evenly, then there is no point in trying it. Therefore, I
+tried creating a slice of all integers that divide <code class="language-plaintext highlighter-rouge">(a - c)</code> evenly and only
 trying those. I was worried that creating this divisor slice would take an
 insane amount of time. But it didn’t! And eventually I was lead to the answer
 in just 19 seconds of program time. Pretty awesome!</p>
@@ -107,167 +107,167 @@ in just 19 seconds of program time. Pretty awesome!</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-go">package main
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
 
-import (
-	"fmt"
-	"math"
-)
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"fmt"</span>
+	<span class="s">"math"</span>
+<span class="p">)</span>
 
-// nextLocation gives the next location of a given card location.
-func nextLocation(currentLocation, deckSize int) int {
-	return (currentLocation * 2) % (deckSize - 1)
-}
+<span class="c">// nextLocation gives the next location of a given card location.</span>
+<span class="k">func</span> <span class="n">nextLocation</span><span class="p">(</span><span class="n">currentLocation</span><span class="p">,</span> <span class="n">deckSize</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">currentLocation</span> <span class="o">*</span> <span class="m">2</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">deckSize</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
+<span class="p">}</span>
 
-var (
-	overageErr = fmt.Errorf("passed goal shuffle count")
-	oddErr     = fmt.Errorf("deck size should not be odd")
-)
+<span class="k">var</span> <span class="p">(</span>
+	<span class="n">overageErr</span> <span class="o">=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"passed goal shuffle count"</span><span class="p">)</span>
+	<span class="n">oddErr</span>     <span class="o">=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"deck size should not be odd"</span><span class="p">)</span>
+<span class="p">)</span>
 
-// shufflesNeeded returns the total shuffles need to return a deck of size
-// deckSize back to its original configuration.
-func shufflesNeeded(deckSize, goal int) (int, error) {
-	if deckSize%2 != 0 {
-		return 0, oddErr
-	}
-	currentLocation := 1
-	shuffles := 0
-	for {
-		shuffles++
-		currentLocation = nextLocation(currentLocation, deckSize)
-		if currentLocation == 1 {
-			return shuffles, nil
-		}
-		if currentLocation == deckSize-2 {
-			return shuffles * 2, nil
-		}
-		if shuffles &gt; goal {
-			return 0, overageErr
-		}
-	}
-}
+<span class="c">// shufflesNeeded returns the total shuffles need to return a deck of size</span>
+<span class="c">// deckSize back to its original configuration.</span>
+<span class="k">func</span> <span class="n">shufflesNeeded</span><span class="p">(</span><span class="n">deckSize</span><span class="p">,</span> <span class="n">goal</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="n">deckSize</span><span class="o">%</span><span class="m">2</span> <span class="o">!=</span> <span class="m">0</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="m">0</span><span class="p">,</span> <span class="n">oddErr</span>
+	<span class="p">}</span>
+	<span class="n">currentLocation</span> <span class="o">:=</span> <span class="m">1</span>
+	<span class="n">shuffles</span> <span class="o">:=</span> <span class="m">0</span>
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="n">shuffles</span><span class="o">++</span>
+		<span class="n">currentLocation</span> <span class="o">=</span> <span class="n">nextLocation</span><span class="p">(</span><span class="n">currentLocation</span><span class="p">,</span> <span class="n">deckSize</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">currentLocation</span> <span class="o">==</span> <span class="m">1</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="n">shuffles</span><span class="p">,</span> <span class="no">nil</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="n">currentLocation</span> <span class="o">==</span> <span class="n">deckSize</span><span class="o">-</span><span class="m">2</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="n">shuffles</span> <span class="o">*</span> <span class="m">2</span><span class="p">,</span> <span class="no">nil</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="n">shuffles</span> <span class="o">&gt;</span> <span class="n">goal</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="m">0</span><span class="p">,</span> <span class="n">overageErr</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-// getDivisors returns a slice of the divisors of num.
-func getDivisors(num int) []int {
-	halfWay := int(math.Sqrt(float64(num))) + 1
-	d := []int{1, num}
-	for i := 2; i &lt; halfWay; i++ {
-		if num%i == 0 {
-			d = append(d, i)
-			if div := num / i; div != i {
-				d = append(d, div)
-			}
-		}
-	}
-	return d
-}
+<span class="c">// getDivisors returns a slice of the divisors of num.</span>
+<span class="k">func</span> <span class="n">getDivisors</span><span class="p">(</span><span class="n">num</span> <span class="kt">int</span><span class="p">)</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span>
+	<span class="n">halfWay</span> <span class="o">:=</span> <span class="kt">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="kt">float64</span><span class="p">(</span><span class="n">num</span><span class="p">)))</span> <span class="o">+</span> <span class="m">1</span>
+	<span class="n">d</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="n">num</span><span class="p">}</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">halfWay</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">num</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
+			<span class="n">d</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">div</span> <span class="o">:=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">i</span><span class="p">;</span> <span class="n">div</span> <span class="o">!=</span> <span class="n">i</span> <span class="p">{</span>
+				<span class="n">d</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">div</span><span class="p">)</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">d</span>
+<span class="p">}</span>
 
-// sumShufflesNeeded returns the total of all deck sizes that are possible to
-// shuffler perfectly in goal times.
-func sumShufflesNeeded(goal int) int {
-	max := int(math.Pow(2, float64(goal))) - 1
-	var totalDeckSizes int
-	for _, n := range getDivisors(max) {
-		i := (max / n) + 1
-		if shuffles, _ := shufflesNeeded(i, goal); shuffles == goal {
-			totalDeckSizes += i
-		}
-	}
-	return totalDeckSizes
-}
+<span class="c">// sumShufflesNeeded returns the total of all deck sizes that are possible to</span>
+<span class="c">// shuffler perfectly in goal times.</span>
+<span class="k">func</span> <span class="n">sumShufflesNeeded</span><span class="p">(</span><span class="n">goal</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="n">max</span> <span class="o">:=</span> <span class="kt">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">Pow</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="kt">float64</span><span class="p">(</span><span class="n">goal</span><span class="p">)))</span> <span class="o">-</span> <span class="m">1</span>
+	<span class="k">var</span> <span class="n">totalDeckSizes</span> <span class="kt">int</span>
+	<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">getDivisors</span><span class="p">(</span><span class="n">max</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">i</span> <span class="o">:=</span> <span class="p">(</span><span class="n">max</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span>
+		<span class="k">if</span> <span class="n">shuffles</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">shufflesNeeded</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">goal</span><span class="p">);</span> <span class="n">shuffles</span> <span class="o">==</span> <span class="n">goal</span> <span class="p">{</span>
+			<span class="n">totalDeckSizes</span> <span class="o">+=</span> <span class="n">i</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">totalDeckSizes</span>
+<span class="p">}</span>
 
-func main() {
-	result := sumShufflesNeeded(60)
-	fmt.Println(result)
-}
-</code></pre>
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">result</span> <span class="o">:=</span> <span class="n">sumShufflesNeeded</span><span class="p">(</span><span class="m">60</span><span class="p">)</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="tests-and-benchmarks">Tests and Benchmarks</h2>
 
-<pre><code class="language-go">package main
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
 
-import "testing"
+<span class="k">import</span> <span class="s">"testing"</span>
 
-func TestShufflesNeeded(t *testing.T) {
-	testcases := []struct {
-		deckSize    int
-		maxShuffles int
-		expected    int
-	}{
-		{deckSize: 52, maxShuffles: 100, expected: 8},
-		{deckSize: 52, maxShuffles: 8, expected: 8},
-		{deckSize: 86, maxShuffles: 100, expected: 8},
-		{deckSize: 6, maxShuffles: 100, expected: 4},
-		{deckSize: 8, maxShuffles: 100, expected: 3},
-		{deckSize: 10, maxShuffles: 100, expected: 6},
-		{deckSize: 12, maxShuffles: 100, expected: 10},
-		{deckSize: 4, maxShuffles: 100, expected: 2},
-		{deckSize: 12, maxShuffles: 2, expected: 0},
-	}
+<span class="k">func</span> <span class="n">TestShufflesNeeded</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">testcases</span> <span class="o">:=</span> <span class="p">[]</span><span class="k">struct</span> <span class="p">{</span>
+		<span class="n">deckSize</span>    <span class="kt">int</span>
+		<span class="n">maxShuffles</span> <span class="kt">int</span>
+		<span class="n">expected</span>    <span class="kt">int</span>
+	<span class="p">}{</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">52</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">100</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">8</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">52</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">8</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">8</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">86</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">100</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">8</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">6</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">100</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">4</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">8</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">100</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">3</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">10</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">100</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">6</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">12</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">100</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">10</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">4</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">100</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">2</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">deckSize</span><span class="o">:</span> <span class="m">12</span><span class="p">,</span> <span class="n">maxShuffles</span><span class="o">:</span> <span class="m">2</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">0</span><span class="p">},</span>
+	<span class="p">}</span>
 
-	for _, test := range testcases {
-		if actual, _ := shufflesNeeded(test.deckSize, test.maxShuffles); actual != test.expected {
-			t.Errorf("incorrect shufflesNeeded for deck size %d: actual=%d expected=%d",
-				test.deckSize, actual, test.expected)
-		}
-	}
-}
+	<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">test</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">testcases</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">actual</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">shufflesNeeded</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">deckSize</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">maxShuffles</span><span class="p">);</span> <span class="n">actual</span> <span class="o">!=</span> <span class="n">test</span><span class="o">.</span><span class="n">expected</span> <span class="p">{</span>
+			<span class="n">t</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"incorrect shufflesNeeded for deck size %d: actual=%d expected=%d"</span><span class="p">,</span>
+				<span class="n">test</span><span class="o">.</span><span class="n">deckSize</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">expected</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-func TestSumShufflesNeeded(t *testing.T) {
-	testcases := []struct {
-		goal     int
-		expected int
-	}{
-		{goal: 3, expected: 8},
-		{goal: 4, expected: 22},
-		{goal: 5, expected: 32},
-		{goal: 6, expected: 96},
-		{goal: 7, expected: 128},
-		{goal: 8, expected: 412},
-		{goal: 9, expected: 586},
-		{goal: 10, expected: 1506},
-		{goal: 11, expected: 2162},
-		{goal: 12, expected: 8628},
-		{goal: 13, expected: 8192},
-		{goal: 14, expected: 22402},
-		{goal: 15, expected: 38878},
-		{goal: 16, expected: 111032},
-		{goal: 17, expected: 131072},
-		{goal: 18, expected: 472936},
-		{goal: 19, expected: 524288},
-		{goal: 20, expected: 1998354},
-		{goal: 21, expected: 2465922},
-		{goal: 22, expected: 5907608},
-		{goal: 23, expected: 8567138},
-		{goal: 24, expected: 38044940},
-		{goal: 25, expected: 34713702},
-		{goal: 26, expected: 89513986},
-		{goal: 27, expected: 155492948},
-		{goal: 28, expected: 462252066},
-	}
+<span class="k">func</span> <span class="n">TestSumShufflesNeeded</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">testcases</span> <span class="o">:=</span> <span class="p">[]</span><span class="k">struct</span> <span class="p">{</span>
+		<span class="n">goal</span>     <span class="kt">int</span>
+		<span class="n">expected</span> <span class="kt">int</span>
+	<span class="p">}{</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">3</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">8</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">4</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">22</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">5</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">32</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">6</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">96</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">7</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">128</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">8</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">412</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">9</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">586</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">10</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">1506</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">11</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">2162</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">12</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">8628</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">13</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">8192</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">14</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">22402</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">15</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">38878</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">16</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">111032</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">17</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">131072</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">18</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">472936</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">19</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">524288</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">20</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">1998354</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">21</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">2465922</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">22</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">5907608</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">23</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">8567138</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">24</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">38044940</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">25</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">34713702</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">26</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">89513986</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">27</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">155492948</span><span class="p">},</span>
+		<span class="p">{</span><span class="n">goal</span><span class="o">:</span> <span class="m">28</span><span class="p">,</span> <span class="n">expected</span><span class="o">:</span> <span class="m">462252066</span><span class="p">},</span>
+	<span class="p">}</span>
 
-	for _, test := range testcases {
-		if actual := sumShufflesNeeded(test.goal); actual != test.expected {
-			t.Errorf("incorrect sumShufflesNeeded for goal %d: actual=%d expected=%d",
-				test.goal, actual, test.expected)
-		}
-	}
-}
+	<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">test</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">testcases</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">actual</span> <span class="o">:=</span> <span class="n">sumShufflesNeeded</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">goal</span><span class="p">);</span> <span class="n">actual</span> <span class="o">!=</span> <span class="n">test</span><span class="o">.</span><span class="n">expected</span> <span class="p">{</span>
+			<span class="n">t</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"incorrect sumShufflesNeeded for goal %d: actual=%d expected=%d"</span><span class="p">,</span>
+				<span class="n">test</span><span class="o">.</span><span class="n">goal</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">expected</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-func BenchmarkShufflesNeeded(b *testing.B) {
-	b.ReportAllocs()
-	for n := 0; n &lt; b.N; n++ {
-		shufflesNeeded(52, 8)
-	}
-}
+<span class="k">func</span> <span class="n">BenchmarkShufflesNeeded</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">B</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">b</span><span class="o">.</span><span class="n">ReportAllocs</span><span class="p">()</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">N</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span> <span class="p">{</span>
+		<span class="n">shufflesNeeded</span><span class="p">(</span><span class="m">52</span><span class="p">,</span> <span class="m">8</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-func BenchmarkSumShufflesNeeded(b *testing.B) {
-	b.ReportAllocs()
-	for n := 0; n &lt; b.N; n++ {
-		sumShufflesNeeded(8)
-	}
-}
-</code></pre>
+<span class="k">func</span> <span class="n">BenchmarkSumShufflesNeeded</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">B</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">b</span><span class="o">.</span><span class="n">ReportAllocs</span><span class="p">()</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">N</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span> <span class="p">{</span>
+		<span class="n">sumShufflesNeeded</span><span class="p">(</span><span class="m">8</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 </div>
 

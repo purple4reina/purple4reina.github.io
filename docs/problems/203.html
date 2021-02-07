@@ -80,56 +80,56 @@ script. I wrote the nCk function, though I bet Python already has it.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from math import factorial
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
 
-def isprime(n):
-	if n == 2:
-		return True
-	elif n &lt; 2 or n%2 == 0:
-		return False
-	else:
-		for i in range(3, int(n**0.5 + 1), 2):
-			if n%i == 0: return False
-		return True
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
+	<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+		<span class="k">return</span> <span class="bp">True</span>
 
-def nextprime(p):
-	if p == 2:
-		return 3
-	else:
-		while True:
-			p += 2
-			if isprime(p) == True:
-				return p
+<span class="k">def</span> <span class="nf">nextprime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">3</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span>
+			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="k">return</span> <span class="n">p</span>
 
-def squarefree(n):
-	p = 2
-	while n &gt; 1:
-		i = 1
-	 	while n%(p**i) == 0:
-			i += 1
-		if i == 2:
-			n /= p**(i-1)
-		elif i &gt; 2:
-			return False
-		p = nextprime(p)
-	return True
+<span class="k">def</span> <span class="nf">squarefree</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span>
+	<span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+	 	<span class="k">while</span> <span class="n">n</span><span class="o">%</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+			<span class="n">n</span> <span class="o">/=</span> <span class="n">p</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">False</span>
+		<span class="n">p</span> <span class="o">=</span> <span class="n">nextprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def C(n, k):
-	return (factorial(n)/(factorial(k)*factorial(n-k)))
+<span class="k">def</span> <span class="nf">C</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)))</span>
 
 
-total = 0
-tested = set()
-for n in xrange(51):
-	for k in xrange(n+1):
-		this = C(n, k)
-		if this not in tested:
-			tested.add(this)
-			if squarefree(this) == True:
-				total += this
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tested</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">51</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="n">this</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">this</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tested</span><span class="p">:</span>
+			<span class="n">tested</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">squarefree</span><span class="p">(</span><span class="n">this</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="n">total</span> <span class="o">+=</span> <span class="n">this</span>
 
-print total
-</code></pre>
+<span class="k">print</span> <span class="n">total</span>
+</code></pre></div></div>
 
 </div>
 

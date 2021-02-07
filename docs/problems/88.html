@@ -90,32 +90,32 @@ runs in about 8 minutes on python3.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def solve(n):
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 
-    def partition(start, end, summ, prod, count):
-        k = start
-        while k &gt; end:
-            s, p = summ + k, prod * k
-            if s == p and count &gt; 1:
-                if s &lt; minimals[count]:
-                    minimals[count] = s
-            elif count &lt; n and s &gt;= p:
-                st = start
-                if p &gt; 1:
-                    st = s // (p - 1)
-                partition(st, k - 1, s, p, count + 1)
-            k -= 1
+    <span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">summ</span><span class="p">,</span> <span class="n">prod</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="k">while</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span>
+            <span class="n">s</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">summ</span> <span class="o">+</span> <span class="n">k</span><span class="p">,</span> <span class="n">prod</span> <span class="o">*</span> <span class="n">k</span>
+            <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">minimals</span><span class="p">[</span><span class="n">count</span><span class="p">]:</span>
+                    <span class="n">minimals</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
+            <span class="k">elif</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">:</span>
+                <span class="n">st</span> <span class="o">=</span> <span class="n">start</span>
+                <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">st</span> <span class="o">=</span> <span class="n">s</span> <span class="o">//</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">partition</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
 
-    minimals = {i: float('inf') for i in range(2, n+1)}
-    partition(n, 0, 0, 1, 1)
-    return sum(set(minimals.values()))
+    <span class="n">minimals</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span>
+    <span class="n">partition</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">minimals</span><span class="p">.</span><span class="n">values</span><span class="p">()))</span>
 
-if __name__ == '__main__':
-    import sys
-    n = int(sys.argv[1])
-    sys.setrecursionlimit(n * 2)
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">sys</span><span class="p">.</span><span class="n">setrecursionlimit</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 </div>
 

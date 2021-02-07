@@ -84,19 +84,19 @@ the n less than or equal to 100.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from math import factorial
-def nCk(n, k):
-	return (factorial(n))/(factorial(k)*factorial(n-k))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+<span class="k">def</span> <span class="nf">nCk</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span>
 
-sum = 0
-for n in range(1, 101):
-	for k in range(1, n+1):
-		if nCk(n, k) &gt;= 10**6:
-			print n, k, nCk(n, k)
-			sum += 1
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">nCk</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+			<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">nCk</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+			<span class="nb">sum</span> <span class="o">+=</span> <span class="mi">1</span>
 			
-print sum
-</code></pre>
+<span class="k">print</span> <span class="nb">sum</span>
+</code></pre></div></div>
 
 </div>
 

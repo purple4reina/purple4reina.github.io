@@ -86,35 +86,35 @@ This script ran in under 4 seconds.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def isprime(n):
-	if n == 0 or n == 1: return False
-	for i in range(2, int(n**0.5 + 1)):
-		if n%i == 0: return False
-	return True
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-primes = []
-n = 1
-while n**2 &lt; 5*10**7:
-	n += 1
-	if isprime(n) == True:
-		primes.append(n)
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">:</span>
+	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-belowset = set()
-for square in primes:
-	if square**2 &gt; 5*10**7:
-		break
-	for cube in primes:
-		if cube**3 &gt; 5*10**7:
-			break
-		for tesseract in primes:
-			if tesseract**4 &gt; 5*10**7:
-				break
-			below = square**2 + cube**3 + tesseract**4
-			if below &lt; 5*10**7:
-				belowset |= {below}
+<span class="n">belowset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">square</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">square</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">:</span>
+		<span class="k">break</span>
+	<span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">cube</span><span class="o">**</span><span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">:</span>
+			<span class="k">break</span>
+		<span class="k">for</span> <span class="n">tesseract</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">tesseract</span><span class="o">**</span><span class="mi">4</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">:</span>
+				<span class="k">break</span>
+			<span class="n">below</span> <span class="o">=</span> <span class="n">square</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cube</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">tesseract</span><span class="o">**</span><span class="mi">4</span>
+			<span class="k">if</span> <span class="n">below</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">:</span>
+				<span class="n">belowset</span> <span class="o">|=</span> <span class="p">{</span><span class="n">below</span><span class="p">}</span>
 				
-print len(belowset)
-</code></pre>
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">belowset</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

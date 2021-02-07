@@ -79,22 +79,22 @@
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import re
-def num2str(n):
-	return re.split('_', re.sub('\B', '_', str(n)))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'\B'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
 
-import decimal
-decimal.getcontext().prec = 200
+<span class="kn">import</span> <span class="nn">decimal</span>
+<span class="n">decimal</span><span class="p">.</span><span class="n">getcontext</span><span class="p">().</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">200</span>
 
-biggest = 0
-for a in range(1, 100):
-	for b in range(1, 100):
-		ab = map(int, num2str(pow(decimal.Decimal(a), decimal.Decimal(b))))
-		ab = sum(ab)
-		if ab &gt; biggest: biggest = ab
+<span class="n">biggest</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+		<span class="n">ab</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">num2str</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">b</span><span class="p">))))</span>
+		<span class="n">ab</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ab</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">ab</span> <span class="o">&gt;</span> <span class="n">biggest</span><span class="p">:</span> <span class="n">biggest</span> <span class="o">=</span> <span class="n">ab</span>
 
-print biggest
-</code></pre>
+<span class="k">print</span> <span class="n">biggest</span>
+</code></pre></div></div>
 
 </div>
 

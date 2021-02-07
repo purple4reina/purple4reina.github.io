@@ -85,27 +85,27 @@ that will have to do for now :)</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def isprime(n):
-	if n == 1: return False
-	for i in range(2, int(n**.5 + 1)):
-		if n%i == 0: return False
-	return True
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-a = False
-s = 3
-total = 0
+<span class="n">a</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">s</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 
-while a == False:
-	for x in range(4):
-		n = (s-2)**2 + (x+1)*s - (x+1)
-		if isprime(n) == True:
-			total += 1
-	if float(100 * total / (2*(s-1) + 1)) &lt; 10:
-		print s
-		a = True
-	else:
-		s += 2
-</code></pre>
+<span class="k">while</span> <span class="n">a</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+		<span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">s</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">total</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+		<span class="k">print</span> <span class="n">s</span>
+		<span class="n">a</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">s</span> <span class="o">+=</span> <span class="mi">2</span>
+</code></pre></div></div>
 
 </div>
 

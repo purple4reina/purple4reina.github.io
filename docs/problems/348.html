@@ -88,41 +88,41 @@ seconds using Pypy3.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def palendromes():
-    pow0, pow1 = 1, 10
-    while True:
-        for n in range(pow0, pow1):
-            strn = str(n)
-            yield int(strn + strn[-2::-1])
-        for n in range(pow0, pow1):
-            strn = str(n)
-            yield int(strn + strn[::-1])
-        pow0, pow1 = pow1, pow1 * 10
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">palendromes</span><span class="p">():</span>
+    <span class="n">pow0</span><span class="p">,</span> <span class="n">pow1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pow0</span><span class="p">,</span> <span class="n">pow1</span><span class="p">):</span>
+            <span class="n">strn</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="nb">int</span><span class="p">(</span><span class="n">strn</span> <span class="o">+</span> <span class="n">strn</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pow0</span><span class="p">,</span> <span class="n">pow1</span><span class="p">):</span>
+            <span class="n">strn</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="nb">int</span><span class="p">(</span><span class="n">strn</span> <span class="o">+</span> <span class="n">strn</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">pow0</span><span class="p">,</span> <span class="n">pow1</span> <span class="o">=</span> <span class="n">pow1</span><span class="p">,</span> <span class="n">pow1</span> <span class="o">*</span> <span class="mi">10</span>
 
-def is_square(n):
-    return int(n ** 0.5) ** 2 == n
+<span class="k">def</span> <span class="nf">is_square</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">==</span> <span class="n">n</span>
 
-def solve(n):
-    squ_cubes = []
-    for p in palendromes():
-        found = 0
-        for cube in range(1, int(p ** (1/3)) + 1):
-            remain = p - cube ** 3
-            if is_square(remain):
-                found += 1
-                if found &gt; 4:
-                    break
-        if found == 4:
-            squ_cubes.append(p)
-            if len(squ_cubes) == n:
-                break
-    return sum(squ_cubes)
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">squ_cubes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">palendromes</span><span class="p">():</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">cube</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">remain</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">cube</span> <span class="o">**</span> <span class="mi">3</span>
+            <span class="k">if</span> <span class="n">is_square</span><span class="p">(</span><span class="n">remain</span><span class="p">):</span>
+                <span class="n">found</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">found</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="k">if</span> <span class="n">found</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">squ_cubes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">squ_cubes</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">squ_cubes</span><span class="p">)</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 </div>
 

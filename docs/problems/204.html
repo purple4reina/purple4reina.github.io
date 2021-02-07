@@ -87,36 +87,36 @@ criteria. However, it took over 2 hours for this to run.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def isprime(n):
-	if n == 2:
-		return True
-	elif n &lt; 2 or n%2 == 0:
-		return False
-	else:
-		for i in range(3, int(n**0.5 + 1), 2):
-			if n%i == 0: return False
-		return True
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
+	<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+		<span class="k">return</span> <span class="bp">True</span>
 
-def prime_list(low, high):
-	primes = []
-	for n in xrange(low, high):
-		if isprime(n) == True:
-			primes.append(n)
-	return primes
+<span class="k">def</span> <span class="nf">prime_list</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">primes</span>
 
-primes = prime_list(2, 100)
+<span class="n">primes</span> <span class="o">=</span> <span class="n">prime_list</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-count = 0
-for n in xrange(1, 10**9+1):
-	if n%10**5 == 0: print n, count
-	for p in primes:
-		while n%p == 0:
-			n /= p
-	if n == 1:
-		count += 1
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">count</span>
+	<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+		<span class="k">while</span> <span class="n">n</span><span class="o">%</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">n</span> <span class="o">/=</span> <span class="n">p</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

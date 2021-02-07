@@ -92,38 +92,38 @@ empty, the final value was found.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">small = 10**8
-empty = nothing()
-visite = []
-for start in range(80):	
-	visite.append([start, 0])
-	empty[start][0] = matrix[start][0]
-while len(visite) != 0:
-	v = visite[0]
-	if v[0] != 79:
-		visite.append([v[0]+1, v[1]])
-		if empty[v[0]][v[1]] + matrix[v[0]+1][v[1]] &lt; empty[v[0]+1][v[1]]:
-			empty[v[0]+1][v[1]] = empty[v[0]][v[1]] + matrix[v[0]+1][v[1]]
-		else:
-			visite.pop()
-	if v[0] != 0:
-		visite.append([v[0]-1, v[1]])
-		if empty[v[0]][v[1]] + matrix[v[0]-1][v[1]] &lt; empty[v[0]-1][v[1]]:
-			empty[v[0]-1][v[1]] = empty[v[0]][v[1]] + matrix[v[0]-1][v[1]]
-		else:
-			visite.pop()
-	if v[1] != 79:
-		visite.append([v[0], v[1]+1])
-		if empty[v[0]][v[1]] + matrix[v[0]][v[1]+1] &lt; empty[v[0]][v[1]+1]:
-			empty[v[0]][v[1]+1] = empty[v[0]][v[1]] + matrix[v[0]][v[1]+1]
-		else:
-			visite.pop()
-	del visite[0]
-	for e in empty:
-		if e[-1] &lt; small:
-			small = e[-1]
-print small
-</code></pre>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">small</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">8</span>
+<span class="n">empty</span> <span class="o">=</span> <span class="n">nothing</span><span class="p">()</span>
+<span class="n">visite</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">80</span><span class="p">):</span>	
+	<span class="n">visite</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">start</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+	<span class="n">empty</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">visite</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+	<span class="n">v</span> <span class="o">=</span> <span class="n">visite</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">79</span><span class="p">:</span>
+		<span class="n">visite</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+		<span class="k">if</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]:</span>
+			<span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">visite</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="n">visite</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+		<span class="k">if</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]:</span>
+			<span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">visite</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">79</span><span class="p">:</span>
+		<span class="n">visite</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+		<span class="k">if</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+			<span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">empty</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">matrix</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">visite</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+	<span class="k">del</span> <span class="n">visite</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">empty</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">small</span><span class="p">:</span>
+			<span class="n">small</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">small</span>
+</code></pre></div></div>
 
 </div>
 

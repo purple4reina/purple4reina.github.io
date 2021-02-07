@@ -97,77 +97,77 @@ the average.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from random import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="o">*</span>
 
-class Envelope:
+<span class="k">class</span> <span class="nc">Envelope</span><span class="p">:</span>
 
-    def __init__(self):
-        self.contents = ['A1']
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">contents</span> <span class="o">=</span> <span class="p">[</span><span class="s">'A1'</span><span class="p">]</span>
 
-    def grab(self):
-        if len(self.contents) == 0:
-            raise IndexError('contents empty')
-        return self.contents.pop(randrange(len(self.contents)))
+    <span class="k">def</span> <span class="nf">grab</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">contents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">IndexError</span><span class="p">(</span><span class="s">'contents empty'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">contents</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">contents</span><span class="p">)))</span>
 
-    def replace(self, items): # items must be list
-        try:
-            self.contents += items
-        except:
-            pass
+    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span> <span class="c1"># items must be list
+</span>        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">contents</span> <span class="o">+=</span> <span class="n">items</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
 
-    def size(self):
-        return len(self.contents)
-
-
-
-class Paper: # takes the size of paper and cuts it till it contains 2 size A5, returns list of the cut sizes
-
-    def __init__(self, sheetSize):
-        if sheetSize not in ['A1', 'A2', 'A3', 'A4', 'A5'] or sheetSize == None:
-            raise ValueError('not correct size type or None type')
-        else:
-            self.sheetSize = sheetSize
-
-    def cut(self):
-        if self.sheetSize == 'A1':
-            return ['A2', 'A3', 'A4', 'A5', 'A5']
-        elif self.sheetSize == 'A2':
-            return ['A3', 'A4', 'A5', 'A5']
-        elif self.sheetSize == 'A3':
-            return ['A4', 'A5', 'A5']
-        elif self.sheetSize == 'A4':
-            return ['A5', 'A5']
-        elif self.sheetSize == 'A5':
-            return ['A5']
-        else:
-            raise ValueError('not correct size type or None type')
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">contents</span><span class="p">)</span>
 
 
 
-totalWeeks = float(0)
-totalOneSheets = float(0)
-runningAverage = float(0)
+<span class="k">class</span> <span class="nc">Paper</span><span class="p">:</span> <span class="c1"># takes the size of paper and cuts it till it contains 2 size A5, returns list of the cut sizes
+</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sheetSize</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sheetSize</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'A1'</span><span class="p">,</span> <span class="s">'A2'</span><span class="p">,</span> <span class="s">'A3'</span><span class="p">,</span> <span class="s">'A4'</span><span class="p">,</span> <span class="s">'A5'</span><span class="p">]</span> <span class="ow">or</span> <span class="n">sheetSize</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">'not correct size type or None type'</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">sheetSize</span> <span class="o">=</span> <span class="n">sheetSize</span>
 
-while True:
+    <span class="k">def</span> <span class="nf">cut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">sheetSize</span> <span class="o">==</span> <span class="s">'A1'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s">'A2'</span><span class="p">,</span> <span class="s">'A3'</span><span class="p">,</span> <span class="s">'A4'</span><span class="p">,</span> <span class="s">'A5'</span><span class="p">,</span> <span class="s">'A5'</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">sheetSize</span> <span class="o">==</span> <span class="s">'A2'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s">'A3'</span><span class="p">,</span> <span class="s">'A4'</span><span class="p">,</span> <span class="s">'A5'</span><span class="p">,</span> <span class="s">'A5'</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">sheetSize</span> <span class="o">==</span> <span class="s">'A3'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s">'A4'</span><span class="p">,</span> <span class="s">'A5'</span><span class="p">,</span> <span class="s">'A5'</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">sheetSize</span> <span class="o">==</span> <span class="s">'A4'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s">'A5'</span><span class="p">,</span> <span class="s">'A5'</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">sheetSize</span> <span class="o">==</span> <span class="s">'A5'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s">'A5'</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">'not correct size type or None type'</span><span class="p">)</span>
 
-totalWeeks += 1
 
-thisWeek = Envelope()
-oneSheet = 0
-for i in xrange(16):
-    if thisWeek.size() == 1:
-        oneSheet += 1
-    randomSheet = Paper(thisWeek.grab())
-    cutSheet = randomSheet.cut()
-    cutSheet.remove(cutSheet[-1])
-    thisWeek.replace(cutSheet)
 
-totalOneSheets += oneSheet
-runningAverage = float( totalOneSheets / totalWeeks )
+<span class="n">totalWeeks</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">totalOneSheets</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">runningAverage</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-if totalWeeks % 10**4 == 0:
-    print int(totalWeeks), int(totalOneSheets), runningAverage
-</code></pre>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+
+<span class="n">totalWeeks</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">thisWeek</span> <span class="o">=</span> <span class="n">Envelope</span><span class="p">()</span>
+<span class="n">oneSheet</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">thisWeek</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">oneSheet</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">randomSheet</span> <span class="o">=</span> <span class="n">Paper</span><span class="p">(</span><span class="n">thisWeek</span><span class="p">.</span><span class="n">grab</span><span class="p">())</span>
+    <span class="n">cutSheet</span> <span class="o">=</span> <span class="n">randomSheet</span><span class="p">.</span><span class="n">cut</span><span class="p">()</span>
+    <span class="n">cutSheet</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">cutSheet</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">thisWeek</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">cutSheet</span><span class="p">)</span>
+
+<span class="n">totalOneSheets</span> <span class="o">+=</span> <span class="n">oneSheet</span>
+<span class="n">runningAverage</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span> <span class="n">totalOneSheets</span> <span class="o">/</span> <span class="n">totalWeeks</span> <span class="p">)</span>
+
+<span class="k">if</span> <span class="n">totalWeeks</span> <span class="o">%</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">print</span> <span class="nb">int</span><span class="p">(</span><span class="n">totalWeeks</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">totalOneSheets</span><span class="p">),</span> <span class="n">runningAverage</span>
+</code></pre></div></div>
 
 </div>
 

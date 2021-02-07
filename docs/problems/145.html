@@ -82,41 +82,41 @@ the answer waiting when I got back.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from time import time
-start = time(); end = time()
-bound = 10**9
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">();</span> <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">bound</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
 
-def rev(n):
-	n = str(n)
-	if n[-1] == '0':
-		return None
-	ans = []
-	for i in range(len(n)):
-		ans.append(n[-1-i])
-	return int(''.join(map(str, ans)))
+<span class="k">def</span> <span class="nf">rev</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">None</span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+		<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">])</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">ans</span><span class="p">)))</span>
 
-odds = ['1','3','5','7','9']
-def isodd(n):
-	global odds
-	for d in str(n):
-		if d not in odds:
-			return False
-	return True
+<span class="n">odds</span> <span class="o">=</span> <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'3'</span><span class="p">,</span><span class="s">'5'</span><span class="p">,</span><span class="s">'7'</span><span class="p">,</span><span class="s">'9'</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">isodd</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">global</span> <span class="n">odds</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">odds</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
 
-count = 0
-for n in xrange(bound):
-	if n%10**6 == 0: 
-		end, start = time() - start, time()	
-		print n/10**6, end
-	reverse = rev(n)
-	if reverse == None:
-		continue
-	elif isodd(n + reverse) == True:
-		count += 1
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+		<span class="n">end</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">time</span><span class="p">()</span>	
+		<span class="k">print</span> <span class="n">n</span><span class="o">/</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="n">end</span>
+	<span class="n">reverse</span> <span class="o">=</span> <span class="n">rev</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">reverse</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+		<span class="k">continue</span>
+	<span class="k">elif</span> <span class="n">isodd</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">reverse</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

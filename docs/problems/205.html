@@ -93,35 +93,35 @@ him as the B’s.</li>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-PeterDict = dict(zip(range(37), [0]*37))
-ColinDict = dict(zip(range(37), [0]*37))
-for game in product(range(1,5), range(1,5), range(1,5), range(1,5), range(1,5), range(1,5), range(1,5), range(1,5), range(1,5)):
-	PeterDict[sum(game)] += 1
+<span class="n">PeterDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">37</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">37</span><span class="p">))</span>
+<span class="n">ColinDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">37</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">37</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">game</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)):</span>
+	<span class="n">PeterDict</span><span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">game</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-for game in product(range(1,7), range(1,7), range(1,7), range(1,7), range(1,7), range(1,7)):
-	ColinDict[sum(game)] += 1
+<span class="k">for</span> <span class="n">game</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)):</span>
+	<span class="n">ColinDict</span><span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">game</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-PeterSum = 0
-ColinSum = 0
+<span class="n">PeterSum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ColinSum</span> <span class="o">=</span> <span class="mi">0</span>
 
-for Ps in PeterDict.itervalues():
-	PeterSum += Ps
-for Cs in ColinDict.itervalues():
-	ColinSum += Cs
+<span class="k">for</span> <span class="n">Ps</span> <span class="ow">in</span> <span class="n">PeterDict</span><span class="p">.</span><span class="n">itervalues</span><span class="p">():</span>
+	<span class="n">PeterSum</span> <span class="o">+=</span> <span class="n">Ps</span>
+<span class="k">for</span> <span class="n">Cs</span> <span class="ow">in</span> <span class="n">ColinDict</span><span class="p">.</span><span class="n">itervalues</span><span class="p">():</span>
+	<span class="n">ColinSum</span> <span class="o">+=</span> <span class="n">Cs</span>
 
-P = 0
-for Colin in ColinDict.iterkeys():
-	PeterWins = 0
-	ColinProb = (ColinDict[Colin]/float(ColinSum))
-	for Peter in PeterDict.iterkeys():
-		if Peter &gt; Colin:
-			PeterWins += PeterDict[Peter]
-	P += ColinProb * (PeterWins/float(PeterSum))
+<span class="n">P</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">Colin</span> <span class="ow">in</span> <span class="n">ColinDict</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+	<span class="n">PeterWins</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">ColinProb</span> <span class="o">=</span> <span class="p">(</span><span class="n">ColinDict</span><span class="p">[</span><span class="n">Colin</span><span class="p">]</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">ColinSum</span><span class="p">))</span>
+	<span class="k">for</span> <span class="n">Peter</span> <span class="ow">in</span> <span class="n">PeterDict</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+		<span class="k">if</span> <span class="n">Peter</span> <span class="o">&gt;</span> <span class="n">Colin</span><span class="p">:</span>
+			<span class="n">PeterWins</span> <span class="o">+=</span> <span class="n">PeterDict</span><span class="p">[</span><span class="n">Peter</span><span class="p">]</span>
+	<span class="n">P</span> <span class="o">+=</span> <span class="n">ColinProb</span> <span class="o">*</span> <span class="p">(</span><span class="n">PeterWins</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">PeterSum</span><span class="p">))</span>
 
-print P
-</code></pre>
+<span class="k">print</span> <span class="n">P</span>
+</code></pre></div></div>
 
 </div>
 

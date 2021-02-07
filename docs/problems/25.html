@@ -79,28 +79,28 @@
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from time import time
-start_time= time()
-print """Process started
-----------"""
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">"""Process started
+----------"""</span>
 
 
-f = []
-f[0:] = [1]
-f[1:] = [1]
+<span class="n">f</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-for g in range(2, 10000):
-	f[g:] = [f[g-1] + f[g-2]]
-	if f[g] &gt; (10**999):
-		print (g+1)
-		break; break
+<span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10000</span><span class="p">):</span>
+	<span class="n">f</span><span class="p">[</span><span class="n">g</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="n">g</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[</span><span class="n">g</span><span class="o">-</span><span class="mi">2</span><span class="p">]]</span>
+	<span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">999</span><span class="p">):</span>
+		<span class="k">print</span> <span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">break</span><span class="p">;</span> <span class="k">break</span>
 		
 
-end_time= time()
-elapse_time= end_time - start_time
-print '----------'
-print elapse_time, 'seconds have passed'
-</code></pre>
+<span class="n">end_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">elapse_time</span><span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="k">print</span> <span class="s">'----------'</span>
+<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="s">'seconds have passed'</span>
+</code></pre></div></div>
 
 </div>
 

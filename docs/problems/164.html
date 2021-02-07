@@ -87,39 +87,39 @@ with those last two digits.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-def next_digit(a, b):
-	largest = 9 - a - b
-	return range(largest+1)
-
-
-trys = dict()
-
-for start in product(range(1,10), range(10)):
-	if sum(list(start)) &gt; 9:
-		continue
-	else:
-		trys[start] = 1
+<span class="k">def</span> <span class="nf">next_digit</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+	<span class="n">largest</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">-</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+	<span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="n">largest</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
 
-for i in range(18):
-	new_trys = dict()
-	for t in trys.iterkeys():
-		for n in next_digit(t[0], t[1]):
-			try:
-				new_trys[(t[1], n)] += trys[(t[0], t[1])]
-			except:
-				new_trys[(t[1], n)] = trys[(t[0], t[1])]
-	trys = new_trys
+<span class="n">trys</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)):</span>
+	<span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">start</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">:</span>
+		<span class="k">continue</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">trys</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
 
-total = 0
-for s in trys.itervalues():
-	total += s
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">18</span><span class="p">):</span>
+	<span class="n">new_trys</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+	<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">trys</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">next_digit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">new_trys</span><span class="p">[(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">n</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">trys</span><span class="p">[(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="n">new_trys</span><span class="p">[(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">n</span><span class="p">)]</span> <span class="o">=</span> <span class="n">trys</span><span class="p">[(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+	<span class="n">trys</span> <span class="o">=</span> <span class="n">new_trys</span>
 
-print total
-</code></pre>
+
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">trys</span><span class="p">.</span><span class="n">itervalues</span><span class="p">():</span>
+	<span class="n">total</span> <span class="o">+=</span> <span class="n">s</span>
+
+<span class="k">print</span> <span class="n">total</span>
+</code></pre></div></div>
 
 </div>
 

@@ -100,22 +100,22 @@ be closer to the next correct answer.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">root2 = float(2.0**0.5)/float(2.0)
-br = 2
-prev = 1
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">root2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mf">2.0</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">br</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">prev</span> <span class="o">=</span> <span class="mi">1</span>
 
-while True:
-	b = int(br*root2) + 1
-	if 2*b*(b-1) == br*(br-1):
-		print b, br
-		if br &gt; 10**12:
-			break
-		mult = br/float(prev)
-		prev = br
-		br = int(br*mult)
-	else:
-		br += 1
-</code></pre>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">br</span><span class="o">*</span><span class="n">root2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+	<span class="k">if</span> <span class="mi">2</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">br</span><span class="o">*</span><span class="p">(</span><span class="n">br</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">print</span> <span class="n">b</span><span class="p">,</span> <span class="n">br</span>
+		<span class="k">if</span> <span class="n">br</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">12</span><span class="p">:</span>
+			<span class="k">break</span>
+		<span class="n">mult</span> <span class="o">=</span> <span class="n">br</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">prev</span><span class="p">)</span>
+		<span class="n">prev</span> <span class="o">=</span> <span class="n">br</span>
+		<span class="n">br</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">br</span><span class="o">*</span><span class="n">mult</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">br</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
 
 </div>
 

@@ -86,22 +86,22 @@ next value of m is about 4 times larger than the previous.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">L = []
-m = 0
-n = 1
-while len(L) &lt; 12:
-	m += 1
-	a = m**2 - n**2
-	b = 2*m*n
-	c = m**2 + n**2
-	if 2*a == b + 1 or 2*a == b - 1 or 2*b == a + 1 or 2*b == a - 1:
-		L.append(c)
-		print m, n, len(L)
-		n = m
-		m = int(m*4.2)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
+	<span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">n</span>
+	<span class="n">c</span> <span class="o">=</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
+	<span class="k">if</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">or</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">or</span> <span class="mi">2</span><span class="o">*</span><span class="n">b</span> <span class="o">==</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">or</span> <span class="mi">2</span><span class="o">*</span><span class="n">b</span> <span class="o">==</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="n">L</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+		<span class="k">print</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+		<span class="n">n</span> <span class="o">=</span> <span class="n">m</span>
+		<span class="n">m</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="mf">4.2</span><span class="p">)</span>
 
-print sum(L)
-</code></pre>
+<span class="k">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

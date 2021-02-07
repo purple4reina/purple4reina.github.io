@@ -91,8 +91,8 @@ bit larger than what we’re given for this problem.</p>
 <p>Additionally, I’ve been thinking a lot at work lately about good APIs. I’d say
 that what I have here is not an idea API. Some methods that I have on the
 Matrix class really shouldn’t be methods on that class and instead should
-probably just be top level functions. Examples of this being the <code>_next_vertex</code>
-and <code>_next_vertex_via_rollback</code> methods. There’s nothing in them that is
+probably just be top level functions. Examples of this being the <code class="language-plaintext highlighter-rouge">_next_vertex</code>
+and <code class="language-plaintext highlighter-rouge">_next_vertex_via_rollback</code> methods. There’s nothing in them that is
 requiring access to the Matrix class itself, so why have it as a method on that
 class? I didn’t find it all that important to fix this while working on the
 problem since this is just one off work, but just some thoughts for if I were
@@ -100,31 +100,31 @@ to actually need this code long term.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">given = """
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="o">=</span> <span class="s">"""
   7  53 183 439 863
 497 383 563  79 973
 287  63 343 169 583
 627 343 773 959 943
 767 473 103 699 303
-"""
+"""</span>
 
-empty = """
+<span class="n">empty</span> <span class="o">=</span> <span class="s">"""
 0 0 0 0 0
 0 0 0 0 0
 0 0 0 0 0
 0 0 0 0 0
 0 0 0 0 0
-"""
+"""</span>
 
-easy = """
+<span class="n">easy</span> <span class="o">=</span> <span class="s">"""
 0 0 0 0 5
 0 0 0 5 0
 0 0 5 0 0
 0 5 0 0 0
 5 0 0 0 0
-"""
+"""</span>
 
-problem = """
+<span class="n">problem</span> <span class="o">=</span> <span class="s">"""
   7  53 183 439 863 497 383 563  79 973 287  63 343 169 583
 627 343 773 959 943 767 473 103 699 303 957 703 583 639 913
 447 283 463  29  23 487 463 993 119 883 327 493 423 159 743
@@ -140,208 +140,208 @@ problem = """
  34 124   4 878 450 476 712 914 838 669 875 299 823 329 699
 815 559 813 459 522 788 168 586 966 232 308 833 251 631 107
 813 883 451 509 615  77 281 613 459 205 380 274 302  35 805
-"""
+"""</span>
 
-class Matrix(list):
+<span class="k">class</span> <span class="nc">Matrix</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
 
-    # Assumptions:
-    #  1. The matrix passed to new_matrix_from_str is square.
-    #  2. No value in the matrix is greater than 999.
+    <span class="c1"># Assumptions:
+</span>    <span class="c1">#  1. The matrix passed to new_matrix_from_str is square.
+</span>    <span class="c1">#  2. No value in the matrix is greater than 999.
+</span>
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">new_matrix_from_str</span><span class="p">(</span><span class="n">matrix_string</span><span class="p">):</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">()</span>
+        <span class="n">row_list</span> <span class="o">=</span> <span class="n">matrix_string</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">row_list</span><span class="p">:</span>
+            <span class="n">item_str_list</span> <span class="o">=</span> <span class="n">row</span><span class="p">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">item_str_list</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">item_int_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1000</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">item_str_list</span><span class="p">]</span>
+            <span class="n">matrix</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item_int_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">matrix</span>
 
-    @staticmethod
-    def new_matrix_from_str(matrix_string):
-        matrix = Matrix()
-        row_list = matrix_string.split('\n')
-        for row in row_list:
-            item_str_list = row.split()
-            if not item_str_list:
-                continue
-            item_int_list = [1000-int(item) for item in item_str_list]
-            matrix.append(item_int_list)
-        return matrix
+    <span class="k">def</span> <span class="nf">calculate_max_sum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># start with an initial depth of vertexes
+</span>        <span class="n">vertexes</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">dimention</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">min_sum</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)</span>
+        <span class="c1"># the last vertex will be added in the while loop
+</span>        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span> <span class="o">-</span> <span class="mi">1</span>
 
-    def calculate_max_sum(self):
-        # start with an initial depth of vertexes
-        vertexes = [(i, i) for i in range(self.dimention - 1)]
-        min_sum = float('inf')
-        # the last vertex will be added in the while loop
-        i, j = self.dimention - 1, self.dimention - 1
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span><span class="p">:</span>
+            <span class="n">vertexes</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+            <span class="n">current_sum</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">vertex_sum</span><span class="p">(</span><span class="n">vertexes</span><span class="p">)</span>
 
-        while i &lt; self.dimention and j &lt; self.dimention:
-            vertexes.append((i, j))
-            current_sum = self.vertex_sum(vertexes)
+            <span class="k">if</span> <span class="n">current_sum</span> <span class="o">&lt;</span> <span class="n">min_sum</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertexes</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span><span class="p">:</span>
+                <span class="n">min_sum</span> <span class="o">=</span> <span class="n">current_sum</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_vertexes_complete</span><span class="p">(</span><span class="n">vertexes</span><span class="p">):</span>
+                <span class="k">break</span>
 
-            if current_sum &lt; min_sum and len(vertexes) == self.dimention:
-                min_sum = current_sum
-            if self._vertexes_complete(vertexes):
-                break
+            <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_next_vertex</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="n">current_sum</span> <span class="o">&gt;</span> <span class="n">min_sum</span><span class="p">)</span>
 
-            i, j = self._next_vertex(vertexes, current_sum &gt; min_sum)
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_inverse_sum</span><span class="p">(</span><span class="n">min_sum</span><span class="p">)</span>
 
-        return self._inverse_sum(min_sum)
+    <span class="k">def</span> <span class="nf">_next_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertexes</span><span class="p">,</span> <span class="n">force_rollback</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">force_rollback</span><span class="p">:</span>
+            <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_next_vertex_via_rollback</span><span class="p">(</span><span class="n">vertexes</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span> <span class="o">=</span> <span class="n">vertexes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">next_i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span> <span class="ow">and</span> <span class="n">next_j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_available_vertex</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="p">(</span><span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span><span class="p">)):</span>
+                    <span class="k">break</span>
+                <span class="n">next_j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_next_vertex_via_rollback</span><span class="p">(</span><span class="n">vertexes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span>
 
-    def _next_vertex(self, vertexes, force_rollback):
-        if force_rollback:
-            next_i, next_j = self._next_vertex_via_rollback(vertexes)
-        else:
-            next_i, next_j = vertexes[-1][0] + 1, 0
-            while next_i &lt; self.dimention and next_j &lt; self.dimention:
-                if self.is_available_vertex(vertexes, (next_i, next_j)):
-                    break
-                next_j += 1
-            else:
-                next_i, next_j = self._next_vertex_via_rollback(vertexes)
-        return next_i, next_j
+    <span class="k">def</span> <span class="nf">_next_vertex_via_rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertexes</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">vertexes</span><span class="p">:</span>
+            <span class="n">last_i</span><span class="p">,</span> <span class="n">last_j</span> <span class="o">=</span> <span class="n">vertexes</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span> <span class="o">=</span> <span class="n">last_i</span><span class="p">,</span> <span class="n">last_j</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">next_j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span><span class="p">:</span>
+                <span class="c1"># get the next available item on the row
+</span>                <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_available_vertex</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="p">(</span><span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span><span class="p">)):</span>
+                    <span class="k">return</span> <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span>
+                <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span> <span class="o">=</span> <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="c1"># if one is not available, continue to pop another
+</span>        <span class="k">return</span> <span class="n">next_i</span><span class="p">,</span> <span class="n">next_j</span>
 
-    def _next_vertex_via_rollback(self, vertexes):
-        while vertexes:
-            last_i, last_j = vertexes.pop()
-            next_i, next_j = last_i, last_j + 1
-            while next_j &lt; self.dimention:
-                # get the next available item on the row
-                if self.is_available_vertex(vertexes, (next_i, next_j)):
-                    return next_i, next_j
-                next_i, next_j = next_i, next_j + 1
-            # if one is not available, continue to pop another
-        return next_i, next_j
+    <span class="k">def</span> <span class="nf">_vertexes_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertexes</span><span class="p">):</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vertexes</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">True</span>
 
-    def _vertexes_complete(self, vertexes):
-        i, j = self.dimention - 1, 0
-        while j &lt; self.dimention:
-            if (i, j) not in vertexes:
-                return False
-            i -= 1
-            j += 1
-        return True
+    <span class="o">@</span><span class="nb">property</span>
+    <span class="k">def</span> <span class="nf">dimention</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    @property
-    def dimention(self):
-        return len(self)
+    <span class="k">def</span> <span class="nf">_inverse_sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_sum</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">dimention</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">-</span> <span class="n">min_sum</span>
 
-    def _inverse_sum(self, min_sum):
-        return self.dimention * 1000 - min_sum
+    <span class="k">def</span> <span class="nf">vertex_sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertexes</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">vertexes</span><span class="p">)</span>
 
-    def vertex_sum(self, vertexes):
-        return sum(self[i][j] for i, j in vertexes)
-
-    def is_available_vertex(self, existent_vertexes, next_vertex):
-        for i, j in existent_vertexes:
-            if i == next_vertex[0] or j == next_vertex[1]:
-                return False
-        return True
+    <span class="k">def</span> <span class="nf">is_available_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">existent_vertexes</span><span class="p">,</span> <span class="n">next_vertex</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">existent_vertexes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">next_vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">==</span> <span class="n">next_vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
 
 
-if __name__ == '__main__':
-    max_sum = Matrix.new_matrix_from_str(problem).calculate_max_sum()
-    print('The maximum matrix sum is:', max_sum)
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">max_sum</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">problem</span><span class="p">).</span><span class="n">calculate_max_sum</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'The maximum matrix sum is:'</span><span class="p">,</span> <span class="n">max_sum</span><span class="p">)</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
 
-import problem
+<span class="kn">import</span> <span class="nn">problem</span>
 
-_test_matrix = """
+<span class="n">_test_matrix</span> <span class="o">=</span> <span class="s">"""
  1  2  3  4
  5  6  7  8
  9 10 11 12
 13 14 15 16
-"""
+"""</span>
 
-def test_new_matrix_from_str():
-    matrix = problem.Matrix.new_matrix_from_str(_test_matrix)
-    assert matrix == [
-            [999, 998, 997, 996],
-            [995, 994, 993, 992],
-            [991, 990, 989, 988],
-            [987, 986, 985, 984],
-    ]
+<span class="k">def</span> <span class="nf">test_new_matrix_from_str</span><span class="p">():</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">_test_matrix</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">matrix</span> <span class="o">==</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mi">999</span><span class="p">,</span> <span class="mi">998</span><span class="p">,</span> <span class="mi">997</span><span class="p">,</span> <span class="mi">996</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">995</span><span class="p">,</span> <span class="mi">994</span><span class="p">,</span> <span class="mi">993</span><span class="p">,</span> <span class="mi">992</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">991</span><span class="p">,</span> <span class="mi">990</span><span class="p">,</span> <span class="mi">989</span><span class="p">,</span> <span class="mi">988</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">987</span><span class="p">,</span> <span class="mi">986</span><span class="p">,</span> <span class="mi">985</span><span class="p">,</span> <span class="mi">984</span><span class="p">],</span>
+    <span class="p">]</span>
 
-def test_dimention():
-    matrix = problem.Matrix.new_matrix_from_str(_test_matrix)
-    assert matrix.dimention == 4
+<span class="k">def</span> <span class="nf">test_dimention</span><span class="p">():</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">_test_matrix</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">matrix</span><span class="p">.</span><span class="n">dimention</span> <span class="o">==</span> <span class="mi">4</span>
 
-def test__inverse_sum():
-    matrix = problem.Matrix.new_matrix_from_str(_test_matrix)
-    assert matrix._inverse_sum(123) == 3877
+<span class="k">def</span> <span class="nf">test__inverse_sum</span><span class="p">():</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">_test_matrix</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">matrix</span><span class="p">.</span><span class="n">_inverse_sum</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3877</span>
 
-@pytest.mark.parametrize('vertexes,expected', (
-    ([(0, 0)], 999),
-    ([(0, 0), (1, 1)], 1993),
-))
-def test_vertex_sum(vertexes, expected):
-    matrix = problem.Matrix.new_matrix_from_str(_test_matrix)
-    assert matrix.vertex_sum(vertexes) == expected
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'vertexes,expected'</span><span class="p">,</span> <span class="p">(</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="mi">999</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="mi">1993</span><span class="p">),</span>
+<span class="p">))</span>
+<span class="k">def</span> <span class="nf">test_vertex_sum</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">_test_matrix</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">matrix</span><span class="p">.</span><span class="n">vertex_sum</span><span class="p">(</span><span class="n">vertexes</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
 
-@pytest.mark.parametrize('vertexes,vertex,expected', (
-    ([(0, 0)], (0, 0), False),
-    ([(0, 0)], (1, 0), False),
-    ([(0, 0)], (0, 1), False),
-    ([(0, 0), (1, 1)], (0, 1), False),
-    ([(0, 0), (1, 1)], (2, 3), True),
-))
-def test_is_available_vertex(vertexes, vertex, expected):
-    matrix = problem.Matrix.new_matrix_from_str(_test_matrix)
-    assert matrix.is_available_vertex(vertexes, vertex) is expected
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'vertexes,vertex,expected'</span><span class="p">,</span> <span class="p">(</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="bp">True</span><span class="p">),</span>
+<span class="p">))</span>
+<span class="k">def</span> <span class="nf">test_is_available_vertex</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">_test_matrix</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">matrix</span><span class="p">.</span><span class="n">is_available_vertex</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="n">vertex</span><span class="p">)</span> <span class="ow">is</span> <span class="n">expected</span>
 
-@pytest.mark.parametrize('vertexes,expected', (
-    ([(0, 0)], False),
-    ([(3, 3)], False),
-    ([(3, 3), (2, 2)], False),
-    ([(3, 0), (2, 1), (0, 2), (1, 3)], False),
-    ([(3, 0), (2, 1), (1, 2), (0, 3)], True),
-))
-def test__vertexes_complete(vertexes, expected):
-    matrix = problem.Matrix.new_matrix_from_str(_test_matrix)
-    assert matrix._vertexes_complete(vertexes) is expected
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'vertexes,expected'</span><span class="p">,</span> <span class="p">(</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="p">([(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">True</span><span class="p">),</span>
+<span class="p">))</span>
+<span class="k">def</span> <span class="nf">test__vertexes_complete</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">_test_matrix</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">matrix</span><span class="p">.</span><span class="n">_vertexes_complete</span><span class="p">(</span><span class="n">vertexes</span><span class="p">)</span> <span class="ow">is</span> <span class="n">expected</span>
 
-@pytest.mark.parametrize('vertexes,expected_return,expected_vertexes', (
-    ([(0, 0)], (0, 1), []),
-    ([(0, 0), (1, 1)], (1, 2), [(0, 0)]),
-    ([(0, 2), (1, 3)], (0, 3), []),
-    ([(0, 1), (1, 3)], (0, 2), []),
-    ([(0, 1), (1, 3), (2, 2)], (0, 2), []),
-    ([(0, 0), (1, 1), (2, 2), (3, 3)], (2, 3), [(0, 0), (1, 1)]),
-))
-def test__next_vertex_via_rollback(vertexes, expected_return, expected_vertexes):
-    matrix = problem.Matrix.new_matrix_from_str(_test_matrix)
-    actual = matrix._next_vertex_via_rollback(vertexes)
-    assert vertexes == expected_vertexes
-    assert actual == expected_return
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'vertexes,expected_return,expected_vertexes'</span><span class="p">,</span> <span class="p">(</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">[]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]),</span>
+<span class="p">))</span>
+<span class="k">def</span> <span class="nf">test__next_vertex_via_rollback</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="n">expected_return</span><span class="p">,</span> <span class="n">expected_vertexes</span><span class="p">):</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">_test_matrix</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">.</span><span class="n">_next_vertex_via_rollback</span><span class="p">(</span><span class="n">vertexes</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">vertexes</span> <span class="o">==</span> <span class="n">expected_vertexes</span>
+    <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected_return</span>
 
-@pytest.mark.parametrize('vertexes,force_rollback,expected_return,expected_vertexes', (
-    ([(0, 0)], True, (0, 1), []),
-    ([(0, 0), (1, 1)], True, (1, 2), [(0, 0)]),
-    ([(0, 2), (1, 3)], True, (0, 3), []),
-    ([(0, 1), (1, 3)], True, (0, 2), []),
-    ([(0, 1), (1, 3), (2, 2)], True, (0, 2), []),
-    ([(0, 0), (1, 1), (2, 2), (3, 3)], True, (2, 3), [(0, 0), (1, 1)]),
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'vertexes,force_rollback,expected_return,expected_vertexes'</span><span class="p">,</span> <span class="p">(</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="bp">True</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">[]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="bp">True</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">True</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">True</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="bp">True</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">True</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]),</span>
 
-    ([(0, 0)], False, (1, 1), [(0, 0)]),
-    ([(0, 0), (1, 1)], False, (2, 2), [(0, 0), (1, 1)]),
-    ([(0, 2), (1, 3)], False, (2, 0), [(0, 2), (1, 3)]),
-    ([(0, 1), (1, 3)], False, (2, 0), [(0, 1), (1, 3)]),
-    ([(0, 1), (1, 3), (2, 2)], False, (3, 0), [(0, 1), (1, 3), (2, 2)]),
-    ([(0, 2), (1, 3), (2, 1)], False, (3, 0), [(0, 2), (1, 3), (2, 1)]),
-    ([(0, 0), (1, 1), (2, 2), (3, 3)], False, (2, 3), [(0, 0), (1, 1)]),
-    ([(0, 1), (1, 2), (2, 3), (3, 0)], False, (1, 3), [(0, 1)]),
-))
-def test__next_vertex(vertexes, force_rollback, expected_return, expected_vertexes):
-    matrix = problem.Matrix.new_matrix_from_str(_test_matrix)
-    actual = matrix._next_vertex(vertexes, force_rollback)
-    assert vertexes == expected_vertexes
-    assert actual == expected_return
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]),</span>
+    <span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)],</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]),</span>
+<span class="p">))</span>
+<span class="k">def</span> <span class="nf">test__next_vertex</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="n">force_rollback</span><span class="p">,</span> <span class="n">expected_return</span><span class="p">,</span> <span class="n">expected_vertexes</span><span class="p">):</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">_test_matrix</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">.</span><span class="n">_next_vertex</span><span class="p">(</span><span class="n">vertexes</span><span class="p">,</span> <span class="n">force_rollback</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">vertexes</span> <span class="o">==</span> <span class="n">expected_vertexes</span>
+    <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected_return</span>
 
-@pytest.mark.parametrize('test_matrix,expected', (
-    (problem.empty, 0),
-    (problem.easy, 25),
-    (problem.given, 3315),
-))
-def test_calculate_max_sum(test_matrix, expected):
-    matrix = problem.Matrix.new_matrix_from_str(test_matrix)
-    assert matrix.calculate_max_sum() == expected
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'test_matrix,expected'</span><span class="p">,</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">problem</span><span class="p">.</span><span class="n">empty</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">problem</span><span class="p">.</span><span class="n">easy</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">problem</span><span class="p">.</span><span class="n">given</span><span class="p">,</span> <span class="mi">3315</span><span class="p">),</span>
+<span class="p">))</span>
+<span class="k">def</span> <span class="nf">test_calculate_max_sum</span><span class="p">(</span><span class="n">test_matrix</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">problem</span><span class="p">.</span><span class="n">Matrix</span><span class="p">.</span><span class="n">new_matrix_from_str</span><span class="p">(</span><span class="n">test_matrix</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">matrix</span><span class="p">.</span><span class="n">calculate_max_sum</span><span class="p">()</span> <span class="o">==</span> <span class="n">expected</span>
+</code></pre></div></div>
 
 </div>
 

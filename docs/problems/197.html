@@ -85,61 +85,61 @@ why I kept returning a decimal.Decimal was to make sure the tests pass.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import decimal
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">decimal</span>
 
-c = decimal.Decimal('30.403243784')
-e = decimal.Decimal('1e-9')
+<span class="n">c</span> <span class="o">=</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'30.403243784'</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1e-9'</span><span class="p">)</span>
 
-def memoize(fn):
-    _cache = {}
-    def wrap(n):
-        if n in _cache:
-            return _cache[n]
-        ret = fn(n)
-        _cache[n] = ret
-        return ret
-    return wrap
+<span class="k">def</span> <span class="nf">memoize</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">_cache</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrap</span>
 
-@memoize
-def f(n):
-    return int(2**(c-n**2)) * e
+<span class="o">@</span><span class="n">memoize</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">c</span><span class="o">-</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">e</span>
 
-@memoize
-def u(n):
-    if n == 0:
-        return -1
-    return f(u(n-1))
+<span class="o">@</span><span class="n">memoize</span>
+<span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
-def solve(n):
-    if n &gt; 515:
-        return decimal.Decimal('1.029461839') + decimal.Decimal('0.681175878')
-    return u(n) + u(n+1)
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">515</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1.029461839'</span><span class="p">)</span> <span class="o">+</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'0.681175878'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest, decimal
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span><span class="p">,</span> <span class="n">decimal</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (10**0, decimal.Decimal('1.711242148')),
-        (10**1, decimal.Decimal('1.710098289')),
-        (10**2, decimal.Decimal('1.710575329')),
-        (10**3, decimal.Decimal('1.710637717')),
-        (10**4, decimal.Decimal('1.710637717')),
-        (10**5, decimal.Decimal('1.710637717')),
-        (10**6, decimal.Decimal('1.710637717')),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">0</span><span class="p">,</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1.711242148'</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1.710098289'</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1.710575329'</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1.710637717'</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1.710637717'</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1.710637717'</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="n">decimal</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'1.710637717'</span><span class="p">)),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

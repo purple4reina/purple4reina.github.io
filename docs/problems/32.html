@@ -82,42 +82,42 @@ of them.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def str2num(n):
-	return int(''.join(map(str, n)))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
 
-from itertools import permutations
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
 
-prodlist = []
-sum = 0
-for r in permutations(range(1, 10)):
-	multiplicand = str2num(r[0:2])
-	multiplier = str2num(r[2:5])
-	product = str2num(r[5:9])
-	if (multiplicand * multiplier == product) and (product not in prodlist):
-		prodlist.append(product)
-		sum += product
-		print product
+<span class="n">prodlist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+	<span class="n">multiplicand</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+	<span class="n">multiplier</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+	<span class="n">product</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">multiplicand</span> <span class="o">*</span> <span class="n">multiplier</span> <span class="o">==</span> <span class="n">product</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">product</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prodlist</span><span class="p">):</span>
+		<span class="n">prodlist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+		<span class="nb">sum</span> <span class="o">+=</span> <span class="n">product</span>
+		<span class="k">print</span> <span class="n">product</span>
 
-for r in permutations(range(1, 10)):
-	multiplicand = str2num(r[0:1])
-	multiplier = str2num(r[1:5])
-	product = str2num(r[5:9])
-	if (multiplicand * multiplier == product) and (product not in prodlist):
-		prodlist.append(product)
-		sum += product
-		print product
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+	<span class="n">multiplicand</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+	<span class="n">multiplier</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+	<span class="n">product</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">multiplicand</span> <span class="o">*</span> <span class="n">multiplier</span> <span class="o">==</span> <span class="n">product</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">product</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prodlist</span><span class="p">):</span>
+		<span class="n">prodlist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+		<span class="nb">sum</span> <span class="o">+=</span> <span class="n">product</span>
+		<span class="k">print</span> <span class="n">product</span>
 		
-for r in permutations(range(1, 10)):
-	multiplicand = str2num(r[0:2])
-	multiplier = str2num(r[2:4])
-	product = str2num(r[4:9])
-	if (multiplicand * multiplier == product) and (product not in prodlist):
-		prodlist.append(product)
-		sum += product
-		print product
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+	<span class="n">multiplicand</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+	<span class="n">multiplier</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+	<span class="n">product</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">multiplicand</span> <span class="o">*</span> <span class="n">multiplier</span> <span class="o">==</span> <span class="n">product</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">product</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prodlist</span><span class="p">):</span>
+		<span class="n">prodlist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+		<span class="nb">sum</span> <span class="o">+=</span> <span class="n">product</span>
+		<span class="k">print</span> <span class="n">product</span>
 
-print sum, 'here'
-</code></pre>
+<span class="k">print</span> <span class="nb">sum</span><span class="p">,</span> <span class="s">'here'</span>
+</code></pre></div></div>
 
 </div>
 

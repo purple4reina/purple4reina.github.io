@@ -79,36 +79,36 @@
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-def rule1(a):
-	for i in range(1, len(a)/2+1):
-		for A in combinations(a, i):
-			for j in range(1, len(a)-len(A)+1):
-				for B in combinations((set(a)-set(A)), j):
-					if sum(list(A)) == sum(list(B)):
-						return False
-	return True
+<span class="k">def</span> <span class="nf">rule1</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+				<span class="k">for</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">((</span><span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">A</span><span class="p">)),</span> <span class="n">j</span><span class="p">):</span>
+					<span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">A</span><span class="p">))</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">B</span><span class="p">)):</span>
+						<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
-def rule2(a):
-	for i in range(1, len(a)/2+1):
-		for A in combinations(a, i):
-			for j in range(1, len(a)-len(A)+1):
-				for B in combinations((set(a)-set(A)), j):
-					if len(A) &gt; len(B) and sum(list(A)) &lt; sum(list(B)):
-						return False
-					elif len(B) &gt; len(A) and sum(list(B)) &lt; sum(list(A)):
-						return False
-	return True
+<span class="k">def</span> <span class="nf">rule2</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+				<span class="k">for</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">((</span><span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">A</span><span class="p">)),</span> <span class="n">j</span><span class="p">):</span>
+					<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">A</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">B</span><span class="p">)):</span>
+						<span class="k">return</span> <span class="bp">False</span>
+					<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">B</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+						<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">return</span> <span class="bp">True</span>
 
 
-last = 0
-for a in combinations(range(19, 48), 7):
-	a = set(a)
-	if rule1(a) == True and rule2(a) == True:
-		print a
-		break
-</code></pre>
+<span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">48</span><span class="p">),</span> <span class="mi">7</span><span class="p">):</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">rule1</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">rule2</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="k">print</span> <span class="n">a</span>
+		<span class="k">break</span>
+</code></pre></div></div>
 
 </div>
 

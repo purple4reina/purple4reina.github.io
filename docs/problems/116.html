@@ -80,44 +80,44 @@ initially clear and I get to think creatively about the solution.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">bound = 50
-count = 0
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bound</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-redDict = dict()
-greenDict = dict()
-blueDict = dict()
+<span class="n">redDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">greenDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">blueDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-red = 2
-green = 3
-blue = 4
+<span class="n">red</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">green</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">blue</span> <span class="o">=</span> <span class="mi">4</span>
 
-for k in xrange(bound+1):
-	redDict[k] = 0
-	greenDict[k] = 0
-	blueDict[k] = 0
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="n">redDict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">greenDict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">blueDict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-#red
-for length in range(red, bound+1):
-	for start in range(1, length-red+2):
-		redDict[length] += 1
-		redDict[length] += redDict[length-start-red+1]
+<span class="c1">#red
+</span><span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="o">-</span><span class="n">red</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
+		<span class="n">redDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="n">redDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="n">redDict</span><span class="p">[</span><span class="n">length</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="n">red</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 
-#green
-for length in range(green, bound+1):
-	for start in range(1, length-green+2):
-		greenDict[length] += 1
-		greenDict[length] += greenDict[length-start-green+1]
+<span class="c1">#green
+</span><span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">green</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="o">-</span><span class="n">green</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
+		<span class="n">greenDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="n">greenDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="n">greenDict</span><span class="p">[</span><span class="n">length</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="n">green</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 
-#red
-for length in range(blue, bound+1):
-	for start in range(1, length-blue+2):
-		blueDict[length] += 1
-		blueDict[length] += blueDict[length-start-blue+1]
+<span class="c1">#red
+</span><span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">blue</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="o">-</span><span class="n">blue</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
+		<span class="n">blueDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="n">blueDict</span><span class="p">[</span><span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="n">blueDict</span><span class="p">[</span><span class="n">length</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="n">blue</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 
 
-count = redDict[bound] + greenDict[bound] + blueDict[bound]
-print count
-</code></pre>
+<span class="n">count</span> <span class="o">=</span> <span class="n">redDict</span><span class="p">[</span><span class="n">bound</span><span class="p">]</span> <span class="o">+</span> <span class="n">greenDict</span><span class="p">[</span><span class="n">bound</span><span class="p">]</span> <span class="o">+</span> <span class="n">blueDict</span><span class="p">[</span><span class="n">bound</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

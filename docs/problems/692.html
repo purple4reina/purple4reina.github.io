@@ -84,42 +84,42 @@ derive G(n) when n is a fibonacci number.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-ruby">def solve(max)
-  f1, f2 = 3, 2
-  g1, g2 = 6, 3
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">max</span><span class="p">)</span>
+  <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span>
+  <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span>
 
-  loop do
-    g1, g2 = g1 + g2 + f1, g1
-    f1, f2 = f1 + f2, f1
-    return g1 if f1 == max
-  end
-end
+  <span class="kp">loop</span> <span class="k">do</span>
+    <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="o">=</span> <span class="n">g1</span> <span class="o">+</span> <span class="n">g2</span> <span class="o">+</span> <span class="n">f1</span><span class="p">,</span> <span class="n">g1</span>
+    <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">f1</span> <span class="o">+</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f1</span>
+    <span class="k">return</span> <span class="n">g1</span> <span class="k">if</span> <span class="n">f1</span> <span class="o">==</span> <span class="n">max</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-puts solve(23416728348467685)
-</code></pre>
+<span class="nb">puts</span> <span class="n">solve</span><span class="p">(</span><span class="mi">23416728348467685</span><span class="p">)</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-ruby">require 'test/unit'
-require './problem'
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'test/unit'</span>
+<span class="nb">require</span> <span class="s1">'./problem'</span>
 
-class TestProblem &lt; Test::Unit::TestCase
-  [
-    [5, 12],
-    [8, 23],
-    [13, 43],
-    [21, 79],
-    [34, 143],
-    [55, 256],
-    [89, 454],
-    [144, 799],
-  ].each do |heap, expect|
-    define_method "test_solve_#{heap.to_s.rjust(3, '0')}" do
-      assert_equal expect, solve(heap)
-    end
-  end
-end
-</code></pre>
+<span class="k">class</span> <span class="nc">TestProblem</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="p">[</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">79</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">143</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">89</span><span class="p">,</span> <span class="mi">454</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">144</span><span class="p">,</span> <span class="mi">799</span><span class="p">],</span>
+  <span class="p">].</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">heap</span><span class="p">,</span> <span class="n">expect</span><span class="o">|</span>
+    <span class="n">define_method</span> <span class="s2">"test_solve_</span><span class="si">#{</span><span class="n">heap</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">rjust</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">'0'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span> <span class="k">do</span>
+      <span class="n">assert_equal</span> <span class="n">expect</span><span class="p">,</span> <span class="n">solve</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
 
 </div>
 

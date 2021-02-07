@@ -80,29 +80,29 @@ really starting to get tough!</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from math import factorial
-def factorialdigits(n):
-	total = 0
-	for d in str(n):
-		total += factorial(int(d))
-	return total
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+<span class="k">def</span> <span class="nf">factorialdigits</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="n">factorial</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+	<span class="k">return</span> <span class="n">total</span>
 
-n = 0
-count = 0
+<span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-while n &lt; 10**6:
-	n += 1
-	if n%10000 == 0: print n
-	loop = [n]
-	next = factorialdigits(n)
-	while next not in loop:
-		loop.append(next)
-		next = factorialdigits(next)
-	if len(loop) == 60:
-		count += 1
+<span class="k">while</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">10000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">n</span>
+	<span class="n">loop</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
+	<span class="nb">next</span> <span class="o">=</span> <span class="n">factorialdigits</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">while</span> <span class="nb">next</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">loop</span><span class="p">:</span>
+		<span class="n">loop</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
+		<span class="nb">next</span> <span class="o">=</span> <span class="n">factorialdigits</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">loop</span><span class="p">)</span> <span class="o">==</span> <span class="mi">60</span><span class="p">:</span>
+		<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-print count
-</code></pre>
+<span class="k">print</span> <span class="n">count</span>
+</code></pre></div></div>
 
 </div>
 

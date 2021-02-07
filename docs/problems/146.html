@@ -87,76 +87,76 @@ step would be to check if it actually is prime or not.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">def isprimefactory(top):
-    sieve = [True] * (top + 1)
-    primes = []
-    for p, isprime in enumerate(sieve):
-        if not isprime or p &lt; 2:
-            continue
-        primes.append(p)
-        num = p + p
-        while num &lt;= top:
-            sieve[num] = False
-            num += p
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprimefactory</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+    <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">isprime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isprime</span> <span class="ow">or</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">p</span>
+        <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+            <span class="n">sieve</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">p</span>
 
-    def _isprime(n):
-        top = n**0.5
-        for p in primes:
-            if p &gt; top:
-                return True
-            if n % p == 0:
-                return False
-        return True
+    <span class="k">def</span> <span class="nf">_isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="n">n</span><span class="o">**</span><span class="mf">0.5</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">top</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
 
-    return _isprime
+    <span class="k">return</span> <span class="n">_isprime</span>
 
-primes = (27, 13, 9, 7, 3, 1)
-composites = (5, 11, 15, 17, 19, 21, 23, 25)
-mod11s = (1, 3, 5)
+<span class="n">primes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">composites</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">mod11s</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-def solve(n):
-    isprime = isprimefactory(n + 6)
-    total = 0
-    for k in range(10, n, 10):  # assumption: k is div by 10
-        if k &gt; 10 and k % 7 != 4:
-            continue
-        k2 = k**2
-        if k2 % 210 != 100:
-            continue
-        if k2 % 11 not in mod11s:
-            continue
-        for p in primes:
-            if not isprime(k2 + p):
-                break
-        else:
-            for c in composites:
-                if isprime(k2 + c):
-                    break
-            else:
-                total += k
-    return total
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">isprime</span> <span class="o">=</span> <span class="n">isprimefactory</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>  <span class="c1"># assumption: k is div by 10
+</span>        <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="n">k2</span> <span class="o">%</span> <span class="mi">210</span> <span class="o">!=</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">k2</span> <span class="o">%</span> <span class="mi">11</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mod11s</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">isprime</span><span class="p">(</span><span class="n">k2</span> <span class="o">+</span> <span class="n">p</span><span class="p">):</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">composites</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">k2</span> <span class="o">+</span> <span class="n">c</span><span class="p">):</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">k</span>
+    <span class="k">return</span> <span class="n">total</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (11, 10),
-        (10**6, 1242490),
-        #(10**7, 11914460),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1242490</span><span class="p">),</span>
+        <span class="c1">#(10**7, 11914460),
+</span><span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 

@@ -82,21 +82,21 @@ makes to indent the if statement one level.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import re
-def num2str(n):
-	return re.split('_', re.sub('\B', '_', str(n)))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'\B'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
 
-sum = 0
-for n in range(2, 10**6):
-	power = 0
-	for i in num2str(n):
-		power = int(i)**5 + power
-	if n == power: 
-		sum = sum + n
-		print n, sum
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+	<span class="n">power</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="n">power</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="n">power</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="n">power</span><span class="p">:</span> 
+		<span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="n">n</span>
+		<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="nb">sum</span>
 		
-print '=', sum
-</code></pre>
+<span class="k">print</span> <span class="s">'='</span><span class="p">,</span> <span class="nb">sum</span>
+</code></pre></div></div>
 
 </div>
 

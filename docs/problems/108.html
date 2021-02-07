@@ -86,72 +86,72 @@ forever!</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">from time import time
-start = time()
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
-def isprime(n):
-	if n == 2:
-		return True
-	elif n &lt; 2 or n%2 == 0:
-		return False
-	else:
-		for i in range(3, int(n**0.5 + 1), 2):
-			if n%i == 0: return False
-		return True
-
-
-primes = []
-for n in xrange(10**6):
-	if isprime(n) == True:
-		primes.append(n)
-primes = tuple(primes)
-
-def nextprime_new(p):
-	i = primes.index(p)
-	return primes[i+1]
-
-def nextprime(p):
-	if p == 2:
-		return 3
-	else:
-		while True:
-			p += 2
-			if isprime(p) == True:
-				return p
-
-def powerlist(n):
-	ans = []
-	p = 2
-	while n &gt; 1:
-		i = 1
-	 	while n%(p**i) == 0:
-			i += 1
-		if i &gt; 1:
-			n /= p**(i-1)
-			ans.append(i-1)
-		p = nextprime(p)
-	return ans
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">True</span>
+	<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">False</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+		<span class="k">return</span> <span class="bp">True</span>
 
 
-n = 1
-largest = 0
-while True:
-	n += 1
-	alist = powerlist(n)
-	ans = 1
-	for a in alist:
-		ans *= (1 + 2*a)
-	ans = (ans + 1)/2
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">primes</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
 
-	if ans &gt; 1000:
-		print n, ans
-		break
-	elif ans &gt; largest:
-		largest = ans
-	else:
-		end, start = time() - start, time()
-		print n, largest, end
-</code></pre>
+<span class="k">def</span> <span class="nf">nextprime_new</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="n">primes</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">nextprime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+		<span class="k">return</span> <span class="mi">3</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span>
+			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="k">return</span> <span class="n">p</span>
+
+<span class="k">def</span> <span class="nf">powerlist</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span>
+	<span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+	 	<span class="k">while</span> <span class="n">n</span><span class="o">%</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">n</span> <span class="o">/=</span> <span class="n">p</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+			<span class="n">ans</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="n">p</span> <span class="o">=</span> <span class="n">nextprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">ans</span>
+
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">largest</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="n">alist</span> <span class="o">=</span> <span class="n">powerlist</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alist</span><span class="p">:</span>
+		<span class="n">ans</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+	<span class="k">if</span> <span class="n">ans</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+		<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">ans</span>
+		<span class="k">break</span>
+	<span class="k">elif</span> <span class="n">ans</span> <span class="o">&gt;</span> <span class="n">largest</span><span class="p">:</span>
+		<span class="n">largest</span> <span class="o">=</span> <span class="n">ans</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">end</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">time</span><span class="p">()</span>
+		<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">largest</span><span class="p">,</span> <span class="n">end</span>
+</code></pre></div></div>
 
 </div>
 

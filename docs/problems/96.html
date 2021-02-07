@@ -81,7 +81,7 @@ class. Within this, I was able to create a ton of methods that could be called.<
 
 <p>I combined two strategies in my final code. I’ve been an avid Sudoku player (by
 hand) for years. I thus have the logical strategies down already. I approached
-the initial programming as I do any sudoku puzzle. I created the <code>box_reduce()</code>
+the initial programming as I do any sudoku puzzle. I created the <code class="language-plaintext highlighter-rouge">box_reduce()</code>
 method to capture the first logical step that I use when solving.
 Unfortunately, I was unable to implement any further versions of my logical by
 hand methods.</p>
@@ -97,462 +97,462 @@ end.</p>
 
 <h2 id="final-code">Final Code</h2>
 
-<pre><code class="language-python">#	s = string of the numbers from l to r, x's mean not filled yet
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#	s = string of the numbers from l to r, x's mean not filled yet
 #	n = number index for a row, column, box
 #	d = digit 1-9
-
-class sudoku:
+</span>
+<span class="k">class</span> <span class="nc">sudoku</span><span class="p">:</span>
 	
-	def __init__(self, s):
-		self.part = str()
-		whole_list = []
-		for d in s:
-			whole_list.append(d)
-		for i in xrange(len(whole_list)):
-			if whole_list[i] == '0':
-				whole_list[i] = 'x'
-		self.whole = ''.join(map(str, whole_list))
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+		<span class="n">whole_list</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+			<span class="n">whole_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">'x'</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
 	
-	def row(self, n):
-		self.part = str()
-		for i in xrange(9):
-			self.part += self.whole[n*9 + i]
-		return self.part
+	<span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def column(self, n):
-		self.part = str()
-		for i in xrange(9):
-			self.part += self.whole[n + i*9]
-		return self.part
+	<span class="k">def</span> <span class="nf">column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def box(self, n):
-		self.part = str()
-		for i in xrange(3):
-			for j in xrange(3):
-				self.part += self.whole[(n/3)*18 + n*3 + i*9 + j] # double check
-		return self.part
+	<span class="k">def</span> <span class="nf">box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
+</span>		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def isSolved(self):
-		self.error()
-		if 'x' in self.whole:
-			return False
-		for n in xrange(9):
-			this_row = self.row(n)
-			this_column = self.column(n)
-			this_box = self.box(n)
-			for d in xrange(1, 10):
-				if (str(d) not in this_row) or (str(d) not in this_column) or (str(d) not in this_box):
-					return False
-		return True
+	<span class="k">def</span> <span class="nf">isSolved</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
+		<span class="k">if</span> <span class="s">'x'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">False</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">this_row</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_column</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_row</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_column</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_box</span><span class="p">):</span>
+					<span class="k">return</span> <span class="bp">False</span>
+		<span class="k">return</span> <span class="bp">True</span>
 	
-	def box_index(self, n):		# (row, column)
-		self.part = dict()
-		for i in xrange(3):
-			for j in xrange(3):
-				self.part[((n/3)*3 + i, (n%3)*3 + j)] = self.whole[(n/3)*18 + n*3 + i*9 + j] # double check
-		return self.part
+	<span class="k">def</span> <span class="nf">box_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[((</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
+</span>		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def all_index(self):		# (row, column)
-		self.part = dict()
-		for n in xrange(9):
-			for i in xrange(9):
-				self.part[(n, i)] = self.whole[n*9 + i]
-		return self.part
+	<span class="k">def</span> <span class="nf">all_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+				<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def error(self):
-		if '0' in self.whole:
-			raise Exception('SudokuError: Zero')
-		if len(self.whole) != 81:
-			raise Exception('SudokuError: Length')
-		for n in xrange(9):
-			this_row = self.row(n)
-			this_column = self.column(n)
-			this_box = self.box(n)
-			for d in xrange(1, 10):
-				if this_row.count(str(d)) &gt; 1 or this_column.count(str(d)) &gt; 1 or this_box.count(str(d)) &gt; 1:
-					raise Exception('SudokuError: Double')					
+	<span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">if</span> <span class="s">'0'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Zero'</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">81</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Length'</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">this_row</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_column</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">this_row</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_column</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_box</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+					<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Double'</span><span class="p">)</span>					
 	
-	def dict_to_whole(self, s_index):	# does not return, updates self.whole within the method
-		new_whole = []
-		for i in xrange(9):
-			for j in xrange(9):
-				new_whole.append(s_index[(i, j)])
-		self.whole = ''.join(map(str, new_whole))	
+	<span class="k">def</span> <span class="nf">dict_to_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_index</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">new_whole</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+				<span class="n">new_whole</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)])</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new_whole</span><span class="p">))</span>	
 	
-	def list_to_whole(self, s_list):	# does not return, updates self.whole within the method
-		self.whole = ''.join(map(str, s_list))
+	<span class="k">def</span> <span class="nf">list_to_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_list</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">s_list</span><span class="p">))</span>
 	
-	def box_reduce(self):				# does not return, updates self.whole within the method
-		all_boxes = self.all_index()		
-		prev_whole = ''
+	<span class="k">def</span> <span class="nf">box_reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">all_index</span><span class="p">()</span>		
+		<span class="n">prev_whole</span> <span class="o">=</span> <span class="s">''</span>
 		
-		while self.whole != prev_whole:
-			prev_whole = self.whole
-			for d in xrange(1, 10):
-				for n in xrange(9):
-					this_box_index = self.box_index(n)
-					if str(d) in self.box(n):
-						continue
-					for key_value in all_boxes.iteritems():
-						if key_value[1] == str(d):
-							for i in xrange(9):
-								if (key_value[0][0], i) in this_box_index:
-									del this_box_index[(key_value[0][0], i)]
-								if (i, key_value[0][1]) in this_box_index:
-									del this_box_index[(i, key_value[0][1])]
-					solo_count = 0
-					for i in this_box_index.iterkeys():
-						if this_box_index[i] == 'x':
-							solo_count += 1
-					if solo_count == 1:
-						for i in this_box_index.iterkeys():
-							if this_box_index[i] == 'x':
-								all_boxes[i] = str(d)
-					self.dict_to_whole(all_boxes)
+		<span class="k">while</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
+			<span class="n">prev_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+					<span class="n">this_box_index</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+					<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+						<span class="k">continue</span>
+					<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="n">iteritems</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+							<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+								<span class="k">if</span> <span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+									<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)]</span>
+								<span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+									<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
+					<span class="n">solo_count</span> <span class="o">=</span> <span class="mi">0</span>
+					<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+							<span class="n">solo_count</span> <span class="o">+=</span> <span class="mi">1</span>
+					<span class="k">if</span> <span class="n">solo_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+						<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+							<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+								<span class="n">all_boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+					<span class="bp">self</span><span class="p">.</span><span class="n">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
 			
-		self.error()
+		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
 
-	def walk(self):
+	<span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-		def x_index_list(s):
-			x_list = []
-			for i in range(len(list(s))):
-				if list(s)[i] == 'x':
-					x_list.append(i)
-			return x_list
+		<span class="k">def</span> <span class="nf">x_index_list</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+			<span class="n">x_list</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">))):</span>
+				<span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+					<span class="n">x_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">x_list</span>
 		
-		saved_whole = self.whole
-		whole_list = list(self.whole)
-		x_index = x_index_list(saved_whole)
+		<span class="n">saved_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
+		<span class="n">whole_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
+		<span class="n">x_index</span> <span class="o">=</span> <span class="n">x_index_list</span><span class="p">(</span><span class="n">saved_whole</span><span class="p">)</span>
 		
-		i = 0
-		while True:
-			try:
-				whole_list[x_index[i]] = str(int(whole_list[x_index[i]]) + 1)
-			except:
-				whole_list[x_index[i]] = '1'
-			if whole_list[x_index[i]] == '10':
-				whole_list[x_index[i]] = 'x'
-				i -= 1
-			else:
-				try:
-					self.list_to_whole(whole_list)
-					if self.isSolved() == True:
-						return
-					else:
-						i += 1
-				except:
-					pass
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="s">'1'</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="s">'10'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="s">'x'</span>
+				<span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">try</span><span class="p">:</span>
+					<span class="bp">self</span><span class="p">.</span><span class="n">list_to_whole</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)</span>
+					<span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+						<span class="k">return</span>
+					<span class="k">else</span><span class="p">:</span>
+						<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+				<span class="k">except</span><span class="p">:</span>
+					<span class="k">pass</span>
 		
 
-def nextgrid():
-	s = open('sudoku.txt', 'r')
-	i = 0
-	sud = []
-	for row in s:
-		i = (i+1)%10
-		if i != 1:
-			sud.append(str(row)[:9])
-		if i == 0:
-			sud = ''.join(sud)
-			new = []
-			for j in sud:
-				if j != '0':
-					new.append(int(j))
-				else:
-					new.append('x')
-			yield ''.join(map(str, new))
-			sud = []
-	return		
+<span class="k">def</span> <span class="nf">nextgrid</span><span class="p">():</span>
+	<span class="n">s</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'sudoku.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">sud</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">sud</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)[:</span><span class="mi">9</span><span class="p">])</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">sud</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">sud</span><span class="p">)</span>
+			<span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sud</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="s">'0'</span><span class="p">:</span>
+					<span class="n">new</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">new</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'x'</span><span class="p">)</span>
+			<span class="k">yield</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new</span><span class="p">))</span>
+			<span class="n">sud</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">return</span>		
 
-def main():	
-	total = 0
-	for s in nextgrid():
-		this_sudoku = sudoku(s)
-		this_sudoku.box_reduce()
-		if this_sudoku.isSolved() == False:
-			this_sudoku.walk()
-		print this_sudoku.whole, this_sudoku.isSolved(), int(this_sudoku.whole[:3])
-		total += int(this_sudoku.whole[:3])
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>	
+	<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">nextgrid</span><span class="p">():</span>
+		<span class="n">this_sudoku</span> <span class="o">=</span> <span class="n">sudoku</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+		<span class="n">this_sudoku</span><span class="p">.</span><span class="n">box_reduce</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="n">this_sudoku</span><span class="p">.</span><span class="n">walk</span><span class="p">()</span>
+		<span class="k">print</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">,</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">isSolved</span><span class="p">(),</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 		
-	print total
+	<span class="k">print</span> <span class="n">total</span>
 
-main()
-</code></pre>
+<span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
 
 <h2 id="initial-code">Initial Code</h2>
 
-<pre><code class="language-python">from itertools import *
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
-#	s = string of the numbers from l to r, x's mean not filled yet
+<span class="c1">#	s = string of the numbers from l to r, x's mean not filled yet
 #	n = number index for a row, column, box
 #	d = digit 1-9
-
-class sudoku:
+</span>
+<span class="k">class</span> <span class="nc">sudoku</span><span class="p">:</span>
 	
-	def __init__(self, s):
-		self.part = str()
-		whole_list = []
-		for d in s:
-			whole_list.append(d)
-		for i in xrange(len(whole_list)):
-			if whole_list[i] == '0':
-				whole_list[i] = 'x'
-		self.whole = ''.join(map(str, whole_list))
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+		<span class="n">whole_list</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+			<span class="n">whole_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">'x'</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
 	
-	def row(self, n):
-		self.part = str()
-		for i in xrange(9):
-			self.part += self.whole[n*9 + i]
-		return self.part
+	<span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def column(self, n):
-		self.part = str()
-		for i in xrange(9):
-			self.part += self.whole[n + i*9]
-		return self.part
+	<span class="k">def</span> <span class="nf">column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def box(self, n):
-		self.part = str()
-		for i in xrange(3):
-			for j in xrange(3):
-				self.part += self.whole[(n/3)*18 + n*3 + i*9 + j] # double check
-		return self.part
+	<span class="k">def</span> <span class="nf">box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
+</span>		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def isSolved(self):
-		self.error()
-		if 'x' in self.whole:
-			return False
-		for n in xrange(9):
-			this_row = self.row(n)
-			this_column = self.column(n)
-			this_box = self.box(n)
-			for d in xrange(1, 10):
-				if (str(d) not in this_row) or (str(d) not in this_column) or (str(d) not in this_box):
-					return False
-		return True
+	<span class="k">def</span> <span class="nf">isSolved</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
+		<span class="k">if</span> <span class="s">'x'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">False</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">this_row</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_column</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_row</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_column</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_box</span><span class="p">):</span>
+					<span class="k">return</span> <span class="bp">False</span>
+		<span class="k">return</span> <span class="bp">True</span>
 	
-	def available(self):		# returns list, numbers available for each space
-		slist = []
-		for n in self.whole:
-			if n == 'x':
-				slist.append(range(1,10))
-			else:
-				slist.append([int(n)])
-		return slist
+	<span class="k">def</span> <span class="nf">available</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		<span class="c1"># returns list, numbers available for each space
+</span>		<span class="n">slist</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+				<span class="n">slist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">slist</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+		<span class="k">return</span> <span class="n">slist</span>
 	
-	def row_index(self, n):		# (row, column)
-		self.part = dict()
-		for i in xrange(9):
-			self.part[(n, i)] = self.whole[n*9 + i]
-		return self.part
+	<span class="k">def</span> <span class="nf">row_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def column_index(self, n):	# (row, column)
-		self.part = dict()
-		for i in xrange(9):
-			self.part[(i, n)] = self.whole[n + i*9]
-		return self.part
+	<span class="k">def</span> <span class="nf">column_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>	<span class="c1"># (row, column)
+</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def box_index(self, n):		# (row, column)
-		self.part = dict()
-		for i in xrange(3):
-			for j in xrange(3):
-				self.part[((n/3)*3 + i, (n%3)*3 + j)] = self.whole[(n/3)*18 + n*3 + i*9 + j] # double check
-		return self.part
+	<span class="k">def</span> <span class="nf">box_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[((</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
+</span>		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def all_index(self):		# (row, column)
-		self.part = dict()
-		for n in xrange(9):
-			for i in xrange(9):
-				self.part[(n, i)] = self.whole[n*9 + i]
-		return self.part
+	<span class="k">def</span> <span class="nf">all_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+				<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
 	
-	def error(self):
-		if '0' in self.whole:
-			raise Exception('SudokuError: Zero')
-		if len(self.whole) != 81:
-			raise Exception('SudokuError: Length')
-		for n in xrange(9):
-			this_row = self.row(n)
-			this_column = self.column(n)
-			this_box = self.box(n)
-			for d in xrange(1, 10):
-				if this_row.count(str(d)) &gt; 1 or this_column.count(str(d)) &gt; 1 or this_box.count(str(d)) &gt; 1:
-					raise Exception('SudokuError: Double')					
+	<span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">if</span> <span class="s">'0'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Zero'</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">81</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Length'</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">this_row</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_column</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">this_row</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_column</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_box</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+					<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Double'</span><span class="p">)</span>					
 	
-	def dict_to_whole(self, s_index):	# does not return, updates self.whole within the method
-		new_whole = []
-		for i in xrange(9):
-			for j in xrange(9):
-				new_whole.append(s_index[(i, j)])
-		self.whole = ''.join(map(str, new_whole))	
+	<span class="k">def</span> <span class="nf">dict_to_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_index</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">new_whole</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+				<span class="n">new_whole</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)])</span>
+		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new_whole</span><span class="p">))</span>	
 	
-	def list_to_whole(self, s_list):	# does not return, updates self.whole within the method
-		self.whole = ''.join(map(str, s_list))
+	<span class="k">def</span> <span class="nf">list_to_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_list</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">s_list</span><span class="p">))</span>
 	
-	def box_reduce(self):				# does not return, updates self.whole within the method
-		all_boxes = self.all_index()		
-		prev_whole = ''
+	<span class="k">def</span> <span class="nf">box_reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">all_index</span><span class="p">()</span>		
+		<span class="n">prev_whole</span> <span class="o">=</span> <span class="s">''</span>
 		
-		while self.whole != prev_whole:
-			prev_whole = self.whole
-			for d in xrange(1, 10):
-				for n in xrange(9):
-					this_box_index = self.box_index(n)
-					if str(d) in self.box(n):
-						continue
-					for key_value in all_boxes.iteritems():
-						if key_value[1] == str(d):
-							for i in xrange(9):
-								if (key_value[0][0], i) in this_box_index:
-									del this_box_index[(key_value[0][0], i)]
-								if (i, key_value[0][1]) in this_box_index:
-									del this_box_index[(i, key_value[0][1])]
-					solo_count = 0
-					for i in this_box_index.iterkeys():
-						if this_box_index[i] == 'x':
-							solo_count += 1
-					if solo_count == 1:
-						for i in this_box_index.iterkeys():
-							if this_box_index[i] == 'x':
-								all_boxes[i] = str(d)
-					self.dict_to_whole(all_boxes)
+		<span class="k">while</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
+			<span class="n">prev_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+					<span class="n">this_box_index</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+					<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+						<span class="k">continue</span>
+					<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="n">iteritems</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+							<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+								<span class="k">if</span> <span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+									<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)]</span>
+								<span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+									<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
+					<span class="n">solo_count</span> <span class="o">=</span> <span class="mi">0</span>
+					<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+							<span class="n">solo_count</span> <span class="o">+=</span> <span class="mi">1</span>
+					<span class="k">if</span> <span class="n">solo_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+						<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+							<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+								<span class="n">all_boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+					<span class="bp">self</span><span class="p">.</span><span class="n">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
 			
-		self.error()
+		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
 	
-	def box_spread(self):				# does not return, updates self.whole within the method
-		all_boxes = self.all_index()		
-		prev_whole = ''
+	<span class="k">def</span> <span class="nf">box_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">all_index</span><span class="p">()</span>		
+		<span class="n">prev_whole</span> <span class="o">=</span> <span class="s">''</span>
 		
-		while self.whole != prev_whole:
-			prev_whole = self.whole
-			for i in xrange(3):
+		<span class="k">while</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
+			<span class="n">prev_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
 				
-				for d in xrange(1, 10):
-					for n in xrange(9):
-						this_box_index = self.box_index(n)
-						if str(d) in self.box(n):
-							continue
-						for key_value in all_boxes.items():
-							if key_value[1] == str(d):
-								for i in xrange(9):
-									if (key_value[0][0], i) in this_box_index:
-										del this_box_index[(key_value[0][0], i)]
-									if (i, key_value[0][1]) in this_box_index:
-										del this_box_index[(i, key_value[0][1])]
+				<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+					<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+						<span class="n">this_box_index</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+						<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+							<span class="k">continue</span>
+						<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+							<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+								<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+									<span class="k">if</span> <span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+										<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)]</span>
+									<span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+										<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
 					
-						remaining_keys = []
-						for k in this_box_index.iterkeys():
-							if all_boxes[k] == 'x':
-								remaining_keys.append(k)
-						remaining_keys_row = [k[0] for k in remaining_keys]
-						remaining_keys_column = [k[1] for k in remaining_keys]
+						<span class="n">remaining_keys</span> <span class="o">=</span> <span class="p">[]</span>
+						<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
+							<span class="k">if</span> <span class="n">all_boxes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+								<span class="n">remaining_keys</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+						<span class="n">remaining_keys_row</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">remaining_keys</span><span class="p">]</span>
+						<span class="n">remaining_keys_column</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">remaining_keys</span><span class="p">]</span>
 				
-						if len(remaining_keys) == 0:
-							continue
+						<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">remaining_keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+							<span class="k">continue</span>
 						
-						if max(remaining_keys_row) == min(remaining_keys_row):
-							all_boxes[(min(remaining_keys_row), str(n*10))] = str(d)
-#							print d
+						<span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">)</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">):</span>
+							<span class="n">all_boxes</span><span class="p">[(</span><span class="nb">min</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">10</span><span class="p">))]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1">#							print d
+</span>			
+						<span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">)</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">):</span>
+							<span class="n">all_boxes</span><span class="p">[(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">))]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1">#							print d
+</span>					
+			<span class="bp">self</span><span class="p">.</span><span class="n">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
 			
-						if max(remaining_keys_column) == min(remaining_keys_column):
-							all_boxes[(str(n*10), min(remaining_keys_column))] = str(d)
-#							print d
-					
-			self.dict_to_whole(all_boxes)
 			
-			
-		self.error()
+		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
 		
 	
-	def zip_x(self, x_fill):
-		whole_list = list(self.whole)
-		x_fill = list(x_fill)
-		for i in xrange(len(whole_list)):
-			if whole_list[i] == 'x':
-				whole_list[i] = x_fill.pop(0)
-		return ''.join(map(str, whole_list))
+	<span class="k">def</span> <span class="nf">zip_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_fill</span><span class="p">):</span>
+		<span class="n">whole_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
+		<span class="n">x_fill</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_fill</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_fill</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+		<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
 	
-	def digits_left(self):
-		left = []
-		for d in xrange(1, 10):
-			for i in xrange(9 - self.whole.count(str(d))):
-				left.append(str(d))
-		return ''.join(left)
+	<span class="k">def</span> <span class="nf">digits_left</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">left</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))):</span>
+				<span class="n">left</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+		<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
 	
 
-	def walk(self):
-		def x_index_list(s):
-			x_list = []
-			for i in range(len(list(s))):
-				if list(s)[i] == 'x':
-					x_list.append(i)
-			return x_list
+	<span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">def</span> <span class="nf">x_index_list</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+			<span class="n">x_list</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">))):</span>
+				<span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+					<span class="n">x_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">x_list</span>
 		
-		saved_whole = self.whole
-		whole_list = list(self.whole)
-		x_index = x_index_list(saved_whole)
+		<span class="n">saved_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
+		<span class="n">whole_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
+		<span class="n">x_index</span> <span class="o">=</span> <span class="n">x_index_list</span><span class="p">(</span><span class="n">saved_whole</span><span class="p">)</span>
 		
-		i = 0
-		while True:
-			try:
-				whole_list[x_index[i]] = str(int(whole_list[x_index[i]]) + 1)
-			except:
-				whole_list[x_index[i]] = '1'
-			if whole_list[x_index[i]] == '10':
-				whole_list[x_index[i]] = 'x'
-				i -= 1
-			else:
-				try:
-					self.list_to_whole(whole_list)
-					if self.isSolved() == True:
-						return
-					else:
-						i += 1
-				except:
-					pass
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="s">'1'</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="s">'10'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="s">'x'</span>
+				<span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">try</span><span class="p">:</span>
+					<span class="bp">self</span><span class="p">.</span><span class="n">list_to_whole</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)</span>
+					<span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+						<span class="k">return</span>
+					<span class="k">else</span><span class="p">:</span>
+						<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+				<span class="k">except</span><span class="p">:</span>
+					<span class="k">pass</span>
 
 
-def nextgrid():
-	s = open('sudoku.txt', 'r')
-	i = 0
-	sud = []
-	for row in s:
-		i = (i+1)%10
-		if i != 1:
-			sud.append(str(row)[:9])
-		if i == 0:
-			sud = ''.join(sud)
-			new = []
-			for j in sud:
-				if j != '0':
-					new.append(int(j))
-				else:
-					new.append('x')
-			yield ''.join(map(str, new))
-			sud = []
-	return		
+<span class="k">def</span> <span class="nf">nextgrid</span><span class="p">():</span>
+	<span class="n">s</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'sudoku.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">sud</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">sud</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)[:</span><span class="mi">9</span><span class="p">])</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">sud</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">sud</span><span class="p">)</span>
+			<span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sud</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="s">'0'</span><span class="p">:</span>
+					<span class="n">new</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">new</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'x'</span><span class="p">)</span>
+			<span class="k">yield</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new</span><span class="p">))</span>
+			<span class="n">sud</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">return</span>		
 
-def main():
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 	
-	total = 0
-	for s in nextgrid():
-		this_sudoku = sudoku(s)
+	<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">nextgrid</span><span class="p">():</span>
+		<span class="n">this_sudoku</span> <span class="o">=</span> <span class="n">sudoku</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 		
-		this_sudoku.box_reduce()
+		<span class="n">this_sudoku</span><span class="p">.</span><span class="n">box_reduce</span><span class="p">()</span>
 		
-		if this_sudoku.isSolved() == False:
-			this_sudoku.walk()
+		<span class="k">if</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="n">this_sudoku</span><span class="p">.</span><span class="n">walk</span><span class="p">()</span>
 	
-		print this_sudoku.whole, this_sudoku.isSolved(), int(this_sudoku.whole[:3])
+		<span class="k">print</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">,</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">isSolved</span><span class="p">(),</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 		
-		total += int(this_sudoku.whole[:3])
+		<span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 		
-	print total
+	<span class="k">print</span> <span class="n">total</span>
 
 
-main()
-</code></pre>
+<span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
 
 </div>
 

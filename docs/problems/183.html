@@ -90,78 +90,78 @@ the values for P will maintain their size comparison.</p>
 
 <h2 id="code">Code</h2>
 
-<pre><code class="language-python">import math
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
-def gcd(a, b):
-    while b:
-        a, b = b, a % b
-    return a
+<span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">b</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">a</span>
 
-def solve(n):
-    total = 0
-    for k in range(5, n + 1):
-        top_p = top_j = 0
-        for j in range(1, k + 1):
-            split = j * math.log10(k / j)
-            if split &gt; top_p:
-                top_p = split
-                top_j = j
-            else:
-                break
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">top_p</span> <span class="o">=</span> <span class="n">top_j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">split</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">log10</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="n">j</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">split</span> <span class="o">&gt;</span> <span class="n">top_p</span><span class="p">:</span>
+                <span class="n">top_p</span> <span class="o">=</span> <span class="n">split</span>
+                <span class="n">top_j</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
 
-        top_j //= gcd(k, top_j)
-        while top_j % 2 == 0:
-            top_j //= 2
-        while top_j % 5 == 0:
-            top_j //= 5
+        <span class="n">top_j</span> <span class="o">//=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">top_j</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">top_j</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">top_j</span> <span class="o">//=</span> <span class="mi">2</span>
+        <span class="k">while</span> <span class="n">top_j</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">top_j</span> <span class="o">//=</span> <span class="mi">5</span>
 
-        if top_j == 1:
-            total -= k
-        else:
-            total += k
+        <span class="k">if</span> <span class="n">top_j</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">-=</span> <span class="n">k</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">k</span>
 
-    return total
+    <span class="k">return</span> <span class="n">total</span>
 
-if __name__ == '__main__':
-    import sys
-    n = eval(sys.argv[1])
-    print(solve(n))
-</code></pre>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<pre><code class="language-python">import pytest
-from problem import solve
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
-_test_solve = (
-        (100, 2438),
-        (1000, 452936),
-)
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2438</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">452936</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_solve)
-def test_solve(n, expect):
-    assert expect == solve(n)
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-_test_not_solve = (
-        (2000, 1839106),
-        (3000, 4135506),
-        (4000, 7461508),
-        (5000, 11219942),
-        (6000, 16393680),
-        (7000, 21999104),
-        (8000, 28138658),
-        (9000, 36265688),
-        (10000, 48506996),
-        (10000, 45176320),
-        (10000, 49417322),
-        (10000, 45410190),
-        (10000, 45609938),
-)
+<span class="n">_test_not_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1839106</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">4135506</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="mi">7461508</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">11219942</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6000</span><span class="p">,</span> <span class="mi">16393680</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7000</span><span class="p">,</span> <span class="mi">21999104</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8000</span><span class="p">,</span> <span class="mi">28138658</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9000</span><span class="p">,</span> <span class="mi">36265688</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">48506996</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">45176320</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">49417322</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">45410190</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">45609938</span><span class="p">),</span>
+<span class="p">)</span>
 
-@pytest.mark.parametrize('n,expect', _test_not_solve)
-def test_not_solve(n, expect):
-    assert expect != solve(n)
-</code></pre>
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_not_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_not_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">!=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
 
 </div>
 
