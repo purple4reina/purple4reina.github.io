@@ -12,8 +12,10 @@ looking for an easy answer.
 
 ## Problems
 
-{% for num in (1..750) %}
-{% assign title = "" | append: num %}
-{% assign problem = site.problems | where: "title", title | first %}
-[Problem {{ title }}]({{ site.url }}{{ site.baseurl }}{{ problem.url }}){% if problem.completed != nil %}&nbsp;&nbsp;&nbsp;&nbsp;completed {{ problem.completed | date: "%B %e, %Y" }}{% endif %}
+{% assign problems = site.problems | sort_date | reverse %}
+{% for problem in problems %}
+
+[Problem {{ problem.title }}]({{ site.url }}{{ site.baseurl }}{{ problem.url }})
+&emsp;&emsp;completed {{ problem.completed | date: "%B %e, %Y" }}
+
 {% endfor %}

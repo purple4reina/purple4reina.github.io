@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+bundle install
+rm -rf _site/
+jekyll build
+git add _site/
