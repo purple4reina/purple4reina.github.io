@@ -275,3 +275,6 @@ a.sidebar-nav-item:focus {
 .theme-base-1a .force-fit {
   font-size: .63vw;
 }
+.theme-base-1a .page-title {
+  color: #523069;
+}

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 ---
 
 This project began on Monday November 28, 2011. I am posting here my progress
