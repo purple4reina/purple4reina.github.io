@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      743 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 743</h1>
+  <em>completed March  5, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>I’ll start off by saying that this code runs in 4 minutes and 10 seconds with
+Pypy3 (v3.7.9) and I’m disappointed I didn’t get it down to under a minute.
+The slowest parts of the code are the three lines where I’m getting the modular
+inverse of a number.  I tried this with two different algorithms; first using
+the Euclidean algorithm then ultimately setting on what I have below which uses
+Euler’s theorem.  I’m sure the optimization lies with how to calculate each
+successive value that I add to <code class="language-plaintext highlighter-rouge">count</code> with each loop.  Since all the values
+are either based on factorials or powers, they do not all need to be
+recalculated each time.</p>
+
+<p>The important thing to notice is that in all examples given, <code class="language-plaintext highlighter-rouge">k</code> is a multiple
+of <code class="language-plaintext highlighter-rouge">n</code>.  This is because for each working matrix, the sums of the columns
+repeat with a period of <code class="language-plaintext highlighter-rouge">k</code>.  This makes sense because as the window slides
+from left to right, the values lost on the left must be replaced on the right.
+Therefore, the problem reduces to one of matrices with <code class="language-plaintext highlighter-rouge">k</code> columns.</p>
+
+<p>Each column can have a sum of either 0, 1, or 2.  The first step is to find all
+ways in which to partition the number <code class="language-plaintext highlighter-rouge">k</code> into <code class="language-plaintext highlighter-rouge">k</code> parts using only 0’s, 1’s,
+and 2’s.</p>
+
+<p>From here, I found the number of permutations of each of these partitions.
+Then lastly, we must note that for the columns that sum to 1, there are 2 ways
+in which to situation the 1: \(\begin{bmatrix}1\\0\end{bmatrix}\) or
+\(\begin{bmatrix}0\\1\end{bmatrix}\).  Therefore, we must multiple the number
+of permutations by 2 raised to the power of the number of columns summing to 1
+<em>in the entire matrix</em> not just in the k-width window.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">1000000007</span>
+
+<span class="k">def</span> <span class="nf">inv</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">modulo</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="n">i</span>
+        <span class="n">f</span> <span class="o">%=</span> <span class="n">modulo</span>
+    <span class="k">return</span> <span class="n">f</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+
+    <span class="n">repeats</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="n">k</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">zeros</span> <span class="o">=</span> <span class="n">k</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">ones</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span>
+    <span class="n">fk</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">fact_ones</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">fact_zeros</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span><span class="n">zeros</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">ones</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">:</span>
+        <span class="n">fz</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">fact_zeros</span><span class="p">)</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">fact_ones</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="n">fk</span> <span class="o">*</span> <span class="n">fz</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">fo</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ones</span> <span class="o">*</span> <span class="n">repeats</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
+
+        <span class="n">fact_zeros</span> <span class="o">*=</span> <span class="n">inv</span><span class="p">(</span><span class="n">zeros</span><span class="p">)</span>
+        <span class="n">fact_zeros</span> <span class="o">%=</span> <span class="n">modulo</span>
+        <span class="n">zeros</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="n">ones</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="n">fact_ones</span> <span class="o">*=</span> <span class="n">ones</span> <span class="o">*</span> <span class="p">(</span><span class="n">ones</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">fact_ones</span> <span class="o">%=</span> <span class="n">modulo</span>
+
+    <span class="k">return</span> <span class="n">count</span> <span class="o">%</span> <span class="n">modulo</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="tests">Tests</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">560</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">68614</span><span class="p">),</span>
+
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">641012066</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">646548364</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,m,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
