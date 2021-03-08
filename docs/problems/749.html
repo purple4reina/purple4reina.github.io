@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      749 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 749</h1>
+  <em>completed March  7, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>Searching through all numbers below \(10^{16}\) to see if they are near power
+sums is unreasonable.  Instead, I searched through all permutations of 16
+digits 0 - 9.  This was much more manageable at just over 2 million
+permutations.  For each of these, I raised the digits to <em>k</em> powers and then
+checked to see if this value was a permutation of the original permutation.</p>
+
+<p>The toughest part of this was dealing with answers and sums that end in either
+0 or 9.  For these, there was more than one digit that was different between
+the two numbers.  I tried several algorithms for this and ultimately settled on
+what you see below.</p>
+
+<p>It’s pretty slow, most of the time is taken up in the <code class="language-plaintext highlighter-rouge">digits</code> method.  Runs in
+just under 50 seconds on Pypy3.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+
+        <span class="k">def</span> <span class="nf">_perm</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">depth</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">d</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">):</span>
+                    <span class="k">yield</span> <span class="n">arr</span>
+                <span class="k">return</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">depth</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">depth</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+                <span class="n">arr</span><span class="p">[</span><span class="n">depth</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="k">yield</span> <span class="k">from</span> <span class="n">_perm</span><span class="p">(</span><span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">yield</span> <span class="k">from</span> <span class="n">_perm</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">digits</span><span class="p">(</span><span class="n">summ</span><span class="p">):</span>
+        <span class="n">digs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">summ</span><span class="p">:</span>
+            <span class="n">summ</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">summ</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="n">digs</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">digs</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">digs</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">nearpower</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">summ</span><span class="p">):</span>
+        <span class="n">sorted_arr</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+        <span class="c1"># summ + 1
+</span>        <span class="n">sum_digs</span> <span class="o">=</span> <span class="n">digits</span><span class="p">(</span><span class="n">summ</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">sum_digs</span><span class="p">))</span> <span class="o">==</span> <span class="n">sorted_arr</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">summ</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># summ - 1
+</span>        <span class="n">sum_digs</span> <span class="o">=</span> <span class="n">digits</span><span class="p">(</span><span class="n">summ</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">sum_digs</span><span class="p">))</span> <span class="o">==</span> <span class="n">sorted_arr</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">summ</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="n">top</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">n</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">summ</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">d</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">p</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">summ</span> <span class="o">&gt;</span> <span class="n">top</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">nearpower</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">summ</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">num</span><span class="p">:</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span>
+                <span class="k">break</span>
+            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="tests">Tests</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2562701</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2562701</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">381784152</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1144909106</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
