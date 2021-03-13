@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      168 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 168</h1>
+  <em>completed March 12, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>I never did get working tests for this problem.  I got caught up in whether or
+not to include numbers like 11111 in the sum.  Until the very end I excluded
+them.  But after getting the wrong answer so many times, I attempted including
+them to see what happened.  Yup, right answer.  I would have preferred to have
+an example sum to work off of.</p>
+
+<p>Reading through the threads after completing the problem, it looks like I
+approached this in a very very different way from most people.  This problem
+seems incredibly similar to <a href="358">Problem 358</a> in that they both give the
+number 142857 as an example of a cyclic number.  Therefore, I attempted to go
+about this problem in a similar way.</p>
+
+<p>I new that full cyclic numbers, like 142857, are the results of taking the
+inverse of full reptend primes.  Since I was looking for kinda cyclic numbers,
+I figured I could start by looking at inverses of numbers and their decimal
+expansions.</p>
+
+<p>I spent a long time trying to figure out the most efficient way to get the
+repeating part of these repeating decimals.  I settled on using the
+<a href="https://mathworld.wolfram.com/MultiplicativeOrder.html">multiplicative order</a>
+which gave me the benefit of providing both the period and the repeating part
+all in one algorithm.</p>
+
+<p>The last step was to take multiples of these numbers and then check if their
+right rotations fit the requirement.  Runs in about 13 seconds with Pypy3.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">digits</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">periodof</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">d</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">d</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="n">digits</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">n</span>
+
+    <span class="n">found</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">period</span><span class="p">,</span> <span class="n">perdigits</span> <span class="o">=</span> <span class="n">periodof</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">tenminus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">period</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">tenperiod</span> <span class="o">=</span> <span class="n">tenminus</span> <span class="o">*</span> <span class="mi">10</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">perdigits</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">tenperiod</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="n">rot</span> <span class="o">=</span> <span class="n">div</span> <span class="o">+</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">tenminus</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">rot</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">tenminus</span> <span class="ow">and</span> <span class="n">rot</span> <span class="o">%</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">found</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">digits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">num</span> <span class="o">+</span> <span class="n">d</span>
+            <span class="n">found</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">found</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
