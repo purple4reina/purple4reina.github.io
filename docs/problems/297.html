@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      297 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 297</h1>
+  <em>completed March 13, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>This was another fun dynamic programming problem.  I recognized this right away
+then set about trying to find the best way to recurse.  I found an image from
+the <a href="https://en.wikipedia.org/wiki/Zeckendorf%27s_theorem">Wikipedia page on Zeckendorf’s theorem</a> incredibly helpful:</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Zeckendorf_representations_89px.svg" alt="Zeckendorf diagram" width="1000" /></p>
+
+<p>It shows how Zeckendorf numbers can be uniquely created for all numbers.  Each
+box has length and width of a Fibonacci number.</p>
+
+<p>I studied this image for a while to look for patterns in how it’s constructed.
+The answer we are searching for in this problem is the length of all the
+vertical lines on the right hand side of each rectangle.  Knowing this was what
+I needed to solve for, I was pretty easily able to come up with the solution.</p>
+
+<p>Runs in about 47 milliseconds on Pypy3.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">memoize</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">_cache</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">ret</span>
+    <span class="k">return</span> <span class="n">wrap</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+
+    <span class="n">_fibs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="n">_fibs</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fib_extra</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">_fibs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">n</span> <span class="o">-</span> <span class="n">f</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">fibs</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">_fibs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">start</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">f</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="o">@</span><span class="n">memoize</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">fibs</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">search</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">total</span>
+
+    <span class="n">extra</span> <span class="o">=</span> <span class="n">fib_extra</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">extra</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">extra</span><span class="p">)</span> <span class="o">+</span> <span class="n">extra</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fibs</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">extra</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">search</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="tests">Tests</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">38</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="mi">71</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">130</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="mi">235</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">144</span><span class="p">,</span> <span class="mi">420</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">233</span><span class="p">,</span> <span class="mi">744</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">377</span><span class="p">,</span> <span class="mi">1308</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">610</span><span class="p">,</span> <span class="mi">2285</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">987</span><span class="p">,</span> <span class="mi">3970</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1597</span><span class="p">,</span> <span class="mi">6865</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2584</span><span class="p">,</span> <span class="mi">11822</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4181</span><span class="p">,</span> <span class="mi">20284</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">261</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4003</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">52810</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="mi">658203</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7894453</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="mi">92359637</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1061261095</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
