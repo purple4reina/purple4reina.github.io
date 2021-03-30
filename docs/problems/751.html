@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      751 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 751</h1>
+  <em>completed March 30, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>This problem was pretty straight forward.  I started by creating the function
+that concatenates the numbers by the given formula.  I tested this against the
+example given in the problem.  From there I tested out a couple more numbers,
+one large and one small. I wanted to see if the function was strictly
+increasing, meaning that when he input gets larger, so does the output.  This
+was indeed the case, which meant I could use a binary search to find the
+ultimate solution.</p>
+
+<p>Only challenge here was in comparing numbers at such high precision after the
+decimal point.  I used the python decimal package for this.  Though often slow,
+the decimal package worked in this case because it only took 80 iterations to
+find the solution.  Runs in about 180 milliseconds.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">decimal</span> <span class="k">as</span> <span class="n">d</span>
+
+<span class="n">rnd</span> <span class="o">=</span> <span class="mi">24</span>
+<span class="n">d</span><span class="p">.</span><span class="n">getcontext</span><span class="p">().</span><span class="n">prec</span> <span class="o">=</span> <span class="n">rnd</span> <span class="o">+</span> <span class="mi">4</span>
+
+<span class="k">def</span> <span class="nf">concat</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">numstr</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="s">''</span><span class="p">,</span> <span class="n">theta</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">numstr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">rnd</span> <span class="o">+</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">b2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">b1</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">numstr</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">b1</span><span class="p">))</span>
+        <span class="n">b1</span> <span class="o">=</span> <span class="n">b2</span>
+    <span class="k">return</span> <span class="n">numstr</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s">'.'</span> <span class="o">+</span> <span class="n">numstr</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">rnd</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">():</span>
+    <span class="n">mins</span><span class="p">,</span> <span class="n">maxs</span><span class="p">,</span> <span class="n">two</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">d</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">d</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">mins</span> <span class="o">+</span> <span class="n">maxs</span><span class="p">)</span> <span class="o">/</span> <span class="n">two</span>
+        <span class="n">thetas</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">theta</span><span class="p">)[:</span><span class="n">rnd</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tau</span> <span class="o">==</span> <span class="n">thetas</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tau</span>
+        <span class="k">elif</span> <span class="n">tau</span> <span class="o">&gt;</span> <span class="n">thetas</span><span class="p">:</span>
+            <span class="n">mins</span> <span class="o">=</span> <span class="n">theta</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">maxs</span> <span class="o">=</span> <span class="n">theta</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="tests">Tests</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">concat</span>
+
+<span class="n">_test_concat</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span>               <span class="s">'2.222222222222222222222222'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">2.956938891377988</span><span class="p">,</span> <span class="s">'2.358132134558914423337759'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">2.99</span><span class="p">,</span>              <span class="s">'2.359151928424242424242446'</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_concat</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_concat</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">concat</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
