@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      304 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 304</h1>
+  <em>completed April  5, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>The key to this problem is in the modulo.  Ends up that the Fibonacci sequence
+is cyclical for every modulo.  It’s just a matter of finding what the period –
+referred to as the Pisano period – of this cycle is.  Without this, the values
+of the Fibonacci numbers would be prohibitively high.</p>
+
+<p>I was able to find the period by looking at the
+<a href="https://oeis.org/A001175">OEIS</a> page for the Pisano periods.  It included
+several methods on how to find this number.  I ended up using a small python
+algorithm shared there.  I decided not to include this in my final code since
+it is much more code to find the number than it is to just figure it out once
+and save it to a variable.</p>
+
+<p>My program is much slower than I would like it to be.  Most of the time is
+taken up in just finding and saving all the Fibonacci numbers.  When not saved
+to a list, this process seems to be much faster.  I was unable to find
+something that worked any faster.  However, there are a couple of things that I
+believe will speed this up.  First, only find the Fibonacci numbers that are
+required instead of the full 900,788,112 of them to complete the cycle.
+Second, I am reading and learning of a way to extend the sieve of Eratosthenes
+past the first \(\sqrt{n}\) numbers.  I believe I can find the first group of
+primes as I have here, then use those to sieve for another set of them
+\(&gt;10^{14}\).</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modulo</span> <span class="o">=</span> <span class="mi">1234567891011</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+
+    <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">isprime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isprime</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+            <span class="n">sieve</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">p</span>
+
+    <span class="n">period</span> <span class="o">=</span> <span class="mi">900788112</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">fibs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">period</span><span class="p">:</span>
+        <span class="n">fibs</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="n">modulo</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">next_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">+=</span> <span class="mi">2</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">stop</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">k</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">%</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="nb">AssertionError</span><span class="p">(</span><span class="s">'not enough primes'</span><span class="p">)</span>
+
+    <span class="n">total</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">14</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">next_prime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">fibs</span><span class="p">[</span><span class="n">p</span> <span class="o">%</span> <span class="n">period</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">total</span> <span class="o">%</span> <span class="n">modulo</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="tests">Tests</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">428562224098</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1081741301637</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">526706959321</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">262434673500</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
