@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      220 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 220</h1>
+  <em>completed April 20, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>This was one of the rare problems when I found myself going off and exploring
+topics related to the problem with greater interest than actually completing
+the problem.</p>
+
+<p>It involves the Heighway Dragon, a fractal that is the same what happens when
+you repeatedly fold a piece of paper along the same axis. It’s one of the more
+beautiful fractals I’ve seen, in my opinion at least. What’s great about it is
+its construction is well suited to turtle graphics.</p>
+
+<p>After making a working solution, I immediately added the Python <code class="language-plaintext highlighter-rouge">turtle</code> module
+to my <code class="language-plaintext highlighter-rouge">Turtle</code> class. This was super helpful with debugging because I could
+easily see the errors in the program and exactly where there were occurring.
+But of course, this led me off on a wonderful adventure in drawing.</p>
+
+<p><img src="../img/dragon.png" alt="dragon" /></p>
+
+<p>I would like to further explore ideas of color, line thickness, and angle in
+this dragon. Rendering the above image took a very long time and slowed
+considerably as it went. I know there must be performance gains to be found.</p>
+
+<p>As far as the problem itself goes, it’s recursive, based on powers of 2.
+Program runs almost instantly and seems to work with values of $n = 10^10000$
+and possibly greater.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">position_for</span><span class="p">(</span><span class="n">pwr</span><span class="p">,</span> <span class="n">faces</span><span class="p">):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">pwr</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">faces</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="o">-</span><span class="n">val</span>
+    <span class="n">cycle</span> <span class="o">=</span> <span class="n">pwr</span> <span class="o">%</span> <span class="mi">8</span>
+
+    <span class="k">if</span> <span class="n">cycle</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">val</span>
+    <span class="k">elif</span> <span class="n">cycle</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">val</span><span class="p">,</span> <span class="n">val</span>
+    <span class="k">elif</span> <span class="n">cycle</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">val</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">cycle</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">val</span><span class="p">,</span> <span class="o">-</span><span class="n">val</span>
+    <span class="k">elif</span> <span class="n">cycle</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">val</span>
+    <span class="k">if</span> <span class="n">cycle</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">val</span><span class="p">,</span> <span class="o">-</span><span class="n">val</span>
+    <span class="k">elif</span> <span class="n">cycle</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">val</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">cycle</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">val</span><span class="p">,</span> <span class="n">val</span>
+
+<span class="k">def</span> <span class="nf">facing</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">))[</span><span class="mi">2</span><span class="p">:].</span><span class="n">count</span><span class="p">(</span><span class="s">"1"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">:</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">k</span><span class="p">).</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">relx</span><span class="p">,</span> <span class="n">rely</span> <span class="o">=</span> <span class="n">position_for</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">facing</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">relx</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">rely</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">steps</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="tests">Tests</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">16</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">36</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">108</span><span class="p">,</span> <span class="mi">156</span><span class="p">)),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">104</span><span class="p">,</span> <span class="o">-</span><span class="mi">1008</span><span class="p">)),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'m,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="art">Art</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">turtle</span> <span class="k">as</span> <span class="n">t</span>
+
+<span class="k">class</span> <span class="nc">Turtle</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">Turtle</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">draw</span><span class="p">:</span>
+            <span class="n">t</span><span class="p">.</span><span class="n">mode</span><span class="p">(</span><span class="s">'logo'</span><span class="p">)</span>
+            <span class="n">t</span><span class="p">.</span><span class="n">hideturtle</span><span class="p">()</span>
+            <span class="n">t</span><span class="p">.</span><span class="n">setup</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="p">.</span><span class="mi">90</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="p">.</span><span class="mi">90</span><span class="p">)</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Turtle</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">speed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">hideturtle</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">steps</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">draw</span> <span class="o">=</span> <span class="n">draw</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">facing</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">position</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">steps</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">facing</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">heading</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">facing</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">facing</span> <span class="o">==</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">facing</span> <span class="o">==</span> <span class="mi">180</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">y</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">x</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">draw</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">color</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">16</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s">'#'</span><span class="o">+</span><span class="nb">hex</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">color</span><span class="p">)[</span><span class="mi">2</span><span class="p">:].</span><span class="n">rjust</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">'0'</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">pencolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Turtle</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">forward</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">scale</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">facing</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">facing</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">draw</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Turtle</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">right</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">facing</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">facing</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">draw</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Turtle</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">left</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">heading</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">facing</span>
+
+<span class="k">def</span> <span class="nf">D</span><span class="p">():</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="s">'R'</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">new_word</span> <span class="o">=</span> <span class="n">word</span>
+        <span class="k">yield</span> <span class="k">from</span> <span class="n">word</span><span class="p">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">new_word</span> <span class="o">+=</span> <span class="s">'R'</span>
+        <span class="k">yield</span> <span class="s">'R'</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">word</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s">'R'</span><span class="p">:</span>
+                <span class="n">new_word</span> <span class="o">+=</span> <span class="s">'L'</span>
+                <span class="k">yield</span> <span class="s">'L'</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_word</span> <span class="o">+=</span> <span class="s">'R'</span>
+                <span class="k">yield</span> <span class="s">'R'</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">new_word</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">turtle</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="n">draw</span><span class="p">)</span>
+    <span class="n">turtle</span><span class="p">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">D</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">turtle</span><span class="p">.</span><span class="n">steps</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span>
+            <span class="nb">input</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">turtle</span><span class="p">.</span><span class="n">position</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s">'R'</span><span class="p">:</span>
+            <span class="n">turtle</span><span class="p">.</span><span class="n">right</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+            <span class="n">turtle</span><span class="p">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+            <span class="n">turtle</span><span class="p">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+            <span class="n">turtle</span><span class="p">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
