@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      213 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 213</h1>
+  <em>completed August 20, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>I just finished my upper divisional linear algebra course (I took a lower
+divisional one back in high school) and wanted more practice with applications
+that could be solved using matrices.</p>
+
+<p>This problem is just a random walks problem.  I created a $900\times 900$
+Markov matrix $A$, one row/column for each square in the grid.  Each $a_{i,j}$
+entry in this matrix represent the probability a flea will jump from location
+$i$ to location $j$.  Therefore, the transition matrix for this problem is
+$A^n$ where $n$ is the number of times the fleas move positions.</p>
+
+<p>I struggled a bit to figure out what to do with this matrix once I got it.  I
+read several articles about random walks and though it helped, none of them
+discussed situations where there were multiple walks going on at once.</p>
+
+<p>To better understand the problem on my own, I then implemented a brute force
+method.  This did two things.  It helped me see the relationship between matrix
+$A$ and the number of empty squares.  It also helped me write several tests.</p>
+
+<p>From here I was able to take these tests back to my matrix implementation and
+get the final solution.  For each square on the grid, I needed to find the
+probability that it will not have a flea on it.  Then, add these probabilities
+together.</p>
+
+<p>I used NumPy and it was blazingly fast.  The speed in which it found $A$ raised
+to any power was nearly constant.  For that reason, I was even able to
+calculate the expected number of empty squares after $1{,}000{,}000$ rings of
+the bell.  After this many iterations, the system begins to find a steady
+state.  A cool problem would have been to find the expected number of empty
+squares after an infinite number of bell rings.  That would have been fun
+because then I could have gotten practice with eigenvectors and eigenvalues!</p>
+
+<p>Runs in about 0.6 seconds with Python 3.9.6.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="k">def</span> <span class="nf">markov_matrix</span><span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">bells</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">neighbors_of</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">neighbors</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="o">!=</span> <span class="n">grid_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">neighbors</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">neighbors</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="n">grid_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">neighbors</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">neighbors</span>
+
+    <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grid_size</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grid_size</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">from_n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grid_size</span><span class="o">**</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">neighbors_of</span><span class="p">(</span><span class="n">from_n</span><span class="p">)</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">neighbor_i</span><span class="p">,</span> <span class="n">neighbor_j</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">:</span>
+            <span class="n">to_n</span> <span class="o">=</span> <span class="n">grid_size</span><span class="o">*</span><span class="n">neighbor_i</span> <span class="o">+</span> <span class="n">neighbor_j</span>
+            <span class="n">matrix</span><span class="p">[</span><span class="n">to_n</span><span class="p">][</span><span class="n">from_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob</span>
+
+    <span class="k">return</span> <span class="n">numpy</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">bells</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">bells</span><span class="p">):</span>
+    <span class="n">markov</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">=</span> <span class="n">markov_matrix</span><span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">bells</span><span class="p">),</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">markov</span><span class="p">:</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+            <span class="n">prob</span> <span class="o">-=</span> <span class="n">prob</span> <span class="o">*</span> <span class="n">col</span>
+        <span class="n">zeros</span> <span class="o">+=</span> <span class="n">prob</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">zeros</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="tests">Tests</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">markov_matrix</span>
+
+<span class="n">_test_markov_matrix</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">]]),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,m,expect'</span><span class="p">,</span> <span class="n">_test_markov_matrix</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_markov_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">markov_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">).</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">2.725309</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">4.777778</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,m,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
