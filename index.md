@@ -8,6 +8,9 @@ website I am getting these problems from. I intend for this to be a repository
 for what I've learned from this experience and not a searchable site for those
 looking for an easy answer.
 
+Check out the [highlights]({{ site.url }}{{ site.baseurl }}/problems/highlights)
+for a list of my favorite problems.
+
 ----------
 
 ## Problems

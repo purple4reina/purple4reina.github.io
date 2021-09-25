@@ -93,42 +93,36 @@ infinitely polynomial series like this before so I definitely learned something
 new.  Which is super awesome.</p>
 
 <p>I did some research about how to solve these infinite polynomial series.  I
-found that Σx^n for n {0..∞} is 1/(1 - x).  That didn’t apply here, but what
+found that $\sum_{n=0}^\infty x^n=\frac1{1-x}$.  That didn’t apply here, but what
 was interesting was how this solution was derived.  I then used a similar
-method to figure out the answer to this A(x).</p>
+method to figure out the answer to this $A(x)$. Let $F(n)$ be the Fibonacci
+sequence with $F(0)=0$, $F(1)=1$, and $F(2)=1$:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        A(x) = Σ F(n)*x^n, for n {0..∞}, where F(n) is the Fibonacci sequence
-             = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
-</code></pre></div></div>
+\[A(x)=\displaystyle\sum_{n=0}^\infty F(n)\,x^n=x+x^2+2x^3+3x^4+5x^5+8x^6+\dots\]
 
-<p>Multiply each side by x</p>
+<p>Multiply each side by $x$:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      x*A(x) =     x^2 +  x^3 + 2x^4 + 3x^5 + 5x^6 + ...
-</code></pre></div></div>
+\[x\,A(x)=x^2+x^3+2x^4+3x^5+5x^6+\dots\]
 
-<p>Add A(x) and x*A(x) together</p>
+<p>Add $A(x)$ and $x\,A(x)$ together</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  A(x)*(x+1) = x +2x^2 + 3x^3 + 5x^4 + 8x^5 +13x^6 + ...
-</code></pre></div></div>
+\[(x+1)\,A(x)=x+2x^2+3x^3+5x^4+8x^5+13x^6+\dots\]
 
-<p>Multiply each side by x again</p>
+<p>Multiply each side by $x$ again:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x*A(x)*(x+1) =     x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + ...
-             = A(x) - x
-</code></pre></div></div>
+\[x(x+1)\,A(x)=x^2+2x^3+3x^4+5x^5+8x^6+\dots{}=A(x)-x\]
 
-<p>Rearranging</p>
+<p>Rearranging:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>           0 = A(x)*x^2 + (A(x)+1)*x - A(x)
-</code></pre></div></div>
+\[A(x)\,x^2+\left(A(x)+1\right)x-A(x)=0\]
 
-<p>And since we know A(x) and are solving for x, we can use the quadradic formula
-to solve for x.  This means that for x to be rational, then the determinant
-must be a perfect square.  This allows us to find all the values of A(x) for
-which x is rational.</p>
+<p>And since we know $A(x)$ and are solving for $x$, we can use the quadradic
+formula to solve for $x$.  This means that for $x$ to be rational, then the
+determinant must be a perfect square.  This allows us to find all the values of
+$A(x)$ for which $x$ is rational.</p>
 
-<p>Since I knew the value of A(x) would probably be pretty large, I looked for a
-pattern in the values of the determinant for which x was rational.  These
+<p>Since I knew the value of $A(x)$ would probably be pretty large, I looked for a
+pattern in the values of the determinant for which $x$ was rational.  These
 numbers followed the pattern in
 <a href="https://oeis.org/A033889">https://oeis.org/A033889</a>.  It was from here that I
 was able to get the answer.</p>
