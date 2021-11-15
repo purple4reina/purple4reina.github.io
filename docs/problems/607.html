@@ -107,6 +107,11 @@ subtracted from the variable. Where $F$ is the equation to optimize:</p>
 
 \[a_{i+1}=a_i-\nabla F(a_i)=a_i-\frac{\partial}{\partial a_i}F(a_i)\]
 
+<p>What this process does is iteratively find smaller and smaller values for the
+function. At each iteration, it finds the direction with the steepest descent
+and inches its way forward in that direction.  This is analogous to a ball
+rolling down a hill until it finds the bottom.</p>
+
 <p>From here it was just taking the partial derivatives and solving. Runs in about
 40 milliseconds with Pypy3.</p>
 
