@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      267 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 267</h1>
+  <em>completed November 16, 2021</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>I had so many embarrassing mistakes while working on this problem. I misread
+the problem statement. I calculated the power of two incorrectly. I made an
+error writing a large number in scientific notation.</p>
+
+<p>With all those issues worked out though, this problem was easy to grasp. I
+started by creating the equation defining how much money you will have after
+$h$ coin flips landing on heads, given the value $f$.</p>
+
+\[(2f+1)^h\:(1-f)^{1000-h}\]
+
+<p>This allowed me to determine the smallest number of heads required for each
+value of $f$. Plotting these values, you can easily see there is a single clear
+minimum value.</p>
+
+<p><img src="../img/267-heads.png" alt="minimum heads" /></p>
+
+<p>From here, it is just binomial probabilities to get the answer.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">log_1e9</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e9</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">smallest_h</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1001</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">h</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">f</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">log_1e9</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">h</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s">'nan'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">():</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="n">heads</span> <span class="o">=</span> <span class="n">next_heads</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="k">while</span> <span class="n">next_heads</span> <span class="o">&lt;=</span> <span class="n">heads</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="mf">0.01</span>
+        <span class="n">heads</span><span class="p">,</span> <span class="n">next_heads</span> <span class="o">=</span> <span class="n">next_heads</span><span class="p">,</span> <span class="n">smallest_h</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="n">prob</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">heads</span><span class="p">,</span> <span class="mi">1001</span><span class="p">):</span>
+        <span class="n">prob</span> <span class="o">+=</span> <span class="n">math</span><span class="p">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">prob</span> <span class="o">/=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1000</span>
+
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">())</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
