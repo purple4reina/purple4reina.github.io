@@ -88,17 +88,17 @@
   <hr />
   <h2 id="comments">Comments</h2>
 
-<p>I think the lenght of this code speaks for the complexity of this problem. Or
+<p>I think the length of this code speaks for the complexity of this problem. Or
 rather, its lack there of.</p>
 
 <h2 id="code">Code</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>problem = []
-for a in range(2, 101):
-	for b in range(2, 101):
-		if a**b not in problem:
-			problem.append(a**b)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">problem</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">**</span><span class="n">b</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">problem</span><span class="p">:</span>
+            <span class="n">problem</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="n">b</span><span class="p">)</span>
 
-print len(problem)
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>
