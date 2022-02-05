@@ -84,7 +84,7 @@ function chooseColor() {
 
 // Adds new words to the page with a delay of eight seconds
 
-var wordTiming = setInterval(addWord, 8000);
+var wordTiming = setInterval(addWord, 15000);
 
 
 // Calls checkText function as user types
