@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      808 &middot; Rey Abolofia
+    
+  </title>
+
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/poole.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/syntax.css">
+  <link rel="stylesheet" href="https://purple4reina.github.io//public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://purple4reina.github.io//public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="https://purple4reina.github.io//public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-1a">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Rey Abolofia
+        </a>
+      </h1>
+      <p class="lead">mathematical and programmatic musings with a few cats</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://purple4reina.github.io/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/purple4reina">GitHub</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/rabolofia/">LinkedIn</a>
+    </nav>
+
+    <p class="sidebar-copyright">&copy; <script>document.write(new Date().getFullYear())</script>. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Problem 808</h1>
+  <em>completed February 17, 2023</em>
+  <hr />
+  <h2 id="comments">Comments</h2>
+
+<p>This was another straightforward problem. It came down to looping through all
+primes and storing their squares. If the reverse of one of these prime squares
+has already been seen, then it is a reversible prime square.</p>
+
+<p>Using a sieve to create the primes, gets the answer in roughly 8 seconds with
+Python 3.10.8.</p>
+
+<h2 id="code">Code</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sieve</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+    <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">isprime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isprime</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">yield</span> <span class="n">p</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+            <span class="n">sieve</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="n">p</span>
+
+<span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">k</span> <span class="o">+</span> <span class="n">mod</span>
+    <span class="k">return</span> <span class="n">k</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">sieve</span><span class="p">(</span><span class="mi">31100101</span><span class="p">):</span>
+        <span class="n">squ</span> <span class="o">=</span> <span class="n">prime</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="n">squ</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span> <span class="o">+</span> <span class="n">squ</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">total</span>
+        <span class="n">seen</span><span class="p">[</span><span class="n">squ</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="tests">Tests</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">sieve</span>
+
+<span class="n">_test_sieve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span>
+        <span class="mi">71</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span>
+        <span class="mi">149</span><span class="p">,</span> <span class="mi">151</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">167</span><span class="p">,</span> <span class="mi">173</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">193</span><span class="p">,</span> <span class="mi">197</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span>
+        <span class="mi">227</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">241</span><span class="p">,</span> <span class="mi">251</span><span class="p">,</span> <span class="mi">257</span><span class="p">,</span> <span class="mi">263</span><span class="p">,</span> <span class="mi">269</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">277</span><span class="p">,</span> <span class="mi">281</span><span class="p">,</span> <span class="mi">283</span><span class="p">,</span> <span class="mi">293</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_sieve</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_test_sieve</span><span class="p">,</span> <span class="n">sieve</span><span class="p">(</span><span class="mi">300</span><span class="p">)):</span>
+        <span class="k">assert</span> <span class="n">e</span> <span class="o">==</span> <span class="n">a</span>
+
+<span class="n">_test_reverse</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">41</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">61</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">71</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">81</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">91</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_reverse</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_reverse</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">reverse</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">_test_not_solve</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">3611678744236</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">113361847418</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1183208424</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1163845887</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">29627292</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">11002896</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">172156</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_not_solve</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_not_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">!=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
