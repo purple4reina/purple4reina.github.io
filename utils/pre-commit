@@ -2,5 +2,5 @@
 
 bundle install
 rm -rf docs/
-JEKYLL_ENV=production jekyll build --trace --config _config.yml,_config.production.yml
+JEKYLL_ENV=production bundle exec jekyll build --trace --config _config.yml,_config.production.yml
 git add docs/
