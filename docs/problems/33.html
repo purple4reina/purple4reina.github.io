@@ -97,20 +97,20 @@ find the four fractions necessary.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#take a string of form (1, 2, a, b) and make it into one word or number of form 12ab
 </span><span class="k">def</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>		
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>		
 	
 
 <span class="c1"># find: ab / bc = a / c
 </span>
 <span class="n">myset</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-		<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-			<span class="n">ab</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">str2num</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)))</span>
-			<span class="n">bc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">str2num</span><span class="p">((</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)))</span>
-			<span class="k">if</span> <span class="p">((</span><span class="n">ab</span> <span class="o">/</span> <span class="n">bc</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ab</span> <span class="o">!=</span> <span class="n">bc</span><span class="p">):</span>
-				<span class="k">print</span> <span class="n">ab</span><span class="p">,</span> <span class="s">'/'</span><span class="p">,</span> <span class="n">bc</span>
-				<span class="n">myset</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+			<span class="n">ab</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nf">str2num</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)))</span>
+			<span class="n">bc</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="nf">str2num</span><span class="p">((</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)))</span>
+			<span class="nf">if </span><span class="p">((</span><span class="n">ab</span> <span class="o">/</span> <span class="n">bc</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="nf">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="nf">float</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ab</span> <span class="o">!=</span> <span class="n">bc</span><span class="p">):</span>
+				<span class="k">print</span> <span class="n">ab</span><span class="p">,</span> <span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">,</span> <span class="n">bc</span>
+				<span class="n">myset</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
 			
 <span class="k">print</span> <span class="n">myset</span>
 </code></pre></div></div>

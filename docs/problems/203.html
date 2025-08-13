@@ -94,7 +94,7 @@ script. I wrote the nCk function, though I bet Python already has it.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">math</span> <span class="kn">import</span> <span class="n">factorial</span>
 
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -102,7 +102,7 @@ script. I wrote the nCk function, though I bet Python already has it.</p>
 	<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">False</span>
 	<span class="k">else</span><span class="p">:</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
 			<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 		<span class="k">return</span> <span class="bp">True</span>
 
@@ -112,7 +112,7 @@ script. I wrote the nCk function, though I bet Python already has it.</p>
 	<span class="k">else</span><span class="p">:</span>
 		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
 			<span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span>
-			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 				<span class="k">return</span> <span class="n">p</span>
 
 <span class="k">def</span> <span class="nf">squarefree</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -125,21 +125,21 @@ script. I wrote the nCk function, though I bet Python already has it.</p>
 			<span class="n">n</span> <span class="o">/=</span> <span class="n">p</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 		<span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
 			<span class="k">return</span> <span class="bp">False</span>
-		<span class="n">p</span> <span class="o">=</span> <span class="n">nextprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+		<span class="n">p</span> <span class="o">=</span> <span class="nf">nextprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">C</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-	<span class="k">return</span> <span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)))</span>
+	<span class="nf">return </span><span class="p">(</span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nf">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)))</span>
 
 
 <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">tested</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">51</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-		<span class="n">this</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="n">tested</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">51</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="n">this</span> <span class="o">=</span> <span class="nc">C</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
 		<span class="k">if</span> <span class="n">this</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tested</span><span class="p">:</span>
-			<span class="n">tested</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
-			<span class="k">if</span> <span class="n">squarefree</span><span class="p">(</span><span class="n">this</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">tested</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
+			<span class="k">if</span> <span class="nf">squarefree</span><span class="p">(</span><span class="n">this</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 				<span class="n">total</span> <span class="o">+=</span> <span class="n">this</span>
 
 <span class="k">print</span> <span class="n">total</span>

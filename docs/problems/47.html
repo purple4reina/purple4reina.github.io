@@ -90,10 +90,10 @@
   <h2 id="code">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="s">'false'</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'false'</span>
-	<span class="k">return</span> <span class="s">'true'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">false</span><span class="sh">'</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">false</span><span class="sh">'</span>
+	<span class="k">return</span> <span class="sh">'</span><span class="s">true</span><span class="sh">'</span>
 
 <span class="n">primeslist</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -107,14 +107,14 @@
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
 	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="s">'true'</span><span class="p">:</span> <span class="n">primeslist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="sh">'</span><span class="s">true</span><span class="sh">'</span><span class="p">:</span> <span class="n">primeslist</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">count</span>
-	<span class="k">if</span> <span class="n">factorcount</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+	<span class="k">if</span> <span class="nf">factorcount</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
 		<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 	<span class="k">else</span><span class="p">:</span>
 		<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="s">'is the fourth number'</span>
+<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="sh">'</span><span class="s">is the fourth number</span><span class="sh">'</span>
 </code></pre></div></div>
 
 </div>

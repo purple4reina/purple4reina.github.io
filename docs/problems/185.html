@@ -93,46 +93,46 @@
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">random</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">crossover</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-	<span class="n">a</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-	<span class="n">b</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-	<span class="n">cut</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="n">cut</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">cut</span><span class="p">:])</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+	<span class="n">cut</span> <span class="o">=</span> <span class="nf">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="n">cut</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">cut</span><span class="p">:])</span>
 
 <span class="k">def</span> <span class="nf">mutation</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-	<span class="n">a</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-	<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
-		<span class="n">a</span> <span class="o">=</span> <span class="s">'0'</span> <span class="o">+</span> <span class="n">a</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+	<span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
+		<span class="n">a</span> <span class="o">=</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span> <span class="o">+</span> <span class="n">a</span>
 	<span class="n">aList</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
-		<span class="n">aList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-	<span class="n">randindex</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
-	<span class="n">aList</span><span class="p">[</span><span class="n">randindex</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">aList</span><span class="p">))</span>
+		<span class="n">aList</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+	<span class="n">randindex</span> <span class="o">=</span> <span class="nf">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
+	<span class="n">aList</span><span class="p">[</span><span class="n">randindex</span><span class="p">]</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="nf">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+	<span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">aList</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">exchange</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-	<span class="n">a</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-	<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
-		<span class="n">a</span> <span class="o">=</span> <span class="s">'0'</span> <span class="o">+</span> <span class="n">a</span>
+	<span class="n">a</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+	<span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
+		<span class="n">a</span> <span class="o">=</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span> <span class="o">+</span> <span class="n">a</span>
 	<span class="n">aList</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
-		<span class="n">aList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-	<span class="n">randindex1</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
-	<span class="n">randindex2</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
+		<span class="n">aList</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+	<span class="n">randindex1</span> <span class="o">=</span> <span class="nf">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
+	<span class="n">randindex2</span> <span class="o">=</span> <span class="nf">randrange</span><span class="p">(</span><span class="n">digitLen</span><span class="p">)</span>
 	<span class="n">aList</span><span class="p">[</span><span class="n">randindex1</span><span class="p">],</span> <span class="n">aList</span><span class="p">[</span><span class="n">randindex2</span><span class="p">]</span> <span class="o">=</span> <span class="n">aList</span><span class="p">[</span><span class="n">randindex2</span><span class="p">],</span> <span class="n">aList</span><span class="p">[</span><span class="n">randindex1</span><span class="p">]</span>
-	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">aList</span><span class="p">))</span>
+	<span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">aList</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-	<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
-		<span class="n">n</span> <span class="o">=</span> <span class="s">'0'</span> <span class="o">+</span> <span class="n">n</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">digitLen</span><span class="p">:</span>
+		<span class="n">n</span> <span class="o">=</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span> <span class="o">+</span> <span class="n">n</span>
 	<span class="n">fitLevel</span> <span class="o">=</span> <span class="mi">0</span>
 	<span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">guessList</span><span class="p">:</span>
 		<span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
-		<span class="n">test</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">digitLen</span><span class="p">):</span>
+		<span class="n">test</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">digitLen</span><span class="p">):</span>
 			<span class="k">if</span> <span class="n">test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
 				<span class="n">correct</span> <span class="o">+=</span> <span class="mi">1</span>
 		<span class="k">if</span> <span class="n">correct</span> <span class="o">==</span> <span class="n">rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -144,31 +144,31 @@
 <span class="n">guesses</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">5616185650518293</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3847439647293047</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5855462940810587</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">9742855507068353</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4296849643607543</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3174248439465858</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4513559094146117</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">7890971548908067</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">8157356344118483</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2615250744386899</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">8690095851526254</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">6375711915077050</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6913859173121360</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6442889055042768</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2321386104303845</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2326509471271448</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">5251583379644322</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1748270476758276</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4895722652190306</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3041631117224635</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1841236454324589</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2659862637316867</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
 
 <span class="n">guessList</span> <span class="o">=</span> <span class="n">guesses</span>
-<span class="n">digitLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">guessList</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
-<span class="n">ruleLen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">guessList</span><span class="p">)</span>
+<span class="n">digitLen</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">guessList</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">ruleLen</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">guessList</span><span class="p">)</span>
 
-<span class="n">parent</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ruleLen</span><span class="p">,</span> <span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">digitLen</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">parent</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ruleLen</span><span class="p">,</span> <span class="nf">randrange</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">digitLen</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
 
 <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
 	<span class="n">z</span> <span class="o">+=</span> <span class="mi">1</span>
 	<span class="k">print</span> <span class="n">z</span><span class="p">,</span> <span class="n">parent</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parent</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 	<span class="n">child</span> <span class="o">=</span> <span class="p">{</span><span class="n">parent</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
-	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
 		
-		<span class="n">child1</span> <span class="o">=</span> <span class="n">crossover</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-		<span class="n">fitness1</span> <span class="o">=</span> <span class="n">fitness</span><span class="p">(</span><span class="n">child1</span><span class="p">)</span>
-		<span class="n">child</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">fitness1</span><span class="p">,</span> <span class="n">child1</span><span class="p">))</span>
+		<span class="n">child1</span> <span class="o">=</span> <span class="nf">crossover</span><span class="p">(</span><span class="nf">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="nf">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="n">fitness1</span> <span class="o">=</span> <span class="nf">fitness</span><span class="p">(</span><span class="n">child1</span><span class="p">)</span>
+		<span class="n">child</span><span class="p">.</span><span class="nf">add</span><span class="p">((</span><span class="n">fitness1</span><span class="p">,</span> <span class="n">child1</span><span class="p">))</span>
 		
-		<span class="n">child2</span> <span class="o">=</span> <span class="n">mutation</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-		<span class="n">fitness2</span> <span class="o">=</span> <span class="n">fitness</span><span class="p">(</span><span class="n">child2</span><span class="p">)</span>
-		<span class="n">child</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">fitness2</span><span class="p">,</span> <span class="n">child2</span><span class="p">))</span>
+		<span class="n">child2</span> <span class="o">=</span> <span class="nf">mutation</span><span class="p">(</span><span class="nf">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="n">fitness2</span> <span class="o">=</span> <span class="nf">fitness</span><span class="p">(</span><span class="n">child2</span><span class="p">)</span>
+		<span class="n">child</span><span class="p">.</span><span class="nf">add</span><span class="p">((</span><span class="n">fitness2</span><span class="p">,</span> <span class="n">child2</span><span class="p">))</span>
 		
-		<span class="n">child3</span> <span class="o">=</span> <span class="n">exchange</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-		<span class="n">fitness3</span> <span class="o">=</span> <span class="n">fitness</span><span class="p">(</span><span class="n">child3</span><span class="p">)</span>
-		<span class="n">child</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">fitness3</span><span class="p">,</span> <span class="n">child3</span><span class="p">))</span>		
+		<span class="n">child3</span> <span class="o">=</span> <span class="nf">exchange</span><span class="p">(</span><span class="nf">choice</span><span class="p">(</span><span class="n">parent</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+		<span class="n">fitness3</span> <span class="o">=</span> <span class="nf">fitness</span><span class="p">(</span><span class="n">child3</span><span class="p">)</span>
+		<span class="n">child</span><span class="p">.</span><span class="nf">add</span><span class="p">((</span><span class="n">fitness3</span><span class="p">,</span> <span class="n">child3</span><span class="p">))</span>		
 	
-	<span class="n">child</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">child</span><span class="p">))</span>
+	<span class="n">child</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">child</span><span class="p">))</span>
 	<span class="k">if</span> <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 		<span class="k">print</span> <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 		<span class="k">break</span>

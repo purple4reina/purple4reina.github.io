@@ -103,14 +103,14 @@ any larger is python’s recursion limit.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
 
 <span class="k">def</span> <span class="nf">solve_by_power</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
     <span class="c1"># the n will be (2**e - 1)
 </span>    <span class="n">last</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">this</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">last</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">this</span> <span class="o">=</span> <span class="nf">int</span><span class="p">((</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">last</span>
         <span class="n">total</span> <span class="o">+=</span> <span class="n">this</span>
         <span class="n">last</span> <span class="o">=</span> <span class="n">this</span>
     <span class="k">return</span> <span class="n">total</span>
@@ -121,8 +121,8 @@ any larger is python’s recursion limit.</p>
         <span class="k">return</span> <span class="n">_solve</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
 
     <span class="c1"># total to nearest power of 2
-</span>    <span class="n">nearest_power_of_2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="n">solve_by_power</span><span class="p">(</span><span class="n">nearest_power_of_2</span><span class="p">)</span>
+</span>    <span class="n">nearest_power_of_2</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nf">solve_by_power</span><span class="p">(</span><span class="n">nearest_power_of_2</span><span class="p">)</span>
 
     <span class="c1"># figure out how many numbers are left total
 </span>    <span class="n">total_num_left</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">**</span><span class="n">nearest_power_of_2</span> <span class="o">+</span> <span class="mi">1</span>
@@ -130,7 +130,7 @@ any larger is python’s recursion limit.</p>
     <span class="c1"># figure out how many numbers are left from previous
 </span>    <span class="n">num_from_prev</span> <span class="o">=</span> <span class="n">total_num_left</span> <span class="o">//</span> <span class="mi">2</span>
     <span class="n">further_power_of_2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">nearest_power_of_2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">total</span> <span class="o">+=</span> <span class="n">solve</span><span class="p">(</span><span class="n">further_power_of_2</span> <span class="o">+</span> <span class="n">num_from_prev</span><span class="p">)</span> <span class="o">-</span> <span class="n">solve</span><span class="p">(</span><span class="n">further_power_of_2</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="nf">solve</span><span class="p">(</span><span class="n">further_power_of_2</span> <span class="o">+</span> <span class="n">num_from_prev</span><span class="p">)</span> <span class="o">-</span> <span class="nf">solve</span><span class="p">(</span><span class="n">further_power_of_2</span><span class="p">)</span>
 
     <span class="c1"># get the alternator number
 </span>    <span class="n">total</span> <span class="o">+=</span> <span class="n">nearest_power_of_2</span> <span class="o">*</span> <span class="p">(</span><span class="n">total_num_left</span> <span class="o">-</span> <span class="n">num_from_prev</span><span class="p">)</span>
@@ -138,16 +138,16 @@ any larger is python’s recursion limit.</p>
     <span class="n">_solve</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span>
     <span class="k">return</span> <span class="n">total</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
 <span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
@@ -160,9 +160,9 @@ any larger is python’s recursion limit.</p>
         <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2365782338</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

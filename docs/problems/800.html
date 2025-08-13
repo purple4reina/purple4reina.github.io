@@ -126,15 +126,15 @@ solutions. Code runs in 200 seconds using Python 3.10.8.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
 
 <span class="k">def</span> <span class="nf">sieve</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
     <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">isprime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">isprime</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">isprime</span><span class="p">:</span>
             <span class="k">continue</span>
-        <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="n">num</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">p</span>
         <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
             <span class="n">sieve</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
@@ -142,45 +142,45 @@ solutions. Code runs in 200 seconds using Python 3.10.8.</p>
     <span class="k">return</span> <span class="n">primes</span>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">logn</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">logn</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">primes</span> <span class="o">=</span> <span class="n">sieve</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
-    <span class="n">lenprimes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+    <span class="n">logn</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">logn</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">primes</span> <span class="o">=</span> <span class="nf">sieve</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
+    <span class="n">lenprimes</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lenprimes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">lenprimes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">logp</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lenprimes</span><span class="p">):</span>
+        <span class="n">logp</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lenprimes</span><span class="p">):</span>
             <span class="n">q</span> <span class="o">=</span> <span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">q</span><span class="o">*</span><span class="n">logp</span> <span class="o">+</span> <span class="n">p</span><span class="o">*</span><span class="n">math</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">logn</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">q</span><span class="o">*</span><span class="n">logp</span> <span class="o">+</span> <span class="n">p</span><span class="o">*</span><span class="n">math</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">logn</span><span class="p">:</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">j</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">count</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">break</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
 <span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">pytest</span><span class="p">.</span><span class="n">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'800**1'</span><span class="p">),</span>
-        <span class="n">pytest</span><span class="p">.</span><span class="n">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'800**2'</span><span class="p">),</span>
-        <span class="n">pytest</span><span class="p">.</span><span class="n">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'800**3'</span><span class="p">),</span>
-        <span class="n">pytest</span><span class="p">.</span><span class="n">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'800**3'</span><span class="p">),</span>
-        <span class="n">pytest</span><span class="p">.</span><span class="n">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">800</span><span class="p">,</span> <span class="mi">10790</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'800**800'</span><span class="p">),</span>
+        <span class="n">pytest</span><span class="p">.</span><span class="nf">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">800**1</span><span class="sh">'</span><span class="p">),</span>
+        <span class="n">pytest</span><span class="p">.</span><span class="nf">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">800**2</span><span class="sh">'</span><span class="p">),</span>
+        <span class="n">pytest</span><span class="p">.</span><span class="nf">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">800**3</span><span class="sh">'</span><span class="p">),</span>
+        <span class="n">pytest</span><span class="p">.</span><span class="nf">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">800**3</span><span class="sh">'</span><span class="p">),</span>
+        <span class="n">pytest</span><span class="p">.</span><span class="nf">param</span><span class="p">(</span><span class="mi">800</span><span class="o">**</span><span class="mi">800</span><span class="p">,</span> <span class="mi">10790</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">800**800</span><span class="sh">'</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

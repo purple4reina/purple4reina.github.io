@@ -114,51 +114,51 @@ just brushed my teeth and got ready for bed while it was running :)</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">is_harshad</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="nb">sum</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="nf">str</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="nb">sum</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="bp">False</span>
 
 
 <span class="k">def</span> <span class="nf">is_right_truncatable_harshad</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-    <span class="n">str_num</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="n">str_num</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
     <span class="n">running_sum</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_num</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">str_num</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">t_num</span> <span class="o">=</span> <span class="n">str_num</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">running_sum</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_num</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">t_num</span><span class="p">)</span> <span class="o">%</span> <span class="n">running_sum</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">running_sum</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">t_num</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nf">int</span><span class="p">(</span><span class="n">t_num</span><span class="p">)</span> <span class="o">%</span> <span class="n">running_sum</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
     <span class="k">return</span> <span class="bp">True</span>
 
 
 <span class="k">def</span> <span class="nf">is_strong_harshad_number</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="nb">sum</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="nf">str</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">num</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="nb">sum</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="nb">sum</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">False</span>
 
 
 <span class="k">def</span> <span class="nf">is_strong_right_truncatable_harshad_prime</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">check_prime</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    <span class="n">str_num</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_num</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">str_num</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">str_num</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">False</span>
     <span class="k">if</span> <span class="n">check_prime</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">False</span>
-    <span class="n">truncated</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">is_strong_harshad_number</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span> <span class="ow">and</span> \
-            <span class="n">is_right_truncatable_harshad</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span>
+    <span class="n">truncated</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">num</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nf">is_strong_harshad_number</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span> <span class="ow">and</span> \
+            <span class="nf">is_right_truncatable_harshad</span><span class="p">(</span><span class="n">truncated</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">sum_strong_right_truncatable_harshad_primes_less_than</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1"># FIXME: Since running through so many primes is going to be impossible, we
 </span>    <span class="c1"># will have to build the numbers from scratch instead.
-</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prime_generator</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">is_strong_right_truncatable_harshad_prime</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">check_prime</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">prime_generator</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">is_strong_right_truncatable_harshad_prime</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">check_prime</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
             <span class="nb">sum</span> <span class="o">+=</span> <span class="n">i</span>
     <span class="k">return</span> <span class="nb">sum</span>
 
@@ -168,62 +168,62 @@ just brushed my teeth and got ready for bed while it was running :)</p>
 
 <span class="k">def</span> <span class="nf">get_right_truncatable_harshad_numbers_below</span><span class="p">(</span><span class="nb">max</span><span class="p">):</span>
     <span class="n">harshads_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
-    <span class="n">new_harshads</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">harshads_list</span><span class="p">)</span>
+    <span class="n">new_harshads</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">harshads_list</span><span class="p">)</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">new_harshads</span> <span class="o">=</span> <span class="n">_build_next_truncatables</span><span class="p">(</span><span class="n">new_harshads</span><span class="p">)</span>
+        <span class="n">new_harshads</span> <span class="o">=</span> <span class="nf">_build_next_truncatables</span><span class="p">(</span><span class="n">new_harshads</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">new_harshad</span> <span class="ow">in</span> <span class="n">new_harshads</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">new_harshad</span> <span class="o">&gt;=</span> <span class="nb">max</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">harshads_list</span>
-            <span class="n">harshads_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">)</span>
+            <span class="n">harshads_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">)</span>
 
 
-<span class="n">_single_digits</span> <span class="o">=</span> <span class="p">(</span><span class="s">'0'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">,</span> <span class="s">'2'</span><span class="p">,</span> <span class="s">'3'</span><span class="p">,</span> <span class="s">'4'</span><span class="p">,</span> <span class="s">'5'</span><span class="p">,</span> <span class="s">'6'</span><span class="p">,</span> <span class="s">'7'</span><span class="p">,</span> <span class="s">'8'</span><span class="p">,</span> <span class="s">'9'</span><span class="p">)</span>
-<span class="n">_single_odds</span> <span class="o">=</span> <span class="p">(</span><span class="s">'1'</span><span class="p">,</span> <span class="s">'3'</span><span class="p">,</span> <span class="s">'5'</span><span class="p">,</span> <span class="s">'7'</span><span class="p">,</span> <span class="s">'9'</span><span class="p">)</span>
+<span class="n">_single_digits</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">3</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">4</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">5</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">6</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">7</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">8</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">9</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">_single_odds</span> <span class="o">=</span> <span class="p">(</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">3</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">5</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">7</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">9</span><span class="sh">'</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_build_next_truncatables</span><span class="p">(</span><span class="n">harshads_list</span><span class="p">):</span>
     <span class="n">next_harshads</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">harshad</span> <span class="ow">in</span> <span class="n">harshads_list</span><span class="p">:</span>
-        <span class="n">harshad_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">harshad</span><span class="p">)</span>
+        <span class="n">harshad_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">harshad</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">_single_digits</span><span class="p">:</span>
-            <span class="n">new_harshad</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">harshad_str</span> <span class="o">+</span> <span class="n">digit</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">is_harshad</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">):</span>  <span class="c1"># TODO: this can be cached
-</span>                <span class="n">next_harshads</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">)</span>
+            <span class="n">new_harshad</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">harshad_str</span> <span class="o">+</span> <span class="n">digit</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nf">is_harshad</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">):</span>  <span class="c1"># TODO: this can be cached
+</span>                <span class="n">next_harshads</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">next_harshads</span>
 
 
 <span class="k">def</span> <span class="nf">get_strong_right_truncatable_harshads_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="n">harshads</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">harshad</span> <span class="ow">in</span> <span class="n">get_right_truncatable_harshad_numbers_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">is_strong_harshad_number</span><span class="p">(</span><span class="n">harshad</span><span class="p">):</span>
-            <span class="n">harshads</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">harshad</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">harshad</span> <span class="ow">in</span> <span class="nf">get_right_truncatable_harshad_numbers_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">is_strong_harshad_number</span><span class="p">(</span><span class="n">harshad</span><span class="p">):</span>
+            <span class="n">harshads</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">harshad</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">harshads</span>
 
 
 <span class="k">def</span> <span class="nf">get_strong_right_truncatable_harshad_primes_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="n">harshads</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">harshad</span> <span class="ow">in</span> <span class="n">get_strong_right_truncatable_harshads_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="n">new_harshads</span> <span class="o">=</span> <span class="n">_build_harshad_primes_from</span><span class="p">(</span><span class="n">harshad</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">harshad</span> <span class="ow">in</span> <span class="nf">get_strong_right_truncatable_harshads_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="n">new_harshads</span> <span class="o">=</span> <span class="nf">_build_harshad_primes_from</span><span class="p">(</span><span class="n">harshad</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">new_harshad</span> <span class="ow">in</span> <span class="n">new_harshads</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">new_harshad</span> <span class="o">&gt;=</span> <span class="n">num</span><span class="p">:</span>
                 <span class="k">break</span>
-            <span class="n">harshads</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">)</span>
+            <span class="n">harshads</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">harshads</span>
 
 
 <span class="k">def</span> <span class="nf">_build_harshad_primes_from</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="n">harshads</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">num_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="n">num_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="n">_single_odds</span><span class="p">:</span>
-        <span class="n">new_harshad</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_str</span> <span class="o">+</span> <span class="n">digit</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">):</span>
-            <span class="n">harshads</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">)</span>
+        <span class="n">new_harshad</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">num_str</span> <span class="o">+</span> <span class="n">digit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">):</span>
+            <span class="n">harshads</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">new_harshad</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">harshads</span>
 
 
 <span class="k">def</span> <span class="nf">sum_strong_right_truncatable_harshad_primes_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">harshad</span> <span class="ow">in</span> <span class="n">get_strong_right_truncatable_harshad_primes_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">harshad</span> <span class="ow">in</span> <span class="nf">get_strong_right_truncatable_harshad_primes_below</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
         <span class="nb">sum</span> <span class="o">+=</span> <span class="n">harshad</span>
     <span class="k">return</span> <span class="nb">sum</span>
 
@@ -241,14 +241,14 @@ just brushed my teeth and got ready for bed while it was running :)</p>
     <span class="k">elif</span> <span class="ow">not</span> <span class="p">(</span><span class="n">num</span> <span class="o">%</span> <span class="mi">2</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">False</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prime_generator</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="p">(</span><span class="n">num</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">prime_generator</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="p">(</span><span class="n">num</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">num</span> <span class="o">%</span> <span class="n">i</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>
 
 
 <span class="k">def</span> <span class="nf">prime_generator</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="nb">max</span> <span class="o">=</span> <span class="nb">max</span> <span class="ow">or</span> <span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="nb">max</span> <span class="ow">or</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">_primes</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">prime</span> <span class="o">&lt;=</span> <span class="nb">max</span><span class="p">:</span>
@@ -258,22 +258,22 @@ just brushed my teeth and got ready for bed while it was running :)</p>
 
     <span class="n">num</span> <span class="o">=</span> <span class="n">prime</span> <span class="o">+</span> <span class="mi">2</span>
     <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="nb">max</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
             <span class="k">yield</span> <span class="n">num</span>
-            <span class="n">_primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="n">_primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
         <span class="n">num</span> <span class="o">+=</span> <span class="mi">2</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">sum_strong_right_truncatable_harshad_primes_below</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">14</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="k">print</span> <span class="nf">sum_strong_right_truncatable_harshad_primes_below</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">14</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="tests-and-benchmarks">Tests and Benchmarks</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">import</span> <span class="nn">time</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">import</span> <span class="n">time</span>
 
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="p">(</span><span class="n">is_harshad</span><span class="p">,</span> <span class="n">is_right_truncatable_harshad</span><span class="p">,</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="p">(</span><span class="n">is_harshad</span><span class="p">,</span> <span class="n">is_right_truncatable_harshad</span><span class="p">,</span>
         <span class="n">is_strong_harshad_number</span><span class="p">,</span> <span class="n">is_strong_right_truncatable_harshad_prime</span><span class="p">,</span>
         <span class="n">sum_strong_right_truncatable_harshad_primes_less_than</span> <span class="k">as</span> <span class="n">sum_less_than</span><span class="p">,</span>
         <span class="n">get_right_truncatable_harshad_numbers_below</span><span class="p">,</span>
@@ -283,7 +283,7 @@ just brushed my teeth and got ready for bed while it was running :)</p>
 <span class="p">)</span>
 
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'number,expected'</span><span class="p">,</span> <span class="p">(</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">number,expected</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span>
     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
@@ -300,11 +300,11 @@ just brushed my teeth and got ready for bed while it was running :)</p>
     <span class="p">(</span><span class="mi">202</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
 <span class="p">))</span>
 <span class="k">def</span> <span class="nf">test_is_harshad</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">is_harshad</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">is_harshad</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'number,expected'</span><span class="p">,</span> <span class="p">(</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">number,expected</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span>
     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
@@ -313,11 +313,11 @@ just brushed my teeth and got ready for bed while it was running :)</p>
     <span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
 <span class="p">))</span>
 <span class="k">def</span> <span class="nf">test_is_right_truncatable_harshad</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">is_right_truncatable_harshad</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">is_right_truncatable_harshad</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'number,expected'</span><span class="p">,</span> <span class="p">(</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">number,expected</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span>
     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
@@ -326,11 +326,11 @@ just brushed my teeth and got ready for bed while it was running :)</p>
     <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
 <span class="p">))</span>
 <span class="k">def</span> <span class="nf">test_is_strong_harshad_number</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">is_strong_harshad_number</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">is_strong_harshad_number</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'number,expected'</span><span class="p">,</span> <span class="p">(</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">number,expected</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span>
     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
@@ -348,11 +348,11 @@ just brushed my teeth and got ready for bed while it was running :)</p>
     <span class="p">(</span><span class="mi">2011</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
 <span class="p">))</span>
 <span class="k">def</span> <span class="nf">test_is_strong_right_truncatable_harshad_prime_true</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">is_strong_right_truncatable_harshad_prime</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">check_prime</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">is_strong_right_truncatable_harshad_prime</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">check_prime</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'number,expected'</span><span class="p">,</span> <span class="p">(</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">number,expected</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span>
     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
@@ -370,17 +370,17 @@ just brushed my teeth and got ready for bed while it was running :)</p>
     <span class="p">(</span><span class="mi">2011</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
 <span class="p">))</span>
 <span class="k">def</span> <span class="nf">test_is_strong_right_truncatable_harshad_prime_false</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">is_strong_right_truncatable_harshad_prime</span><span class="p">(</span><span class="n">number</span><span class="p">,</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">is_strong_right_truncatable_harshad_prime</span><span class="p">(</span><span class="n">number</span><span class="p">,</span>
             <span class="n">check_prime</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'number,expected'</span><span class="p">,</span> <span class="p">(</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">number,expected</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span>
     <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">90619</span><span class="p">),</span>
 <span class="p">))</span>
 <span class="k">def</span> <span class="nf">test_sum_strong_right_truncatable_harshad_primes_less_than</span><span class="p">(</span><span class="n">number</span><span class="p">,</span>
         <span class="n">expected</span><span class="p">):</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">sum_less_than</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">sum_less_than</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
 
@@ -388,21 +388,21 @@ just brushed my teeth and got ready for bed while it was running :)</p>
     <span class="n">max_value</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span>
             <span class="mi">40</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">get_right_truncatable_harshad_numbers_below</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">get_right_truncatable_harshad_numbers_below</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">get_right_truncatable_harshad_numbers_below</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">get_right_truncatable_harshad_numbers_below</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span>
 
 
 <span class="k">def</span> <span class="nf">test_get_strong_right_truncatable_harshads_below</span><span class="p">():</span>
     <span class="n">max_value</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">84</span><span class="p">]</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">get_strong_right_truncatable_harshads_below</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">get_strong_right_truncatable_harshads_below</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">get_strong_right_truncatable_harshads_below</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">==</span> <span class="mi">26</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">get_strong_right_truncatable_harshads_below</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">==</span> <span class="mi">26</span>
 
 
 <span class="k">def</span> <span class="nf">test_get_strong_right_truncatable_harshad_primes_below</span><span class="p">():</span>
@@ -410,30 +410,30 @@ just brushed my teeth and got ready for bed while it was running :)</p>
     <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">181</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">271</span><span class="p">,</span> <span class="mi">277</span><span class="p">,</span> <span class="mi">421</span><span class="p">,</span> <span class="mi">457</span><span class="p">,</span> <span class="mi">631</span><span class="p">,</span> <span class="mi">2011</span><span class="p">,</span> <span class="mi">2017</span><span class="p">,</span> <span class="mi">2099</span><span class="p">,</span> <span class="mi">2473</span><span class="p">,</span>
             <span class="mi">2477</span><span class="p">,</span> <span class="mi">4021</span><span class="p">,</span> <span class="mi">4027</span><span class="p">,</span> <span class="mi">4073</span><span class="p">,</span> <span class="mi">4079</span><span class="p">,</span> <span class="mi">4231</span><span class="p">,</span> <span class="mi">4813</span><span class="p">,</span> <span class="mi">4817</span><span class="p">,</span> <span class="mi">6037</span><span class="p">,</span> <span class="mi">8011</span><span class="p">,</span> <span class="mi">8017</span><span class="p">,</span>
             <span class="mi">8039</span><span class="p">,</span> <span class="mi">8461</span><span class="p">,</span> <span class="mi">8467</span><span class="p">]</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">get_strong_right_truncatable_harshad_primes_below</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">get_strong_right_truncatable_harshad_primes_below</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
 
 <span class="k">def</span> <span class="nf">test_sum_strong_right_truncatable_harshad_primes_below</span><span class="p">():</span>
     <span class="n">max_value</span> <span class="o">=</span> <span class="mi">10000</span>
     <span class="n">expected</span> <span class="o">=</span> <span class="mi">90619</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">sum_below</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="nf">sum_below</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span>
 
 
 <span class="k">def</span> <span class="nf">benchmark_sum_strong_right_truncatable_harshad_primes_less_than</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">problem</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="n">problem</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
         <span class="n">problem</span><span class="p">.</span><span class="n">_primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
-        <span class="k">assert</span> <span class="n">sum_less_than</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="o">==</span> <span class="mi">90619</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span> <span class="s">"time for %d iterations: %f sec"</span> <span class="o">%</span> <span class="p">(</span><span class="n">iters</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s">"time per iteration: %f sec"</span> <span class="o">%</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">iters</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nf">sum_less_than</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="o">==</span> <span class="mi">90619</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    <span class="k">print</span> <span class="sh">"</span><span class="s">time for %d iterations: %f sec</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">iters</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+    <span class="k">print</span> <span class="sh">"</span><span class="s">time per iteration: %f sec</span><span class="sh">"</span> <span class="o">%</span> <span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">iters</span><span class="p">)</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="n">benchmark_sum_strong_right_truncatable_harshad_primes_less_than</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">benchmark_sum_strong_right_truncatable_harshad_primes_less_than</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

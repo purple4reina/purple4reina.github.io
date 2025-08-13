@@ -108,21 +108,21 @@ the running, only just starts the race a bit faster.</p>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="nb">max</span><span class="p">):</span>
     <span class="n">total</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">fact_sub</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fact_sub</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fact_sub</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
             <span class="n">factors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="n">v</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">prime_factors</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">factors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">factors</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-            <span class="n">fact_sub</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">fact_sub</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">v</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nf">prime_factors</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">factors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">factors</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">fact_sub</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">fact_sub</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">v</span>
 
         <span class="n">row_total</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">cache_key</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">cache</span> <span class="o">=</span> <span class="n">_exponents_cache</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">cache_key</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="n">cache</span> <span class="o">=</span> <span class="n">_exponents_cache</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">cache</span><span class="p">:</span>
                 <span class="n">prime_total</span> <span class="o">=</span> <span class="n">cache</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">prime</span><span class="p">,</span> <span class="n">exponents</span> <span class="o">=</span> <span class="n">cache_key</span>
-                <span class="n">numerator</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">prime</span><span class="p">,</span> <span class="n">exponents</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">numerator</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="n">prime</span><span class="p">,</span> <span class="n">exponents</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
                 <span class="n">denominator</span> <span class="o">=</span> <span class="n">prime</span> <span class="o">-</span> <span class="mi">1</span>
                 <span class="n">prime_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">numerator</span> <span class="o">//</span> <span class="n">denominator</span><span class="p">)</span> <span class="o">%</span> <span class="n">MODULO</span>
                 <span class="n">_exponents_cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">prime_total</span>
@@ -140,16 +140,16 @@ the running, only just starts the race a bit faster.</p>
 
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
         <span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span>
-        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">p</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">p</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">_primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
             <span class="k">yield</span> <span class="n">p</span>
 
 <span class="k">def</span> <span class="nf">prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">primes_iterator</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="nf">primes_iterator</span><span class="p">():</span>
         <span class="n">exponent</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">while</span> <span class="n">n</span> <span class="o">%</span> <span class="n">prime</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">n</span> <span class="o">//=</span> <span class="n">prime</span>
@@ -159,17 +159,17 @@ the running, only just starts the race a bit faster.</p>
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">factors</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="nb">max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="nb">max</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="nb">max</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="n">pytest</span>
 
 <span class="n">_solve_tests</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
@@ -218,9 +218,9 @@ the running, only just starts the race a bit faster.</p>
 </span>    <span class="c1">#(3000, 665284696),
 </span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_solve_tests</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_solve_tests</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

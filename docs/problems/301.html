@@ -101,14 +101,14 @@ But, it told me I could look up the algorithm for X(a, b, c), so I did.</p>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">X</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">k</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nc">X</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">k</span><span class="p">):</span>
             <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">total</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div></div>
 
 </div>

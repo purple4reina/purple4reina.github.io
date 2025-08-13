@@ -97,26 +97,26 @@ sequencing.</p>
 <h2 id="code">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">seq</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-		<span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">)))</span>
+	<span class="nf">if </span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+		<span class="k">return</span> <span class="nf">float</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">)))</span>
 	<span class="k">else</span><span class="p">:</span>
-		<span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">return</span> <span class="nf">float</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">e</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 		<span class="k">return</span> <span class="mi">2</span>
 	<span class="k">else</span><span class="p">:</span>
-		<span class="n">frac</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
-		<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-			<span class="n">frac</span> <span class="o">=</span> <span class="p">[</span><span class="n">frac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">frac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">seq</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">frac</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+		<span class="n">frac</span> <span class="o">=</span> <span class="p">[</span><span class="nf">float</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nf">float</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+		<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+			<span class="n">frac</span> <span class="o">=</span> <span class="p">[</span><span class="n">frac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">frac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nf">seq</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">frac</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 		<span class="k">return</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">frac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">frac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">frac</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
 	
 	
-<span class="n">e_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="mi">100</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">e_string</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">e</span><span class="p">(</span><span class="mi">100</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
 <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">e_string</span><span class="p">:</span>
-	<span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 	<span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
 <span class="k">print</span> <span class="n">total</span>
 </code></pre></div></div>

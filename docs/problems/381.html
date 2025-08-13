@@ -96,16 +96,16 @@ always work.  Funny that!  In which case <code class="language-plaintext highlig
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">sieve</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sympy</span> <span class="kn">import</span> <span class="n">sieve</span>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sieve</span><span class="p">.</span><span class="n">primerange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="p">((</span><span class="n">p</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sieve</span><span class="p">.</span><span class="nf">primerange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="p">((</span><span class="n">p</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nf">pow</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>
     <span class="k">return</span> <span class="n">total</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">))</span>
 </code></pre></div></div>
 
 </div>

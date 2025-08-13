@@ -97,30 +97,30 @@ tile in it.</p>
 <h2 id="code">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 
 <span class="k">def</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="n">replaceset</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-		<span class="n">new</span> <span class="o">=</span> <span class="n">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
-		<span class="n">replaceset</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">str2num</span><span class="p">(</span><span class="n">new</span><span class="p">))</span>
-	<span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">replaceset</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+		<span class="n">new</span> <span class="o">=</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+		<span class="n">replaceset</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">str2num</span><span class="p">(</span><span class="n">new</span><span class="p">))</span>
+	<span class="k">return</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">replaceset</span><span class="p">)</span>
 
 
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
-<span class="n">choice</span> <span class="o">=</span> <span class="s">'0123456789_'</span>
+<span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="n">choice</span> <span class="o">=</span> <span class="sh">'</span><span class="s">0123456789_</span><span class="sh">'</span>
 
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">choice</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-	<span class="k">if</span> <span class="s">'_'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span> <span class="k">continue</span>
-	<span class="n">this</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">isprime</span><span class="p">,</span> <span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
-	<span class="n">count</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">product</span><span class="p">(</span><span class="n">choice</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+	<span class="k">if</span> <span class="sh">'</span><span class="s">_</span><span class="sh">'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span> <span class="k">continue</span>
+	<span class="n">this</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="n">isprime</span><span class="p">,</span> <span class="nf">replace</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
+	<span class="n">count</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span> <span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">count</span>
 </code></pre></div></div>
 

@@ -123,7 +123,7 @@ right rotations fit the requirement.  Runs in about 13 seconds with Pypy3.</p>
         <span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
             <span class="n">p</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">d</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+            <span class="n">d</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nf">divmod</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">d</span>
             <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">break</span>
@@ -133,35 +133,35 @@ right rotations fit the requirement.  Runs in about 13 seconds with Pypy3.</p>
 
     <span class="n">found</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="n">period</span><span class="p">,</span> <span class="n">perdigits</span> <span class="o">=</span> <span class="n">periodof</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">period</span><span class="p">,</span> <span class="n">perdigits</span> <span class="o">=</span> <span class="nf">periodof</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">period</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="n">tenminus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">period</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">tenperiod</span> <span class="o">=</span> <span class="n">tenminus</span> <span class="o">*</span> <span class="mi">10</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
             <span class="n">num</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">perdigits</span>
             <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">tenperiod</span><span class="p">:</span>
                 <span class="k">break</span>
-            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="n">div</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nf">divmod</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
             <span class="n">rot</span> <span class="o">=</span> <span class="n">div</span> <span class="o">+</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">tenminus</span>
             <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">rot</span><span class="p">:</span>
                 <span class="k">break</span>
             <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">tenminus</span> <span class="ow">and</span> <span class="n">rot</span> <span class="o">%</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">found</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 
-    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
         <span class="n">num</span> <span class="o">=</span> <span class="n">d</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">digits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">digits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">num</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">num</span> <span class="o">+</span> <span class="n">d</span>
             <span class="n">found</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">found</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+    <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">found</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div></div>
 
 </div>

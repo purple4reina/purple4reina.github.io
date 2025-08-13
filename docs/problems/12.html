@@ -102,28 +102,28 @@ and see if they are triangular.</p>
 
 <h3 id="code">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">start_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
 
 
 <span class="n">tri_num</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">tri_fact</span><span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
 	<span class="k">print</span> <span class="n">i</span>
 	<span class="n">tri_num</span><span class="o">=</span> <span class="n">tri_num</span><span class="o">+</span><span class="n">i</span>
-	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">tri_num</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">tri_num</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">tri_num</span><span class="o">%</span><span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
 			<span class="n">tri_fact</span><span class="o">=</span> <span class="n">tri_fact</span><span class="o">+</span><span class="mi">1</span>
 	<span class="k">if</span> <span class="n">tri_fact</span><span class="o">&gt;</span><span class="mi">500</span><span class="p">:</span>
-		<span class="k">print</span> <span class="n">tri_num</span><span class="p">,</span> <span class="s">'Here is the answer!'</span>
+		<span class="k">print</span> <span class="n">tri_num</span><span class="p">,</span> <span class="sh">'</span><span class="s">Here is the answer!</span><span class="sh">'</span>
 		<span class="k">break</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span> <span class="k">break</span>
 	<span class="k">else</span><span class="p">:</span>
 		<span class="n">tri_fact</span><span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">if</span> <span class="n">tri_fact</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-	<span class="k">print</span> <span class="s">'Sorry, try next time!'</span>
+	<span class="k">print</span> <span class="sh">'</span><span class="s">Sorry, try next time!</span><span class="sh">'</span>
 
-<span class="n">end_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">end_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
 <span class="n">elapse_time</span><span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
 <span class="k">print</span> <span class="n">elapse_time</span>
 </code></pre></div></div>
@@ -144,28 +144,28 @@ plaguing me all day!</p>
 
 <h3 id="code-1">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">start_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">'Process started'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="sh">'</span><span class="s">Process started</span><span class="sh">'</span>
 
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">):</span>
 	<span class="n">tri_num</span><span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
 	<span class="n">tri_fact</span><span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">tri_num</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">int</span><span class="p">((</span><span class="n">tri_num</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">tri_num</span><span class="o">%</span><span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
 			<span class="n">tri_fact</span><span class="o">=</span> <span class="n">tri_fact</span><span class="o">+</span><span class="mi">2</span>
 		<span class="k">if</span> <span class="n">j</span><span class="o">*</span><span class="n">j</span><span class="o">==</span><span class="n">tri_num</span><span class="p">:</span>
 			<span class="n">tri_fact</span><span class="o">=</span> <span class="n">tri_fact</span><span class="o">-</span><span class="mi">1</span>
 	<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">tri_num</span><span class="p">,</span> <span class="n">tri_fact</span>
 	<span class="k">if</span> <span class="n">tri_fact</span><span class="o">&gt;</span><span class="mi">500</span><span class="p">:</span>
-		<span class="k">print</span> <span class="n">tri_num</span><span class="p">,</span> <span class="s">'Here is the answer!'</span>
+		<span class="k">print</span> <span class="n">tri_num</span><span class="p">,</span> <span class="sh">'</span><span class="s">Here is the answer!</span><span class="sh">'</span>
 		<span class="k">break</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span> <span class="k">break</span>
 	
 
-<span class="n">end_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">end_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
 <span class="n">elapse_time</span><span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
-<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="s">'seconds have passed'</span>
+<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="sh">'</span><span class="s">seconds have passed</span><span class="sh">'</span>
 </code></pre></div></div>
 
 </div>

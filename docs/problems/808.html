@@ -100,7 +100,7 @@ Python 3.10.8.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sieve</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
     <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">isprime</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">isprime</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">sieve</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">isprime</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="k">yield</span> <span class="n">p</span>
@@ -112,16 +112,16 @@ Python 3.10.8.</p>
 <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
-        <span class="n">n</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nf">divmod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
         <span class="n">k</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">k</span> <span class="o">+</span> <span class="n">mod</span>
     <span class="k">return</span> <span class="n">k</span>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">seen</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">sieve</span><span class="p">(</span><span class="mi">31100101</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="nf">sieve</span><span class="p">(</span><span class="mi">31100101</span><span class="p">):</span>
         <span class="n">squ</span> <span class="o">=</span> <span class="n">prime</span> <span class="o">**</span> <span class="mi">2</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="n">squ</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">squ</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
             <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span> <span class="o">+</span> <span class="n">squ</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">2</span>
@@ -129,16 +129,16 @@ Python 3.10.8.</p>
                 <span class="k">return</span> <span class="n">total</span>
         <span class="n">seen</span><span class="p">[</span><span class="n">squ</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">sieve</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">sieve</span>
 
 <span class="n">_test_sieve</span> <span class="o">=</span> <span class="p">(</span>
         <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span>
@@ -148,7 +148,7 @@ Python 3.10.8.</p>
         <span class="mi">281</span><span class="p">,</span> <span class="mi">283</span><span class="p">,</span> <span class="mi">293</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_sieve</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_test_sieve</span><span class="p">,</span> <span class="n">sieve</span><span class="p">(</span><span class="mi">300</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">_test_sieve</span><span class="p">,</span> <span class="nf">sieve</span><span class="p">(</span><span class="mi">300</span><span class="p">)):</span>
         <span class="k">assert</span> <span class="n">e</span> <span class="o">==</span> <span class="n">a</span>
 
 <span class="n">_test_reverse</span> <span class="o">=</span> <span class="p">(</span>
@@ -174,9 +174,9 @@ Python 3.10.8.</p>
         <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_reverse</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_reverse</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_reverse</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">reverse</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="n">_test_not_solve</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">3611678744236</span><span class="p">),</span>
@@ -188,9 +188,9 @@ Python 3.10.8.</p>
         <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">172156</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_not_solve</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_not_solve</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_not_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">!=</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">!=</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

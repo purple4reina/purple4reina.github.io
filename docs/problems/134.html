@@ -103,7 +103,7 @@ previous round. This cut runtime down incredibly.</p>
 	<span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">False</span>
 	<span class="k">else</span><span class="p">:</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
 			<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 		<span class="k">return</span> <span class="bp">True</span>
 
@@ -113,22 +113,22 @@ previous round. This cut runtime down incredibly.</p>
 	<span class="k">else</span><span class="p">:</span>
 		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
 			<span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span>
-			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 				<span class="k">return</span> <span class="n">p</span>
 
 <span class="k">def</span> <span class="nf">multfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">p2</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
-		<span class="k">return</span> <span class="n">strconcfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
-	<span class="n">p1_last</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p1</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
-	<span class="n">p2_last</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p2</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+		<span class="k">return</span> <span class="nf">strconcfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+	<span class="n">p1_last</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">p1</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+	<span class="n">p2_last</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">p2</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
 	<span class="n">n_list</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">multDict</span><span class="p">[</span><span class="n">p1_last</span><span class="p">]:</span>
 		<span class="k">if</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">p2_last</span><span class="p">:</span>
-			<span class="n">n_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+			<span class="n">n_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
 		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_list</span><span class="p">:</span>
 			<span class="n">test</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">p2</span>
-			<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">p1</span><span class="p">):]</span> <span class="o">==</span> <span class="n">p1</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nf">str</span><span class="p">(</span><span class="n">test</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nf">len</span><span class="p">(</span><span class="n">p1</span><span class="p">):]</span> <span class="o">==</span> <span class="n">p1</span><span class="p">:</span>
 				<span class="k">return</span> <span class="n">test</span>
 			<span class="k">else</span><span class="p">:</span>
 				<span class="n">n_list</span> <span class="o">=</span> <span class="p">[(</span><span class="n">n</span><span class="o">+</span><span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_list</span><span class="p">]</span>
@@ -136,7 +136,7 @@ previous round. This cut runtime down incredibly.</p>
 <span class="k">def</span> <span class="nf">strconcfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
 	<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-		<span class="n">test</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">p1</span><span class="p">)</span>
+		<span class="n">test</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">p1</span><span class="p">)</span>
 		<span class="k">if</span> <span class="n">test</span><span class="o">%</span><span class="n">p2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="k">return</span> <span class="n">test</span>
 		<span class="k">else</span><span class="p">:</span>
@@ -147,27 +147,27 @@ previous round. This cut runtime down incredibly.</p>
 	<span class="k">global</span> <span class="n">primes</span>
 	<span class="k">global</span> <span class="n">multDict</span>
 		
-	<span class="n">multDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]))</span>
-	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-			<span class="n">multDict</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])].</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+	<span class="n">multDict</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]))</span>
+	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="n">multDict</span><span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])].</span><span class="nf">append</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
 			
 	<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-			<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-	<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">nextprime</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">nextprime</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 	
 
 
-<span class="n">Build</span><span class="p">()</span>
-<span class="n">p1</span> <span class="o">=</span> <span class="s">'5'</span>
+<span class="nc">Build</span><span class="p">()</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="sh">'</span><span class="s">5</span><span class="sh">'</span>
 <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">p2</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 	<span class="k">print</span> <span class="n">p2</span>
-	<span class="n">S</span> <span class="o">=</span> <span class="n">multfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+	<span class="n">S</span> <span class="o">=</span> <span class="nf">multfind</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
 	<span class="n">total</span> <span class="o">+=</span> <span class="n">S</span>
-	<span class="n">p1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+	<span class="n">p1</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">total</span>
 </code></pre></div></div>

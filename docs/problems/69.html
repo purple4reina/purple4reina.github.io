@@ -103,32 +103,32 @@ totient.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-		<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">phi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="n">pfact</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="n">answer</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">pfact</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">answer</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">pfact</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 		<span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
 			<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">pfact</span><span class="p">:</span>
-				<span class="n">answer</span> <span class="o">=</span> <span class="n">answer</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+				<span class="n">answer</span> <span class="o">=</span> <span class="n">answer</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nf">float</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
 			<span class="k">return</span> <span class="n">answer</span>
 		<span class="k">elif</span> <span class="n">n</span><span class="o">%</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-			<span class="n">pfact</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+			<span class="n">pfact</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
 <span class="n">phis</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-	<span class="n">phis</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">phi</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">n</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="n">phis</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="nf">float</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="nf">phi</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">n</span><span class="p">])</span>
 
-<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">phis</span><span class="p">)</span>
+<span class="k">print</span> <span class="nf">max</span><span class="p">(</span><span class="n">phis</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="try-one">Try One</h2>
@@ -136,19 +136,19 @@ totient.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">phi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
 	<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-			<span class="k">if</span> <span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+			<span class="nf">if </span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
 				<span class="k">break</span>
 		<span class="k">else</span><span class="p">:</span>
 			<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 	<span class="k">return</span> <span class="n">count</span>
 
 <span class="n">maximum</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">n</span>
-	<span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">phi</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">maximum</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-		<span class="n">maximum</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">phi</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">n</span><span class="p">]</span>
+	<span class="k">if</span> <span class="nf">float</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="nf">phi</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">maximum</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+		<span class="n">maximum</span> <span class="o">=</span> <span class="p">[</span><span class="nf">float</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="nf">phi</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">n</span><span class="p">]</span>
 	
 <span class="k">print</span> <span class="n">maximum</span>
 </code></pre></div></div>
@@ -157,21 +157,21 @@ totient.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">k</span>
-	<span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">gcd</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="o">%</span><span class="n">k</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="o">%</span><span class="n">k</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">phi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">gcd</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 			<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 	<span class="k">return</span> <span class="n">count</span>
 
 <span class="n">phis</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-	<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">phis</span><span class="p">)</span>
-	<span class="n">phis</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">phi</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">n</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="n">phis</span><span class="p">)</span>
+	<span class="n">phis</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="nf">float</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="nf">phi</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">n</span><span class="p">])</span>
 	
-<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">phis</span><span class="p">)</span>
+<span class="k">print</span> <span class="nf">max</span><span class="p">(</span><span class="n">phis</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

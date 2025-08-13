@@ -103,10 +103,10 @@ could be reversed. I just dealt with that by dividing by 2.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-	<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+	<span class="n">num</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 	<span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">81</span><span class="p">]:</span>
 		<span class="k">return</span> <span class="n">num</span>
 	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
@@ -118,7 +118,7 @@ could be reversed. I just dealt with that by dividing by 2.</p>
 	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">46</span><span class="p">:</span>
 		<span class="k">return</span> <span class="mi">49</span>
 	
-	<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+	<span class="n">num</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 	<span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">81</span><span class="p">]:</span>
 		<span class="k">return</span> <span class="n">num</span>
 	<span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
@@ -135,18 +135,18 @@ could be reversed. I just dealt with that by dividing by 2.</p>
 
 
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">cube1</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="mi">6</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">cube2</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="mi">6</span><span class="p">):</span>
-		<span class="n">this_combo</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">double</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">cube1</span><span class="p">,</span><span class="n">cube2</span><span class="p">):</span>
-			<span class="n">test</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">double</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cube1</span> <span class="ow">in</span> <span class="nf">combinations</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="mi">6</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">cube2</span> <span class="ow">in</span> <span class="nf">combinations</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="mi">6</span><span class="p">):</span>
+		<span class="n">this_combo</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">double</span> <span class="ow">in</span> <span class="nf">product</span><span class="p">(</span><span class="n">cube1</span><span class="p">,</span><span class="n">cube2</span><span class="p">):</span>
+			<span class="n">test</span> <span class="o">=</span> <span class="nf">square</span><span class="p">(</span><span class="n">double</span><span class="p">)</span>
 			<span class="k">if</span> <span class="n">test</span> <span class="o">!=</span> <span class="bp">False</span><span class="p">:</span>
-				<span class="n">this_combo</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+				<span class="n">this_combo</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
 				<span class="k">if</span> <span class="n">test</span> <span class="o">==</span> <span class="mi">64</span><span class="p">:</span>
-					<span class="n">this_combo</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
+					<span class="n">this_combo</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
 				<span class="k">elif</span> <span class="n">test</span> <span class="o">==</span> <span class="mi">49</span><span class="p">:</span>
-					<span class="n">this_combo</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
-		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">this_combo</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+					<span class="n">this_combo</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">this_combo</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
 			<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="k">print</span> <span class="n">count</span><span class="o">/</span><span class="mi">2</span>

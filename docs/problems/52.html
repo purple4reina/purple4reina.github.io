@@ -99,26 +99,26 @@ few seconds.</p>
 <h2 id="code">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#(1234) --&gt; [1, 2, 3, 4]
-</span><span class="kn">import</span> <span class="nn">re</span>
+</span><span class="kn">import</span> <span class="n">re</span>
 <span class="k">def</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'\B'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
+	<span class="k">return</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="sh">'</span><span class="s">\B</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
 
 <span class="c1">#take a string of form (1, 2, a, b) and make it into one word or number of form 12ab
 </span><span class="k">def</span> <span class="nf">str2num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>	
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>	
 
 
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+<span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">count</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
 	<span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
-	<span class="n">checkstring</span> <span class="o">=</span> <span class="n">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">checkstring</span> <span class="o">=</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="n">check</span> <span class="o">=</span> <span class="n">n</span>
 	<span class="c1">#checkstring = [1] + num2str(n)
 </span>	<span class="c1">#check = str2num(checkstring)
 </span>	<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">:</span>
-		<span class="n">against</span> <span class="o">=</span> <span class="n">num2str</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">check</span><span class="p">)</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-			<span class="k">if</span> <span class="n">against</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="n">checkstring</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">7</span>
+		<span class="n">against</span> <span class="o">=</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">check</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">against</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="n">checkstring</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">7</span>
 		<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span> <span class="k">print</span> <span class="n">check</span>
 		<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div></div>

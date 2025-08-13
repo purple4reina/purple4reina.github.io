@@ -98,7 +98,7 @@ inefficient to use the power function with these large numbers.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
 	<span class="n">answer</span> <span class="o">=</span> <span class="mi">1</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
 		<span class="n">answer</span> <span class="o">=</span> <span class="n">answer</span> <span class="o">*</span> <span class="n">b</span>
 	<span class="k">return</span> <span class="n">answer</span>
 
@@ -107,7 +107,7 @@ inefficient to use the power function with these large numbers.</p>
 <span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
 	<span class="k">print</span> <span class="n">p</span><span class="p">,</span> <span class="n">n</span>
-	<span class="n">big</span> <span class="o">=</span> <span class="n">power</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+	<span class="n">big</span> <span class="o">=</span> <span class="nf">power</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 	<span class="k">if</span> <span class="n">big</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
 		<span class="n">number</span> <span class="o">=</span> <span class="p">[</span><span class="n">big</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span>
 	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -126,8 +126,8 @@ solvable in under 1 second.</p>
 <h2 id="code-1">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">big</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span>
-	<span class="n">this</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span>
+	<span class="n">this</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nf">log</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 	<span class="k">if</span> <span class="n">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">big</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
 		<span class="n">big</span> <span class="o">=</span> <span class="n">this</span>
 

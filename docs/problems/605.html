@@ -113,59 +113,59 @@ applicable to my job.</p>
     <span class="k">return</span> <span class="n">a</span>
 
 <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">a</span><span class="o">//</span><span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="o">//</span><span class="n">g</span>
 
 <span class="k">def</span> <span class="nf">p</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="n">two_n_one</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">two_n_k</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">reduce</span><span class="p">(</span><span class="n">two_n_k</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">two_n_one</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="n">two_n_k</span><span class="p">,</span> <span class="n">two_n_one</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">two_n_one</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">two_n_k</span> <span class="o">=</span> <span class="nf">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">two_n_k</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">two_n_one</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="n">two_n_k</span><span class="p">,</span> <span class="n">two_n_one</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">m</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="n">num</span><span class="p">,</span> <span class="n">den</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">num</span><span class="p">,</span> <span class="n">den</span> <span class="o">=</span> <span class="nf">p</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">num</span> <span class="o">*</span> <span class="n">den</span>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">m</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">modulo</span>
+    <span class="k">return</span> <span class="nf">m</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">modulo</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">m</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">m</span>
 
 <span class="n">_test_p</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">49</span><span class="p">)),</span>
         <span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">368</span><span class="p">,</span> <span class="mi">1323</span><span class="p">)),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_p</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_p</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_p</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">p</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">p</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
 
 <span class="n">_test_m</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">588</span><span class="p">),</span>
         <span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">486864</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_m</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_m</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_m</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">m</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">m</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
 
 <span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">24818624</span><span class="p">),</span>
         <span class="p">((</span><span class="mi">99</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span> <span class="mi">80660992</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">solve</span><span class="p">(</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

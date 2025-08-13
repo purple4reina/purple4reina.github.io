@@ -101,10 +101,10 @@ the function ran very fast.</p>
 <h2 id="code">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">bouncy</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 	<span class="n">up</span> <span class="o">=</span> <span class="bp">False</span>
 	<span class="n">down</span> <span class="o">=</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
 			<span class="n">up</span> <span class="o">=</span> <span class="bp">True</span>
 		<span class="k">elif</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
@@ -113,16 +113,16 @@ the function ran very fast.</p>
 			<span class="k">return</span> <span class="bp">True</span>
 	<span class="k">return</span> <span class="bp">False</span>
 
-<span class="n">bouncies</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">bouncies</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="k">while</span> <span class="p">(</span><span class="n">bouncies</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">99</span><span class="p">:</span>
+<span class="nf">while </span><span class="p">(</span><span class="n">bouncies</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="nf">float</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">99</span><span class="p">:</span>
 	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-	<span class="k">if</span> <span class="n">bouncy</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="k">if</span> <span class="nf">bouncy</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 		<span class="n">bouncies</span> <span class="o">+=</span> <span class="mi">1</span>
 
 
-<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">bouncies</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">bouncies</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="nf">float</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div></div>
 
 </div>

@@ -105,51 +105,51 @@ zero. That got me the answer in less than a minute.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
 
-<span class="n">Pdict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">Pdict</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
 <span class="n">Pdict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">Pdict</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">def</span> <span class="nf">testP</span><span class="p">():</span>
-	<span class="k">assert</span> <span class="n">P</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-	<span class="k">assert</span> <span class="n">P</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
-	<span class="k">assert</span> <span class="n">P</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
-	<span class="k">assert</span> <span class="n">P</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
-	<span class="k">assert</span> <span class="n">P</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span>
-	<span class="k">assert</span> <span class="n">P</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="mi">11</span>
-	<span class="k">assert</span> <span class="n">P</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">==</span> <span class="mi">15</span>
-	<span class="k">assert</span> <span class="n">P</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="mi">22</span>
+	<span class="k">assert</span> <span class="nc">P</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+	<span class="k">assert</span> <span class="nc">P</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+	<span class="k">assert</span> <span class="nc">P</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+	<span class="k">assert</span> <span class="nc">P</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+	<span class="k">assert</span> <span class="nc">P</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span>
+	<span class="k">assert</span> <span class="nc">P</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="mi">11</span>
+	<span class="k">assert</span> <span class="nc">P</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">==</span> <span class="mi">15</span>
+	<span class="k">assert</span> <span class="nc">P</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="mi">22</span>
 <span class="c1">#	assert P(100) == 190569292
 </span>	
 
 <span class="k">def</span> <span class="nf">P</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
 		<span class="k">return</span> <span class="mi">0</span>
 	<span class="k">elif</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">Pdict</span><span class="p">:</span>
 		<span class="k">return</span> <span class="n">Pdict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
 	<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-		<span class="n">key1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-		<span class="n">key2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+		<span class="n">key1</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="n">key2</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 		<span class="nb">sum</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Pdict</span><span class="p">[</span><span class="n">key1</span><span class="p">]</span><span class="o">+</span><span class="n">Pdict</span><span class="p">[</span><span class="n">key2</span><span class="p">])</span>
-	<span class="n">Pdict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+	<span class="n">Pdict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">Pdict</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
 
-<span class="n">testP</span><span class="p">()</span>
+<span class="nf">testP</span><span class="p">()</span>
 
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
 	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-	<span class="n">Part</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">Part</span> <span class="o">=</span> <span class="nc">P</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">Part</span><span class="o">%</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 		<span class="k">print</span> <span class="n">n</span>
 		<span class="k">break</span>
 	<span class="k">elif</span> <span class="n">n</span><span class="o">%</span><span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-		<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-		<span class="k">print</span> <span class="s">'		'</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">start</span>
+		<span class="n">end</span> <span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
+		<span class="k">print</span> <span class="sh">'</span><span class="s">		</span><span class="sh">'</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">start</span>
 		<span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
 </code></pre></div></div>
 

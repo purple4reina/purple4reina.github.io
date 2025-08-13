@@ -113,55 +113,55 @@ duplicates created are just twists in the ring.</p>
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">minimal_orien</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">num</span><span class="p">)[</span><span class="mi">2</span><span class="p">:].</span><span class="n">rjust</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">,</span> <span class="s">'0'</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nf">bin</span><span class="p">(</span><span class="n">num</span><span class="p">)[</span><span class="mi">2</span><span class="p">:].</span><span class="nf">rjust</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">,</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">)</span>
         <span class="n">minim</span> <span class="o">=</span> <span class="n">num</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">num</span><span class="p">)):</span>
             <span class="n">seg</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="o">+</span> <span class="n">num</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">minim</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">seg</span><span class="p">,</span> <span class="n">minim</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">minim</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">minim</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">seg</span><span class="p">,</span> <span class="n">minim</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="n">minim</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="n">seq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">rings</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
         <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="n">concat</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="nf">concat</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
             <span class="k">return</span>
         <span class="n">last</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
             <span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="n">last</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="n">num</span> <span class="o">==</span> <span class="n">last</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span>
-            <span class="k">yield</span> <span class="k">from</span> <span class="n">rings</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="k">from</span> <span class="nf">rings</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
     <span class="n">total</span><span class="p">,</span> <span class="n">founds</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">ring</span> <span class="ow">in</span> <span class="n">rings</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">):</span>
-        <span class="n">minim</span> <span class="o">=</span> <span class="n">minimal_orien</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ring</span> <span class="ow">in</span> <span class="nf">rings</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">minim</span> <span class="o">=</span> <span class="nf">minimal_orien</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">minim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">founds</span><span class="p">:</span>
             <span class="n">total</span> <span class="o">+=</span> <span class="n">minim</span>
         <span class="n">founds</span><span class="p">[</span><span class="n">minim</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="n">total</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
 <span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">52</span><span class="p">),</span>
         <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">51504</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

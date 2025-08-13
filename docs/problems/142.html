@@ -105,39 +105,39 @@ bit.</p>
 		<span class="k">return</span> <span class="bp">False</span>
 
 <span class="k">def</span> <span class="nf">squaretest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+	<span class="k">if</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">False</span>
-	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+	<span class="k">elif</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">False</span>
-	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+	<span class="k">elif</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">False</span>
-	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+	<span class="k">elif</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">False</span>
-	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+	<span class="k">elif</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">False</span>
-	<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+	<span class="k">elif</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">False</span>
 	<span class="k">else</span><span class="p">:</span>
 		<span class="k">return</span> <span class="bp">True</span>
 
 <span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">issquare</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-		<span class="n">squares</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">bound</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">squares</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">x</span>
 	<span class="k">for</span> <span class="n">yi</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">:</span>
 		<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">yi</span>
 		<span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="k">break</span>
-		<span class="k">elif</span> <span class="n">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">elif</span> <span class="nf">issquare</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 			<span class="k">continue</span>
 		<span class="k">for</span> <span class="n">zi</span> <span class="ow">in</span> <span class="n">squares</span><span class="p">:</span>
 			<span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">zi</span>
 			<span class="k">if</span> <span class="n">z</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
 				<span class="k">break</span>
-			<span class="k">elif</span> <span class="n">squaretest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">elif</span> <span class="nf">squaretest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 				<span class="k">print</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">+</span><span class="n">z</span>
 				
 </code></pre></div></div>

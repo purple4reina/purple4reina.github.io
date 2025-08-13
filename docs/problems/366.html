@@ -100,33 +100,33 @@ thing everytime.</p>
 <h3 id="code">Code</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">'1'</span><span class="p">:</span> <span class="k">return</span> <span class="s">'2'</span>
-	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">'2'</span><span class="p">:</span> <span class="k">return</span> <span class="s">'1'</span>
+	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span>
+	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span>
 
 
 <span class="k">def</span> <span class="nf">game</span><span class="p">(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n_current</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">p</span>
-	<span class="n">p</span> <span class="o">=</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-	<span class="k">for</span> <span class="n">x2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">x2</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n_current</span> <span class="o">-</span> <span class="n">x2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="k">break</span>
-		<span class="k">if</span> <span class="n">game</span><span class="p">(</span><span class="n">n_current</span><span class="o">-</span><span class="n">x2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">game</span><span class="p">(</span><span class="n">n_current</span><span class="o">-</span><span class="n">x2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
 			<span class="k">continue</span>
 		<span class="k">else</span><span class="p">:</span>
 			<span class="k">return</span> <span class="n">p</span>
-	<span class="k">return</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">for</span> <span class="n">n_start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">n_start</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
 	<span class="k">print</span> <span class="n">n_start</span>
 	<span class="n">n_set</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_start</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">game</span><span class="p">(</span><span class="n">n_start</span> <span class="o">-</span> <span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1'</span><span class="p">:</span>
-			<span class="n">n_set</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_start</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">game</span><span class="p">(</span><span class="n">n_start</span> <span class="o">-</span> <span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">)</span> <span class="o">==</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">:</span>
+			<span class="n">n_set</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 		<span class="k">else</span><span class="p">:</span>
-			<span class="n">n_set</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-	<span class="n">count</span> <span class="o">+=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n_set</span><span class="p">)</span>
+			<span class="n">n_set</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="n">count</span> <span class="o">+=</span> <span class="nf">max</span><span class="p">(</span><span class="n">n_set</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">count</span>
 </code></pre></div></div>
@@ -143,48 +143,48 @@ block, but I’m not sure how to handle the errors.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">game_dict</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">'1'</span><span class="p">:</span> <span class="k">return</span> <span class="s">'2'</span>
-	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="s">'2'</span><span class="p">:</span> <span class="k">return</span> <span class="s">'1'</span>
+	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span>
+	<span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span>
 
 
 <span class="k">def</span> <span class="nf">game_comp</span><span class="p">(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n_current</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">p</span>
-	<span class="k">if</span> <span class="n">x1</span><span class="o">*</span><span class="mi">2</span> <span class="o">&gt;=</span> <span class="n">n_current</span><span class="p">:</span> <span class="k">return</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-	<span class="n">p</span> <span class="o">=</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-	<span class="k">for</span> <span class="n">x2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">x1</span><span class="o">*</span><span class="mi">2</span> <span class="o">&gt;=</span> <span class="n">n_current</span><span class="p">:</span> <span class="k">return</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">x2</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n_current</span> <span class="o">-</span> <span class="n">x2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="k">break</span>
-		<span class="k">if</span> <span class="n">game_comp</span><span class="p">(</span><span class="n">n_current</span><span class="o">-</span><span class="n">x2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">game_comp</span><span class="p">(</span><span class="n">n_current</span><span class="o">-</span><span class="n">x2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
 			<span class="k">continue</span>
 		<span class="k">else</span><span class="p">:</span>
 			<span class="n">game_dict</span><span class="p">[(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span> <span class="o">=</span> <span class="n">p</span>
 			<span class="k">return</span> <span class="n">p</span>
-	<span class="n">game_dict</span><span class="p">[(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span> <span class="o">=</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-	<span class="k">return</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="n">game_dict</span><span class="p">[(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span> <span class="o">=</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">n_start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_start</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-		<span class="n">game_comp</span><span class="p">(</span><span class="n">n_start</span> <span class="o">-</span> <span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n_start</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_start</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+		<span class="nf">game_comp</span><span class="p">(</span><span class="n">n_start</span> <span class="o">-</span> <span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">game</span><span class="p">(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n_current</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">p</span>
-	<span class="k">if</span> <span class="n">x1</span><span class="o">*</span><span class="mi">2</span> <span class="o">&gt;=</span> <span class="n">n_current</span><span class="p">:</span> <span class="k">return</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-	<span class="n">p</span> <span class="o">=</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-	<span class="k">for</span> <span class="n">x2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">x1</span><span class="o">*</span><span class="mi">2</span> <span class="o">&gt;=</span> <span class="n">n_current</span><span class="p">:</span> <span class="k">return</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">x2</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n_current</span> <span class="o">-</span> <span class="n">x2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="k">break</span>
 		<span class="k">try</span><span class="p">:</span>
-			<span class="k">if</span> <span class="n">game_dict</span><span class="p">[(</span><span class="n">n_current</span><span class="o">-</span><span class="n">x2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span> <span class="o">==</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">game_dict</span><span class="p">[(</span><span class="n">n_current</span><span class="o">-</span><span class="n">x2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span> <span class="o">==</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
 				<span class="k">continue</span>
 		<span class="k">except</span> <span class="nb">KeyError</span><span class="p">:</span>
 			<span class="n">game_dict</span><span class="p">[(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">p</span><span class="p">)]</span> <span class="o">=</span> <span class="n">p</span>
 			<span class="k">return</span> <span class="n">p</span>
-	<span class="n">game_dict</span><span class="p">[(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-	<span class="k">return</span> <span class="n">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="n">game_dict</span><span class="p">[(</span><span class="n">n_current</span><span class="p">,</span> <span class="n">x1</span><span class="p">)]</span> <span class="o">=</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nf">turn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">n_start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_start</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-		<span class="k">print</span> <span class="n">n_start</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">game</span><span class="p">(</span><span class="n">n_start</span> <span class="o">-</span> <span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n_start</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_start</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+		<span class="k">print</span> <span class="n">n_start</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="nf">game</span><span class="p">(</span><span class="n">n_start</span> <span class="o">-</span> <span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

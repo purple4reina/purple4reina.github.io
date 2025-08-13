@@ -99,10 +99,10 @@ enough!</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1001</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1001</span><span class="p">):</span>
 	<span class="n">Rmax</span> <span class="o">=</span> <span class="mi">0</span>
 	<span class="k">print</span> <span class="n">a</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
 		<span class="n">r</span> <span class="o">=</span> <span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="p">)</span> <span class="o">%</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
 		<span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="n">Rmax</span><span class="p">:</span>
 			<span class="n">Rmax</span> <span class="o">=</span> <span class="n">r</span>

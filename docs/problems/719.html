@@ -106,36 +106,36 @@ https://oeis.org/A038206.  From there I learned that the square number must be
         <span class="k">if</span> <span class="n">mod</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">mod</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">continue</span>
 
-        <span class="n">str_s</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">splits</span> <span class="o">=</span> <span class="p">((</span><span class="n">c</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str_s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">str_s</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nf">len</span><span class="p">(</span><span class="n">str_s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">splits</span> <span class="o">=</span> <span class="p">((</span><span class="n">c</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">str_s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
             <span class="n">i</span> <span class="o">=</span> <span class="n">summ</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">split</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">splits</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">split</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">splits</span><span class="p">):</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">split</span><span class="p">:</span>
                     <span class="k">continue</span>
-                <span class="n">summ</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">str_s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">summ</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">str_s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">summ</span> <span class="o">&gt;</span> <span class="n">r</span><span class="p">:</span>
                     <span class="k">break</span>
                 <span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">summ</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">str_s</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
+                <span class="n">summ</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">str_s</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
                 <span class="k">if</span> <span class="n">summ</span> <span class="o">==</span> <span class="n">r</span><span class="p">:</span>
                     <span class="n">total</span> <span class="o">+=</span> <span class="n">s</span>
                     <span class="k">break</span>
 
     <span class="k">return</span> <span class="n">total</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">T</span><span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="n">p</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nc">T</span><span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="n">p</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">T</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="n">T</span>
 
 <span class="n">_test_T</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -149,9 +149,9 @@ https://oeis.org/A038206.  From there I learned that the square number must be
     <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">6222187932</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_T</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_T</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_T</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">T</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nc">T</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

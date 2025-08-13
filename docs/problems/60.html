@@ -104,69 +104,69 @@ prime at a time to the list until five were found.</p>
 
 <h3 id="code">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">isdifferent</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
 	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">numberlist</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">numberlist</span> <span class="ow">in</span> <span class="nf">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">100000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">numberlist</span>
 		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 		<span class="n">answer</span> <span class="o">=</span> <span class="bp">True</span>
-		<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">numberlist</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">numberlist</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+			<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 				<span class="n">answer</span> <span class="o">=</span> <span class="bp">False</span>
 				<span class="k">break</span>
 		<span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-			<span class="k">return</span> <span class="n">numberlist</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numberlist</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">numberlist</span><span class="p">,</span> <span class="nf">sum</span><span class="p">(</span><span class="n">numberlist</span><span class="p">)</span>
 
-<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+<span class="k">print</span> <span class="nf">theanswer</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="try-two">Try Two</h2>
 
 <h3 id="code-1">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">isdifferent</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
 	<span class="n">twos</span> <span class="o">=</span> <span class="p">[]</span>
@@ -174,128 +174,128 @@ prime at a time to the list until five were found.</p>
 	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
-			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])))</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">])))</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-				<span class="n">twos</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+			<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])))</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">])))</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="n">twos</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
 	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 			<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 				<span class="n">answer</span> <span class="o">=</span> <span class="bp">True</span>
-				<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="mi">2</span><span class="p">):</span>
-					<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> 
+				<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="mi">2</span><span class="p">):</span>
+					<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> 
 						<span class="n">answer</span> <span class="o">=</span> <span class="bp">False</span>
 						<span class="k">break</span>
 				<span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> 
-					<span class="n">threes</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
+					<span class="n">threes</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
 	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">twos</span><span class="p">:</span>
 		<span class="k">for</span> <span class="n">three</span> <span class="ow">in</span> <span class="n">threes</span><span class="p">:</span>
 			<span class="n">five</span> <span class="o">=</span> <span class="n">two</span> <span class="o">+</span> <span class="n">three</span>
 			<span class="n">answer</span> <span class="o">=</span> <span class="bp">True</span>
-			<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">five</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-				<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">five</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+				<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
 					<span class="n">answer</span> <span class="o">=</span> <span class="bp">False</span>
 					<span class="k">break</span>
 			<span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-				<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">five</span><span class="p">);</span> <span class="k">print</span> <span class="n">five</span>
+				<span class="n">answers</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">five</span><span class="p">);</span> <span class="k">print</span> <span class="n">five</span>
 	<span class="k">return</span> <span class="n">answers</span>	
 
-<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+<span class="k">print</span> <span class="nf">theanswer</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="try-three">Try Three</h2>
 
 <h3 id="code-2">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">10000</span>
 
 <span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
 	<span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">p</span>
 
 <span class="k">def</span> <span class="nf">flipprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 
 <span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
 	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="n">primes</span> <span class="o">=</span> <span class="n">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="nf">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span>
 	
 	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 		<span class="k">print</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
 		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 			<span class="k">if</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">:</span> <span class="k">continue</span>
-			<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nf">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 				<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 					<span class="k">if</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span> <span class="k">continue</span>
-					<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+					<span class="k">if</span> <span class="nf">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 						<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 							<span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">:</span> <span class="k">continue</span>
-							<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+							<span class="k">if</span> <span class="nf">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 								<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 									<span class="k">if</span> <span class="n">e</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">:</span> <span class="k">continue</span>
-									<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-										<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span>
+									<span class="k">if</span> <span class="nf">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+										<span class="n">answers</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span>
 										<span class="k">print</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]</span>
 	<span class="k">return</span> <span class="n">answers</span>
 
-<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+<span class="k">print</span> <span class="nf">theanswer</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="try-four">Try Four</h2>
 
 <h3 id="code-3">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">lower</span> <span class="o">=</span> <span class="mi">5000</span>
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">10000</span>
 
 <span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">isdifferent</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
 	<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">primes</span>
 
 <span class="k">def</span> <span class="nf">flipprimelist</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">primes</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">mixup</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">listt</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">listt</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
 	<span class="k">return</span> <span class="bp">False</span>
 
@@ -304,74 +304,74 @@ prime at a time to the list until five were found.</p>
 	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="n">twos</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="n">fours</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="n">primes</span> <span class="o">=</span> <span class="n">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
 	
-	<span class="k">print</span> <span class="s">'primes compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+	<span class="k">print</span> <span class="sh">'</span><span class="s">primes compiled</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
 	
-	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-			<span class="n">twos</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">two</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="nf">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">twos</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">two</span><span class="p">)</span>
 			<span class="k">print</span> <span class="n">two</span>
 	
-	<span class="k">print</span> <span class="s">'twos compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">twos</span><span class="p">)</span>
+	<span class="k">print</span> <span class="sh">'</span><span class="s">twos compiled</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">twos</span><span class="p">)</span>
 	
-	<span class="k">for</span> <span class="n">four</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">twos</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">four</span> <span class="ow">in</span> <span class="nf">combinations</span><span class="p">(</span><span class="n">twos</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
 		<span class="n">four</span> <span class="o">=</span> <span class="n">four</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">four</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-		<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">four</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">mixup</span><span class="p">(</span><span class="n">four</span><span class="p">,</span> <span class="n">fours</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
-			<span class="n">fours</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">four</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">four</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="nf">mixup</span><span class="p">(</span><span class="n">four</span><span class="p">,</span> <span class="n">fours</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="n">fours</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">four</span><span class="p">)</span>
 			<span class="k">print</span> <span class="n">four</span>
 			<span class="k">for</span> <span class="n">one</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
-				<span class="n">five</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">four</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">one</span><span class="p">]</span>
-				<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-					<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)])</span>
-					<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)</span>
+				<span class="n">five</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">four</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">one</span><span class="p">]</span>
+				<span class="k">if</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+					<span class="n">answers</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">five</span><span class="p">,</span> <span class="nf">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)])</span>
+					<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nf">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)</span>
 	
 	<span class="k">return</span> <span class="n">answers</span>
 
-<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+<span class="k">print</span> <span class="nf">theanswer</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="try-five">Try Five</h2>
 
 <h3 id="code-4">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">lower</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">2000</span>
 
 <span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">isdifferent</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
 	<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">primes</span>
 
 <span class="k">def</span> <span class="nf">flipprimelist</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">primes</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">mixup</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">listt</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">listt</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
 	<span class="k">return</span> <span class="bp">False</span>
 
@@ -381,141 +381,141 @@ prime at a time to the list until five were found.</p>
 	<span class="n">twos</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="n">threes</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="n">fours</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="n">primes</span> <span class="o">=</span> <span class="n">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
 	
-	<span class="k">print</span> <span class="s">'primes compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+	<span class="k">print</span> <span class="sh">'</span><span class="s">primes compiled</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
 	
-	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-			<span class="n">twos</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">two</span><span class="p">))</span>
+	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="nf">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">twos</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">two</span><span class="p">))</span>
 	
-	<span class="k">print</span> <span class="s">'twos compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">twos</span><span class="p">)</span>
+	<span class="k">print</span> <span class="sh">'</span><span class="s">twos compiled</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">twos</span><span class="p">)</span>
 	
 	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">twos</span><span class="p">:</span>
 		<span class="k">for</span> <span class="n">one</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 			<span class="k">if</span> <span class="n">one</span> <span class="ow">in</span> <span class="n">two</span><span class="p">:</span> <span class="k">continue</span>
 			<span class="n">three</span> <span class="o">=</span> <span class="n">two</span> <span class="o">+</span> <span class="p">[</span><span class="n">one</span><span class="p">]</span>
-			<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">three</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-				<span class="n">threes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">three</span><span class="p">)</span>
+			<span class="k">if</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">three</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="n">threes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">three</span><span class="p">)</span>
 	
-	<span class="k">print</span> <span class="s">'threes compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">threes</span><span class="p">)</span>
+	<span class="k">print</span> <span class="sh">'</span><span class="s">threes compiled</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">threes</span><span class="p">)</span>
 	
 	<span class="k">for</span> <span class="n">two</span> <span class="ow">in</span> <span class="n">twos</span><span class="p">:</span>
 		<span class="k">for</span> <span class="n">three</span> <span class="ow">in</span> <span class="n">threes</span><span class="p">:</span>
 			<span class="n">five</span> <span class="o">=</span> <span class="n">two</span> <span class="o">+</span> <span class="n">three</span>
 			<span class="c1">#print five
-</span>			<span class="k">if</span> <span class="n">flipprimeloop</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-				<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)])</span>
-				<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">),</span> <span class="s">'&lt;-------------------------------'</span>
+</span>			<span class="k">if</span> <span class="nf">flipprimeloop</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+				<span class="n">answers</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">five</span><span class="p">,</span> <span class="nf">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)])</span>
+				<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nf">sum</span><span class="p">(</span><span class="n">five</span><span class="p">),</span> <span class="sh">'</span><span class="s">&lt;-------------------------------</span><span class="sh">'</span>
 	
 	<span class="k">return</span> <span class="n">answers</span>
 
-<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+<span class="k">print</span> <span class="nf">theanswer</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="try-six">Try Six</h2>
 
 <h3 id="code-5">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">lower</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
 	<span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">p</span>
 
 <span class="k">def</span> <span class="nf">flipprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">mixup</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">listt</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">mix</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">element</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">mix</span> <span class="ow">in</span> <span class="n">listt</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
 	<span class="k">return</span> <span class="bp">False</span>
 
 
 <span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
 	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="n">primes</span> <span class="o">=</span> <span class="n">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="nf">primelist</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span>
 	
-	<span class="k">print</span> <span class="s">'primes compiled'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+	<span class="k">print</span> <span class="sh">'</span><span class="s">primes compiled</span><span class="sh">'</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
 	
-	<span class="k">for</span> <span class="n">five</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">five</span> <span class="ow">in</span> <span class="nf">combinations</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
 		<span class="k">print</span> <span class="n">five</span>
-		<span class="k">if</span> <span class="n">flipprime</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-			<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">five</span><span class="p">))</span>
-			<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nf">flipprime</span><span class="p">(</span><span class="n">five</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="n">answers</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">five</span><span class="p">))</span>
+			<span class="k">print</span> <span class="n">five</span><span class="p">,</span> <span class="nf">sum</span><span class="p">(</span><span class="n">five</span><span class="p">)</span>
 	
 	<span class="k">return</span> <span class="n">answers</span>
 
-<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+<span class="k">print</span> <span class="nf">theanswer</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="try-seven">Try Seven</h2>
 
 <h3 id="code-6">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">10000</span>
 
 <span class="k">def</span> <span class="nf">glue</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+	<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
 	<span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">p</span>
 
 <span class="k">def</span> <span class="nf">flipprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
+	<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">glue</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 
 <span class="k">def</span> <span class="nf">theanswer</span><span class="p">():</span>
 	<span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="n">primes</span> <span class="o">=</span> <span class="n">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span>
+	<span class="n">primes</span> <span class="o">=</span> <span class="nf">makeprimes</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span>
 	
 	<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 		<span class="k">print</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
 		<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 			<span class="k">if</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">:</span> <span class="k">continue</span>
-			<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nf">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 				<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 					<span class="k">if</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span> <span class="k">continue</span>
-					<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+					<span class="k">if</span> <span class="nf">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 						<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 							<span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">:</span> <span class="k">continue</span>
-							<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+							<span class="k">if</span> <span class="nf">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 								<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
 									<span class="k">if</span> <span class="n">e</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">:</span> <span class="k">continue</span>
-									<span class="k">if</span> <span class="n">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-										<span class="n">answers</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span>
+									<span class="k">if</span> <span class="nf">flipprime</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+										<span class="n">answers</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">])</span>
 										<span class="k">print</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">]</span>
 	<span class="k">return</span> <span class="n">answers</span>
 
-<span class="k">print</span> <span class="n">theanswer</span><span class="p">()</span>
+<span class="k">print</span> <span class="nf">theanswer</span><span class="p">()</span>
 </code></pre></div></div>
 
 </div>

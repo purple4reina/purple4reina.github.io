@@ -100,28 +100,28 @@ than a minute!  Hurray!</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bound</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">286</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
-	<span class="n">T</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">286</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+	<span class="n">T</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">int</span><span class="p">((</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
 
-<span class="n">tmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
 
 <span class="n">P</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
-	<span class="n">pi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
-	<span class="n">P</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="n">pi</span> <span class="o">=</span> <span class="nf">int</span><span class="p">((</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+	<span class="n">P</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">pi</span> <span class="o">&gt;</span> <span class="n">tmax</span><span class="p">:</span> <span class="k">break</span>
 
 <span class="n">H</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
-	<span class="n">hi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-	<span class="n">H</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="n">hi</span> <span class="o">=</span> <span class="nf">int</span><span class="p">((</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+	<span class="n">H</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span>
 	<span class="k">if</span> <span class="n">hi</span> <span class="o">&gt;</span> <span class="n">tmax</span><span class="p">:</span> <span class="k">break</span>
 
-<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<span class="k">print</span> <span class="nf">len</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">P</span><span class="p">:</span>
-		<span class="k">print</span> <span class="s">'**'</span><span class="p">,</span> <span class="n">n</span>
+		<span class="k">print</span> <span class="sh">'</span><span class="s">**</span><span class="sh">'</span><span class="p">,</span> <span class="n">n</span>
 		<span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">T</span><span class="p">:</span>
 			<span class="k">print</span> <span class="n">n</span>
 			<span class="k">break</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span> <span class="k">break</span>

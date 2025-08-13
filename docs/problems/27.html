@@ -97,24 +97,24 @@ first problem that used negative numbers.</p>
 <h2 id="code">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
-		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
-	<span class="k">return</span> <span class="s">'TRUE'</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span>
+	<span class="k">return</span> <span class="sh">'</span><span class="s">TRUE</span><span class="sh">'</span>
 
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">count</span>
 <span class="k">def</span> <span class="nf">longest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">count</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
 		<span class="n">quadratic</span> <span class="o">=</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">b</span> 
 		<span class="k">if</span> <span class="n">quadratic</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
-		<span class="k">elif</span> <span class="n">isprime</span><span class="p">(</span><span class="n">quadratic</span><span class="p">)</span> <span class="o">==</span> <span class="s">'FALSE'</span><span class="p">:</span> <span class="k">return</span> <span class="n">n</span>
+		<span class="k">elif</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">quadratic</span><span class="p">)</span> <span class="o">==</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span><span class="p">:</span> <span class="k">return</span> <span class="n">n</span>
 		
 <span class="n">this</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">):</span>
-	<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">):</span>
 		<span class="k">print</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
-		<span class="n">this</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">longest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">])</span>
+		<span class="n">this</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="nf">longest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">])</span>
 	
-<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
+<span class="k">print</span> <span class="nf">max</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

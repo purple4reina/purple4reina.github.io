@@ -100,17 +100,17 @@ variable’s name. Not changing the name everywhere makes the script not work!</
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">start_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">"""Process started
-----------"""</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="sh">"""</span><span class="s">Process started
+----------</span><span class="sh">"""</span>
 
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">28123</span><span class="o">+</span><span class="mi">1</span>
 
 <span class="c1">#Create function to determine if a number is perfect
 </span><span class="k">def</span> <span class="nf">perfect</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span>
 	<span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
@@ -122,33 +122,33 @@ variable’s name. Not changing the name everywhere makes the script not work!</
 
 <span class="c1">#Build list of all abundant numbers
 </span><span class="n">abundantsums</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">abundant</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="n">collected</span> <span class="o">=</span> <span class="s">'FALSE'</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">perfect</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
-	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">collected</span> <span class="ow">is</span> <span class="s">'FALSE'</span><span class="p">:</span>
-			<span class="n">abundant</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">perfect</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-		<span class="k">if</span> <span class="n">abundant</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
+<span class="n">abundant</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
+<span class="n">collected</span> <span class="o">=</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nf">perfect</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
+	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">collected</span> <span class="ow">is</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span><span class="p">:</span>
+			<span class="n">abundant</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">perfect</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">abundant</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
 		<span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">bound</span><span class="p">:</span>
-			<span class="n">collected</span> <span class="o">=</span> <span class="s">'TRUE'</span><span class="p">;</span> <span class="k">break</span>
-		<span class="k">elif</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">abundant</span><span class="p">):</span>
+			<span class="n">collected</span> <span class="o">=</span> <span class="sh">'</span><span class="s">TRUE</span><span class="sh">'</span><span class="p">;</span> <span class="k">break</span>
+		<span class="nf">elif </span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">abundant</span><span class="p">):</span>
 			<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
-			<span class="n">abundantsums</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
+			<span class="n">abundantsums</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
 
 <span class="c1">#Find the sum of all numbers not in the previous list
 </span><span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">r</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">abundant</span><span class="p">:</span>
 		<span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="n">r</span>
 		
 <span class="k">print</span> <span class="nb">sum</span>
 
 
-<span class="n">end_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">end_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
 <span class="n">elapse_time</span><span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
-<span class="k">print</span> <span class="s">'----------'</span>
-<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="s">'seconds have passed'</span>
+<span class="k">print</span> <span class="sh">'</span><span class="s">----------</span><span class="sh">'</span>
+<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="sh">'</span><span class="s">seconds have passed</span><span class="sh">'</span>
 </code></pre></div></div>
 
 </div>

@@ -108,12 +108,12 @@ previous (These were for n when I was testing n^3). Pretty cool.</p>
 <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">n</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">iscube</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.0</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.0</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
 	<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">**</span><span class="mi">3</span> <span class="o">==</span> <span class="n">c</span><span class="p">:</span>
 			<span class="k">return</span> <span class="bp">True</span>
@@ -124,18 +124,18 @@ previous (These were for n when I was testing n^3). Pretty cool.</p>
 
 
 <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-		<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">last</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
-	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">last</span><span class="p">,</span> <span class="n">last</span><span class="o">+</span><span class="mi">20</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">last</span><span class="p">,</span> <span class="n">last</span><span class="o">+</span><span class="mi">20</span><span class="p">):</span>
 		<span class="n">c</span> <span class="o">=</span> <span class="n">n</span><span class="o">**</span><span class="mi">3</span>
 		<span class="n">this</span> <span class="o">=</span> <span class="n">c</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">p</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span>
-		<span class="k">if</span> <span class="n">iscube</span><span class="p">(</span><span class="n">this</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="k">if</span> <span class="nf">iscube</span><span class="p">(</span><span class="n">this</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 			<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 			<span class="n">last</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
 			<span class="k">break</span>

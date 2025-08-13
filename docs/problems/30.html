@@ -96,20 +96,20 @@ makes to indent the if statement one level.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">re</span>
 <span class="k">def</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'_'</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'\B'</span><span class="p">,</span> <span class="s">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+	<span class="k">return</span> <span class="n">re</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="sh">'</span><span class="s">\B</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
 
 <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
 	<span class="n">power</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-		<span class="n">power</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="n">power</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="n">power</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="n">power</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="n">power</span><span class="p">:</span> 
 		<span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="n">n</span>
 		<span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="nb">sum</span>
 		
-<span class="k">print</span> <span class="s">'='</span><span class="p">,</span> <span class="nb">sum</span>
+<span class="k">print</span> <span class="sh">'</span><span class="s">=</span><span class="sh">'</span><span class="p">,</span> <span class="nb">sum</span>
 </code></pre></div></div>
 
 </div>

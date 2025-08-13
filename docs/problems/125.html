@@ -101,16 +101,16 @@ quickly produce all the values. Then I tested that they were palindromic.</p>
 <h2 id="code">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">pal</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">n</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">]:</span>
 			<span class="k">return</span> <span class="bp">False</span>
 	<span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">def</span> <span class="nf">pyr</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="mi">6</span>
+	<span class="nf">return </span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="mi">6</span>
 
-<span class="n">used</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">used</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
 <span class="n">bound</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">8</span>
 <span class="n">bigger</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -118,11 +118,11 @@ quickly produce all the values. Then I tested that they were palindromic.</p>
 <span class="k">while</span> <span class="n">bigger</span> <span class="o">&lt;=</span> <span class="n">bound</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">:</span>
 	<span class="n">bigger</span> <span class="o">+=</span> <span class="mi">1</span>
 	<span class="k">if</span> <span class="n">bigger</span><span class="o">%</span><span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">bigger</span>
-	<span class="k">for</span> <span class="n">smaller</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bigger</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-		<span class="n">this</span> <span class="o">=</span> <span class="n">pyr</span><span class="p">(</span><span class="n">bigger</span><span class="p">)</span><span class="o">-</span><span class="n">pyr</span><span class="p">(</span><span class="n">smaller</span><span class="p">)</span>
-		<span class="k">if</span> <span class="n">this</span> <span class="o">&lt;</span> <span class="n">bound</span> <span class="ow">and</span> <span class="n">pal</span><span class="p">(</span><span class="n">pyr</span><span class="p">(</span><span class="n">bigger</span><span class="p">)</span><span class="o">-</span><span class="n">pyr</span><span class="p">(</span><span class="n">smaller</span><span class="p">))</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">this</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">used</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">smaller</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">bigger</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+		<span class="n">this</span> <span class="o">=</span> <span class="nf">pyr</span><span class="p">(</span><span class="n">bigger</span><span class="p">)</span><span class="o">-</span><span class="nf">pyr</span><span class="p">(</span><span class="n">smaller</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">this</span> <span class="o">&lt;</span> <span class="n">bound</span> <span class="ow">and</span> <span class="nf">pal</span><span class="p">(</span><span class="nf">pyr</span><span class="p">(</span><span class="n">bigger</span><span class="p">)</span><span class="o">-</span><span class="nf">pyr</span><span class="p">(</span><span class="n">smaller</span><span class="p">))</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">this</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">used</span><span class="p">:</span>
 			<span class="n">total</span> <span class="o">+=</span> <span class="n">this</span>
-			<span class="n">used</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
+			<span class="n">used</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">total</span>
 </code></pre></div></div>

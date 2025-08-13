@@ -117,141 +117,141 @@ end.</p>
 </span>
 <span class="k">class</span> <span class="nc">sudoku</span><span class="p">:</span>
 	
-	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>
 		<span class="n">whole_list</span> <span class="o">=</span> <span class="p">[]</span>
 		<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-			<span class="n">whole_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
-			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">'x'</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
+			<span class="n">whole_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
 	
-	<span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">column</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-				<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
-</span>		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">box</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
+</span>		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">isSolved</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
-		<span class="k">if</span> <span class="s">'x'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+	<span class="k">def</span> <span class="nf">isSolved</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="nf">error</span><span class="p">()</span>
+		<span class="k">if</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
 			<span class="k">return</span> <span class="bp">False</span>
-		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="n">this_row</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="n">this_column</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="n">this_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-				<span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_row</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_column</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_box</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">this_row</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_column</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_box</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="nf">if </span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_row</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_column</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_box</span><span class="p">):</span>
 					<span class="k">return</span> <span class="bp">False</span>
 		<span class="k">return</span> <span class="bp">True</span>
 	
-	<span class="k">def</span> <span class="nf">box_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
-</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-				<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[((</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
-</span>		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">box_index</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="n">self</span><span class="p">.</span><span class="n">part</span><span class="p">[((</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
+</span>		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">all_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		<span class="c1"># (row, column)
-</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-				<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">all_index</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+				<span class="n">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="k">if</span> <span class="s">'0'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
-			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Zero'</span><span class="p">)</span>
-		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">81</span><span class="p">:</span>
-			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Length'</span><span class="p">)</span>
-		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="n">this_row</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="n">this_column</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="n">this_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-				<span class="k">if</span> <span class="n">this_row</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_column</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_box</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-					<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Double'</span><span class="p">)</span>					
+	<span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+		<span class="k">if</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">'</span><span class="s">SudokuError: Zero</span><span class="sh">'</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">81</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">'</span><span class="s">SudokuError: Length</span><span class="sh">'</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">this_row</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_column</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_box</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">this_row</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_column</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_box</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+					<span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">'</span><span class="s">SudokuError: Double</span><span class="sh">'</span><span class="p">)</span>					
 	
-	<span class="k">def</span> <span class="nf">dict_to_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_index</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
+	<span class="k">def</span> <span class="nf">dict_to_whole</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">s_index</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
 </span>		<span class="n">new_whole</span> <span class="o">=</span> <span class="p">[]</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-				<span class="n">new_whole</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)])</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new_whole</span><span class="p">))</span>	
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+				<span class="n">new_whole</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">s_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)])</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new_whole</span><span class="p">))</span>	
 	
-	<span class="k">def</span> <span class="nf">list_to_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_list</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
-</span>		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">s_list</span><span class="p">))</span>
+	<span class="k">def</span> <span class="nf">list_to_whole</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">s_list</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">s_list</span><span class="p">))</span>
 	
-	<span class="k">def</span> <span class="nf">box_reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
-</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">all_index</span><span class="p">()</span>		
-		<span class="n">prev_whole</span> <span class="o">=</span> <span class="s">''</span>
+	<span class="k">def</span> <span class="nf">box_reduce</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">all_index</span><span class="p">()</span>		
+		<span class="n">prev_whole</span> <span class="o">=</span> <span class="sh">''</span>
 		
-		<span class="k">while</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
-			<span class="n">prev_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
-			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-				<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-					<span class="n">this_box_index</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-					<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="k">while</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
+			<span class="n">prev_whole</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+					<span class="n">this_box_index</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+					<span class="k">if</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="nf">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 						<span class="k">continue</span>
-					<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="n">iteritems</span><span class="p">():</span>
-						<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-							<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-								<span class="k">if</span> <span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+					<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="nf">iteritems</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+							<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+								<span class="nf">if </span><span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
 									<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)]</span>
-								<span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+								<span class="nf">if </span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
 									<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
 					<span class="n">solo_count</span> <span class="o">=</span> <span class="mi">0</span>
-					<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
-						<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+					<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="nf">iterkeys</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
 							<span class="n">solo_count</span> <span class="o">+=</span> <span class="mi">1</span>
 					<span class="k">if</span> <span class="n">solo_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-						<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
-							<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
-								<span class="n">all_boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-					<span class="bp">self</span><span class="p">.</span><span class="n">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
+						<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="nf">iterkeys</span><span class="p">():</span>
+							<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
+								<span class="n">all_boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+					<span class="n">self</span><span class="p">.</span><span class="nf">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
 			
-		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
+		<span class="n">self</span><span class="p">.</span><span class="nf">error</span><span class="p">()</span>
 
-	<span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
 
 		<span class="k">def</span> <span class="nf">x_index_list</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 			<span class="n">x_list</span> <span class="o">=</span> <span class="p">[]</span>
-			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">))):</span>
-				<span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
-					<span class="n">x_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">s</span><span class="p">))):</span>
+				<span class="k">if</span> <span class="nf">list</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
+					<span class="n">x_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 			<span class="k">return</span> <span class="n">x_list</span>
 		
-		<span class="n">saved_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
-		<span class="n">whole_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
-		<span class="n">x_index</span> <span class="o">=</span> <span class="n">x_index_list</span><span class="p">(</span><span class="n">saved_whole</span><span class="p">)</span>
+		<span class="n">saved_whole</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span>
+		<span class="n">whole_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
+		<span class="n">x_index</span> <span class="o">=</span> <span class="nf">x_index_list</span><span class="p">(</span><span class="n">saved_whole</span><span class="p">)</span>
 		
 		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
 			<span class="k">try</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 			<span class="k">except</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="s">'1'</span>
-			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="s">'10'</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="s">'x'</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">10</span><span class="sh">'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span>
 				<span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
 			<span class="k">else</span><span class="p">:</span>
 				<span class="k">try</span><span class="p">:</span>
-					<span class="bp">self</span><span class="p">.</span><span class="n">list_to_whole</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)</span>
-					<span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+					<span class="n">self</span><span class="p">.</span><span class="nf">list_to_whole</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)</span>
+					<span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 						<span class="k">return</span>
 					<span class="k">else</span><span class="p">:</span>
 						<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -260,43 +260,43 @@ end.</p>
 		
 
 <span class="k">def</span> <span class="nf">nextgrid</span><span class="p">():</span>
-	<span class="n">s</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'sudoku.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+	<span class="n">s</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">sudoku.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span>
 	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 	<span class="n">sud</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
 		<span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span>
 		<span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-			<span class="n">sud</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)[:</span><span class="mi">9</span><span class="p">])</span>
+			<span class="n">sud</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">row</span><span class="p">)[:</span><span class="mi">9</span><span class="p">])</span>
 		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-			<span class="n">sud</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">sud</span><span class="p">)</span>
+			<span class="n">sud</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">sud</span><span class="p">)</span>
 			<span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
 			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sud</span><span class="p">:</span>
-				<span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="s">'0'</span><span class="p">:</span>
-					<span class="n">new</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+				<span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">:</span>
+					<span class="n">new</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
 				<span class="k">else</span><span class="p">:</span>
-					<span class="n">new</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'x'</span><span class="p">)</span>
-			<span class="k">yield</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new</span><span class="p">))</span>
+					<span class="n">new</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">)</span>
+			<span class="k">yield</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new</span><span class="p">))</span>
 			<span class="n">sud</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="k">return</span>		
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>	
 	<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">nextgrid</span><span class="p">():</span>
-		<span class="n">this_sudoku</span> <span class="o">=</span> <span class="n">sudoku</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-		<span class="n">this_sudoku</span><span class="p">.</span><span class="n">box_reduce</span><span class="p">()</span>
-		<span class="k">if</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
-			<span class="n">this_sudoku</span><span class="p">.</span><span class="n">walk</span><span class="p">()</span>
-		<span class="k">print</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">,</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">isSolved</span><span class="p">(),</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
-		<span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+	<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nf">nextgrid</span><span class="p">():</span>
+		<span class="n">this_sudoku</span> <span class="o">=</span> <span class="nf">sudoku</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+		<span class="n">this_sudoku</span><span class="p">.</span><span class="nf">box_reduce</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="nf">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="n">this_sudoku</span><span class="p">.</span><span class="nf">walk</span><span class="p">()</span>
+		<span class="k">print</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">,</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="nf">isSolved</span><span class="p">(),</span> <span class="nf">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 		
 	<span class="k">print</span> <span class="n">total</span>
 
-<span class="n">main</span><span class="p">()</span>
+<span class="nf">main</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="initial-code">Initial Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1">#	s = string of the numbers from l to r, x's mean not filled yet
 #	n = number index for a row, column, box
@@ -304,222 +304,222 @@ end.</p>
 </span>
 <span class="k">class</span> <span class="nc">sudoku</span><span class="p">:</span>
 	
-	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>
 		<span class="n">whole_list</span> <span class="o">=</span> <span class="p">[]</span>
 		<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-			<span class="n">whole_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
-			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">'x'</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
+			<span class="n">whole_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
 	
-	<span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">column</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-				<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
-</span>		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">box</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">str</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">+=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
+</span>		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">isSolved</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
-		<span class="k">if</span> <span class="s">'x'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+	<span class="k">def</span> <span class="nf">isSolved</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+		<span class="n">self</span><span class="p">.</span><span class="nf">error</span><span class="p">()</span>
+		<span class="k">if</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
 			<span class="k">return</span> <span class="bp">False</span>
-		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="n">this_row</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="n">this_column</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="n">this_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-				<span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_row</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_column</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_box</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">this_row</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_column</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_box</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="nf">if </span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_row</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_column</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">this_box</span><span class="p">):</span>
 					<span class="k">return</span> <span class="bp">False</span>
 		<span class="k">return</span> <span class="bp">True</span>
 	
-	<span class="k">def</span> <span class="nf">available</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		<span class="c1"># returns list, numbers available for each space
+	<span class="k">def</span> <span class="nf">available</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>		<span class="c1"># returns list, numbers available for each space
 </span>		<span class="n">slist</span> <span class="o">=</span> <span class="p">[]</span>
-		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
-			<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
-				<span class="n">slist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
+				<span class="n">slist</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 			<span class="k">else</span><span class="p">:</span>
-				<span class="n">slist</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+				<span class="n">slist</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
 		<span class="k">return</span> <span class="n">slist</span>
 	
-	<span class="k">def</span> <span class="nf">row_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
-</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">row_index</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">column_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>	<span class="c1"># (row, column)
-</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">column_index</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>	<span class="c1"># (row, column)
+</span>		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">box_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
-</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-				<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[((</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
-</span>		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">box_index</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="n">self</span><span class="p">.</span><span class="n">part</span><span class="p">[((</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">18</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="c1"># double check
+</span>		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">all_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		<span class="c1"># (row, column)
-</span>		<span class="bp">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-				<span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">part</span>
+	<span class="k">def</span> <span class="nf">all_index</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>		<span class="c1"># (row, column)
+</span>		<span class="n">self</span><span class="p">.</span><span class="n">part</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+				<span class="n">self</span><span class="p">.</span><span class="n">part</span><span class="p">[(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">part</span>
 	
-	<span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="k">if</span> <span class="s">'0'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
-			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Zero'</span><span class="p">)</span>
-		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">81</span><span class="p">:</span>
-			<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Length'</span><span class="p">)</span>
-		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="n">this_row</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="n">this_column</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="n">this_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-				<span class="k">if</span> <span class="n">this_row</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_column</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_box</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-					<span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'SudokuError: Double'</span><span class="p">)</span>					
+	<span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+		<span class="k">if</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">'</span><span class="s">SudokuError: Zero</span><span class="sh">'</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">81</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">'</span><span class="s">SudokuError: Length</span><span class="sh">'</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="n">this_row</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">row</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_column</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">column</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="n">this_box</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">box</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">if</span> <span class="n">this_row</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_column</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">this_box</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+					<span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">'</span><span class="s">SudokuError: Double</span><span class="sh">'</span><span class="p">)</span>					
 	
-	<span class="k">def</span> <span class="nf">dict_to_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_index</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
+	<span class="k">def</span> <span class="nf">dict_to_whole</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">s_index</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
 </span>		<span class="n">new_whole</span> <span class="o">=</span> <span class="p">[]</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-				<span class="n">new_whole</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)])</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new_whole</span><span class="p">))</span>	
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+				<span class="n">new_whole</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">s_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)])</span>
+		<span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new_whole</span><span class="p">))</span>	
 	
-	<span class="k">def</span> <span class="nf">list_to_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s_list</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
-</span>		<span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">s_list</span><span class="p">))</span>
+	<span class="k">def</span> <span class="nf">list_to_whole</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">s_list</span><span class="p">):</span>	<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">s_list</span><span class="p">))</span>
 	
-	<span class="k">def</span> <span class="nf">box_reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
-</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">all_index</span><span class="p">()</span>		
-		<span class="n">prev_whole</span> <span class="o">=</span> <span class="s">''</span>
+	<span class="k">def</span> <span class="nf">box_reduce</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">all_index</span><span class="p">()</span>		
+		<span class="n">prev_whole</span> <span class="o">=</span> <span class="sh">''</span>
 		
-		<span class="k">while</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
-			<span class="n">prev_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
-			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-				<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-					<span class="n">this_box_index</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-					<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="k">while</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
+			<span class="n">prev_whole</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span>
+			<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+				<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+					<span class="n">this_box_index</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+					<span class="k">if</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="nf">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 						<span class="k">continue</span>
-					<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="n">iteritems</span><span class="p">():</span>
-						<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-							<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-								<span class="k">if</span> <span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+					<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="nf">iteritems</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+							<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+								<span class="nf">if </span><span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
 									<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)]</span>
-								<span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+								<span class="nf">if </span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
 									<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
 					<span class="n">solo_count</span> <span class="o">=</span> <span class="mi">0</span>
-					<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
-						<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
+					<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="nf">iterkeys</span><span class="p">():</span>
+						<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
 							<span class="n">solo_count</span> <span class="o">+=</span> <span class="mi">1</span>
 					<span class="k">if</span> <span class="n">solo_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-						<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
-							<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
-								<span class="n">all_boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-					<span class="bp">self</span><span class="p">.</span><span class="n">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
+						<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="nf">iterkeys</span><span class="p">():</span>
+							<span class="k">if</span> <span class="n">this_box_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
+								<span class="n">all_boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+					<span class="n">self</span><span class="p">.</span><span class="nf">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
 			
-		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
+		<span class="n">self</span><span class="p">.</span><span class="nf">error</span><span class="p">()</span>
 	
-	<span class="k">def</span> <span class="nf">box_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
-</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">all_index</span><span class="p">()</span>		
-		<span class="n">prev_whole</span> <span class="o">=</span> <span class="s">''</span>
+	<span class="k">def</span> <span class="nf">box_spread</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>				<span class="c1"># does not return, updates self.whole within the method
+</span>		<span class="n">all_boxes</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">all_index</span><span class="p">()</span>		
+		<span class="n">prev_whole</span> <span class="o">=</span> <span class="sh">''</span>
 		
-		<span class="k">while</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
-			<span class="n">prev_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
-			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+		<span class="k">while</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span> <span class="o">!=</span> <span class="n">prev_whole</span><span class="p">:</span>
+			<span class="n">prev_whole</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
 				
-				<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-					<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-						<span class="n">this_box_index</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-						<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+				<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+					<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+						<span class="n">this_box_index</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">box_index</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+						<span class="k">if</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="nf">box</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 							<span class="k">continue</span>
-						<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
-							<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-								<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-									<span class="k">if</span> <span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+						<span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">all_boxes</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+							<span class="k">if</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+								<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+									<span class="nf">if </span><span class="p">(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
 										<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">)]</span>
-									<span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
+									<span class="nf">if </span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">:</span>
 										<span class="k">del</span> <span class="n">this_box_index</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">key_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
 					
 						<span class="n">remaining_keys</span> <span class="o">=</span> <span class="p">[]</span>
-						<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="n">iterkeys</span><span class="p">():</span>
-							<span class="k">if</span> <span class="n">all_boxes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
-								<span class="n">remaining_keys</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+						<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">this_box_index</span><span class="p">.</span><span class="nf">iterkeys</span><span class="p">():</span>
+							<span class="k">if</span> <span class="n">all_boxes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
+								<span class="n">remaining_keys</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 						<span class="n">remaining_keys_row</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">remaining_keys</span><span class="p">]</span>
 						<span class="n">remaining_keys_column</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">remaining_keys</span><span class="p">]</span>
 				
-						<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">remaining_keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+						<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">remaining_keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 							<span class="k">continue</span>
 						
-						<span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">)</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">):</span>
-							<span class="n">all_boxes</span><span class="p">[(</span><span class="nb">min</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">10</span><span class="p">))]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+						<span class="k">if</span> <span class="nf">max</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">)</span> <span class="o">==</span> <span class="nf">min</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">):</span>
+							<span class="n">all_boxes</span><span class="p">[(</span><span class="nf">min</span><span class="p">(</span><span class="n">remaining_keys_row</span><span class="p">),</span> <span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">10</span><span class="p">))]</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 <span class="c1">#							print d
 </span>			
-						<span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">)</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">):</span>
-							<span class="n">all_boxes</span><span class="p">[(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">))]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+						<span class="k">if</span> <span class="nf">max</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">)</span> <span class="o">==</span> <span class="nf">min</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">):</span>
+							<span class="n">all_boxes</span><span class="p">[(</span><span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span> <span class="nf">min</span><span class="p">(</span><span class="n">remaining_keys_column</span><span class="p">))]</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 <span class="c1">#							print d
 </span>					
-			<span class="bp">self</span><span class="p">.</span><span class="n">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
+			<span class="n">self</span><span class="p">.</span><span class="nf">dict_to_whole</span><span class="p">(</span><span class="n">all_boxes</span><span class="p">)</span>
 			
 			
-		<span class="bp">self</span><span class="p">.</span><span class="n">error</span><span class="p">()</span>
+		<span class="n">self</span><span class="p">.</span><span class="nf">error</span><span class="p">()</span>
 		
 	
-	<span class="k">def</span> <span class="nf">zip_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_fill</span><span class="p">):</span>
-		<span class="n">whole_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
-		<span class="n">x_fill</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_fill</span><span class="p">)</span>
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
-			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_fill</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-		<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
+	<span class="k">def</span> <span class="nf">zip_x</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x_fill</span><span class="p">):</span>
+		<span class="n">whole_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
+		<span class="n">x_fill</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">x_fill</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)):</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_fill</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+		<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">whole_list</span><span class="p">))</span>
 	
-	<span class="k">def</span> <span class="nf">digits_left</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">digits_left</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
 		<span class="n">left</span> <span class="o">=</span> <span class="p">[]</span>
-		<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">9</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))):</span>
-				<span class="n">left</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
-		<span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">9</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">))):</span>
+				<span class="n">left</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+		<span class="k">return</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
 	
 
-	<span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
 		<span class="k">def</span> <span class="nf">x_index_list</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 			<span class="n">x_list</span> <span class="o">=</span> <span class="p">[]</span>
-			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">))):</span>
-				<span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">:</span>
-					<span class="n">x_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">s</span><span class="p">))):</span>
+				<span class="k">if</span> <span class="nf">list</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">:</span>
+					<span class="n">x_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 			<span class="k">return</span> <span class="n">x_list</span>
 		
-		<span class="n">saved_whole</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">whole</span>
-		<span class="n">whole_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
-		<span class="n">x_index</span> <span class="o">=</span> <span class="n">x_index_list</span><span class="p">(</span><span class="n">saved_whole</span><span class="p">)</span>
+		<span class="n">saved_whole</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">whole</span>
+		<span class="n">whole_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">whole</span><span class="p">)</span>
+		<span class="n">x_index</span> <span class="o">=</span> <span class="nf">x_index_list</span><span class="p">(</span><span class="n">saved_whole</span><span class="p">)</span>
 		
 		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 		<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
 			<span class="k">try</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 			<span class="k">except</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="s">'1'</span>
-			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="s">'10'</span><span class="p">:</span>
-				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="s">'x'</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">1</span><span class="sh">'</span>
+			<span class="k">if</span> <span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">10</span><span class="sh">'</span><span class="p">:</span>
+				<span class="n">whole_list</span><span class="p">[</span><span class="n">x_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span>
 				<span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
 			<span class="k">else</span><span class="p">:</span>
 				<span class="k">try</span><span class="p">:</span>
-					<span class="bp">self</span><span class="p">.</span><span class="n">list_to_whole</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)</span>
-					<span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+					<span class="n">self</span><span class="p">.</span><span class="nf">list_to_whole</span><span class="p">(</span><span class="n">whole_list</span><span class="p">)</span>
+					<span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 						<span class="k">return</span>
 					<span class="k">else</span><span class="p">:</span>
 						<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -528,44 +528,44 @@ end.</p>
 
 
 <span class="k">def</span> <span class="nf">nextgrid</span><span class="p">():</span>
-	<span class="n">s</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'sudoku.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+	<span class="n">s</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">sudoku.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span>
 	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 	<span class="n">sud</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
 		<span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span>
 		<span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-			<span class="n">sud</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)[:</span><span class="mi">9</span><span class="p">])</span>
+			<span class="n">sud</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">row</span><span class="p">)[:</span><span class="mi">9</span><span class="p">])</span>
 		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-			<span class="n">sud</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">sud</span><span class="p">)</span>
+			<span class="n">sud</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">sud</span><span class="p">)</span>
 			<span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
 			<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sud</span><span class="p">:</span>
-				<span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="s">'0'</span><span class="p">:</span>
-					<span class="n">new</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+				<span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">:</span>
+					<span class="n">new</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
 				<span class="k">else</span><span class="p">:</span>
-					<span class="n">new</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'x'</span><span class="p">)</span>
-			<span class="k">yield</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new</span><span class="p">))</span>
+					<span class="n">new</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">)</span>
+			<span class="k">yield</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">new</span><span class="p">))</span>
 			<span class="n">sud</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="k">return</span>		
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 	
 	<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">nextgrid</span><span class="p">():</span>
-		<span class="n">this_sudoku</span> <span class="o">=</span> <span class="n">sudoku</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nf">nextgrid</span><span class="p">():</span>
+		<span class="n">this_sudoku</span> <span class="o">=</span> <span class="nf">sudoku</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 		
-		<span class="n">this_sudoku</span><span class="p">.</span><span class="n">box_reduce</span><span class="p">()</span>
+		<span class="n">this_sudoku</span><span class="p">.</span><span class="nf">box_reduce</span><span class="p">()</span>
 		
-		<span class="k">if</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
-			<span class="n">this_sudoku</span><span class="p">.</span><span class="n">walk</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="nf">isSolved</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="n">this_sudoku</span><span class="p">.</span><span class="nf">walk</span><span class="p">()</span>
 	
-		<span class="k">print</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">,</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">isSolved</span><span class="p">(),</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+		<span class="k">print</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">,</span> <span class="n">this_sudoku</span><span class="p">.</span><span class="nf">isSolved</span><span class="p">(),</span> <span class="nf">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 		
-		<span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+		<span class="n">total</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">this_sudoku</span><span class="p">.</span><span class="n">whole</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 		
 	<span class="k">print</span> <span class="n">total</span>
 
 
-<span class="n">main</span><span class="p">()</span>
+<span class="nf">main</span><span class="p">()</span>
 </code></pre></div></div>
 
 </div>

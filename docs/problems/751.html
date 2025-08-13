@@ -104,25 +104,25 @@ find the solution.  Runs in about 180 milliseconds.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">decimal</span> <span class="k">as</span> <span class="n">d</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">decimal</span> <span class="k">as</span> <span class="n">d</span>
 
 <span class="n">rnd</span> <span class="o">=</span> <span class="mi">24</span>
-<span class="n">d</span><span class="p">.</span><span class="n">getcontext</span><span class="p">().</span><span class="n">prec</span> <span class="o">=</span> <span class="n">rnd</span> <span class="o">+</span> <span class="mi">4</span>
+<span class="n">d</span><span class="p">.</span><span class="nf">getcontext</span><span class="p">().</span><span class="n">prec</span> <span class="o">=</span> <span class="n">rnd</span> <span class="o">+</span> <span class="mi">4</span>
 
 <span class="k">def</span> <span class="nf">concat</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="n">numstr</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="s">''</span><span class="p">,</span> <span class="n">theta</span>
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">numstr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">rnd</span> <span class="o">+</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">b2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">b1</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">numstr</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">b1</span><span class="p">))</span>
+    <span class="n">numstr</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="sh">''</span><span class="p">,</span> <span class="n">theta</span>
+    <span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">numstr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">rnd</span> <span class="o">+</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">b2</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">b1</span> <span class="o">-</span> <span class="nf">int</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">numstr</span> <span class="o">+=</span> <span class="nf">str</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">b1</span><span class="p">))</span>
         <span class="n">b1</span> <span class="o">=</span> <span class="n">b2</span>
-    <span class="k">return</span> <span class="n">numstr</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s">'.'</span> <span class="o">+</span> <span class="n">numstr</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">rnd</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">numstr</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="sh">'</span><span class="s">.</span><span class="sh">'</span> <span class="o">+</span> <span class="n">numstr</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">rnd</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">():</span>
-    <span class="n">mins</span><span class="p">,</span> <span class="n">maxs</span><span class="p">,</span> <span class="n">two</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">d</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">d</span><span class="p">.</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mins</span><span class="p">,</span> <span class="n">maxs</span><span class="p">,</span> <span class="n">two</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="nc">Decimal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">d</span><span class="p">.</span><span class="nc">Decimal</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">d</span><span class="p">.</span><span class="nc">Decimal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
         <span class="n">theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">mins</span> <span class="o">+</span> <span class="n">maxs</span><span class="p">)</span> <span class="o">/</span> <span class="n">two</span>
-        <span class="n">thetas</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">theta</span><span class="p">)[:</span><span class="n">rnd</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">tau</span> <span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">thetas</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">theta</span><span class="p">)[:</span><span class="n">rnd</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="nf">concat</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">tau</span> <span class="o">==</span> <span class="n">thetas</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">tau</span>
         <span class="k">elif</span> <span class="n">tau</span> <span class="o">&gt;</span> <span class="n">thetas</span><span class="p">:</span>
@@ -131,24 +131,24 @@ find the solution.  Runs in about 180 milliseconds.</p>
             <span class="n">maxs</span> <span class="o">=</span> <span class="n">theta</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">())</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">concat</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="n">concat</span>
 
 <span class="n">_test_concat</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span>               <span class="s">'2.222222222222222222222222'</span><span class="p">),</span>
-        <span class="p">(</span><span class="mf">2.956938891377988</span><span class="p">,</span> <span class="s">'2.358132134558914423337759'</span><span class="p">),</span>
-        <span class="p">(</span><span class="mf">2.99</span><span class="p">,</span>              <span class="s">'2.359151928424242424242446'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span>               <span class="sh">'</span><span class="s">2.222222222222222222222222</span><span class="sh">'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">2.956938891377988</span><span class="p">,</span> <span class="sh">'</span><span class="s">2.358132134558914423337759</span><span class="sh">'</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">2.99</span><span class="p">,</span>              <span class="sh">'</span><span class="s">2.359151928424242424242446</span><span class="sh">'</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_concat</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_concat</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_concat</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">concat</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">concat</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

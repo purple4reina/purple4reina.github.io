@@ -115,56 +115,56 @@ as I continue working on these problems.</p>
     <span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nf">fn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">_cache</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_cache</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="nf">fn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
         <span class="n">_cache</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
         <span class="k">return</span> <span class="n">ret</span>
     <span class="k">return</span> <span class="n">wrap</span>
 
-<span class="n">mask</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">26</span><span class="p">)}</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">26</span><span class="p">)}</span>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">P</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-        <span class="o">@</span><span class="n">memoize</span>
+        <span class="nd">@memoize</span>
         <span class="k">def</span> <span class="nf">p</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">afters</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">used</span><span class="p">):</span>
             <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">if</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">last</span> <span class="k">if</span> <span class="n">afters</span> <span class="k">else</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">last</span> <span class="k">if</span> <span class="n">afters</span> <span class="k">else</span> <span class="n">n</span><span class="p">):</span>
                     <span class="n">m</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
                     <span class="k">if</span> <span class="n">used</span> <span class="o">&amp;</span> <span class="n">m</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span>
                         <span class="k">continue</span>
                     <span class="n">count</span> <span class="o">+=</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">last</span> <span class="ow">or</span> <span class="n">afters</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">last</span> <span class="k">if</span> <span class="n">afters</span> <span class="k">else</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">last</span> <span class="k">if</span> <span class="n">afters</span> <span class="k">else</span> <span class="n">n</span><span class="p">):</span>
                     <span class="n">m</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
                     <span class="k">if</span> <span class="n">used</span> <span class="o">&amp;</span> <span class="n">m</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span>
                         <span class="k">continue</span>
-                    <span class="n">count</span> <span class="o">+=</span> <span class="n">p</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">last</span> <span class="ow">or</span> <span class="n">afters</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">used</span> <span class="o">^</span> <span class="n">m</span><span class="p">)</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="nf">p</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">last</span> <span class="ow">or</span> <span class="n">afters</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">used</span> <span class="o">^</span> <span class="n">m</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">count</span>
-        <span class="k">return</span> <span class="n">p</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nf">p</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="n">top</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">'-inf'</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="o">//</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">pk</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">-inf</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="o">//</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">pk</span> <span class="o">=</span> <span class="nc">P</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pk</span> <span class="o">&gt;=</span> <span class="n">top</span><span class="p">:</span>
             <span class="n">top</span> <span class="o">=</span> <span class="n">pk</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">top</span>
     <span class="k">return</span> <span class="n">top</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="tests">Tests</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">problem</span> <span class="kn">import</span> <span class="n">solve</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">from</span> <span class="n">problem</span> <span class="kn">import</span> <span class="n">solve</span>
 
 <span class="n">_test_solve</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -182,9 +182,9 @@ as I continue working on these problems.</p>
         <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">358930</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s">'n,expect'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="sh">'</span><span class="s">n,expect</span><span class="sh">'</span><span class="p">,</span> <span class="n">_test_solve</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_solve</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">expect</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="n">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expect</span> <span class="o">==</span> <span class="nf">solve</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

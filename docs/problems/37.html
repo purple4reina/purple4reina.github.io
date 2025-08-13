@@ -100,37 +100,37 @@ numbers. That has been a very useful skill in these last few problems.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#evaluate if a number is prime or not
 </span><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
-		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s">'FALSE'</span>
-	<span class="k">return</span> <span class="s">'TRUE'</span>
+	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span>
+	<span class="k">return</span> <span class="sh">'</span><span class="s">TRUE</span><span class="sh">'</span>
 	
 <span class="c1">#define right truncation
 </span><span class="k">def</span> <span class="nf">rtrunk</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+	<span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="c1">#define left truncation
 </span><span class="k">def</span> <span class="nf">ltrunk</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="s">'0'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+	<span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="sh">'</span><span class="s">0</span><span class="sh">'</span> <span class="o">+</span> <span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
 	
 
-<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log10</span>
+<span class="kn">from</span> <span class="n">math</span> <span class="kn">import</span> <span class="n">log10</span>
 <span class="n">nlist</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">nlist</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">11</span><span class="p">:</span>
-	<span class="n">test</span> <span class="o">=</span> <span class="s">'TRUE'</span>
-	<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="s">'TRUE'</span><span class="p">:</span>
+<span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">nlist</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">11</span><span class="p">:</span>
+	<span class="n">test</span> <span class="o">=</span> <span class="sh">'</span><span class="s">TRUE</span><span class="sh">'</span>
+	<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="sh">'</span><span class="s">TRUE</span><span class="sh">'</span><span class="p">:</span>
 		<span class="n">rn</span> <span class="o">=</span> <span class="n">ln</span> <span class="o">=</span> <span class="n">n</span>
-		<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">))):</span>
-			<span class="n">rn</span> <span class="o">=</span> <span class="n">rtrunk</span><span class="p">(</span><span class="n">rn</span><span class="p">)</span>
-			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">rn</span><span class="p">)</span> <span class="o">==</span> <span class="s">'FALSE'</span><span class="p">:</span> <span class="n">test</span> <span class="o">=</span> <span class="s">'FALSE'</span>
-		<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">))):</span>
-			<span class="n">ln</span> <span class="o">=</span> <span class="n">ltrunk</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span>
-			<span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span> <span class="o">==</span> <span class="s">'FALSE'</span><span class="p">:</span> <span class="n">test</span> <span class="o">=</span> <span class="s">'FALSE'</span>
-		<span class="k">if</span> <span class="n">test</span> <span class="o">==</span> <span class="s">'TRUE'</span><span class="p">:</span> <span class="n">nlist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">log10</span><span class="p">(</span><span class="n">n</span><span class="p">))):</span>
+			<span class="n">rn</span> <span class="o">=</span> <span class="nf">rtrunk</span><span class="p">(</span><span class="n">rn</span><span class="p">)</span>
+			<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">rn</span><span class="p">)</span> <span class="o">==</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span><span class="p">:</span> <span class="n">test</span> <span class="o">=</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span>
+		<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="nf">log10</span><span class="p">(</span><span class="n">n</span><span class="p">))):</span>
+			<span class="n">ln</span> <span class="o">=</span> <span class="nf">ltrunk</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span>
+			<span class="k">if</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span> <span class="o">==</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span><span class="p">:</span> <span class="n">test</span> <span class="o">=</span> <span class="sh">'</span><span class="s">FALSE</span><span class="sh">'</span>
+		<span class="k">if</span> <span class="n">test</span> <span class="o">==</span> <span class="sh">'</span><span class="s">TRUE</span><span class="sh">'</span><span class="p">:</span> <span class="n">nlist</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 	<span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="k">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nlist</span><span class="p">)</span>
+<span class="k">print</span> <span class="nf">sum</span><span class="p">(</span><span class="n">nlist</span><span class="p">)</span>
 </code></pre></div></div>
 
 </div>

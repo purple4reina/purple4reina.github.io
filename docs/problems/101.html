@@ -106,47 +106,47 @@ tough because it involved a list comprehension within a list comprehension.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/python
 </span>
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="n">numpy</span>
 
 
 <span class="k">def</span> <span class="nf">generating_function</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     Generating function as given in the problem
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">n</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">n</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="n">n</span><span class="o">**</span><span class="mi">5</span> <span class="o">+</span> <span class="n">n</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="n">n</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="n">n</span><span class="o">**</span><span class="mi">8</span> <span class="o">-</span> <span class="n">n</span><span class="o">**</span><span class="mi">9</span> <span class="o">+</span> <span class="n">n</span><span class="o">**</span><span class="mi">10</span>
 
 
 <span class="k">def</span> <span class="nf">OP</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="s">"""
-    From the problem: "We shall define OP(k, n) to be the nth term of the
+    <span class="sh">"""</span><span class="s">
+    From the problem: </span><span class="sh">"</span><span class="s">We shall define OP(k, n) to be the nth term of the
     optimum polynomial generating function for the first k terms of a
-    sequence."
+    sequence.</span><span class="sh">"</span><span class="s">
 
     Adds in the fn (generating function) arg
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="c1"># First we need to solve a system of linear equations so we can find the
 </span>    <span class="c1"># optimum polynomial generating function. This means putting in values of n
 </span>    <span class="c1"># to the generating function so we can solve for the coefficients.
-</span>    <span class="n">coefs</span> <span class="o">=</span> <span class="n">numpy</span><span class="p">.</span><span class="n">array</span><span class="p">(</span>
-        <span class="p">[[</span><span class="n">row</span> <span class="o">**</span> <span class="n">exp</span> <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+</span>    <span class="n">coefs</span> <span class="o">=</span> <span class="n">numpy</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span>
+        <span class="p">[[</span><span class="n">row</span> <span class="o">**</span> <span class="n">exp</span> <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">k</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
     <span class="p">)</span>
 
-    <span class="n">ans</span> <span class="o">=</span> <span class="n">numpy</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">fn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">numpy</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="nf">fn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
 
-    <span class="n">opt_poly_gen_fn_coefs</span> <span class="o">=</span> <span class="n">numpy</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">ans</span><span class="p">).</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">opt_poly_gen_fn_coefs</span> <span class="o">=</span> <span class="n">numpy</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="nf">solve</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">ans</span><span class="p">).</span><span class="nf">tolist</span><span class="p">()</span>
 
     <span class="c1"># return opt poly at n
 </span>    <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">exp</span><span class="p">,</span> <span class="n">coef</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">opt_poly_gen_fn_coefs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">exp</span><span class="p">,</span> <span class="n">coef</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">opt_poly_gen_fn_coefs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="n">val</span> <span class="o">+=</span> <span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="n">exp</span><span class="p">)</span> <span class="o">*</span> <span class="n">coef</span>
 
     <span class="k">return</span> <span class="n">val</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
     <span class="n">total_FITs</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
-        <span class="n">FIT</span> <span class="o">=</span> <span class="n">OP</span><span class="p">(</span><span class="n">generating_function</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+        <span class="n">FIT</span> <span class="o">=</span> <span class="nc">OP</span><span class="p">(</span><span class="n">generating_function</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">total_FITs</span> <span class="o">+=</span> <span class="n">FIT</span>
 
     <span class="k">print</span> <span class="n">total_FITs</span>

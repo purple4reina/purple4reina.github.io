@@ -97,23 +97,23 @@ power it is raised to.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log10</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">math</span> <span class="kn">import</span> <span class="n">log10</span>
 <span class="k">def</span> <span class="nf">n_digit</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
-	<span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nf">int</span><span class="p">(</span><span class="nf">log10</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="s">"""for n in range(1001):
-	print n, n_digit(n)"""</span>
+<span class="sh">"""</span><span class="s">for n in range(1001):
+	print n, n_digit(n)</span><span class="sh">"""</span>
 
 
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">for</span> <span class="n">power</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">power</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">power</span><span class="o">%</span><span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">power</span>
-	<span class="k">for</span> <span class="n">bass</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">n_digit</span><span class="p">(</span><span class="n">bass</span><span class="o">**</span><span class="n">power</span><span class="p">)</span> <span class="o">==</span> <span class="n">power</span><span class="p">:</span> 
+	<span class="k">for</span> <span class="n">bass</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nf">n_digit</span><span class="p">(</span><span class="n">bass</span><span class="o">**</span><span class="n">power</span><span class="p">)</span> <span class="o">==</span> <span class="n">power</span><span class="p">:</span> 
 			<span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
-			<span class="k">print</span> <span class="n">bass</span><span class="p">,</span> <span class="s">'^'</span><span class="p">,</span> <span class="n">power</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">bass</span><span class="o">**</span><span class="n">power</span><span class="p">,</span> <span class="s">'count ='</span><span class="p">,</span> <span class="n">count</span>
+			<span class="k">print</span> <span class="n">bass</span><span class="p">,</span> <span class="sh">'</span><span class="s">^</span><span class="sh">'</span><span class="p">,</span> <span class="n">power</span><span class="p">,</span> <span class="sh">'</span><span class="s">=</span><span class="sh">'</span><span class="p">,</span> <span class="n">bass</span><span class="o">**</span><span class="n">power</span><span class="p">,</span> <span class="sh">'</span><span class="s">count =</span><span class="sh">'</span><span class="p">,</span> <span class="n">count</span>
 
 <span class="k">print</span> <span class="n">count</span>
 </code></pre></div></div>

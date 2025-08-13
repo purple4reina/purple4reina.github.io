@@ -97,36 +97,36 @@ amicables where the next number was less than the first one.</p>
 <h2 id="code">Code</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">nset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">nset</span> <span class="o">=</span> <span class="nf">set</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">nextam</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="n">fact</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-			<span class="n">fact</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+			<span class="n">fact</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 			<span class="k">if</span> <span class="n">n</span><span class="o">/</span><span class="n">i</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
-				<span class="n">fact</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">i</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">fact</span><span class="p">)</span>
+				<span class="n">fact</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">i</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">fact</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">nset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-	<span class="n">number</span> <span class="o">=</span> <span class="n">nset</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">nset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+	<span class="n">number</span> <span class="o">=</span> <span class="n">nset</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
 	<span class="n">n</span> <span class="o">=</span> <span class="n">number</span>
-	<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nset</span><span class="p">),</span> <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span> <span class="n">n</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">nset</span><span class="p">),</span> <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 	<span class="n">amlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
 	<span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
 	<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 	<span class="k">while</span> <span class="n">done</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
-		<span class="nb">next</span> <span class="o">=</span> <span class="n">nextam</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+		<span class="nb">next</span> <span class="o">=</span> <span class="nf">nextam</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 		<span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 		<span class="k">if</span> <span class="nb">next</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="ow">or</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span> <span class="ow">or</span> <span class="nb">next</span> <span class="o">&lt;</span> <span class="n">number</span><span class="p">:</span>
 			<span class="k">break</span>
 		<span class="k">elif</span> <span class="nb">next</span> <span class="o">==</span> <span class="n">number</span><span class="p">:</span>
 			<span class="n">done</span> <span class="o">=</span> <span class="bp">True</span>
 		<span class="k">else</span><span class="p">:</span>
-			<span class="n">amlist</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
+			<span class="n">amlist</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
 		<span class="n">n</span> <span class="o">=</span> <span class="nb">next</span>	
 	<span class="k">if</span> <span class="n">done</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
-		<span class="n">nset</span> <span class="o">-=</span> <span class="nb">set</span><span class="p">(</span><span class="n">amlist</span><span class="p">)</span>
+		<span class="n">nset</span> <span class="o">-=</span> <span class="nf">set</span><span class="p">(</span><span class="n">amlist</span><span class="p">)</span>
 		<span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
 			<span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="n">number</span><span class="p">]</span>
 

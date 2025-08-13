@@ -102,20 +102,20 @@ This should be a much faster process. At least I hope!</p>
 
 <h3 id="code">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">start_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">"""Process started
-----------"""</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="sh">"""</span><span class="s">Process started
+----------</span><span class="sh">"""</span>
 
 
 <span class="c1">#Step 1: Create {Tn}
 </span>
 <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000000</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100000000</span><span class="p">):</span>
 	<span class="k">print</span> <span class="n">n</span>
 	<span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]]</span>
 	<span class="n">t</span><span class="p">[(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]]</span>
-<span class="n">t</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+<span class="n">t</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
 <span class="k">print</span> <span class="n">t</span>
 
 
@@ -123,11 +123,11 @@ This should be a much faster process. At least I hope!</p>
 </span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">18</span> <span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">18</span> <span class="o">+</span><span class="mi">1</span><span class="p">):</span>
 	<span class="k">print</span> <span class="n">j</span>
-	<span class="n">i</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">j</span><span class="p">).</span><span class="n">lstrip</span><span class="p">(</span><span class="s">'0b'</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">t</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-		<span class="n">a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="nf">bin</span><span class="p">(</span><span class="n">j</span><span class="p">).</span><span class="nf">lstrip</span><span class="p">(</span><span class="sh">'</span><span class="s">0b</span><span class="sh">'</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">t</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+		<span class="n">a</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
 	<span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
 <span class="k">print</span> <span class="n">a</span>
 
@@ -135,16 +135,16 @@ This should be a much faster process. At least I hope!</p>
 <span class="c1">#Step 3: Do the sigma
 </span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">19</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">19</span><span class="p">):</span>
 	<span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span><span class="p">]</span>
 	
 <span class="k">print</span> <span class="n">sigma</span>
 		
 
-<span class="n">end_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">end_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
 <span class="n">elapse_time</span><span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
-<span class="k">print</span> <span class="s">'----------'</span>
-<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="s">'seconds have passed'</span>
+<span class="k">print</span> <span class="sh">'</span><span class="s">----------</span><span class="sh">'</span>
+<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="sh">'</span><span class="s">seconds have passed</span><span class="sh">'</span>
 </code></pre></div></div>
 
 <h2 id="try-two">Try Two</h2>
@@ -157,39 +157,39 @@ formula that makes all the elements of An.</p>
 
 <h3 id="code-1">Code</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">start_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">"""Process started
-----------"""</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">start_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="sh">"""</span><span class="s">Process started
+----------</span><span class="sh">"""</span>
 
 
 <span class="c1">#Step 1: Create {Tn}
 </span>
 <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">):</span>
 	<span class="k">print</span> <span class="n">n</span>
 	<span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]]</span>
 	<span class="n">t</span><span class="p">[(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]]</span>
-<span class="n">t</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+<span class="n">t</span> <span class="o">=</span> <span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
 
 
 <span class="c1">#Step 2: Create {An}
 </span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">):</span>
-	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">):</span>
+	<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">):</span>
 		<span class="k">break</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">l</span><span class="p">):</span>
-		<span class="n">itest</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="p">)]),</span> <span class="mi">2</span><span class="p">)</span>
-		<span class="k">print</span> <span class="n">l</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">itest</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
-			<span class="n">a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">itest</span><span class="p">)</span>
-		<span class="k">elif</span> <span class="n">a</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">itest</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">l</span><span class="p">):</span>
+		<span class="n">itest</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="p">)]),</span> <span class="mi">2</span><span class="p">)</span>
+		<span class="k">print</span> <span class="n">l</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+		<span class="nf">if </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="n">itest</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+			<span class="n">a</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">itest</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="n">a</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="n">itest</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="k">break</span>
 
 
-<span class="n">a</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span> <span class="nf">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
 
 <span class="c1">#Step 3: Do the sigma
@@ -201,10 +201,10 @@ formula that makes all the elements of An.</p>
 <span class="c1">#print sigma
 </span>		
 
-<span class="n">end_time</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">end_time</span><span class="o">=</span> <span class="nf">time</span><span class="p">()</span>
 <span class="n">elapse_time</span><span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
-<span class="k">print</span> <span class="s">'----------'</span>
-<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="s">'seconds have passed'</span>
+<span class="k">print</span> <span class="sh">'</span><span class="s">----------</span><span class="sh">'</span>
+<span class="k">print</span> <span class="n">elapse_time</span><span class="p">,</span> <span class="sh">'</span><span class="s">seconds have passed</span><span class="sh">'</span>
 </code></pre></div></div>
 
 </div>

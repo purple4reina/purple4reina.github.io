@@ -117,7 +117,7 @@ which order to apply all this knowledge.</p>
     <span class="n">summ</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
         <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">d</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nf">divmod</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span> <span class="o">%</span> <span class="n">ten_5</span>
         <span class="n">summ</span> <span class="o">+=</span> <span class="n">d</span>
         <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -129,8 +129,8 @@ which order to apply all this knowledge.</p>
 <span class="k">def</span> <span class="nf">primes</span><span class="p">():</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">ten_11</span> <span class="o">//</span> <span class="mi">138</span> <span class="o">-</span> <span class="mi">10</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">pow</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">p</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
@@ -138,23 +138,23 @@ which order to apply all this knowledge.</p>
         <span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span>
 
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nf">primes</span><span class="p">():</span>
         <span class="n">ratio</span> <span class="o">=</span> <span class="n">ten_11</span> <span class="o">//</span> <span class="n">p</span>
         <span class="k">if</span> <span class="n">ratio</span> <span class="o">&gt;</span> <span class="n">left</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="k">elif</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="nb">AssertionError</span><span class="p">(</span><span class="s">'should have found it by now!'</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="nc">AssertionError</span><span class="p">(</span><span class="sh">'</span><span class="s">should have found it by now!</span><span class="sh">'</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">right</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">ten_5</span> <span class="o">==</span> <span class="mi">99999</span><span class="p">:</span>
-            <span class="n">found_right</span><span class="p">,</span> <span class="n">digit_sum</span> <span class="o">=</span> <span class="n">the_far_right</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="nf">if </span><span class="p">(</span><span class="n">right</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">ten_5</span> <span class="o">==</span> <span class="mi">99999</span><span class="p">:</span>
+            <span class="n">found_right</span><span class="p">,</span> <span class="n">digit_sum</span> <span class="o">=</span> <span class="nf">the_far_right</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">found_right</span> <span class="o">==</span> <span class="n">right</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">digit_sum</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="n">left</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">right</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="nf">eval</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">))</span>
 </code></pre></div></div>
 
 </div>

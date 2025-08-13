@@ -103,7 +103,7 @@ nonetheless.</p>
 
 <h2 id="code">Code</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">random</span> <span class="kn">import</span> <span class="n">randint</span>
 
 <span class="k">def</span> <span class="nf">rules</span><span class="p">(</span><span class="nb">next</span><span class="p">):</span>
 	<span class="c1"># go to jail:
@@ -112,7 +112,7 @@ nonetheless.</p>
 	
 	<span class="c1"># comunity chest:
 </span>	<span class="k">elif</span> <span class="nb">next</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">next</span> <span class="o">==</span> <span class="mi">17</span> <span class="ow">or</span> <span class="nb">next</span> <span class="o">==</span> <span class="mi">33</span><span class="p">:</span>
-		<span class="n">CC</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+		<span class="n">CC</span> <span class="o">=</span> <span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
 		<span class="k">if</span> <span class="n">CC</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 			<span class="k">return</span> <span class="mi">0</span>
 		<span class="k">elif</span> <span class="n">CC</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -122,7 +122,7 @@ nonetheless.</p>
 	
 	<span class="c1"># chance:
 </span>	<span class="k">elif</span> <span class="nb">next</span> <span class="o">==</span> <span class="mi">7</span> <span class="ow">or</span> <span class="nb">next</span> <span class="o">==</span> <span class="mi">22</span> <span class="ow">or</span> <span class="nb">next</span> <span class="o">==</span> <span class="mi">36</span><span class="p">:</span>
-		<span class="n">CH</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+		<span class="n">CH</span> <span class="o">=</span> <span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
 		<span class="k">if</span> <span class="n">CH</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 			<span class="k">return</span> <span class="mi">0</span>
 		<span class="k">elif</span> <span class="n">CH</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -148,7 +148,7 @@ nonetheless.</p>
 			<span class="k">elif</span> <span class="nb">next</span> <span class="o">==</span> <span class="mi">22</span><span class="p">:</span>
 				<span class="k">return</span> <span class="mi">28</span>
 		<span class="k">elif</span> <span class="n">CH</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
-			<span class="k">return</span> <span class="n">rules</span><span class="p">(</span><span class="nb">next</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+			<span class="k">return</span> <span class="nf">rules</span><span class="p">(</span><span class="nb">next</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
 		<span class="k">else</span><span class="p">:</span>
 			<span class="k">return</span> <span class="nb">next</span>
 	
@@ -166,7 +166,7 @@ nonetheless.</p>
 		<span class="k">return</span> <span class="bp">False</span>
 
 
-<span class="n">squareDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">),[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">40</span><span class="p">))</span>
+<span class="n">squareDict</span> <span class="o">=</span> <span class="nf">dict</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">40</span><span class="p">),[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">40</span><span class="p">))</span>
 
 <span class="n">current_square</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">last_square</span> <span class="o">=</span> <span class="mi">0</span>
@@ -174,24 +174,24 @@ nonetheless.</p>
 <span class="n">roll_hist</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
 
 <span class="k">while</span> <span class="n">total_rolls</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
-	<span class="n">roll_hist</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+	<span class="n">roll_hist</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
 	<span class="k">del</span> <span class="n">roll_hist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 	<span class="n">total_rolls</span> <span class="o">+=</span> <span class="mi">1</span>
 	
-	<span class="k">if</span> <span class="n">three_doubles</span><span class="p">(</span><span class="n">roll_hist</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+	<span class="k">if</span> <span class="nf">three_doubles</span><span class="p">(</span><span class="n">roll_hist</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
 		<span class="n">squareDict</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 		<span class="n">last_square</span> <span class="o">=</span> <span class="mi">10</span>
 		<span class="n">roll_hist</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
 	<span class="k">else</span><span class="p">:</span>
-		<span class="n">current_square</span> <span class="o">=</span> <span class="n">rules</span><span class="p">((</span><span class="n">last_square</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roll_hist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">%</span><span class="mi">40</span><span class="p">)</span>
+		<span class="n">current_square</span> <span class="o">=</span> <span class="nf">rules</span><span class="p">((</span><span class="n">last_square</span> <span class="o">+</span> <span class="nf">sum</span><span class="p">(</span><span class="n">roll_hist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">%</span><span class="mi">40</span><span class="p">)</span>
 		<span class="n">squareDict</span><span class="p">[</span><span class="n">current_square</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 		<span class="n">last_square</span> <span class="o">=</span> <span class="n">current_square</span>
 		
 <span class="n">largest</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">this</span> <span class="ow">in</span> <span class="n">squareDict</span><span class="p">.</span><span class="n">iteritems</span><span class="p">():</span>
-	<span class="k">if</span> <span class="n">this</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">largest</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
-		<span class="n">largest</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">largest</span><span class="p">))</span>
-		<span class="n">largest</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">this</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">this</span> <span class="ow">in</span> <span class="n">squareDict</span><span class="p">.</span><span class="nf">iteritems</span><span class="p">():</span>
+	<span class="k">if</span> <span class="n">this</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nf">min</span><span class="p">(</span><span class="n">largest</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+		<span class="n">largest</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">largest</span><span class="p">))</span>
+		<span class="n">largest</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">this</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">this</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
 <span class="k">print</span> <span class="n">largest</span>
 </code></pre></div></div>

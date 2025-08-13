@@ -110,19 +110,19 @@ $10^{11}$…</p>
             <span class="k">break</span>
         <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="n">counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">n</span><span class="p">):</span>
         <span class="n">k</span> <span class="o">=</span> <span class="n">i</span>
         <span class="k">while</span> <span class="n">i</span><span class="p">:</span>
-            <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nf">divmod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
             <span class="n">counts</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="n">k</span> <span class="o">*</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">counts</span><span class="p">.</span><span class="n">values</span><span class="p">()).</span><span class="n">count</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">k</span> <span class="o">*</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">counts</span><span class="p">.</span><span class="nf">values</span><span class="p">()).</span><span class="nf">count</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">total</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">solve</span><span class="p">())</span>
 </code></pre></div></div>
 
 </div>

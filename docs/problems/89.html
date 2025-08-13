@@ -97,30 +97,30 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
 	<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">)):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">R</span><span class="p">)):</span>
 		<span class="n">d</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-		<span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'I'</span><span class="p">:</span>
-			<span class="k">if</span> <span class="s">'V'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="s">'X'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
+		<span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">:</span>
+			<span class="k">if</span> <span class="sh">'</span><span class="s">V</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="sh">'</span><span class="s">X</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
 				<span class="n">total</span> <span class="o">-=</span> <span class="mi">1</span>
 			<span class="k">else</span><span class="p">:</span>
 				<span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
-		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'V'</span><span class="p">:</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="sh">'</span><span class="s">V</span><span class="sh">'</span><span class="p">:</span>
 			<span class="n">total</span> <span class="o">+=</span> <span class="mi">5</span>
-		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'X'</span><span class="p">:</span>
-			<span class="k">if</span> <span class="s">'L'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="s">'C'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+			<span class="k">if</span> <span class="sh">'</span><span class="s">L</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="sh">'</span><span class="s">C</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
 				<span class="n">total</span> <span class="o">-=</span> <span class="mi">10</span>
 			<span class="k">else</span><span class="p">:</span>
 				<span class="n">total</span> <span class="o">+=</span> <span class="mi">10</span>
-		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'L'</span><span class="p">:</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">:</span>
 			<span class="n">total</span> <span class="o">+=</span> <span class="mi">50</span>
-		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'C'</span><span class="p">:</span>
-			<span class="k">if</span> <span class="s">'D'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="s">'M'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="sh">'</span><span class="s">C</span><span class="sh">'</span><span class="p">:</span>
+			<span class="k">if</span> <span class="sh">'</span><span class="s">D</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="ow">or</span> <span class="sh">'</span><span class="s">M</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
 				<span class="n">total</span> <span class="o">-=</span> <span class="mi">100</span>
 			<span class="k">else</span><span class="p">:</span>
 				<span class="n">total</span> <span class="o">+=</span> <span class="mi">100</span>
-		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'D'</span><span class="p">:</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">:</span>
 			<span class="n">total</span> <span class="o">+=</span> <span class="mi">500</span>
-		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s">'M'</span><span class="p">:</span>
+		<span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="sh">'</span><span class="s">M</span><span class="sh">'</span><span class="p">:</span>
 			<span class="n">total</span> <span class="o">+=</span> <span class="mi">1000</span>
 	<span class="k">return</span> <span class="n">total</span>
 
@@ -129,90 +129,90 @@
 	<span class="n">hundred</span> <span class="o">=</span> <span class="n">n</span><span class="o">%</span><span class="mi">1000</span> <span class="o">-</span> <span class="n">n</span><span class="o">%</span><span class="mi">100</span>
 	<span class="n">ten</span> <span class="o">=</span> <span class="n">n</span><span class="o">%</span><span class="mi">100</span> <span class="o">-</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span>
 	<span class="n">one</span> <span class="o">=</span> <span class="n">n</span><span class="o">%</span><span class="mi">10</span>
-	<span class="k">return</span> <span class="n">Rthousand</span><span class="p">(</span><span class="n">thousand</span><span class="p">)</span> <span class="o">+</span> <span class="n">Rhundred</span><span class="p">(</span><span class="n">hundred</span><span class="p">)</span> <span class="o">+</span> <span class="n">Rten</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span> <span class="o">+</span> <span class="n">Rone</span><span class="p">(</span><span class="n">one</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nc">Rthousand</span><span class="p">(</span><span class="n">thousand</span><span class="p">)</span> <span class="o">+</span> <span class="nc">Rhundred</span><span class="p">(</span><span class="n">hundred</span><span class="p">)</span> <span class="o">+</span> <span class="nc">Rten</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span> <span class="o">+</span> <span class="nc">Rone</span><span class="p">(</span><span class="n">one</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">Rthousand</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4000</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'MMMM'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">MMMM</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">3000</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'MMM'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">MMM</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2000</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'MM'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">MM</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1000</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'M'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">M</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">''</span>
+		<span class="k">return</span> <span class="sh">''</span>
 
 <span class="k">def</span> <span class="nf">Rhundred</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">900</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'CM'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">CM</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">800</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'DCCC'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">DCCC</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">700</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'DCC'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">DCC</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">600</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'DC'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">DC</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">500</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'D'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">D</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">400</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'CD'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">CD</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">300</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'CCC'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">CCC</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'CC'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">CC</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'C'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">C</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">''</span>
+		<span class="k">return</span> <span class="sh">''</span>
 
 <span class="k">def</span> <span class="nf">Rten</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">90</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'XC'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">XC</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">80</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'LXXX'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">LXXX</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">70</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'LXX'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">LXX</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">60</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'LX'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">LX</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">50</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'L'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">L</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">40</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'XL'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">XL</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">30</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'XXX'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">XXX</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'XX'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">XX</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'X'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">X</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">''</span>
+		<span class="k">return</span> <span class="sh">''</span>
 
 <span class="k">def</span> <span class="nf">Rone</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'IX'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">IX</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'VIII'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">VIII</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'VII'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">VII</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'VI'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">VI</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'V'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">V</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'IV'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">IV</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'III'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">III</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'II'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">II</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">'I'</span>
+		<span class="k">return</span> <span class="sh">'</span><span class="s">I</span><span class="sh">'</span>
 	<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-		<span class="k">return</span> <span class="s">''</span>
+		<span class="k">return</span> <span class="sh">''</span>
 
 
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">R</span> <span class="ow">in</span> <span class="n">LIST</span><span class="p">:</span>
-	<span class="n">count</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">Roman</span><span class="p">(</span><span class="n">value</span><span class="p">(</span><span class="n">R</span><span class="p">)))</span>
+	<span class="n">count</span> <span class="o">+=</span> <span class="nf">len</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">-</span> <span class="nf">len</span><span class="p">(</span><span class="nc">Roman</span><span class="p">(</span><span class="nf">value</span><span class="p">(</span><span class="n">R</span><span class="p">)))</span>
 
 <span class="k">print</span> <span class="n">count</span>
 </code></pre></div></div>
