@@ -7,48 +7,50 @@ bootstrap: true
 # ISS Vanguard: _Dice Probability Calculator_
 
 <div class="container">
-  <div id="dice-container" class="col">
-    <label for="dice-input" class="form-label">Dice Input</label>
-    <div class="input-group mb-3" id="dice-input">
-      <select class="form-select" id="dice-color-select">
-        <option value="" selected disabled>Color...</option>
-        <option value="red">Red</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-      </select>
-      <select class="form-select" id="dice-icon-placeholder">
-        <option selected disabled>Icon...</option>
-      </select>
-      <select class="form-select" id="dice-icon-select-red" hidden>
-        <option value="" selected disabled>Icon...</option>
-        <option value="basic">Basic</option>
-        <option value="strength">Strength</option>
-        <option value="shield">Shield</option>
-        <option value="pickaxe">Pick Axe</option>
-        <option value="vanguard">Vanguard</option>
-      </select>
-      <select class="form-select" id="dice-icon-select-green" hidden>
-        <option value="" selected disabled>Icon...</option>
-        <option value="basic">Basic</option>
-        <option value="compass">Compass</option>
-        <option value="eyeball">Eyeball</option>
-        <option value="dna">DNA</option>
-        <option value="vanguard">Vanguard</option>
-      </select>
-      <select class="form-select" id="dice-icon-select-blue" hidden>
-        <option value="" selected disabled>Icon...</option>
-        <option value="basic">Basic</option>
-        <option value="wrench">Wrench</option>
-        <option value="computer">Computer</option>
-        <option value="science">Science</option>
-        <option value="vanguard">Vanguard</option>
-      </select>
-      <button class="btn btn-outline-secondary" type="button" id="add-die-button" disabled>
-        <i class="bi bi-plus-lg"></i>Add Die
-      </button>
-    </div>
-    <div id="dice-list" class="list-group">
-      <!-- Dice will be added here dynamically -->
+  <div class="row">
+    <div class="col">
+      <label for="dice-input" class="form-label">Dice Input</label>
+      <div class="input-group mb-3" id="dice-input">
+        <select class="form-select" id="dice-color-select">
+          <option value="" selected disabled>Color...</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+        </select>
+        <select class="form-select" id="dice-icon-placeholder">
+          <option selected disabled>Icon...</option>
+        </select>
+        <select class="form-select" id="dice-icon-select-red" hidden>
+          <option value="" selected disabled>Icon...</option>
+          <option value="basic">Basic</option>
+          <option value="strength">Strength</option>
+          <option value="shield">Shield</option>
+          <option value="pickaxe">Pick Axe</option>
+          <option value="vanguard">Vanguard</option>
+        </select>
+        <select class="form-select" id="dice-icon-select-green" hidden>
+          <option value="" selected disabled>Icon...</option>
+          <option value="basic">Basic</option>
+          <option value="compass">Compass</option>
+          <option value="eyeball">Eyeball</option>
+          <option value="dna">DNA</option>
+          <option value="vanguard">Vanguard</option>
+        </select>
+        <select class="form-select" id="dice-icon-select-blue" hidden>
+          <option value="" selected disabled>Icon...</option>
+          <option value="basic">Basic</option>
+          <option value="wrench">Wrench</option>
+          <option value="computer">Computer</option>
+          <option value="science">Science</option>
+          <option value="vanguard">Vanguard</option>
+        </select>
+        <button class="btn btn-outline-secondary" type="button" id="add-die-button" disabled>
+          <i class="bi bi-plus-lg"></i>Add Die
+        </button>
+      </div>
+      <div id="dice-list" class="list-group">
+        <!-- Dice will be added here dynamically -->
+      </div>
     </div>
   </div>
 </div>
