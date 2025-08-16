@@ -48,6 +48,7 @@ exclude:
   - "**/*.yml"
   - "**/node_modules/**"
   - "**/.serverless/**"
+  - "**/*.json"
 
 collections:
   problems:
