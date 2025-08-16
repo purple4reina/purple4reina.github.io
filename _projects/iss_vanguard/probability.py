@@ -1,3 +1,4 @@
+import itertools
 import json
 
 # Basic dice: 4 basic, 1 vanguard, 1 bang
@@ -56,16 +57,38 @@ def prod(nums):
         result *= num
     return result
 
+def choose(n, k):
+    if k > n:
+        return 0
+    if k == 0 or k == n:
+        return 1
+    if k == 1:
+        return n
+    if k > n // 2:
+        k = n - k
+    result = 1
+    for i in range(k):
+        result *= (n - i)
+        result //= (i + 1)
+    return result
+
 def calculate_probability(inputs):
     dice = [
         Die(**die) for die in inputs['dice']
     ]
     fails = inputs.get('fails') or []
 
-    failure_probability = 0
-    if fails:
+    failure_probability, success_probability  = 0.0, 0.0
+
+    if len(fails) == 0 or len(dice) == 0:
+        pass
+    elif len(fails) == 1:
         probabilities = [die.roll_probability(fails[0]) for die in dice]
-        failure_probability = sum(probabilities) - prod(probabilities) * (len(fails) - 1)
+        neg = 1
+        for dice_cnt in range(1, len(dice)+1):
+            for probs in itertools.combinations(probabilities, dice_cnt):
+                failure_probability += neg * prod(probs)
+            neg *= -1
 
     return {
             'failure_probability': failure_probability,
