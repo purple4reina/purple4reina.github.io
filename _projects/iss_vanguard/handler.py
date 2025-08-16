@@ -9,7 +9,7 @@ def handle(request, context=None):
         return {
             'statusCode': 204,
             'headers': {
-                'Access-Control-Allow-Origin': 'https://purple4reina.github.io',
+                'Access-Control-Allow-Origin': 'https://purple4reina.github.io/',
                 'Access-Control-Allow-Methods': 'OPTIONS, POST',
                 'Access-Control-Allow-Headers': 'Content-Type',
             }
