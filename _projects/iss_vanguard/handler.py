@@ -24,4 +24,8 @@ def handle(request, context=None):
     return {
             'statusCode': 200,
             'body': json.dumps(result),
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'https://purple4reina.github.io/',
+            },
     }
