@@ -208,14 +208,10 @@
   const addDieButton = document.getElementById('add-die-button');
   const diceList = document.getElementById('dice-list');
 
-  const dice = [];
-
   // Add Fail Conditions
   const failsSelect = document.getElementById('fails-select');
   const addFailButton = document.getElementById('add-fail-button');
   const failsList = document.getElementById('fails-list');
-
-  const fails = [];
 
   // Calculate
   const calculateButton = document.getElementById('calculate-button');
@@ -293,13 +289,7 @@
 
   // Calculate
 
-  // Basic dice: 4 basic, 1 vanguard, 1 bang
-  // Icon dice: 3 icon, 1 basic, 1 vanguard, 1 bang
-  // Vanguard dice: 2 vanguard, 1 double-vanguard, 3 bang
-
   function calculate() {
-    
-
     const failPercent = 5;
     const successPercent = 50;
     const nonePercent = 100 - (failPercent + successPercent);
