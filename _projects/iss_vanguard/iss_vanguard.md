@@ -60,10 +60,10 @@ bootstrap: true
         </div>
         <div class="col">
           <div class="btn-group btn-group-sm" role="group">
-            <input type="radio" class="btn-check" name="fail-and-or" id="fail-and" checked>
-            <label class="btn btn-outline-secondary" for="fail-and">And</label>
-            <input type="radio" class="btn-check" name="fail-and-or" id="fail-or">
-            <label class="btn btn-outline-secondary" for="fail-or">Or</label>
+            <input type="radio" class="btn-check" name="fail-and-or" id="and" checked>
+            <label class="btn btn-outline-secondary" for="and">And</label>
+            <input type="radio" class="btn-check" name="fail-and-or" id="or">
+            <label class="btn btn-outline-secondary" for="or">Or</label>
           </div>
         </div>
       </div>
@@ -123,10 +123,14 @@ bootstrap: true
   const addDieButton = document.getElementById('add-die-button');
   const diceList = document.getElementById('dice-list');
 
+  const dice = [];
+
   // Add Fail Conditions
   const failsSelect = document.getElementById('fails-select');
   const addFailButton = document.getElementById('add-fail-button');
   const failsList = document.getElementById('fails-list');
+
+  const fails = [];
 
   // Calculate
   const calculateButton = document.getElementById('calculate-button');
@@ -136,6 +140,13 @@ bootstrap: true
   const resultsBarSuccess = document.getElementById('results-bar-success');
   const resultsBarFailText = document.getElementById('results-bar-fail-text');
   const resultsBarSuccessText = document.getElementById('results-bar-success-text');
+
+  const backendUrl =
+    {%- if site.env == "dev" -%}
+      'http://localhost:8000'
+    {%- else -%}
+      'tbd'
+    {%- endif %};
 
   // Add Dice
 
@@ -171,6 +182,8 @@ bootstrap: true
       return;
     }
 
+    dice.push({ color: selectedColor, icon: selectedIcon });
+
     const dieItem = document.createElement('div');
     dieItem.className = 'list-group-item d-flex justify-content-between align-items-center';
     dieItem.textContent = `${selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)} ${selectedIcon.charAt(0).toUpperCase() + selectedIcon.slice(1)}`;
@@ -193,6 +206,9 @@ bootstrap: true
 
   function addFails(event) {
     const selectedFail = failsSelect.value;
+
+    fails.push(selectedFail);
+
     const failItem = document.createElement('div');
     failItem.className = 'list-group-item d-flex justify-content-between align-items-center';
     failItem.textContent = selectedFail.charAt(0).toUpperCase() + selectedFail.slice(1);
@@ -204,9 +220,34 @@ bootstrap: true
 
   // Calculate
 
-  function calculate() {
-    const failPercent = 5;
-    const successPercent = 50;
+  async function calculate() {
+    if (dice.length === 0) {
+      return;
+    }
+
+    const resp = await fetch(backendUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          dice: dice,
+          fails: fails,
+          failCondition: document.querySelector('input[name="fail-and-or"]:checked').id,
+        })
+      })
+      .then(response => {
+        const body = response.json().then();
+        return body;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        return { failure_probability: 0, success_probability: 0 };
+      });
+    console.log('Response:', resp);
+
+    const failPercent = resp.failure_probability * 100;
+    const successPercent = resp.success_probability * 100;
     const nonePercent = 100 - (failPercent + successPercent);
 
     resultsBar.hidden = false;
