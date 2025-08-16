@@ -51,8 +51,17 @@ class VanguardDie(Die):
     faces = ['vanguard', 'vanguard', 'double-vanguard', 'bang', 'bang', 'bang']
 
 def calculate_probability(inputs):
+    dice = [
+        Die(**die) for die in inputs['dice']
+    ]
+
+    # assume 1 bang
+    failure_probability = 1
+    for die in dice:
+        failure_probability *= die.roll_probability('bang')
+
     return {
             'inputs': inputs,
-            'failure_probability': .1,
-            'success_probability': .25,
+            'failure_probability': failure_probability,
+            'success_probability': 0,
     }
