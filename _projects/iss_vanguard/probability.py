@@ -18,9 +18,13 @@ class Die(object):
         self.color = color
         self.icon = icon
 
+    def roll_probability(self, icon):
+        return self.faces.count(icon) / 6
+
 class BasicDie(Die):
 
     icons = ['basic']
+    faces = ['basic', 'basic', 'basic', 'basic', 'vanguard', 'bang']
 
     def __init__(self, color, icon):
         self.color = color
@@ -34,9 +38,17 @@ class IconDie(Die):
             'wrench', 'computer', 'science'   # blue
     ]
 
+    @property
+    def faces(self):
+        return [
+            self.icon, self.icon, self.icon,
+            'basic', 'vanguard', 'bang'
+        ]
+
 class VanguardDie(Die):
 
     icons = ['vanguard']
+    faces = ['vanguard', 'vanguard', 'double-vanguard', 'bang', 'bang', 'bang']
 
 def calculate_probability(inputs):
     return {
