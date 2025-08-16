@@ -1,6 +1,8 @@
 import pytest
 
-from probability import Die, BasicDie, IconDie, VanguardDie, calculate_probability
+from probability import (
+        Die, BasicDie, IconDie, VanguardDie, calculate_probability, prod,
+)
 
 _test_die_classes = (
         ('red', 'basic', BasicDie),
@@ -149,3 +151,15 @@ def test_calculate_probability(inputs, fail_probability, success_probability):
         'failure_probability': fail_probability,
         'success_probability': success_probability,
     }
+
+_test_prod = (
+        ([], 1),
+        ([1], 1),
+        ([2], 2),
+        ([2, 3], 6),
+        ([2, 3, 4], 24),
+)
+
+@pytest.mark.parametrize('nums,expect', _test_prod)
+def test_prod(nums,expect):
+    assert prod(nums) == expect

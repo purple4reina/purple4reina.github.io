@@ -50,6 +50,12 @@ class VanguardDie(Die):
     icons = ['vanguard']
     faces = ['vanguard', 'vanguard', 'double-vanguard', 'bang', 'bang', 'bang']
 
+def prod(nums):
+    result = 1
+    for num in nums:
+        result *= num
+    return result
+
 def calculate_probability(inputs):
     dice = [
         Die(**die) for die in inputs['dice']
