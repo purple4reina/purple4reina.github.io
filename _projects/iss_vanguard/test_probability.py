@@ -123,24 +123,33 @@ _test_calculate_probability = (
             {
                 'dice': [
                     {'color': 'red', 'icon': 'basic'},
-                ]
-            }, 1/6, 0
+                ],
+            }, 0, 0
         ),
         (
             {
                 'dice': [
                     {'color': 'red', 'icon': 'basic'},
                     {'color': 'green', 'icon': 'basic'},
-                ]
-            }, 1/6 * 1/6, 0
+                ],
+            }, 0, 0
         ),
         (
             {
                 'dice': [
-                    {'color': 'red', 'icon': 'vanguard'},
-                    {'color': 'green', 'icon': 'basic'},
-                ]
-            }, 3/6 * 1/6, 0
+                    {'color': 'red', 'icon': 'basic'},
+                ],
+                'fails': ['basic'],
+            }, 4/6, 0
+        ),
+        (
+            {
+                'dice': [
+                    {'color': 'red', 'icon': 'basic'},
+                    {'color': 'blue', 'icon': 'basic'},
+                ],
+                'fails': ['basic'],
+            }, 4/6, 0
         ),
 )
 

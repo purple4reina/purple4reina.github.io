@@ -60,11 +60,12 @@ def calculate_probability(inputs):
     dice = [
         Die(**die) for die in inputs['dice']
     ]
+    fails = inputs.get('fails') or []
 
-    # assume 1 bang
-    failure_probability = 1
-    for die in dice:
-        failure_probability *= die.roll_probability('bang')
+    failure_probability = 0
+    if fails:
+        probabilities = [die.roll_probability(fails[0]) for die in dice]
+        failure_probability = sum(probabilities) - prod(probabilities) * (len(fails) - 1)
 
     return {
             'inputs': inputs,
