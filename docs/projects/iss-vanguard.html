@@ -93,7 +93,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col" style="margin-bottom: 20px;">
       <label for="dice-input" class="form-label">Dice Input</label>
       <div class="input-group mb-3" id="dice-input">
         <select class="form-select" id="dice-color-select">
@@ -133,14 +133,41 @@
           <i class="bi bi-plus-lg"></i>Add Die
         </button>
       </div>
-      <div id="dice-list" class="list-group">
-        <!-- Dice will be added here dynamically -->
+      <div id="dice-list" class="list-group"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col" style="margin-bottom: 20px;">
+      <div class="row">
+        <div class="col">
+          <label for="fails-input" class="form-label">Fail Conditions</label>
+        </div>
+        <div class="col">
+          <div class="btn-group btn-group-sm" role="group">
+            <input type="radio" class="btn-check" name="fail-and-or" id="fail-and" checked="" />
+            <label class="btn btn-outline-secondary" for="fail-and">And</label>
+            <input type="radio" class="btn-check" name="fail-and-or" id="fail-or" />
+            <label class="btn btn-outline-secondary" for="fail-or">Or</label>
+          </div>
+        </div>
       </div>
+      <div class="input-group mb-3" id="fails-input">
+        <select class="form-select" id="fails-select">
+          <option value="" selected="" disabled="">Select...</option>
+          <option value="bang">Bang</option>
+        </select>
+        <button class="btn btn-outline-secondary" type="button" id="add-fail-button" disabled="">
+          <i class="bi bi-plus-lg"></i>Add Fail
+        </button>
+      </div>
+      <div id="fails-list" class="list-group"></div>
     </div>
   </div>
 </div>
 
 <script>
+  // Add Dice
   const diceColorSelect = document.getElementById('dice-color-select');
   const diceIconPlaceholder = document.getElementById('dice-icon-placeholder');
   const diceIconSelectRed = document.getElementById('dice-icon-select-red');
@@ -148,6 +175,13 @@
   const diceIconSelectBlue = document.getElementById('dice-icon-select-blue');
   const addDieButton = document.getElementById('add-die-button');
   const diceList = document.getElementById('dice-list');
+
+  // Add Fail Conditions
+  const failsSelect = document.getElementById('fails-select');
+  const addFailButton = document.getElementById('add-fail-button');
+  const failsList = document.getElementById('fails-list');
+
+  // Add Dice
 
   function updateDiceColor(event) {
     selectedColor = event.target.value;
@@ -192,11 +226,33 @@
     }
   }
 
+  // Add Fail Conditions
+
+  function updateFails(event) {
+    addFailButton.disabled = event.target.value === '';
+  }
+
+  function addFails(event) {
+    const selectedFail = failsSelect.value;
+    const failItem = document.createElement('div');
+    failItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+    failItem.textContent = selectedFail.charAt(0).toUpperCase() + selectedFail.slice(1);
+    failsList.appendChild(failItem);
+
+    failsSelect.value = '';
+    addFailButton.disabled = true;
+  }
+
+  // Add Dice
   diceColorSelect.addEventListener('change', updateDiceColor);
   diceIconSelectRed.addEventListener('change', updateDiceIcon);
   diceIconSelectGreen.addEventListener('change', updateDiceIcon);
   diceIconSelectBlue.addEventListener('change', updateDiceIcon);
   addDieButton.addEventListener('click', addDie);
+
+  // Add Fail Conditions
+  failsSelect.addEventListener('change', updateFails);
+  addFailButton.addEventListener('click', addFails);
 </script>
 
 
