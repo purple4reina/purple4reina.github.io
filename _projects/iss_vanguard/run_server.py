@@ -6,7 +6,8 @@ if __name__ == '__main__':
     class RequestHandler(BaseHTTPRequestHandler):
         def do_POST(self):
             result = handle({
-                'body': self.rfile.read(int(self.headers['Content-Length'])).decode('utf-8')
+                'body': self.rfile.read(int(self.headers['Content-Length'])).decode('utf-8'),
+                'requestContext': {'http': {'method': 'POST'}},
             })
             self.send_response(result['statusCode'])
             self.send_header('Content-Type', 'application/json')
