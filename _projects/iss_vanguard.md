@@ -79,6 +79,38 @@ bootstrap: true
       <div id="fails-list" class="list-group"></div>
     </div>
   </div>
+
+  <div class="row" style="margin-bottom: 20px;">
+    <div class="col">
+      <button class="btn btn-outline-secondary" type="button" id="calculate-button" disabled>
+        <i class="bi bi-calculator"></i> Calculate
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <hr class="border border-secondary border-1" />
+      <h5>Results</h5>
+      <div id="results-bar" hidden>
+        <div class="progress-stacked" style="height: 24px">
+          <div class="progress" id="results-bar-fail" role="progressbar" style="height: 24px">
+            <div class="progress-bar bg-danger"></div>
+          </div>
+          <div class="progress opacity-0" id="results-bar-none" role="progressbar" style="height: 24px">
+            <div class="progress-bar"></div>
+          </div>
+          <div class="progress" id="results-bar-success" role="progressbar" style="height: 24px">
+            <div class="progress-bar bg-success"></div>
+          </div>
+        </div>
+        <div class="col justify-content-between d-flex" style="margin: 5px">
+          <span id="results-bar-fail-text"></span>
+          <span id="results-bar-success-text"></span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -95,6 +127,15 @@ bootstrap: true
   const failsSelect = document.getElementById('fails-select');
   const addFailButton = document.getElementById('add-fail-button');
   const failsList = document.getElementById('fails-list');
+
+  // Calculate
+  const calculateButton = document.getElementById('calculate-button');
+  const resultsBar = document.getElementById('results-bar');
+  const resultsBarFail = document.getElementById('results-bar-fail');
+  const resultsBarNone = document.getElementById('results-bar-none');
+  const resultsBarSuccess = document.getElementById('results-bar-success');
+  const resultsBarFailText = document.getElementById('results-bar-fail-text');
+  const resultsBarSuccessText = document.getElementById('results-bar-success-text');
 
   // Add Dice
 
@@ -138,6 +179,7 @@ bootstrap: true
       diceIconSelectGreen.hidden = true;
       diceIconSelectBlue.hidden = true;
       addDieButton.disabled = true;
+      calculateButton.disabled = false;
     }
   }
 
@@ -158,6 +200,21 @@ bootstrap: true
     addFailButton.disabled = true;
   }
 
+  // Calculate
+
+  function calculate() {
+    const failPercent = 5;
+    const successPercent = 50;
+    const nonePercent = 100 - (failPercent + successPercent);
+
+    resultsBar.hidden = false;
+    resultsBarFail.style.width = `${failPercent}%`;
+    resultsBarNone.style.width = `${nonePercent}%`;
+    resultsBarSuccess.style.width = `${successPercent}%`;
+    resultsBarFailText.textContent = `${failPercent}% Fail`;
+    resultsBarSuccessText.textContent = `${successPercent}% Success`;
+  }
+
   // Add Dice
   diceColorSelect.addEventListener('change', updateDiceColor);
   diceIconSelectRed.addEventListener('change', updateDiceIcon);
@@ -168,4 +225,7 @@ bootstrap: true
   // Add Fail Conditions
   failsSelect.addEventListener('change', updateFails);
   addFailButton.addEventListener('click', addFails);
+
+  // Calculate
+  calculateButton.addEventListener('click', calculate);
 </script>
