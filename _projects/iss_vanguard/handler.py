@@ -3,13 +3,15 @@ import json
 
 from probability import calculate_probability
 
+cors_origin = 'https://purple4reina.github.io'
+
 def handle(request, context=None):
     print("Received request:", request)
     if request['requestContext']['http']['method'] == 'OPTIONS':
         return {
             'statusCode': 204,
             'headers': {
-                'Access-Control-Allow-Origin': 'https://purple4reina.github.io/',
+                'Access-Control-Allow-Origin': cors_origin,
                 'Access-Control-Allow-Methods': 'OPTIONS, POST',
                 'Access-Control-Allow-Headers': 'Content-Type',
             }
@@ -26,6 +28,6 @@ def handle(request, context=None):
             'body': json.dumps(result),
             'headers': {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'https://purple4reina.github.io/',
+                'Access-Control-Allow-Origin': cors_origin,
             },
     }
