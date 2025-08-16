@@ -167,20 +167,22 @@ bootstrap: true
       selectedIcon = diceIconSelectBlue.value;
     }
 
-    if (selectedIcon) {
-      const dieItem = document.createElement('div');
-      dieItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-      dieItem.textContent = `${selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)} ${selectedIcon.charAt(0).toUpperCase() + selectedIcon.slice(1)}`;
-      diceList.appendChild(dieItem);
-
-      diceColorSelect.value = '';
-      diceIconPlaceholder.hidden = false;
-      diceIconSelectRed.hidden = true;
-      diceIconSelectGreen.hidden = true;
-      diceIconSelectBlue.hidden = true;
-      addDieButton.disabled = true;
-      calculateButton.disabled = false;
+    if (!selectedIcon) {
+      return;
     }
+
+    const dieItem = document.createElement('div');
+    dieItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+    dieItem.textContent = `${selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)} ${selectedIcon.charAt(0).toUpperCase() + selectedIcon.slice(1)}`;
+    diceList.appendChild(dieItem);
+
+    diceColorSelect.value = '';
+    diceIconPlaceholder.hidden = false;
+    diceIconSelectRed.hidden = true;
+    diceIconSelectGreen.hidden = true;
+    diceIconSelectBlue.hidden = true;
+    addDieButton.disabled = true;
+    calculateButton.disabled = false;
   }
 
   // Add Fail Conditions
