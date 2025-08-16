@@ -44,6 +44,7 @@ exclude:
   - "**/*.py"
   - "**/*.yml"
   - "**/node_modules/**"
+  - "**/.serverless/**"
 
 collections:
   problems:
