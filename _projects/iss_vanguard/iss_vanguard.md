@@ -145,7 +145,7 @@ bootstrap: true
     {%- if site.env == "dev" -%}
       'http://localhost:8000'
     {%- else -%}
-      'tbd'
+      'https://6ej4pejufnxacafmtzeu7u5rsa0wgavk.lambda-url.us-west-2.on.aws'
     {%- endif %};
 
   // Add Dice

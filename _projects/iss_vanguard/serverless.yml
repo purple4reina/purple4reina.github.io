@@ -1,0 +1,25 @@
+service: iss-vanguard
+
+provider:
+  name: aws
+  runtime: python3.12
+  region: us-west-2
+  memorySize: 256
+  timeout: 30
+
+plugins:
+  - serverless-plugin-datadog
+
+custom:
+  datadog:
+    apiKey: ${env:DD_API_KEY}
+
+package:
+  patterns:
+    - '!**'
+    - '**/*.py'
+
+functions:
+  dice-probability:
+    handler: handler.handle
+    url: true
