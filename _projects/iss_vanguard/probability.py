@@ -68,7 +68,6 @@ def calculate_probability(inputs):
         failure_probability = sum(probabilities) - prod(probabilities) * (len(fails) - 1)
 
     return {
-            'inputs': inputs,
             'failure_probability': failure_probability,
-            'success_probability': 0,
+            'success_probability': 0.0,
     }

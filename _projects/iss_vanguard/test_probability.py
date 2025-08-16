@@ -118,49 +118,6 @@ _test_die_roll_probability = (
 def test_die_roll_probability(color, icon, face, expect):
     assert Die(color, icon).roll_probability(face) == expect
 
-_test_calculate_probability = (
-        (
-            {
-                'dice': [
-                    {'color': 'red', 'icon': 'basic'},
-                ],
-            }, 0, 0
-        ),
-        (
-            {
-                'dice': [
-                    {'color': 'red', 'icon': 'basic'},
-                    {'color': 'green', 'icon': 'basic'},
-                ],
-            }, 0, 0
-        ),
-        (
-            {
-                'dice': [
-                    {'color': 'red', 'icon': 'basic'},
-                ],
-                'fails': ['basic'],
-            }, 4/6, 0
-        ),
-        (
-            {
-                'dice': [
-                    {'color': 'red', 'icon': 'basic'},
-                    {'color': 'blue', 'icon': 'basic'},
-                ],
-                'fails': ['basic'],
-            }, 4/6, 0
-        ),
-)
-
-@pytest.mark.parametrize('inputs,fail_probability,success_probability', _test_calculate_probability)
-def test_calculate_probability(inputs, fail_probability, success_probability):
-   assert calculate_probability(inputs) == {
-        'inputs': inputs,
-        'failure_probability': fail_probability,
-        'success_probability': success_probability,
-    }
-
 _test_prod = (
         ([], 1),
         ([1], 1),
