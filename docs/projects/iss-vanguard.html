@@ -333,8 +333,8 @@
       });
     console.log('Response:', resp);
 
-    const failPercent = resp.failure_probability * 100;
-    const successPercent = resp.success_probability * 100;
+    const failPercent = (resp.failure_probability * 100).toFixed(2);
+    const successPercent = (resp.success_probability * 100).toFixed(2);
     const nonePercent = 100 - (failPercent + successPercent);
 
     resultsBarFail.style.width = `${failPercent}%`;
