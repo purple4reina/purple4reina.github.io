@@ -225,6 +225,8 @@ bootstrap: true
       return;
     }
 
+    resultsBar.hidden = true;
+
     const resp = await fetch(backendUrl, {
         method: 'POST',
         headers: {
@@ -250,12 +252,12 @@ bootstrap: true
     const successPercent = resp.success_probability * 100;
     const nonePercent = 100 - (failPercent + successPercent);
 
-    resultsBar.hidden = false;
     resultsBarFail.style.width = `${failPercent}%`;
     resultsBarNone.style.width = `${nonePercent}%`;
     resultsBarSuccess.style.width = `${successPercent}%`;
     resultsBarFailText.textContent = `${failPercent}% Fail`;
     resultsBarSuccessText.textContent = `${successPercent}% Success`;
+    resultsBar.hidden = false;
   }
 
   // Add Dice
