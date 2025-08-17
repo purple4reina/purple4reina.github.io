@@ -24,8 +24,7 @@ def monte_carlo(request, monte_carlo_update, monte_carlo_create):
         inputs  = []
         for dice_cnt in range(4):
             for dice in itertools.combinations_with_replacement(available_dice, dice_cnt):
-                # start with just 0 or 1 fails for now
-                for fails_cnt in range(min(1, dice_cnt)+1):
+                for fails_cnt in range(dice_cnt+1):
                     for fail_cond in fail_conditions:
                         inputs.append(({
                             'dice': [{'color': color, 'icon': icon} for color, icon in dice],

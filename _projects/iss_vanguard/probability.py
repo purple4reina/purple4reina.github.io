@@ -80,9 +80,7 @@ def calculate_probability(inputs):
 
     failure_probability, success_probability  = 0.0, 0.0
 
-    if len(fails) == 0 or len(dice) == 0:
-        pass
-    elif len(fails) == 1:
+    if len(fails) > 0 and len(dice) > 0:
         probabilities = [die.roll_probability(fails[0]) for die in dice]
         neg = 1
         for dice_cnt in range(1, len(dice)+1):
