@@ -92,6 +92,9 @@ bootstrap: true
     <div class="col">
       <hr class="border border-secondary border-1" />
       <h5>Results</h5>
+      <div class="spinner-border spinner-border-sm" role="status" id="spinner" hidden>
+        <span class="visually-hidden">Loading...</span>
+      </div>
       <div id="results-bar" hidden>
         <div class="progress-stacked" style="height: 24px">
           <div class="progress" id="results-bar-fail" role="progressbar" style="height: 24px">
@@ -134,6 +137,7 @@ bootstrap: true
 
   // Calculate
   const calculateButton = document.getElementById('calculate-button');
+  const resultsSpinner = document.getElementById('spinner');
   const resultsBar = document.getElementById('results-bar');
   const resultsBarFail = document.getElementById('results-bar-fail');
   const resultsBarNone = document.getElementById('results-bar-none');
@@ -226,6 +230,7 @@ bootstrap: true
     }
 
     resultsBar.hidden = true;
+    spinner.hidden = false;
 
     const resp = await fetch(backendUrl, {
         method: 'POST',
@@ -257,6 +262,8 @@ bootstrap: true
     resultsBarSuccess.style.width = `${successPercent}%`;
     resultsBarFailText.textContent = `${failPercent}% Fail`;
     resultsBarSuccessText.textContent = `${successPercent}% Success`;
+
+    spinner.hidden = true;
     resultsBar.hidden = false;
   }
 
