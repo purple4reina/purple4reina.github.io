@@ -126,14 +126,10 @@ bootstrap: true
   const addDieButton = document.getElementById('add-die-button');
   const diceList = document.getElementById('dice-list');
 
-  const dice = [];
-
   // Add Fail Conditions
   const failsSelect = document.getElementById('fails-select');
   const addFailButton = document.getElementById('add-fail-button');
   const failsList = document.getElementById('fails-list');
-
-  const fails = [];
 
   // Calculate
   const calculateButton = document.getElementById('calculate-button');
@@ -151,6 +147,27 @@ bootstrap: true
     {%- else -%}
       'https://6ej4pejufnxacafmtzeu7u5rsa0wgavk.lambda-url.us-west-2.on.aws'
     {%- endif %};
+
+  function createRowElement(text, attrs = {}) {
+    const div = document.createElement('div');
+    div.className = 'list-group-item d-flex justify-content-between align-items-center';
+    div.textContent = text;
+    Object.keys(attrs).forEach(key => {
+      div.setAttribute(key, attrs[key]);
+    });
+
+    const rmIcon = document.createElement('i');
+    rmIcon.className = 'bi bi-dash-circle';
+    rmIcon.addEventListener('click', () => {
+      div.remove();
+      if (diceList.children.length === 0) {
+        calculateButton.disabled = true;
+      }
+    });
+    div.appendChild(rmIcon);
+
+    return div;
+  }
 
   // Add Dice
 
@@ -186,12 +203,9 @@ bootstrap: true
       return;
     }
 
-    dice.push({ color: selectedColor, icon: selectedIcon });
-
-    const dieItem = document.createElement('div');
-    dieItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-    dieItem.textContent = `${selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)} ${selectedIcon.charAt(0).toUpperCase() + selectedIcon.slice(1)}`;
-    diceList.appendChild(dieItem);
+    const dieTxt = `${selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)} ${selectedIcon.charAt(0).toUpperCase() + selectedIcon.slice(1)}`;
+    const dieRow = createRowElement(dieTxt, { 'color': selectedColor, 'icon': selectedIcon });
+    diceList.appendChild(dieRow);
 
     diceColorSelect.value = '';
     diceIconPlaceholder.hidden = false;
@@ -211,11 +225,8 @@ bootstrap: true
   function addFails(event) {
     const selectedFail = failsSelect.value;
 
-    fails.push(selectedFail);
-
-    const failItem = document.createElement('div');
-    failItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-    failItem.textContent = selectedFail.charAt(0).toUpperCase() + selectedFail.slice(1);
+    const failTxt = selectedFail.charAt(0).toUpperCase() + selectedFail.slice(1);
+    const failItem = createRowElement(failTxt, { 'fail': selectedFail });
     failsList.appendChild(failItem);
 
     failsSelect.value = '';
@@ -225,7 +236,15 @@ bootstrap: true
   // Calculate
 
   async function calculate() {
-    if (dice.length === 0) {
+    const diceArray = Array.from(diceList.children).map(die => ({
+      color: die.getAttribute('color'),
+      icon: die.getAttribute('icon'),
+    }));
+    const failsArray = Array.from(failsList.children).map(fail => {
+      return fail.getAttribute('fail');
+    });
+
+    if (diceArray.length === 0) {
       return;
     }
 
@@ -238,8 +257,8 @@ bootstrap: true
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          dice: dice,
-          fails: fails,
+          dice: diceArray,
+          fails: failsArray,
           failCondition: document.querySelector('input[name="fail-and-or"]:checked').id,
         })
       })
