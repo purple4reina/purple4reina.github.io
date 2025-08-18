@@ -31,7 +31,7 @@ def monte_carlo(request, monte_carlo_update, monte_carlo_create):
                         'failCondition': 'or',
                     }, 0))
                 for success in selected_successes:
-                    for conversion_icon, conversion_color in selected_conversions:
+                    for conversion_color, conversion_icon in selected_conversions:
                         inputs.append(({
                             'dice': [{'color': color, 'icon': icon} for color, icon in dice],
                             'successes': [success],
