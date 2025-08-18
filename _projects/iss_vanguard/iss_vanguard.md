@@ -80,6 +80,37 @@ bootstrap: true
     </div>
   </div>
 
+  <div class="row">
+    <div class="col" style="margin-bottom: 20px;">
+      <label for="conversion-input" class="form-label">Conversion</label>
+      <div class="input-group mb-3" id="conversion-input">
+        <select class="form-select" id="conversion-color-select">
+          <option value="" selected disabled>Color...</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+        </select>
+        <span class="input-group-text">to</span>
+        <select class="form-select" id="conversion-icon-select">
+          <option value="" selected disabled>Icon...</option>
+          <option value="strength">Strength</option>
+          <option value="shield">Shield</option>
+          <option value="pickaxe">Pick Axe</option>
+          <option value="compass">Compass</option>
+          <option value="eyeball">Eyeball</option>
+          <option value="dna">DNA</option>
+          <option value="wrench">Wrench</option>
+          <option value="computer">Computer</option>
+          <option value="science">Science</option>
+        </select>
+        <button class="btn btn-outline-secondary" type="button" id="set-conversion-button" disabled>
+          <i class="bi bi-plus-lg"></i>Set Conversion
+        </button>
+      </div>
+      <div id="conversion-list" class="list-group"></div>
+    </div>
+  </div>
+
   <div class="row" style="margin-bottom: 20px;">
     <div class="col">
       <button class="btn btn-outline-secondary" type="button" id="calculate-button" disabled>
@@ -131,6 +162,12 @@ bootstrap: true
   const addFailButton = document.getElementById('add-fail-button');
   const failsList = document.getElementById('fails-list');
 
+  // Set Conversions
+  const conversionColorSelect = document.getElementById('conversion-color-select');
+  const conversionIconSelect = document.getElementById('conversion-icon-select');
+  const setConversionButton = document.getElementById('set-conversion-button');
+  const conversionList = document.getElementById('conversion-list');
+
   // Calculate
   const calculateButton = document.getElementById('calculate-button');
   const resultsSpinner = document.getElementById('spinner');
@@ -147,6 +184,8 @@ bootstrap: true
     {%- else -%}
       'https://6ej4pejufnxacafmtzeu7u5rsa0wgavk.lambda-url.us-west-2.on.aws'
     {%- endif %};
+
+  // Utility Functions
 
   function createRowElement(text, attrs = {}) {
     const div = document.createElement('div');
@@ -233,6 +272,31 @@ bootstrap: true
     addFailButton.disabled = true;
   }
 
+  // Set Conversions
+
+  function updateConversion() {
+    setConversionButton.disabled = conversionColorSelect.value === '' || conversionIconSelect.value === '';
+  }
+
+  function setConversion() {
+    const selectedColor = conversionColorSelect.value;
+    const selectedIcon = conversionIconSelect.value;
+
+    if (!selectedColor || !selectedIcon) {
+      return;
+    }
+
+    conversionList.innerHTML = ''; // Clear previous conversion
+
+    const conversionTxt = `${selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)} to ${selectedIcon.charAt(0).toUpperCase() + selectedIcon.slice(1)}`;
+    const conversionRow = createRowElement(conversionTxt, { 'color': selectedColor, 'icon': selectedIcon });
+    conversionList.appendChild(conversionRow);
+
+    conversionColorSelect.value = '';
+    conversionIconSelect.value = '';
+    setConversionButton.disabled = true;
+  }
+
   // Calculate
 
   async function calculate() {
@@ -260,6 +324,10 @@ bootstrap: true
           dice: diceArray,
           fails: failsArray,
           failCondition: document.querySelector('input[name="fail-and-or"]:checked').id,
+          conversion: conversionList.children.length > 0 ? {
+            color: conversionList.children[0].getAttribute('color'),
+            icon: conversionList.children[0].getAttribute('icon'),
+          } : null,
         })
       })
       .then(response => {
@@ -296,6 +364,11 @@ bootstrap: true
   // Add Fail Conditions
   failsSelect.addEventListener('change', updateFails);
   addFailButton.addEventListener('click', addFails);
+
+  // Set Conversion
+  conversionColorSelect.addEventListener('change', updateConversion);
+  conversionIconSelect.addEventListener('change', updateConversion);
+  setConversionButton.addEventListener('click', setConversion);
 
   // Calculate
   calculateButton.addEventListener('click', calculate);
