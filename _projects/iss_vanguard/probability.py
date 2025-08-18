@@ -7,17 +7,18 @@ import json
 
 class Die(object):
 
-    def __new__(cls, color, icon):
+    def __new__(cls, color, icon, conversions=None):
         if cls is not Die:
             return super(Die, cls).__new__(cls)
         for subclass in cls.__subclasses__():
             if icon in subclass.icons:
-                return subclass(color, icon)
+                return subclass(color, icon, conversions=conversions)
         raise ValueError(f'Unknown die icon: {icon}')
 
-    def __init__(self, color, icon):
+    def __init__(self, color, icon, conversions=None):
         self.color = color
         self.icon = icon
+        self.conversions = conversions
 
     def roll_probability(self, icon):
         return self.faces.count(icon) / 6
@@ -26,10 +27,6 @@ class BasicDie(Die):
 
     icons = ['basic']
     faces = ['basic', 'basic', 'basic', 'basic', 'vanguard', 'bang']
-
-    def __init__(self, color, icon):
-        self.color = color
-        self.icon = icon
 
 class IconDie(Die):
 
@@ -73,8 +70,9 @@ def choose(n, k):
     return result
 
 def calculate_probability(inputs):
+    conversions = None
     dice = [
-        Die(**die) for die in inputs['dice']
+        Die(**die, conversions=conversions) for die in inputs['dice']
     ]
     fails = inputs.get('fails') or []
 
