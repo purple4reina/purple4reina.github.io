@@ -5,23 +5,44 @@ import json
 # Icon dice: 3 icon, 1 basic, 1 vanguard, 1 bang
 # Vanguard dice: 2 vanguard, 1 double-vanguard, 3 bang
 
+base_icons = (
+        'strength', 'shield', 'pickaxe',
+        'compass', 'eyeball', 'dna',
+        'wrench', 'computer', 'science'
+)
+
 class Die(object):
 
-    def __new__(cls, color, icon, conversions=None):
+    def __new__(cls, color, icon, conversion=None):
         if cls is not Die:
             return super(Die, cls).__new__(cls)
         for subclass in cls.__subclasses__():
             if icon in subclass.icons:
-                return subclass(color, icon, conversions=conversions)
+                return subclass(color, icon, conversion=conversion)
         raise ValueError(f'Unknown die icon: {icon}')
 
-    def __init__(self, color, icon, conversions=None):
+    def __init__(self, color, icon, conversion=None):
         self.color = color
         self.icon = icon
-        self.conversions = conversions
+        self.conversion = None
+        if conversion and conversion['color'] == color:
+            self.conversion = conversion['icon']
 
-    def roll_probability(self, icon):
-        return self.faces.count(icon) / 6
+    def get_faces(self, apply_conversions=True):
+        faces = []
+        for face in self.faces:
+            if face == 'basic' and apply_conversions and self.conversion:
+                faces.append((face, self.conversion))
+            elif 'vanguard' in face and apply_conversions:
+                # convert double-vanguard to vanguard for now
+                faces.append(('vanguard',) + base_icons)
+            else:
+                faces.append((face,))
+        return faces
+
+    def roll_probability(self, icon, apply_conversions=True):
+        faces_set = self.get_faces(apply_conversions)
+        return sum(icon in faces for faces in faces_set) / 6
 
 class BasicDie(Die):
 
@@ -33,14 +54,14 @@ class IconDie(Die):
     icons = [
             'strength', 'shield', 'pickaxe',  # red
             'compass', 'eyeball', 'dna',      # green
-            'wrench', 'computer', 'science'   # blue
+            'wrench', 'computer', 'science',  # blue
     ]
 
     @property
     def faces(self):
         return [
             self.icon, self.icon, self.icon,
-            'basic', 'vanguard', 'bang'
+            'basic', 'vanguard', 'bang',
         ]
 
 class VanguardDie(Die):
@@ -70,9 +91,9 @@ def choose(n, k):
     return result
 
 def calculate_probability(inputs):
-    conversions = None
+    conversion = inputs.get('conversion')
     dice = [
-        Die(**die, conversions=conversions) for die in inputs['dice']
+        Die(**die, conversion=conversion) for die in inputs['dice']
     ]
     fails = inputs.get('fails') or []
 
