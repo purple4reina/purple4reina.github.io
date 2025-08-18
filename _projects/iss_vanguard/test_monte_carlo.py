@@ -25,11 +25,18 @@ def monte_carlo(request, monte_carlo_update, monte_carlo_create):
         for dice_cnt in range(4):
             for dice in itertools.combinations_with_replacement(available_dice, dice_cnt):
                 for fails_cnt in range(dice_cnt+1):
-                    for fail_cond in fail_conditions:
+                    inputs.append(({
+                        'dice': [{'color': color, 'icon': icon} for color, icon in dice],
+                        'fails': ['bang'] * fails_cnt,
+                        'failCondition': 'or',
+                    }, 0))
+                for success in selected_successes:
+                    for conversion_icon, conversion_color in selected_conversions:
                         inputs.append(({
                             'dice': [{'color': color, 'icon': icon} for color, icon in dice],
-                            'fails': ['bang'] * fails_cnt,
-                            'failCondition': fail_cond,
+                            'successes': [success],
+                            'successCondition': 'or',
+                            'conversion': {'color': conversion_color, 'icon': conversion_icon},
                         }, 0))
         with open(monte_carlo_results_file, 'w') as f:
             json.dump(inputs, f, indent=2)
@@ -41,6 +48,11 @@ def monte_carlo(request, monte_carlo_update, monte_carlo_create):
         with open(monte_carlo_results_file, 'w') as f:
             json.dump(monte_carlo.results, f, indent=2)
 
+available_colors = [
+        'red',
+        'green',
+        'blue',
+]
 available_dice = [
         ('red', 'basic'),
         ('red', 'strength'),
@@ -60,13 +72,22 @@ available_dice = [
         ('blue', 'science'),
         ('blue', 'vanguard'),
 ]
-available_faces = [
+selected_successes = [
+        'strength', 'shield',
+        'compass', 'eyeball',
+        'wrench', 'computer',
+        'basic', 'vanguard',
+]
+available_icons = [
         'strength', 'shield', 'pickaxe',
         'compass', 'eyeball', 'dna',
         'wrench', 'computer', 'science',
-        'basic', 'vanguard', 'double-vanguard', 'bang',
 ]
-fail_conditions = ['or']
+selected_conversions = [
+        ('red', 'compass'),
+        ('blue', 'wrench'),
+        ('green', 'strength'),
+]
 
 def roll_die(die):
     return random.choice(die.faces)
