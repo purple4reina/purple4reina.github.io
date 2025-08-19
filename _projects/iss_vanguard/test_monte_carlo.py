@@ -93,11 +93,46 @@ def roll_die(die):
     return random.choice(die.faces)
 
 def roll_dice(dice):
-    return [roll_die(die) for die in dice]
+    return [(die.color, roll_die(die)) for die in dice]
 
-def fails_in_result(fails, result):
-    # assume only `or` for now
-    return any(fail in result for fail in fails)
+class ResultsCalculator(object):
+
+    def __init__(self, dice, fails=None, successes=None, conversion=None):
+        self.dice = dice
+        self.fails = fails or []
+        self.successes = successes or []
+        self.conversion = conversion
+
+    def roll_dice(self):
+        return [(die.color, roll_die(die)) for die in self.dice]
+
+    def roll_die(self, die):
+        return random.choice(die.faces)
+
+    def fails_in_result(self, result):
+        # assume only `or` for now
+        for _, face in result:
+            if face in self.fails:
+                return True
+        return False
+
+    def successes_in_result(self, result):
+        # assume only `or` for now
+        if not self.successes:
+            return False
+        for color, face in result:
+            if face in self.successes:
+                return True
+            elif face == 'vanguard':
+                return True
+            elif face == 'double-vanguard':
+                return True
+            elif face == 'basic' \
+                    and self.conversion \
+                    and self.conversion['color'] == color \
+                    and self.conversion['icon'] in self.successes:
+                return True
+        return False
 
 with open(monte_carlo_results_file) as f:
     monte_carlo_tests = json.load(f)
@@ -111,13 +146,26 @@ def test_monte_carlo_json(inputs, expect, monte_carlo):
         return
 
     dice = [Die(**die) for die in inputs['dice']]
-    fails = inputs['fails']
-    hits = 0
-    for i in range(monte_carlo.samples):
-        result = roll_dice(dice)
-        hits += fails_in_result(fails, result)
-    expect = hits / monte_carlo.samples
+    fails = inputs.get('fails') or []
+    successes = inputs.get('successes') or []
 
+    runner = ResultsCalculator(
+            dice,
+            fails=fails,
+            successes=successes,
+            conversion=inputs.get('conversion'),
+    )
+
+    fail_hits = success_hits = 0
+    for i in range(monte_carlo.samples):
+        result = runner.roll_dice()
+        fail_hits += runner.fails_in_result(result)
+        success_hits += runner.successes_in_result(result)
+
+    expect = fail_hits / monte_carlo.samples
     assert abs(actual['failure_probability'] - expect) < monte_carlo.diff
+
+    expect = success_hits / monte_carlo.samples
+    assert abs(actual['success_probability'] - expect) < monte_carlo.diff
 
     monte_carlo.write((inputs, actual))

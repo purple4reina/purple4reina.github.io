@@ -120,8 +120,8 @@ def test_die_roll_probability_without_conversion(color, icon, face, conversion, 
     assert Die(color, icon, conversion=conversion).roll_probability(face, apply_conversions=False) == expect
 
 _test_die_roll_probability_with_conversion = (
-        ('red', 'basic', 'basic', {'color': 'red', 'icon': 'wrench'}, 4/6),
-        ('red', 'basic', 'basic', {'color': 'blue', 'icon': 'dna'}, 4/6),
+        ('red', 'basic', 'basic', {'color': 'red', 'icon': 'wrench'}, 5/6),
+        ('red', 'basic', 'basic', {'color': 'blue', 'icon': 'dna'}, 5/6),
         ('red', 'basic', 'strength', {'color': 'red', 'icon': 'wrench'}, 1/6),
         ('red', 'basic', 'strength', {'color': 'blue', 'icon': 'dna'}, 1/6),
         ('red', 'basic', 'dna', {'color': 'red', 'icon': 'wrench'}, 1/6),
@@ -131,8 +131,8 @@ _test_die_roll_probability_with_conversion = (
         ('red', 'basic', 'vanguard', {'color': 'red', 'icon': 'wrench'}, 1/6),
         ('red', 'basic', 'vanguard', {'color': 'blue', 'icon': 'dna'}, 1/6),
 
-        ('red', 'strength', 'basic', {'color': 'red', 'icon': 'wrench'}, 1/6),
-        ('red', 'strength', 'basic', {'color': 'blue', 'icon': 'dna'}, 1/6),
+        ('red', 'strength', 'basic', {'color': 'red', 'icon': 'wrench'}, 2/6),
+        ('red', 'strength', 'basic', {'color': 'blue', 'icon': 'dna'}, 2/6),
         ('red', 'strength', 'strength', {'color': 'red', 'icon': 'wrench'}, 4/6),
         ('red', 'strength', 'strength', {'color': 'blue', 'icon': 'dna'}, 4/6),
         ('red', 'strength', 'dna', {'color': 'red', 'icon': 'wrench'}, 1/6),
@@ -142,8 +142,8 @@ _test_die_roll_probability_with_conversion = (
         ('red', 'strength', 'vanguard', {'color': 'red', 'icon': 'wrench'}, 1/6),
         ('red', 'strength', 'vanguard', {'color': 'blue', 'icon': 'dna'}, 1/6),
 
-        ('red', 'vanguard', 'basic', {'color': 'red', 'icon': 'wrench'}, 0),
-        ('red', 'vanguard', 'basic', {'color': 'blue', 'icon': 'dna'}, 0),
+        ('red', 'vanguard', 'basic', {'color': 'red', 'icon': 'wrench'}, 3/6),
+        ('red', 'vanguard', 'basic', {'color': 'blue', 'icon': 'dna'}, 3/6),
         ('red', 'vanguard', 'strength', {'color': 'red', 'icon': 'wrench'}, 3/6),
         ('red', 'vanguard', 'strength', {'color': 'blue', 'icon': 'dna'}, 3/6),
         ('red', 'vanguard', 'dna', {'color': 'red', 'icon': 'wrench'}, 3/6),
