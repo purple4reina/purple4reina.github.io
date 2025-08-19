@@ -82,6 +82,42 @@ bootstrap: true
 
   <div class="row">
     <div class="col" style="margin-bottom: 20px;">
+      <div class="row">
+        <div class="col">
+          <label for="success-input" class="form-label">Success Conditions</label>
+        </div>
+        <div class="col">
+          <div class="btn-group btn-group-sm" role="group">
+            <input type="radio" class="btn-check" name="success-and-or" id="and" disabled>
+            <label class="btn btn-outline-secondary" for="and">And</label>
+            <input type="radio" class="btn-check" name="success-and-or" id="or" checked>
+            <label class="btn btn-outline-secondary" for="or">Or</label>
+          </div>
+        </div>
+      </div>
+      <div class="input-group mb-3" id="success-input">
+        <select class="form-select" id="success-select">
+          <option value="" selected disabled>Select...</option>
+          <option value="strength">Strength</option>
+          <option value="shield">Shield</option>
+          <option value="pickaxe">Pick Axe</option>
+          <option value="compass">Compass</option>
+          <option value="eyeball">Eyeball</option>
+          <option value="dna">DNA</option>
+          <option value="wrench">Wrench</option>
+          <option value="computer">Computer</option>
+          <option value="science">Science</option>
+        </select>
+        <button class="btn btn-outline-secondary" type="button" id="add-success-button" disabled>
+          <i class="bi bi-plus-lg"></i>Add Success
+        </button>
+      </div>
+      <div id="success-list" class="list-group"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col" style="margin-bottom: 20px;">
       <label for="conversion-input" class="form-label">Conversion</label>
       <div class="input-group mb-3" id="conversion-input">
         <select class="form-select" id="conversion-color-select">
@@ -161,6 +197,11 @@ bootstrap: true
   const failsSelect = document.getElementById('fails-select');
   const addFailButton = document.getElementById('add-fail-button');
   const failsList = document.getElementById('fails-list');
+
+  // Add Success Conditions
+  const successSelect = document.getElementById('success-select');
+  const addSuccessButton = document.getElementById('add-success-button');
+  const successList = document.getElementById('success-list');
 
   // Set Conversions
   const conversionColorSelect = document.getElementById('conversion-color-select');
@@ -272,6 +313,23 @@ bootstrap: true
     addFailButton.disabled = true;
   }
 
+  // Add Success Conditions
+
+  function updateSuccess(event) {
+    addSuccessButton.disabled = event.target.value === '';
+  }
+
+  function addSuccess(event) {
+    const selectedSuccess = successSelect.value;
+
+    const successTxt = selectedSuccess.charAt(0).toUpperCase() + selectedSuccess.slice(1);
+    const successItem = createRowElement(successTxt, { 'success': selectedSuccess });
+    successList.appendChild(successItem);
+
+    successSelect.value = '';
+    addSuccessButton.disabled = true;
+  }
+
   // Set Conversions
 
   function updateConversion() {
@@ -307,6 +365,9 @@ bootstrap: true
     const failsArray = Array.from(failsList.children).map(fail => {
       return fail.getAttribute('fail');
     });
+    const successArray = Array.from(successList.children).map(success => {
+      return success.getAttribute('success');
+    });
 
     if (diceArray.length === 0) {
       return;
@@ -324,6 +385,8 @@ bootstrap: true
           dice: diceArray,
           fails: failsArray,
           failCondition: document.querySelector('input[name="fail-and-or"]:checked').id,
+          successes: successArray,
+          successCondition: document.querySelector('input[name="success-and-or"]:checked').id,
           conversion: conversionList.children.length > 0 ? {
             color: conversionList.children[0].getAttribute('color'),
             icon: conversionList.children[0].getAttribute('icon'),
@@ -342,7 +405,7 @@ bootstrap: true
 
     const failPercent = (resp.failure_probability * 100).toFixed(2);
     const successPercent = (resp.success_probability * 100).toFixed(2);
-    const nonePercent = 100 - (failPercent + successPercent);
+    const nonePercent = (1 - resp.failure_probability - resp.success_probability) * 100;
 
     resultsBarFail.style.width = `${failPercent}%`;
     resultsBarNone.style.width = `${nonePercent}%`;
@@ -364,6 +427,10 @@ bootstrap: true
   // Add Fail Conditions
   failsSelect.addEventListener('change', updateFails);
   addFailButton.addEventListener('click', addFails);
+
+  // Add Success Conditions
+  successSelect.addEventListener('change', updateSuccess);
+  addSuccessButton.addEventListener('click', addSuccess);
 
   // Set Conversion
   conversionColorSelect.addEventListener('change', updateConversion);
