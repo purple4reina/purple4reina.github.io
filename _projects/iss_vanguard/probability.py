@@ -5,10 +5,11 @@ import json
 # Icon dice: 3 icon, 1 basic, 1 vanguard, 1 bang
 # Vanguard dice: 2 vanguard, 1 double-vanguard, 3 bang
 
-base_icons = (
+vanguard_conversion_icons = (
         'strength', 'shield', 'pickaxe',
         'compass', 'eyeball', 'dna',
-        'wrench', 'computer', 'science'
+        'wrench', 'computer', 'science',
+        'basic',
 )
 
 class Die(object):
@@ -35,7 +36,7 @@ class Die(object):
                 faces.append((face, self.conversion))
             elif 'vanguard' in face and apply_conversions:
                 # convert double-vanguard to vanguard for now
-                faces.append(('vanguard',) + base_icons)
+                faces.append(('vanguard',) + vanguard_conversion_icons)
             else:
                 faces.append((face,))
         return faces
@@ -96,18 +97,32 @@ def calculate_probability(inputs):
         Die(**die, conversion=conversion) for die in inputs['dice']
     ]
     fails = inputs.get('fails') or []
+    successes = inputs.get('successes') or []
 
     failure_probability, success_probability  = 0.0, 0.0
 
     if len(fails) > 0 and len(dice) > 0:
-        probabilities = [die.roll_probability(fails[0]) for die in dice]
+        probabilities = [
+                die.roll_probability(fails[0], apply_conversions=False) for die in dice
+        ]
         neg = 1
         for dice_cnt in range(1, len(dice)+1):
             for probs in itertools.combinations(probabilities, dice_cnt):
                 failure_probability += neg * prod(probs)
             neg *= -1
 
+    if len(successes) == 1 and len(dice) > 0:
+        # support just one success at a time for now
+        probabilities = [
+                die.roll_probability(successes[0], apply_conversions=True) for die in dice
+        ]
+        neg = 1
+        for dice_cnt in range(1, len(dice)+1):
+            for probs in itertools.combinations(probabilities, dice_cnt):
+                success_probability += neg * prod(probs)
+            neg *= -1
+
     return {
             'failure_probability': failure_probability,
-            'success_probability': 0.0,
+            'success_probability': success_probability,
     }
