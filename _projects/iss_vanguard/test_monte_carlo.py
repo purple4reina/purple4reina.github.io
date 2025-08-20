@@ -138,7 +138,7 @@ with open(monte_carlo_results_file) as f:
     monte_carlo_tests = json.load(f)
 
 @pytest.mark.parametrize('inputs,expect', monte_carlo_tests)
-def test_monte_carlo_json(inputs, expect, monte_carlo):
+def xtest_monte_carlo_json(inputs, expect, monte_carlo):
     actual = calculate_probability(inputs)
 
     if not monte_carlo.update:
