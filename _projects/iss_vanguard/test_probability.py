@@ -251,32 +251,65 @@ def test_result_fail(result, fails, condition, expect):
     assert Result(result, fails=fails, fail_condition=condition).fail() is expect
 
 _test_result_success = (
-        ([], [], None, False),
-        ([], [ICON.strength], None, False),
+        ([], [], None, 'or', False),
+        ([], [ICON.strength], None, 'or', False),
 
-        ([FACE.red_basic], [ICON.basic], None, True),
-        ([FACE.red_basic], [ICON.strength], None, False),
-        ([FACE.red_strength], [ICON.strength], None, True),
-        ([FACE.red_strength], [ICON.compass], None, False),
-        ([FACE.red_vanguard], [ICON.basic], None, True),
-        ([FACE.red_vanguard], [ICON.strength], None, True),
-        ([FACE.red_vanguard], [ICON.vanguard], None, True),
-        ([FACE.red_double_vanguard], [ICON.strength], None, True),
-        ([FACE.red_double_vanguard], [ICON.vanguard], None, True),
+        ([FACE.red_basic], [ICON.basic], None, 'or', True),
+        ([FACE.red_basic], [ICON.strength], None, 'or', False),
+        ([FACE.red_strength], [ICON.strength], None, 'or', True),
+        ([FACE.red_strength], [ICON.compass], None, 'or', False),
+        ([FACE.red_vanguard], [ICON.basic], None, 'or', True),
+        ([FACE.red_vanguard], [ICON.strength], None, 'or', True),
+        ([FACE.red_vanguard], [ICON.vanguard], None, 'or', True),
+        ([FACE.red_double_vanguard], [ICON.strength], None, 'or', True),
+        ([FACE.red_double_vanguard], [ICON.vanguard], None, 'or', True),
 
-        ([FACE.red_basic], [ICON.basic], CONVERSION.red_strength, True),
-        ([FACE.red_basic], [ICON.strength], CONVERSION.red_strength, True),
-        ([FACE.red_basic], [ICON.shield], CONVERSION.red_strength, False),
-        ([FACE.red_basic], [ICON.strength], CONVERSION.green_strength, False),
+        ([FACE.red_basic], [ICON.basic], CONVERSION.red_strength, 'or', True),
+        ([FACE.red_basic], [ICON.strength], CONVERSION.red_strength, 'or', True),
+        ([FACE.red_basic], [ICON.shield], CONVERSION.red_strength, 'or', False),
+        ([FACE.red_basic], [ICON.strength], CONVERSION.green_strength, 'or', False),
 
-        ([FACE.red_strength, FACE.green_bang], [ICON.strength], None, True),
-        ([FACE.red_strength, FACE.green_dna], [ICON.shield], None, False),
-        ([FACE.red_strength, FACE.green_dna], [ICON.shield], CONVERSION.red_shield, False),
+        ([FACE.red_strength, FACE.green_bang], [ICON.strength], None, 'or', True),
+        ([FACE.red_strength, FACE.green_dna], [ICON.shield], None, 'or', False),
+        ([FACE.red_strength, FACE.green_dna], [ICON.shield], CONVERSION.red_shield, 'or', False),
 
-        ([FACE.red_strength, FACE.green_dna], [ICON.strength, ICON.wrench], None, True),
-        ([FACE.red_basic, FACE.green_dna], [ICON.strength, ICON.dna], CONVERSION.red_strength, True),
+        ([FACE.red_strength, FACE.green_dna], [ICON.strength, ICON.wrench], None, 'or', True),
+        ([FACE.red_basic, FACE.green_dna], [ICON.strength, ICON.dna], CONVERSION.red_strength, 'or', True),
+
+        ([], [], None, 'and', False),
+        ([], [ICON.strength], None, 'and', False),
+
+        ([FACE.red_basic], [ICON.basic], None, 'and', True),
+        ([FACE.red_basic], [ICON.strength], None, 'and', False),
+        ([FACE.red_strength], [ICON.strength], None, 'and', True),
+        ([FACE.red_strength], [ICON.compass], None, 'and', False),
+        ([FACE.red_vanguard], [ICON.basic], None, 'and', True),
+        ([FACE.red_vanguard], [ICON.strength], None, 'and', True),
+        ([FACE.red_vanguard], [ICON.vanguard], None, 'and', True),
+        ([FACE.red_double_vanguard], [ICON.strength], None, 'and', True),
+        ([FACE.red_double_vanguard], [ICON.vanguard], None, 'and', True),
+
+        ([FACE.red_basic], [ICON.basic], CONVERSION.red_strength, 'and', True),
+        ([FACE.red_basic], [ICON.strength], CONVERSION.red_strength, 'and', True),
+        ([FACE.red_basic], [ICON.shield], CONVERSION.red_strength, 'and', False),
+        ([FACE.red_basic], [ICON.strength], CONVERSION.green_strength, 'and', False),
+
+        ([FACE.red_strength, FACE.green_bang], [ICON.strength], None, 'and', True),
+        ([FACE.red_strength, FACE.green_dna], [ICON.shield], None, 'and', False),
+        ([FACE.red_strength, FACE.green_dna], [ICON.shield], CONVERSION.red_shield, 'and', False),
+
+        ([FACE.red_strength, FACE.green_dna], [ICON.strength, ICON.wrench], None, 'and', False),
+        ([FACE.red_basic, FACE.green_dna], [ICON.strength, ICON.dna], CONVERSION.red_strength, 'and', True),
+        ([FACE.red_basic, FACE.green_eyeball], [ICON.strength, ICON.dna], CONVERSION.red_strength, 'and', False),
+
+        ([FACE.red_double_vanguard], [ICON.strength, ICON.dna], None, 'and', True),
+        ([FACE.red_double_vanguard], [ICON.basic, ICON.basic], None, 'and', True),
+        ([FACE.red_vanguard, FACE.red_vanguard], [ICON.strength, ICON.dna], None, 'and', True),
+        ([FACE.red_vanguard, FACE.red_double_vanguard], [ICON.strength, ICON.dna], None, 'and', True),
+        ([FACE.red_vanguard, FACE.red_double_vanguard], [ICON.strength, ICON.dna, ICON.basic], None, 'and', True),
+        ([FACE.red_basic, FACE.red_basic], [ICON.dna, ICON.dna], CONVERSION.red_dna, 'and', True),
 )
 
-@pytest.mark.parametrize('result,successes,conversion,expect', _test_result_success)
-def test_result_success(result,successes,conversion,expect):
-    assert Result(result, successes=successes, conversion=conversion).success() is expect
+@pytest.mark.parametrize('result,successes,conversion,condition,expect', _test_result_success)
+def test_result_success(result, successes, conversion, condition, expect):
+    assert Result(result, successes=successes, success_condition=condition, conversion=conversion).success() is expect

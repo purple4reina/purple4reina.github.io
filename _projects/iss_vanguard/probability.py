@@ -114,21 +114,37 @@ class Result(object):
         return False
 
     def success(self):
-        # assume only `or` for now
         if not self.successes:
             return False
-        for color, face in self.result:
-            if face in self.successes:
-                return True
-            elif face == 'vanguard':
-                return True
-            elif face == 'double-vanguard':
-                return True
-            elif face == 'basic' \
-                    and self.conversion \
-                    and self.conversion['color'] == color \
-                    and self.conversion['icon'] in self.successes:
-                return True
+        if self.success_condition == 'and':
+            successes = self.successes.copy()
+            vanguards = 0
+            for color, face in self.result:
+                if face in successes:
+                    successes.remove(face)
+                elif face == 'vanguard':
+                    vanguards += 1
+                elif face == 'double-vanguard':
+                    vanguards += 2
+                elif face == 'basic' \
+                        and self.conversion \
+                        and self.conversion['color'] == color \
+                        and self.conversion['icon'] in successes:
+                    successes.remove(self.conversion['icon'])
+            return len(successes) <= vanguards
+        elif self.success_condition == 'or':
+            for color, face in self.result:
+                if face in self.successes:
+                    return True
+                elif face == 'vanguard':
+                    return True
+                elif face == 'double-vanguard':
+                    return True
+                elif face == 'basic' \
+                        and self.conversion \
+                        and self.conversion['color'] == color \
+                        and self.conversion['icon'] in self.successes:
+                    return True
         return False
 
 def calculate_probability(inputs):
