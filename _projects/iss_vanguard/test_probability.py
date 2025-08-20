@@ -1,28 +1,126 @@
 import pytest
+import random
 
-from probability import (
-        Die, BasicDie, IconDie, VanguardDie, calculate_probability, prod,
-        choose,
-)
+from probability import Die, BasicDie, IconDie, VanguardDie, DiceRoller, Result
+
+class COLOR:
+    red = 'red'
+    green = 'green'
+    blue = 'blue'
+
+class ICON:
+    basic = 'basic'
+    vanguard = 'vanguard'
+    double_vanguard = 'double-vanguard'
+    bang = 'bang'
+
+    strength = 'strength'
+    shield = 'shield'
+    pickaxe = 'pickaxe'
+    compass = 'compass'
+    eyeball = 'eyeball'
+    dna = 'dna'
+    wrench = 'wrench'
+    computer = 'computer'
+    science = 'science'
+
+class DIE:
+    red_basic = (COLOR.red, ICON.basic)
+    red_strength = (COLOR.red, ICON.strength)
+    red_shield = (COLOR.red, ICON.shield)
+    red_pickaxe = (COLOR.red, ICON.pickaxe)
+    red_vanguard = (COLOR.red, ICON.vanguard)
+
+    green_basic = (COLOR.green, ICON.basic)
+    green_compass = (COLOR.green, ICON.compass)
+    green_eyeball = (COLOR.green, ICON.eyeball)
+    green_dna = (COLOR.green, ICON.dna)
+    green_vanguard = (COLOR.green, ICON.vanguard)
+
+    blue_basic = (COLOR.blue, ICON.basic)
+    blue_wrench = (COLOR.blue, ICON.wrench)
+    blue_computer = (COLOR.blue, ICON.computer)
+    blue_science = (COLOR.blue, ICON.science)
+    blue_vanguard = (COLOR.blue, ICON.vanguard)
+
+class FACE:
+    red_basic = (COLOR.red, ICON.basic)
+    red_strength = (COLOR.red, ICON.strength)
+    red_shield = (COLOR.red, ICON.shield)
+    red_pickaxe = (COLOR.red, ICON.pickaxe)
+    red_vanguard = (COLOR.red, ICON.vanguard)
+    red_double_vanguard = (COLOR.red, ICON.double_vanguard)
+    red_bang = (COLOR.red, ICON.bang)
+
+    green_basic = (COLOR.green, ICON.basic)
+    green_compass = (COLOR.green, ICON.compass)
+    green_eyeball = (COLOR.green, ICON.eyeball)
+    green_dna = (COLOR.green, ICON.dna)
+    green_vanguard = (COLOR.green, ICON.vanguard)
+    green_double_vanguard = (COLOR.green, ICON.double_vanguard)
+    green_bang = (COLOR.green, ICON.bang)
+
+    blue_basic = (COLOR.blue, ICON.basic)
+    blue_wrench = (COLOR.blue, ICON.wrench)
+    blue_computer = (COLOR.blue, ICON.computer)
+    blue_science = (COLOR.blue, ICON.science)
+    blue_vanguard = (COLOR.blue, ICON.vanguard)
+    blue_double_vanguard = (COLOR.blue, ICON.double_vanguard)
+    blue_bang = (COLOR.blue, ICON.bang)
+
+class CONVERSION:
+    red_strength = {'color': COLOR.red, 'icon': ICON.strength}
+    red_shield = {'color': COLOR.red, 'icon': ICON.shield}
+    red_pickaxe = {'color': COLOR.red, 'icon': ICON.pickaxe}
+    red_compass = {'color': COLOR.red, 'icon': ICON.compass}
+    red_eyeball = {'color': COLOR.red, 'icon': ICON.eyeball}
+    red_dna = {'color': COLOR.red, 'icon': ICON.dna}
+    red_wrench = {'color': COLOR.red, 'icon': ICON.wrench}
+    red_computer = {'color': COLOR.red, 'icon': ICON.computer}
+    red_science = {'color': COLOR.red, 'icon': ICON.science}
+
+    green_strength = {'color': COLOR.green, 'icon': ICON.strength}
+    green_shield = {'color': COLOR.green, 'icon': ICON.shield}
+    green_pickaxe = {'color': COLOR.green, 'icon': ICON.pickaxe}
+    green_compass = {'color': COLOR.green, 'icon': ICON.compass}
+    green_eyeball = {'color': COLOR.green, 'icon': ICON.eyeball}
+    green_dna = {'color': COLOR.green, 'icon': ICON.dna}
+    green_wrench = {'color': COLOR.green, 'icon': ICON.wrench}
+    green_computer = {'color': COLOR.green, 'icon': ICON.computer}
+    green_science = {'color': COLOR.green, 'icon': ICON.science}
+
+    blue_strength = {'color': COLOR.blue, 'icon': ICON.strength}
+    blue_shield = {'color': COLOR.blue, 'icon': ICON.shield}
+    blue_pickaxe = {'color': COLOR.blue, 'icon': ICON.pickaxe}
+    blue_compass = {'color': COLOR.blue, 'icon': ICON.compass}
+    blue_eyeball = {'color': COLOR.blue, 'icon': ICON.eyeball}
+    blue_dna = {'color': COLOR.blue, 'icon': ICON.dna}
+    blue_wrench = {'color': COLOR.blue, 'icon': ICON.wrench}
+    blue_computer = {'color': COLOR.blue, 'icon': ICON.computer}
+    blue_science = {'color': COLOR.blue, 'icon': ICON.science}
+
+@pytest.fixture(scope='function', autouse=True)
+def random_seed():
+    random.seed(1)
 
 _test_die_classes = (
-        ('red', 'basic', BasicDie),
-        ('red', 'strength', IconDie),
-        ('red', 'shield', IconDie),
-        ('red', 'pickaxe', IconDie),
-        ('red', 'vanguard', VanguardDie),
+        (COLOR.red, ICON.basic, BasicDie),
+        (COLOR.red, ICON.strength, IconDie),
+        (COLOR.red, ICON.shield, IconDie),
+        (COLOR.red, ICON.pickaxe, IconDie),
+        (COLOR.red, ICON.vanguard, VanguardDie),
 
-        ('green', 'basic', BasicDie),
-        ('green', 'compass', IconDie),
-        ('green', 'eyeball', IconDie),
-        ('green', 'dna', IconDie),
-        ('green', 'vanguard', VanguardDie),
+        (COLOR.green, ICON.basic, BasicDie),
+        (COLOR.green, ICON.compass, IconDie),
+        (COLOR.green, ICON.eyeball, IconDie),
+        (COLOR.green, ICON.dna, IconDie),
+        (COLOR.green, ICON.vanguard, VanguardDie),
 
-        ('blue', 'basic', BasicDie),
-        ('blue', 'wrench', IconDie),
-        ('blue', 'computer', IconDie),
-        ('blue', 'science', IconDie),
-        ('blue', 'vanguard', VanguardDie),
+        (COLOR.blue, ICON.basic, BasicDie),
+        (COLOR.blue, ICON.wrench, IconDie),
+        (COLOR.blue, ICON.computer, IconDie),
+        (COLOR.blue, ICON.science, IconDie),
+        (COLOR.blue, ICON.vanguard, VanguardDie),
 )
 
 @pytest.mark.parametrize('color,icon,expect', _test_die_classes)
@@ -32,183 +130,144 @@ def test_die_classes(color, icon, expect):
     assert die.color == color
     assert die.icon == icon
 
-_test_die_roll_probability_without_conversion = (
-        ('red', 'basic', 'basic', None, 4/6),
-        ('red', 'basic', 'vanguard', None, 1/6),
-        ('red', 'basic', 'bang', None, 1/6),
+    for _ in range(100):
+        result = die.roll()
+        assert isinstance(result, str)
+        assert result in die.faces
 
-        ('red', 'strength', 'basic', None, 1/6),
-        ('red', 'strength', 'strength', None, 3/6),
-        ('red', 'strength', 'vanguard', None, 1/6),
-        ('red', 'strength', 'bang', None, 1/6),
+def test_dice_roller_roll(monkeypatch):
+    roller = DiceRoller.from_inputs({
+        'dice': [
+            {'color': COLOR.red, 'icon': ICON.basic},
+            {'color': COLOR.green, 'icon': ICON.compass},
+            {'color': COLOR.blue, 'icon': ICON.science},
+        ],
+        'fails': [ICON.bang],
+        'successes': [ICON.vanguard],
+        'conversion': {'color': COLOR.red, 'icon': ICON.compass},
+    })
 
-        ('red', 'shield', 'basic', None, 1/6),
-        ('red', 'shield', 'shield', None, 3/6),
-        ('red', 'shield', 'vanguard', None, 1/6),
-        ('red', 'shield', 'bang', None, 1/6),
+    roll_calls = []
+    def mock_roll(self):
+        roll_calls.append((self.color, self.icon))
+        return ICON.vanguard
+    monkeypatch.setattr(Die, 'roll', mock_roll)
 
-        ('red', 'pickaxe', 'basic', None, 1/6),
-        ('red', 'pickaxe', 'pickaxe', None, 3/6),
-        ('red', 'pickaxe', 'vanguard', None, 1/6),
-        ('red', 'pickaxe', 'bang', None, 1/6),
+    result = roller.roll()
 
-        ('red', 'vanguard', 'basic', None, 0),
-        ('red', 'vanguard', 'strength', None, 0),
-        ('red', 'vanguard', 'shield', None, 0),
-        ('red', 'vanguard', 'pickaxe', None, 0),
-        ('red', 'vanguard', 'vanguard', None, 2/6),
-        ('red', 'vanguard', 'double-vanguard', None, 1/6),
-        ('red', 'vanguard', 'bang', None, 3/6),
+    assert roll_calls == [DIE.red_basic, DIE.green_compass, DIE.blue_science]
 
-        ('green', 'basic', 'basic', None, 4/6),
-        ('green', 'basic', 'vanguard', None, 1/6),
-        ('green', 'basic', 'bang', None, 1/6),
+    assert isinstance(result, Result)
 
-        ('green', 'compass', 'basic', None, 1/6),
-        ('green', 'compass', 'compass', None, 3/6),
-        ('green', 'compass', 'vanguard', None, 1/6),
-        ('green', 'compass', 'bang', None, 1/6),
+    assert result.fails == [ICON.bang]
+    assert result.successes == [ICON.vanguard]
+    assert result.conversion == {'color': COLOR.red, 'icon': ICON.compass}
 
-        ('green', 'eyeball', 'basic', None, 1/6),
-        ('green', 'eyeball', 'eyeball', None, 3/6),
-        ('green', 'eyeball', 'vanguard', None, 1/6),
-        ('green', 'eyeball', 'bang', None, 1/6),
+    assert len(result.result) == 3
+    assert result.result[0] == FACE.red_vanguard
+    assert result.result[1] == FACE.green_vanguard
+    assert result.result[2] == FACE.blue_vanguard
 
-        ('green', 'dna', 'basic', None, 1/6),
-        ('green', 'dna', 'dna', None, 3/6),
-        ('green', 'dna', 'vanguard', None, 1/6),
-        ('green', 'dna', 'bang', None, 1/6),
+_test_result_fail = (
+        ([FACE.red_basic], [], False),
+        ([FACE.red_strength], [], False),
+        ([FACE.red_shield], [], False),
+        ([FACE.red_pickaxe], [], False),
+        ([FACE.red_vanguard], [], False),
+        ([FACE.red_double_vanguard], [], False),
+        ([FACE.red_bang], [], False),
 
-        ('green', 'vanguard', 'basic', None, 0),
-        ('green', 'vanguard', 'compass', None, 0),
-        ('green', 'vanguard', 'eyeball', None, 0),
-        ('green', 'vanguard', 'dna', None, 0),
-        ('green', 'vanguard', 'vanguard', None, 2/6),
-        ('green', 'vanguard', 'double-vanguard', None, 1/6),
-        ('green', 'vanguard', 'bang', None, 3/6),
+        ([FACE.green_basic], [], False),
+        ([FACE.green_compass], [], False),
+        ([FACE.green_eyeball], [], False),
+        ([FACE.green_dna], [], False),
+        ([FACE.green_vanguard], [], False),
+        ([FACE.green_double_vanguard], [], False),
+        ([FACE.green_bang], [], False),
 
-        ('blue', 'basic', 'basic', None, 4/6),
-        ('blue', 'basic', 'vanguard', None, 1/6),
-        ('blue', 'basic', 'bang', None, 1/6),
+        ([FACE.blue_basic], [], False),
+        ([FACE.blue_wrench], [], False),
+        ([FACE.blue_computer], [], False),
+        ([FACE.blue_science], [], False),
+        ([FACE.blue_vanguard], [], False),
+        ([FACE.blue_double_vanguard], [], False),
+        ([FACE.blue_bang], [], False),
 
-        ('blue', 'wrench', 'basic', None, 1/6),
-        ('blue', 'wrench', 'wrench', None, 3/6),
-        ('blue', 'wrench', 'vanguard', None, 1/6),
-        ('blue', 'wrench', 'bang', None, 1/6),
+        ([FACE.red_basic], [ICON.bang], False),
+        ([FACE.red_strength], [ICON.bang], False),
+        ([FACE.red_shield], [ICON.bang], False),
+        ([FACE.red_pickaxe], [ICON.bang], False),
+        ([FACE.red_vanguard], [ICON.bang], False),
+        ([FACE.red_double_vanguard], [ICON.bang], False),
+        ([FACE.red_bang], [ICON.bang], True),
 
-        ('blue', 'computer', 'basic', None, 1/6),
-        ('blue', 'computer', 'computer', None, 3/6),
-        ('blue', 'computer', 'vanguard', None, 1/6),
-        ('blue', 'computer', 'bang', None, 1/6),
+        ([FACE.green_basic], [ICON.bang], False),
+        ([FACE.green_compass], [ICON.bang], False),
+        ([FACE.green_eyeball], [ICON.bang], False),
+        ([FACE.green_dna], [ICON.bang], False),
+        ([FACE.green_vanguard], [ICON.bang], False),
+        ([FACE.green_double_vanguard], [ICON.bang], False),
+        ([FACE.green_bang], [ICON.bang], True),
 
-        ('blue','science','basic', None, 1/6),
-        ('blue','science','science', None, 3/6),
-        ('blue','science','vanguard', None, 1/6),
-        ('blue','science','bang', None, 1/6),
+        ([FACE.blue_basic], [ICON.bang], False),
+        ([FACE.blue_wrench], [ICON.bang], False),
+        ([FACE.blue_computer], [ICON.bang], False),
+        ([FACE.blue_science], [ICON.bang], False),
+        ([FACE.blue_vanguard], [ICON.bang], False),
+        ([FACE.blue_double_vanguard], [ICON.bang], False),
+        ([FACE.blue_bang], [ICON.bang], True),
 
-        ('blue', 'vanguard', 'basic', None, 0),
-        ('blue', 'vanguard', 'wrench', None, 0),
-        ('blue', 'vanguard', 'computer', None, 0),
-        ('blue', 'vanguard', 'science', None, 0),
-        ('blue', 'vanguard', 'vanguard', None, 2/6),
-        ('blue', 'vanguard', 'double-vanguard', None, 1/6),
-        ('blue', 'vanguard', 'bang', None, 3/6),
+        ([FACE.red_basic, FACE.red_basic], [ICON.bang], False),
+        ([FACE.red_basic, FACE.red_strength], [ICON.bang], False),
+        ([FACE.red_basic, FACE.red_shield], [ICON.bang], False),
+        ([FACE.red_basic, FACE.red_pickaxe], [ICON.bang], False),
+        ([FACE.red_basic, FACE.red_vanguard], [ICON.bang], False),
+        ([FACE.red_basic, FACE.red_double_vanguard], [ICON.bang], False),
+        ([FACE.red_basic, FACE.red_bang], [ICON.bang], True),
+        ([FACE.red_basic, FACE.green_basic], [ICON.bang], False),
+        ([FACE.red_basic, FACE.green_compass], [ICON.bang], False),
+        ([FACE.red_basic, FACE.green_eyeball], [ICON.bang], False),
+        ([FACE.red_basic, FACE.green_dna], [ICON.bang], False),
+        ([FACE.red_basic, FACE.green_vanguard], [ICON.bang], False),
+        ([FACE.red_basic, FACE.green_double_vanguard], [ICON.bang], False),
+        ([FACE.red_basic, FACE.green_bang], [ICON.bang], True),
+        ([FACE.red_basic, FACE.blue_basic], [ICON.bang], False),
+        ([FACE.red_basic, FACE.blue_wrench], [ICON.bang], False),
+        ([FACE.red_basic, FACE.blue_computer], [ICON.bang], False),
+        ([FACE.red_basic, FACE.blue_science], [ICON.bang], False),
+        ([FACE.red_basic, FACE.blue_vanguard], [ICON.bang], False),
+        ([FACE.red_basic, FACE.blue_double_vanguard], [ICON.bang], False),
+        ([FACE.red_basic, FACE.blue_bang], [ICON.bang], True),
 )
 
-@pytest.mark.parametrize('color,icon,face,conversion,expect', _test_die_roll_probability_without_conversion)
-def test_die_roll_probability_without_conversion(color, icon, face, conversion, expect):
-    assert Die(color, icon, conversion=conversion).roll_probability(face, apply_conversions=False) == expect
+@pytest.mark.parametrize('result,fails,expect', _test_result_fail)
+def test_result_fail(result, fails, expect):
+    assert Result(result, fails=fails).fail() is expect
 
-_test_die_roll_probability_with_conversion = (
-        ('red', 'basic', 'basic', {'color': 'red', 'icon': 'wrench'}, 5/6),
-        ('red', 'basic', 'basic', {'color': 'blue', 'icon': 'dna'}, 5/6),
-        ('red', 'basic', 'strength', {'color': 'red', 'icon': 'wrench'}, 1/6),
-        ('red', 'basic', 'strength', {'color': 'blue', 'icon': 'dna'}, 1/6),
-        ('red', 'basic', 'dna', {'color': 'red', 'icon': 'wrench'}, 1/6),
-        ('red', 'basic', 'dna', {'color': 'blue', 'icon': 'dna'}, 1/6),
-        ('red', 'basic', 'wrench', {'color': 'red', 'icon': 'wrench'}, 5/6),
-        ('red', 'basic', 'wrench', {'color': 'blue', 'icon': 'dna'}, 1/6),
-        ('red', 'basic', 'vanguard', {'color': 'red', 'icon': 'wrench'}, 1/6),
-        ('red', 'basic', 'vanguard', {'color': 'blue', 'icon': 'dna'}, 1/6),
+_test_result_success = (
+        ([], [], None, False),
+        ([], [ICON.strength], None, False),
 
-        ('red', 'strength', 'basic', {'color': 'red', 'icon': 'wrench'}, 2/6),
-        ('red', 'strength', 'basic', {'color': 'blue', 'icon': 'dna'}, 2/6),
-        ('red', 'strength', 'strength', {'color': 'red', 'icon': 'wrench'}, 4/6),
-        ('red', 'strength', 'strength', {'color': 'blue', 'icon': 'dna'}, 4/6),
-        ('red', 'strength', 'dna', {'color': 'red', 'icon': 'wrench'}, 1/6),
-        ('red', 'strength', 'dna', {'color': 'blue', 'icon': 'dna'}, 1/6),
-        ('red', 'strength', 'wrench', {'color': 'red', 'icon': 'wrench'}, 2/6),
-        ('red', 'strength', 'wrench', {'color': 'blue', 'icon': 'dna'}, 1/6),
-        ('red', 'strength', 'vanguard', {'color': 'red', 'icon': 'wrench'}, 1/6),
-        ('red', 'strength', 'vanguard', {'color': 'blue', 'icon': 'dna'}, 1/6),
+        ([FACE.red_basic], [ICON.basic], None, True),
+        ([FACE.red_basic], [ICON.strength], None, False),
+        ([FACE.red_strength], [ICON.strength], None, True),
+        ([FACE.red_strength], [ICON.compass], None, False),
+        ([FACE.red_vanguard], [ICON.basic], None, True),
+        ([FACE.red_vanguard], [ICON.strength], None, True),
+        ([FACE.red_vanguard], [ICON.vanguard], None, True),
+        ([FACE.red_double_vanguard], [ICON.strength], None, True),
+        ([FACE.red_double_vanguard], [ICON.vanguard], None, True),
 
-        ('red', 'vanguard', 'basic', {'color': 'red', 'icon': 'wrench'}, 3/6),
-        ('red', 'vanguard', 'basic', {'color': 'blue', 'icon': 'dna'}, 3/6),
-        ('red', 'vanguard', 'strength', {'color': 'red', 'icon': 'wrench'}, 3/6),
-        ('red', 'vanguard', 'strength', {'color': 'blue', 'icon': 'dna'}, 3/6),
-        ('red', 'vanguard', 'dna', {'color': 'red', 'icon': 'wrench'}, 3/6),
-        ('red', 'vanguard', 'dna', {'color': 'blue', 'icon': 'dna'}, 3/6),
-        ('red', 'vanguard', 'wrench', {'color': 'red', 'icon': 'wrench'}, 3/6),
-        ('red', 'vanguard', 'wrench', {'color': 'blue', 'icon': 'dna'}, 3/6),
-        ('red', 'vanguard', 'vanguard', {'color': 'red', 'icon': 'wrench'}, 3/6),
-        ('red', 'vanguard', 'vanguard', {'color': 'blue', 'icon': 'dna'}, 3/6),
+        ([FACE.red_basic], [ICON.basic], CONVERSION.red_strength, True),
+        ([FACE.red_basic], [ICON.strength], CONVERSION.red_strength, True),
+        ([FACE.red_basic], [ICON.shield], CONVERSION.red_strength, False),
+        ([FACE.red_basic], [ICON.strength], CONVERSION.green_strength, False),
+
+        ([FACE.red_strength, FACE.green_bang], [ICON.strength], None, True),
+        ([FACE.red_strength, FACE.green_dna], [ICON.shield], None, False),
+        ([FACE.red_strength, FACE.green_dna], [ICON.shield], CONVERSION.red_shield, False),
 )
 
-@pytest.mark.parametrize('color,icon,face,conversion,expect', _test_die_roll_probability_with_conversion)
-def test_die_roll_probability_with_conversion(color, icon, face, conversion, expect):
-    assert Die(color, icon, conversion=conversion).roll_probability(face, apply_conversions=True) == expect
-
-_test_prod = (
-        ([], 1),
-        ([1], 1),
-        ([2], 2),
-        ([2, 3], 6),
-        ([2, 3, 4], 24),
-)
-
-@pytest.mark.parametrize('nums,expect', _test_prod)
-def test_prod(nums,expect):
-    assert prod(nums) == expect
-
-_test_choose = (
-        (0, 0, 1),
-        (1, 0, 1),
-        (1, 1, 1),
-        (2, 0, 1),
-        (2, 1, 2),
-        (2, 2, 1),
-        (3, 0, 1),
-        (3, 1, 3),
-        (3, 2, 3),
-        (3, 3, 1),
-        (4, 0, 1),
-        (4, 1, 4),
-        (4, 2, 6),
-        (4, 3, 4),
-        (4, 4, 1),
-        (5, 0, 1),
-        (5, 1, 5),
-        (5, 2, 10),
-        (5, 3, 10),
-        (5, 4, 5),
-        (5, 5, 1),
-        (6, 0, 1),
-        (6, 1, 6),
-        (6, 2, 15),
-        (6, 3, 20),
-        (6, 4, 15),
-        (6, 5, 6),
-        (6, 6, 1),
-        (7, 0, 1),
-        (7, 1, 7),
-        (7, 2, 21),
-        (7, 3, 35),
-        (7, 4, 35),
-        (7, 5, 21),
-        (7, 6, 7),
-        (7, 7, 1),
-)
-
-@pytest.mark.parametrize('n,k,expect', _test_choose)
-def test_choose(n, k, expect):
-    assert choose(n, k) == expect
+@pytest.mark.parametrize('result,successes,conversion,expect', _test_result_success)
+def test_result_success(result,successes,conversion,expect):
+    assert Result(result, successes=successes, conversion=conversion).success() is expect

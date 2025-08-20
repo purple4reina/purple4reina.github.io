@@ -1,5 +1,6 @@
 import itertools
 import json
+import random
 
 # Basic dice: 4 basic, 1 vanguard, 1 bang
 # Icon dice: 3 icon, 1 basic, 1 vanguard, 1 bang
@@ -14,36 +15,20 @@ vanguard_conversion_icons = (
 
 class Die(object):
 
-    def __new__(cls, color, icon, conversion=None):
+    def __new__(cls, color, icon):
         if cls is not Die:
             return super(Die, cls).__new__(cls)
         for subclass in cls.__subclasses__():
             if icon in subclass.icons:
-                return subclass(color, icon, conversion=conversion)
+                return subclass(color, icon)
         raise ValueError(f'Unknown die icon: {icon}')
 
-    def __init__(self, color, icon, conversion=None):
+    def __init__(self, color, icon):
         self.color = color
         self.icon = icon
-        self.conversion = None
-        if conversion and conversion['color'] == color:
-            self.conversion = conversion['icon']
 
-    def get_faces(self, apply_conversions=True):
-        faces = []
-        for face in self.faces:
-            if face == 'basic' and apply_conversions and self.conversion:
-                faces.append((face, self.conversion))
-            elif 'vanguard' in face and apply_conversions:
-                # convert double-vanguard to vanguard for now
-                faces.append(('vanguard',) + vanguard_conversion_icons)
-            else:
-                faces.append((face,))
-        return faces
-
-    def roll_probability(self, icon, apply_conversions=True):
-        faces_set = self.get_faces(apply_conversions)
-        return sum(icon in faces for faces in faces_set) / 6
+    def roll(self):
+        return random.choice(self.faces)
 
 class BasicDie(Die):
 
@@ -70,59 +55,76 @@ class VanguardDie(Die):
     icons = ['vanguard']
     faces = ['vanguard', 'vanguard', 'double-vanguard', 'bang', 'bang', 'bang']
 
-def prod(nums):
-    result = 1
-    for num in nums:
-        result *= num
-    return result
+class DiceRoller(object):
 
-def choose(n, k):
-    if k > n:
-        return 0
-    if k == 0 or k == n:
-        return 1
-    if k == 1:
-        return n
-    if k > n // 2:
-        k = n - k
-    result = 1
-    for i in range(k):
-        result *= (n - i)
-        result //= (i + 1)
-    return result
+    @staticmethod
+    def from_inputs(inputs):
+        return DiceRoller(
+                dice=[Die(**die) for die in inputs['dice']],
+                fails=inputs.get('fails') or [],
+                successes=inputs.get('successes') or [],
+                conversion=inputs.get('conversion'),
+        )
+
+    def __init__(self, dice, fails=None, successes=None, conversion=None):
+        self.dice = dice
+        self.fails = fails or []
+        self.successes = successes or []
+        self.conversion = conversion
+
+    def roll(self):
+        return Result(
+                [(die.color, die.roll()) for die in self.dice],
+                fails=self.fails,
+                successes=self.successes,
+                conversion=self.conversion,
+        )
+
+class Result(object):
+
+    def __init__(self, result, fails=None, successes=None, conversion=None):
+        self.result = result
+        self.fails = fails or []
+        self.successes = successes or []
+        self.conversion = conversion
+
+    def fail(self):
+        # assume only `or` for now
+        for _, face in self.result:
+            if face in self.fails:
+                return True
+        return False
+
+    def success(self):
+        # assume only `or` for now
+        if not self.successes:
+            return False
+        for color, face in self.result:
+            if face in self.successes:
+                return True
+            elif face == 'vanguard':
+                return True
+            elif face == 'double-vanguard':
+                return True
+            elif face == 'basic' \
+                    and self.conversion \
+                    and self.conversion['color'] == color \
+                    and self.conversion['icon'] in self.successes:
+                return True
+        return False
 
 def calculate_probability(inputs):
-    conversion = inputs.get('conversion')
-    dice = [
-        Die(**die, conversion=conversion) for die in inputs['dice']
-    ]
-    fails = inputs.get('fails') or []
-    successes = inputs.get('successes') or []
+    roller = DiceRoller.from_inputs(inputs)
+    fail_count, success_count, samples = 0, 0, 10_000_000
 
-    failure_probability, success_probability  = 0.0, 0.0
-
-    if len(fails) > 0 and len(dice) > 0:
-        probabilities = [
-                die.roll_probability(fails[0], apply_conversions=False) for die in dice
-        ]
-        neg = 1
-        for dice_cnt in range(1, len(dice)+1):
-            for probs in itertools.combinations(probabilities, dice_cnt):
-                failure_probability += neg * prod(probs)
-            neg *= -1
-
-    if len(successes) == 1 and len(dice) > 0:
-        # support just one success at a time for now
-        probabilities = [
-                die.roll_probability(successes[0], apply_conversions=True) for die in dice
-        ]
-        neg = 1
-        for dice_cnt in range(1, len(dice)+1):
-            for probs in itertools.combinations(probabilities, dice_cnt):
-                success_probability += neg * prod(probs)
-            neg *= -1
+    for _ in range(samples):
+        result = roller.roll()
+        if result.fail():
+            fail_count += 1
+        elif result.success():
+            success_count += 1
 
     return {
-            'failure_probability': failure_probability,
-            'success_probability': success_probability,
+            'failure_probability': fail_count / samples,
+            'success_probability': success_count / samples,
     }
