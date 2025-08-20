@@ -60,7 +60,7 @@ bootstrap: true
         </div>
         <div class="col">
           <div class="btn-group btn-group-sm" role="group">
-            <input type="radio" class="btn-check" name="fail-and-or" id="and" disabled>
+            <input type="radio" class="btn-check" name="fail-and-or" id="and">
             <label class="btn btn-outline-secondary" for="and">And</label>
             <input type="radio" class="btn-check" name="fail-and-or" id="or" checked>
             <label class="btn btn-outline-secondary" for="or">Or</label>

@@ -62,37 +62,55 @@ class DiceRoller(object):
         return DiceRoller(
                 dice=[Die(**die) for die in inputs['dice']],
                 fails=inputs.get('fails') or [],
+                fail_condition=inputs.get('failCondition', 'or'),
                 successes=inputs.get('successes') or [],
+                success_condition=inputs.get('successCondition', 'or'),
                 conversion=inputs.get('conversion'),
         )
 
-    def __init__(self, dice, fails=None, successes=None, conversion=None):
+    def __init__(self, dice, fails=None, fail_condition=None, successes=None,
+            success_condition=None, conversion=None):
         self.dice = dice
         self.fails = fails or []
+        self.fail_condition = fail_condition or 'or'
         self.successes = successes or []
+        self.success_condition = success_condition or 'or'
         self.conversion = conversion
 
     def roll(self):
         return Result(
                 [(die.color, die.roll()) for die in self.dice],
                 fails=self.fails,
+                fail_condition=self.fail_condition,
                 successes=self.successes,
+                success_condition=self.success_condition,
                 conversion=self.conversion,
         )
 
 class Result(object):
 
-    def __init__(self, result, fails=None, successes=None, conversion=None):
+    def __init__(self, result, fails=None, fail_condition=None, successes=None,
+            success_condition=None, conversion=None):
         self.result = result
         self.fails = fails or []
+        self.fail_condition = fail_condition or 'or'
         self.successes = successes or []
+        self.success_condition = success_condition or 'or'
         self.conversion = conversion
 
     def fail(self):
-        # assume only `or` for now
-        for _, face in self.result:
-            if face in self.fails:
-                return True
+        if not self.fails:
+            return False
+        if self.fail_condition == 'and':
+            fails = self.fails.copy()
+            for _, face in self.result:
+                if face in fails:
+                    fails.remove(face)
+            return not fails
+        elif self.fail_condition == 'or':
+            for _, face in self.result:
+                if face in self.fails:
+                    return True
         return False
 
     def success(self):
