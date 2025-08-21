@@ -28,7 +28,7 @@ class Die(object):
         self.icon = icon
 
     def roll(self):
-        return random.choice(self.faces)
+        return self.faces[int(random.random() * 6)]
 
 class BasicDie(Die):
 
@@ -131,7 +131,8 @@ class Result(object):
                         and self.conversion['color'] == color \
                         and self.conversion['icon'] in successes:
                     successes.remove(self.conversion['icon'])
-            return len(successes) <= vanguards
+                if len(successes) <= vanguards:
+                    return True
         elif self.success_condition == 'or':
             for color, face in self.result:
                 if face in self.successes:
