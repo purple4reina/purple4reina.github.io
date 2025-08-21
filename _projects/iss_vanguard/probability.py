@@ -6,13 +6,6 @@ import random
 # Icon dice: 3 icon, 1 basic, 1 vanguard, 1 bang
 # Vanguard dice: 2 vanguard, 1 double-vanguard, 3 bang
 
-vanguard_conversion_icons = (
-        'strength', 'shield', 'pickaxe',
-        'compass', 'eyeball', 'dna',
-        'wrench', 'computer', 'science',
-        'basic',
-)
-
 class Die(object):
 
     def __new__(cls, color, icon):
@@ -98,6 +91,16 @@ class Result(object):
         self.success_condition = success_condition or 'or'
         self.conversion = conversion
 
+    def has_icon_success(self):
+        if not hasattr(self, '_has_icon_success'):
+            self._has_icon_success = any(
+                s != 'red' and s != 'green' and s != 'blue' for s in self.successes
+            )
+        return self._has_icon_success
+
+    def has_only_icon_success(self, successes):
+        return all(s != 'red' and s != 'green' and s != 'blue' for s in successes)
+
     def fail(self):
         if not self.fails:
             return False
@@ -127,6 +130,8 @@ class Result(object):
             for color, face in self.result:
                 if face in successes:
                     successes.remove(face)
+                if color in successes:
+                    successes.remove(color)
                 elif face == 'vanguard':
                     vanguards += 1
                 elif face == 'double-vanguard':
@@ -136,15 +141,18 @@ class Result(object):
                         and self.conversion['color'] == color \
                         and self.conversion['icon'] in successes:
                     successes.remove(self.conversion['icon'])
-                if len(successes) <= vanguards:
+                if len(successes) <= vanguards and self.has_only_icon_success(successes):
                     return True
         elif self.success_condition == 'or':
+            has_icon_success = any(s != 'red' and s != 'green' and s != 'blue' for s in self.successes)
             for color, face in self.result:
                 if face in self.successes:
                     return True
-                elif face == 'vanguard':
+                if color in self.successes:
                     return True
-                elif face == 'double-vanguard':
+                elif face == 'vanguard' and self.has_icon_success():
+                    return True
+                elif face == 'double-vanguard' and self.has_icon_success():
                     return True
                 elif face == 'basic' \
                         and self.conversion \

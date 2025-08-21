@@ -110,6 +110,9 @@ bootstrap: true
       <div class="input-group mb-3" id="success-input">
         <select class="form-select" id="success-select">
           <option value="" selected disabled>Select...</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
           <option value="strength">Strength</option>
           <option value="shield">Shield</option>
           <option value="pickaxe">Pick Axe</option>

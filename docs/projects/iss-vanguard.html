@@ -144,10 +144,10 @@
           <label for="fails-input" class="form-label">Fail Conditions</label>
         </div>
         <div class="col">
-          <div class="btn-group btn-group-sm" role="group">
-            <input type="radio" class="btn-check" name="fail-and-or" id="and" checked="" />
+          <div class="btn-group btn-group-sm" role="group" id="fail-and-or">
+            <input type="radio" class="btn-check" name="fail-and-or" autocomplete="off" id="and" checked="" />
             <label class="btn btn-outline-secondary" for="and">And</label>
-            <input type="radio" class="btn-check" name="fail-and-or" id="or" />
+            <input type="radio" class="btn-check" name="fail-and-or" autocomplete="off" id="or" />
             <label class="btn btn-outline-secondary" for="or">Or</label>
           </div>
         </div>
@@ -184,10 +184,10 @@
           <label for="success-input" class="form-label">Success Conditions</label>
         </div>
         <div class="col">
-          <div class="btn-group btn-group-sm" role="group">
-            <input type="radio" class="btn-check" name="success-and-or" id="and" checked="" />
+          <div class="btn-group btn-group-sm" role="group" id="success-and-or">
+            <input type="radio" class="btn-check" name="success-and-or" autocomplete="off" id="and" checked="" />
             <label class="btn btn-outline-secondary" for="and">And</label>
-            <input type="radio" class="btn-check" name="success-and-or" id="or" />
+            <input type="radio" class="btn-check" name="success-and-or" autocomplete="off" id="or" />
             <label class="btn btn-outline-secondary" for="or">Or</label>
           </div>
         </div>
@@ -195,6 +195,9 @@
       <div class="input-group mb-3" id="success-input">
         <select class="form-select" id="success-select">
           <option value="" selected="" disabled="">Select...</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
           <option value="strength">Strength</option>
           <option value="shield">Shield</option>
           <option value="pickaxe">Pick Axe</option>
