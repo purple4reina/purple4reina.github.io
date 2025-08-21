@@ -60,10 +60,10 @@ bootstrap: true
         </div>
         <div class="col">
           <div class="btn-group btn-group-sm" role="group">
-            <input type="radio" class="btn-check" name="fail-and-or" id="and" checked>
-            <label class="btn btn-outline-secondary" for="and">And</label>
-            <input type="radio" class="btn-check" name="fail-and-or" id="or">
-            <label class="btn btn-outline-secondary" for="or">Or</label>
+            <input type="radio" class="btn-check" name="fail-and-or" id="fail-and" checked>
+            <label class="btn btn-outline-secondary" for="fail-and">And</label>
+            <input type="radio" class="btn-check" name="fail-and-or" id="fail-or">
+            <label class="btn btn-outline-secondary" for="fail-or">Or</label>
           </div>
         </div>
       </div>
@@ -100,10 +100,10 @@ bootstrap: true
         </div>
         <div class="col">
           <div class="btn-group btn-group-sm" role="group">
-            <input type="radio" class="btn-check" name="success-and-or" id="and" checked>
-            <label class="btn btn-outline-secondary" for="and">And</label>
-            <input type="radio" class="btn-check" name="success-and-or" id="or">
-            <label class="btn btn-outline-secondary" for="or">Or</label>
+            <input type="radio" class="btn-check" name="success-and-or" id="success-and" checked>
+            <label class="btn btn-outline-secondary" for="success-and">And</label>
+            <input type="radio" class="btn-check" name="success-and-or" id="success-or">
+            <label class="btn btn-outline-secondary" for="success-or">Or</label>
           </div>
         </div>
       </div>
@@ -391,22 +391,24 @@ bootstrap: true
     resultsBar.hidden = true;
     spinner.hidden = false;
 
+    const body = JSON.stringify({
+      dice: diceArray,
+      fails: failsArray,
+      failCondition: document.querySelector('input[name="fail-and-or"]:checked').id.replace('fail-', ''),
+      successes: successArray,
+      successCondition: document.querySelector('input[name="success-and-or"]:checked').id.replace('success-', ''),
+      conversion: conversionList.children.length > 0 ? {
+        color: conversionList.children[0].getAttribute('color'),
+        icon: conversionList.children[0].getAttribute('icon'),
+      } : null,
+    })
+    console.log('Request Body:', body);
     const resp = await fetch(backendUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          dice: diceArray,
-          fails: failsArray,
-          failCondition: document.querySelector('input[name="fail-and-or"]:checked').id,
-          successes: successArray,
-          successCondition: document.querySelector('input[name="success-and-or"]:checked').id,
-          conversion: conversionList.children.length > 0 ? {
-            color: conversionList.children[0].getAttribute('color'),
-            icon: conversionList.children[0].getAttribute('icon'),
-          } : null,
-        })
+        body: body,
       })
       .then(response => {
         const body = response.json().then();
@@ -416,7 +418,7 @@ bootstrap: true
         console.error('Error:', error);
         return { failure_probability: 0, success_probability: 0 };
       });
-    console.log('Response:', resp);
+    console.log('Response Body:', resp);
 
     const failPercent = (resp.failure_probability * 100).toFixed(1);
     const successPercent = (resp.success_probability * 100).toFixed(1);
