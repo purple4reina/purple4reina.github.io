@@ -3,8 +3,9 @@ service: iss-vanguard
 provider:
   name: aws
   runtime: python3.12
+  architecture: arm64
   region: us-west-2
-  memorySize: 256
+  memorySize: 3008
   timeout: 60
 
 plugins:
