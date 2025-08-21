@@ -103,13 +103,18 @@ class Result(object):
             return False
         if self.fail_condition == 'and':
             fails = self.fails.copy()
-            for _, face in self.result:
+            for color, face in self.result:
                 if face in fails:
                     fails.remove(face)
-            return not fails
+                elif color in fails:
+                    fails.remove(color)
+                if not fails:
+                    return True
         elif self.fail_condition == 'or':
-            for _, face in self.result:
+            for color, face in self.result:
                 if face in self.fails:
+                    return True
+                if color in self.fails:
                     return True
         return False
 

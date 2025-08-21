@@ -244,6 +244,15 @@ _test_result_fail = (
         ([FACE.red_strength, FACE.red_strength], [ICON.bang, ICON.bang], 'and', False),
         ([FACE.red_bang, FACE.red_strength], [ICON.bang, ICON.bang], 'and', False),
         ([FACE.red_bang, FACE.red_bang], [ICON.bang, ICON.bang], 'and', True),
+
+        ([FACE.red_basic], [COLOR.red], 'or', True),
+        ([FACE.red_basic], [COLOR.green], 'or', False),
+        ([FACE.red_strength], [COLOR.red, ICON.strength], 'or', True),
+        ([FACE.red_shield, FACE.green_compass], [COLOR.red, ICON.strength], 'or', True),
+        ([FACE.red_basic], [COLOR.red], 'and', True),
+        ([FACE.red_basic], [COLOR.green], 'and', False),
+        ([FACE.red_shield, FACE.green_compass], [COLOR.red, ICON.strength], 'and', False),
+        ([FACE.red_shield, FACE.green_compass], [COLOR.red, ICON.compass], 'and', True),
 )
 
 @pytest.mark.parametrize('result,fails,condition,expect', _test_result_fail)
@@ -301,6 +310,8 @@ _test_result_success = (
         ([FACE.red_strength, FACE.green_dna], [ICON.strength, ICON.wrench], None, 'and', False),
         ([FACE.red_basic, FACE.green_dna], [ICON.strength, ICON.dna], CONVERSION.red_strength, 'and', True),
         ([FACE.red_basic, FACE.green_eyeball], [ICON.strength, ICON.dna], CONVERSION.red_strength, 'and', False),
+        ([FACE.red_basic, FACE.green_vanguard], [ICON.strength, ICON.dna], CONVERSION.red_strength, 'and', True),
+        ([FACE.green_vanguard, FACE.red_basic], [ICON.strength, ICON.dna], CONVERSION.red_strength, 'and', True),
 
         ([FACE.red_double_vanguard], [ICON.strength, ICON.dna], None, 'and', True),
         ([FACE.red_double_vanguard], [ICON.basic, ICON.basic], None, 'and', True),
