@@ -150,7 +150,7 @@ class Result(object):
 
 def calculate_probability(inputs):
     roller = DiceRoller.from_inputs(inputs)
-    fail_count, success_count, samples = 0, 0, 10_000_000
+    fail_count, success_count, samples = 0, 0, 1_000_000
 
     for _ in range(samples):
         result = roller.roll()
