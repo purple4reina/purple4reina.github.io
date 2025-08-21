@@ -60,7 +60,7 @@ class DiceRoller(object):
     @staticmethod
     def from_inputs(inputs):
         return DiceRoller(
-                dice=[Die(**die) for die in inputs['dice']],
+                dice=[Die(**die) for die in inputs.get('dice') or []],
                 fails=inputs.get('fails') or [],
                 fail_condition=inputs.get('failCondition', 'or'),
                 successes=inputs.get('successes') or [],
