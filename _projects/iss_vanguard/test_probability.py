@@ -255,6 +255,8 @@ _test_result_fail = (
         ([FACE.red_basic], [COLOR.green], 'and', False),
         ([FACE.red_shield, FACE.green_compass], [COLOR.red, ICON.strength], 'and', False),
         ([FACE.red_shield, FACE.green_compass], [COLOR.red, ICON.compass], 'and', True),
+
+        ([FACE.red_basic, FACE.green_eyeball], [ICON.basic], 'or', True),
 )
 
 @pytest.mark.parametrize('result,fails,condition,expect', _test_result_fail)
